@@ -15,6 +15,9 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+			controller.applicationStage = primaryStage;
+			
 			Scene scene = new Scene(root,400,500);
 			primaryStage.setTitle("Fitness Tracker App");
 			primaryStage.setScene(scene);
