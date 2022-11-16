@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="47.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="211.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Steps">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#5a59ab" />
+                     </effect></Button>
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#0e0a83" />
+                     </effect>
+                  </Button>
+                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="94.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Water Intake">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#0d96eb" />
+                     </effect></Button>
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="46.0" mnemonicParsing="false" prefHeight="235.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Nutrition">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#cd570d" />
+                     </effect></Button>
+                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="292.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="516.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Activities">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#b02219" />
+                     </effect>
+                  </Button>
+                  <Label layoutX="68.0" layoutY="-58.0" text="10,000">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="186.0" layoutY="19.0" text="Daily Goal">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="229.0" layoutY="48.0" text="Steps">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="329.0" layoutY="-60.0" text="8 h 42 min">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <ProgressIndicator layoutX="125.0" layoutY="154.0" prefHeight="114.0" prefWidth="95.0" progress="0.0" />
+                  <ImageView fitHeight="60.0" fitWidth="61.0" layoutX="228.0" layoutY="-122.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="493.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="238.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="93.0" fitWidth="63.0" layoutX="490.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="130.0">
+               <children>
+                  <Hyperlink prefHeight="45.0" prefWidth="186.0" text="Dashboard" textFill="#5a59ab" />
+                  <Circle fill="#5a59ab" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </VBox>
+            <Hyperlink text="Recipes" textFill="#5b5babb2">
+               <HBox.margin>
+                  <Insets bottom="8.0" />
+               </HBox.margin>
+            </Hyperlink>
+            <Hyperlink text="Personalization" textFill="#5b5babb2">
+               <HBox.margin>
+                  <Insets bottom="8.0" />
+               </HBox.margin>
+            </Hyperlink>
+            <Hyperlink alignment="CENTER" text="Goals" textFill="#5b5babb2">
+               <HBox.margin>
+                  <Insets bottom="8.0" />
+               </HBox.margin></Hyperlink>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <Pane prefHeight="116.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#282828" layoutX="517.0" layoutY="96.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
+            <VBox layoutX="54.0" layoutY="49.0" prefHeight="200.0" prefWidth="205.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="165.0" text="Welcome,">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Full name">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label text="Current Date" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
