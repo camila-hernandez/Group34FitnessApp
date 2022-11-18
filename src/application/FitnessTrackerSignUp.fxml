@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserSignUpFormController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="622.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label style="-fx-background-radius: 20;" text="CREATE AN ACCOUNT" textAlignment="CENTER" textFill="#5a59ab">
+               <VBox.margin>
+                  <Insets bottom="50.0" top="2.5" />
+               </VBox.margin>
+               <font>
+                  <Font name="Symbol" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="userSignUpMessage">
+               <VBox.margin>
+                  <Insets top="-25.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="nameTextfield" maxWidth="425.0" promptText="Full name" style="-fx-background-radius: 20;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></TextField>
+            <TextField fx:id="emailTextfield" maxHeight="0.0" maxWidth="425.0" promptText="Enter your email" style="-fx-background-radius: 20;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="passwordTextfield" maxWidth="425.0" promptText="Password" style="-fx-background-radius: 20;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Button fx:id="signUpForAccount" contentDisplay="CENTER" maxWidth="250.0" mnemonicParsing="false" onAction="#userSignUp" style="-fx-background-color: #5a59ab; -fx-background-radius: 20;" text="SIGN UP" textFill="#fffdfd">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Already have an account?" textFill="#000000b2" />
+                  <Button fx:id="existingAccount" mnemonicParsing="false" onAction="#userLogIn" style="-fx-background-color: transparent;" text="Login" textFill="#5a59ab" underline="true">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <ImageView fx:id="signUpImage" fitHeight="287.0" fitWidth="548.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>
