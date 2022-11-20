@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
+   <top>
+      <Label alignment="CENTER" prefHeight="72.0" prefWidth="483.0" text="Water Intake" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="59.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="770.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER" prefHeight="111.0" prefWidth="459.0" text="How much water have you drank? (L)">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="1.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField alignment="CENTER" onAction="#trackWaterIntake" prefHeight="68.0" prefWidth="324.0" promptText="in Liters">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
