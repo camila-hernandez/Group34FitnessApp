@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
@@ -12,28 +13,57 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
    <top>
-      <Label alignment="CENTER" prefHeight="72.0" prefWidth="483.0" text="Water Intake" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="59.0" />
-         </font>
-      </Label>
-   </top>
-   <left>
-      <VBox prefHeight="770.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+      <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Label alignment="CENTER" prefHeight="111.0" prefWidth="459.0" text="How much water have you drank? (L)">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6" height="159.0" stroke="#52d4ff" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="481.0" />
+            <Label text="Water Intake" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="58.0" />
                </font>
             </Label>
-            <ImageView fitHeight="1.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField alignment="CENTER" onAction="#trackWaterIntake" prefHeight="68.0" prefWidth="324.0" promptText="in Liters">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </TextField>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#57aeffe8" height="66.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+                  <Label prefHeight="46.0" prefWidth="390.0" text="your water intake in Liters:" textFill="WHITE">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <TextField fx:id="amountOfWater" prefHeight="99.0" prefWidth="447.0" />
+            <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="progress" />
          </children>
       </VBox>
+   </center>
+   <right>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </left>
+   <bottom>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="380.0">
+               <children>
+                  <Label fx:id="waterProgress" prefHeight="28.0" prefWidth="288.0" text="progress to goal:" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" />
+                     </children>
+                  </HBox>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </bottom>
 </BorderPane>

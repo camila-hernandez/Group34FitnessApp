@@ -31,7 +31,7 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#0e0a83" />
                      </effect>
                   </Button>
-                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="94.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Water Intake">
+                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="94.0" mnemonicParsing="false" onAction="#trackWaterIntake" prefHeight="185.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Water Intake">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
