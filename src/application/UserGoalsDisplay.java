@@ -45,26 +45,26 @@ public class UserGoalsDisplay {
     private Button homeButton;
 
     void displayStepsGoals(String stepsInformation) {
- 		stepGoalsLabel.setText(stepsInformation);
+ 		stepGoalsLabel.setText(String.format("STEPS GOALS:   " + stepsInformation));
     }
     void displaySleepGoals(String sleepInformation) {
-    	sleepGoalsLabel.setText(sleepInformation);
+    	sleepGoalsLabel.setText(String.format("SLEEP GOALS:   " + sleepInformation));
     }
     
     void displayWaterIntakeGoals(String waterInformation) {
-    	waterIntakeGoalsLabel.setText(waterInformation);
+    	waterIntakeGoalsLabel.setText(String.format("WATER INTAKE GOALS:   " + waterInformation));
     }
     
     void displayWeightGoals(String weightInformation) {
-    	weightGoalsLabel.setText(weightInformation);
+    	weightGoalsLabel.setText(String.format("What is your weight goal (in kg)?   " + weightInformation));
     }
     
     void displayCaloriesBurnedGoals(String caloriesBurnedInformation) {
-    	caloriesBurnedGoalsLabel.setText(caloriesBurnedInformation);
+    	caloriesBurnedGoalsLabel.setText(" " + caloriesBurnedInformation);
     }
     
     void displayExerciseGoals(String exerciseInformation) {
-    	exerciseGoalsLabel.setText(exerciseInformation);
+    	exerciseGoalsLabel.setText(" " + exerciseInformation);
     }
     
     @FXML
@@ -182,14 +182,6 @@ public class UserGoalsDisplay {
  	   updateCaloriesGoalsContainer.getChildren().addAll(updateCaloriesBurnedGoalsLabel, caloriesBurnedGoalsTextfield);
  	   updateCaloriesGoalsContainer.setAlignment(Pos.CENTER);
  	   
- 	   // Getting the user input from textfields and slider
- 	   String stepsInformation = stepsGoalsTextfield.getText();
- 	   String sleepInformation = sleepGoalsTextfield.getText();
- 	   String waterIntakeInformation = waterIntakeGoalsTextfield.getText();
- 	   String weightInformation = weightGoalsTextfield.getText();
- 	   String caloriesBurnedInformation = caloriesBurnedGoalsTextfield.getText();
- 	   String exerciseInformation = exerciseDurationGoalsTextfield.getText();
- 	 	
  	   // Create buttons container
  	   HBox updateButtonContainer = new HBox();
  	   
@@ -198,16 +190,15 @@ public class UserGoalsDisplay {
  	   saveChangesGoalsButton.setTextFill(Color.WHITE);
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
- 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> applicationStage.setScene(displayUserFitnessGoalsScene));
+ 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {applicationStage.setScene(displayUserFitnessGoalsScene);
+ 	   displayStepsGoals(stepsGoalsTextfield.getText());
+	   displaySleepGoals(sleepGoalsTextfield.getText());
+	   displayWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+	   displayWeightGoals(weightGoalsTextfield.getText());
+	   displayCaloriesBurnedGoals(caloriesBurnedGoalsTextfield.getText());
+	   displayExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	   });
 
- 	   // Using methods from user goals display class
- 	   displayStepsGoals(stepsInformation);
- 	   displaySleepGoals(sleepInformation);
- 	   displayWaterIntakeGoals(waterIntakeInformation);
- 	   displayWeightGoals(weightInformation);
- 	   displayCaloriesBurnedGoals(caloriesBurnedInformation);
- 	   displayExerciseGoals(exerciseInformation);
- 	   
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
  	   updateButtonContainer.setPadding(new Insets(10,0,0,0));
