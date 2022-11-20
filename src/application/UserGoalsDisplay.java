@@ -44,27 +44,37 @@ public class UserGoalsDisplay {
     @FXML
     private Button homeButton;
 
+    Font newLabelFont = Font.font("System", 24);
     void displayStepsGoals(String stepsInformation) {
- 		stepGoalsLabel.setText(String.format("STEPS GOALS:   " + stepsInformation));
+    	stepGoalsLabel.setFont(newLabelFont);
+ 		stepGoalsLabel.setText(String.format(stepsInformation + " steps"));
     }
+    
     void displaySleepGoals(String sleepInformation) {
-    	sleepGoalsLabel.setText(String.format("SLEEP GOALS:   " + sleepInformation));
+    	sleepGoalsLabel.setFont(newLabelFont);
+    	sleepGoalsLabel.setText(String.format(sleepInformation + " hours"));
     }
     
     void displayWaterIntakeGoals(String waterInformation) {
-    	waterIntakeGoalsLabel.setText(String.format("WATER INTAKE GOALS:   " + waterInformation));
+    	waterIntakeGoalsLabel.setFont(newLabelFont);
+    	waterIntakeGoalsLabel.setText(String.format(waterInformation + " cups"));
     }
     
     void displayWeightGoals(String weightInformation) {
-    	weightGoalsLabel.setText(String.format("What is your weight goal (in kg)?   " + weightInformation));
+    	weightGoalsLabel.setFont(newLabelFont);
+    	weightGoalsLabel.setText(String.format(weightInformation + " kg"));
     }
     
     void displayCaloriesBurnedGoals(String caloriesBurnedInformation) {
-    	caloriesBurnedGoalsLabel.setText(" " + caloriesBurnedInformation);
+    	caloriesBurnedGoalsLabel.setFont(newLabelFont);
+    	caloriesBurnedGoalsLabel.setText(caloriesBurnedInformation + " cal");
+    	caloriesBurnedGoalsLabel.setAlignment(Pos.CENTER);
     }
     
     void displayExerciseGoals(String exerciseInformation) {
-    	exerciseGoalsLabel.setText(" " + exerciseInformation);
+    	exerciseGoalsLabel.setFont(newLabelFont);
+    	exerciseGoalsLabel.setText(exerciseInformation + " minutes");
+    	exerciseGoalsLabel.setAlignment(Pos.CENTER);
     }
     
     @FXML
