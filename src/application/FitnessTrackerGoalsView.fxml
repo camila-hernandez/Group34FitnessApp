@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserGoalsDisplay">
+   <children>
+      <Label layoutX="87.0" layoutY="267.0" prefHeight="35.0" prefWidth="164.0" text="SLEEP GOALS:" textFill="LIGHTBLUE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="190.0" prefHeight="35.0" prefWidth="155.0" text="STEP GOALS:" textFill="LIGHTBLUE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="346.0" prefHeight="35.0" prefWidth="276.0" text="WATER INTAKE GOALS:" textFill="LIGHTBLUE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="412.0" text="NUTRITION GOALS:" textFill="LIGHTBLUE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="516.0" text="EXERCISE GOALS:" textFill="LIGHTBLUE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="LIGHTBLUE" height="93.0" layoutX="87.0" layoutY="58.0" stroke="LIGHTBLUE" strokeType="INSIDE" width="435.0" />
+      <Label layoutX="143.0" layoutY="86.0" text="HEALTH &amp; FITNESS GOALS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="455.0" prefHeight="27.0" prefWidth="267.0" text="What is your weight goal (in kg)?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="563.0" text="How long would you like to exercise (in minutes)?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="658.0" text="How many calories would you like to burn in a day?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="homeButton" layoutX="95.0" layoutY="764.0" mnemonicParsing="false" onAction="#returnToMainPage" style="-fx-background-radius: 20; -fx-background-color: LIGHTBLUE;" text="RETURN TO MAIN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="exerciseGoalsLabel" contentDisplay="CENTER" layoutX="184.0" layoutY="609.0" prefHeight="35.0" prefWidth="224.0" />
+      <Button fx:id="updateGoalsButton" layoutX="322.0" layoutY="764.0" mnemonicParsing="false" onAction="#updateFitnessGoals" style="-fx-background-radius: 20; -fx-background-color: LIGHTBLUE;" text="UPDATE GOALS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="caloriesBurnedGoalsLabel" contentDisplay="CENTER" layoutX="193.0" layoutY="695.0" prefHeight="35.0" prefWidth="224.0" />
+      <Label fx:id="stepGoalsLabel" contentDisplay="CENTER" layoutX="250.0" layoutY="190.0" prefHeight="35.0" prefWidth="267.0" />
+      <Label fx:id="sleepGoalsLabel" contentDisplay="CENTER" layoutX="253.0" layoutY="267.0" prefHeight="35.0" prefWidth="260.0" />
+      <Label fx:id="waterIntakeGoalsLabel" contentDisplay="CENTER" layoutX="364.0" layoutY="346.0" prefHeight="35.0" prefWidth="145.0" />
+      <Label fx:id="weightGoalsLabel" contentDisplay="CENTER" layoutX="355.0" layoutY="451.0" prefHeight="35.0" prefWidth="145.0" />
+   </children>
+</AnchorPane>
