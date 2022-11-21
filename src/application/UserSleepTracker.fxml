@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
+   <left>
+      <Pane prefHeight="909.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="163.0" prefWidth="609.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f4f7" height="91.0" opacity="0.54" stroke="#ab06f2" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" width="450.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="233.0" prefWidth="517.0" text="Sleep">
+                     <font>
+                        <Font name="System Bold" size="54.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <Label layoutX="20.0" layoutY="260.0" prefHeight="79.0" prefWidth="434.0" text="How long did you sleep?">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hoursSleep" layoutX="223.0" layoutY="359.0" />
+            <Label alignment="CENTER" layoutX="20.0" layoutY="339.0" prefHeight="79.0" prefWidth="199.0" text="Hours">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="20.0" layoutY="408.0" prefHeight="79.0" prefWidth="199.0" text="Minutes">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <TextField fx:id="minutesSleep" layoutX="223.0" layoutY="428.0" />
+            <Label fx:id="sleepProgress" alignment="CENTER" layoutX="20.0" layoutY="561.0" prefHeight="79.0" prefWidth="521.0" text="compared to your goals">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Button layoutX="223.0" layoutY="717.0" mnemonicParsing="false" onAction="#returnToMain" text="return to main" />
+            <Button layoutX="292.0" layoutY="487.0" mnemonicParsing="false" onAction="#trackSleep" text="update" />
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <VBox prefHeight="856.0" prefWidth="360.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

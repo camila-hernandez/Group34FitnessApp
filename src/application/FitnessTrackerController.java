@@ -18,11 +18,27 @@ import javafx.stage.Stage;
 public class FitnessTrackerController {
 	Stage applicationStage;
 	
+	double hours = 0.0;
+	double minutes = 0.0;
+	
 	@FXML
 	private TextField amountOfWater;
 	
 	@FXML 
 	private Label waterProgress;
+	
+	@FXML
+	private TextField hoursSleep;
+	
+	@FXML
+	private TextField minutesSleep;
+	
+	@FXML
+	private Label sleepProgress;
+	
+	@FXML
+	private Label sleepTextInMain;
+	
 	
     @FXML
     void openUserProfile(ActionEvent event) {
@@ -33,9 +49,27 @@ public class FitnessTrackerController {
     void trackSteps(ActionEvent event) {
 
     }
+    
+    @FXML
+    void trackSleep(ActionEvent trackSleepEvent) {
+    	hours = Double.parseDouble(hoursSleep.getText());
+   	 	minutes = Double.parseDouble(minutesSleep.getText());
+    }
 
     @FXML
-    void trackSleep(ActionEvent event) {
+    void setSleep(ActionEvent setSleepEvent) {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+    	    BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
+    	    FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+    	    controller.applicationStage = applicationStage;
+    	    Scene scene = new Scene(root);
+    	    applicationStage.setScene(scene);
+    	    applicationStage.show();
+    	  } catch (IOException e) {
+    		  
+    	  }
+    	
 
     }
 
@@ -122,6 +156,21 @@ public class FitnessTrackerController {
     			weightGoalsContainer, updateGoalsButton, returnToMainPageButton);
     	Scene goalsScene = new Scene(goalsContainer);
     	applicationStage.setScene(goalsScene);
+    }
+    
+    @FXML
+    void returnToMain(ActionEvent returnToMainEvent) {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+    	    BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+    	    FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+    	    controller.applicationStage = applicationStage;
+    	    Scene scene = new Scene(root);
+    	    applicationStage.setScene(scene);
+    	    applicationStage.show();
+    	  } catch (IOException e) {
+    		  
+    	  }
     }
 
 }

@@ -57,7 +57,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" />
+                        <Button mnemonicParsing="false" onAction="#returnToMain" prefHeight="36.0" prefWidth="139.0" text="return to main" />
                      </children>
                   </HBox>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

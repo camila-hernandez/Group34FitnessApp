@@ -23,7 +23,7 @@
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#5a59ab" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction ="#setSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="329.0" layoutY="-60.0" text="8 h 42 min">
+                  <Label fx:id="sleepTextInMain" layoutX="329.0" layoutY="-60.0" text="0 h 00 min">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
