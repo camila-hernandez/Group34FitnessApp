@@ -23,7 +23,7 @@
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#5a59ab" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction="#trackSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction ="#trackSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -95,14 +95,6 @@
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#showRecommendations" style="-fx-background-color: transparent;" text="Recommendations" textFill="#5a59ab">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#displayGoals" style="-fx-background-color: transparent;" text="Goals" textFill="#5a59ab">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserSleepTrackerController">
    <left>
       <Pane prefHeight="909.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
@@ -47,8 +47,8 @@
                   <Font size="38.0" />
                </font>
             </Label>
-            <Button layoutX="223.0" layoutY="717.0" mnemonicParsing="false" onAction="#returnToMain" text="return to main" />
-            <Button layoutX="292.0" layoutY="487.0" mnemonicParsing="false" onAction="#trackSleep" text="update" />
+            <Button layoutX="292.0" layoutY="487.0" mnemonicParsing="false" text="update" />
+            <Button layoutX="253.0" layoutY="686.0" mnemonicParsing="false" text="return to main" />
          </children>
       </Pane>
    </left>
