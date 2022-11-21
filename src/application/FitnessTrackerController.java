@@ -58,15 +58,17 @@ public class FitnessTrackerController {
     @FXML
     void trackActivities(ActionEvent event) {
     	try {
-			FXMLLoader loader = new FXMLLoader();
-    	    Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
-    	    ActivitiesController controller = (ActivitiesController)loader.getController();
-    	    controller.applicationStage = applicationStage;
-    	    Scene scene = new Scene(root);
-    	    applicationStage.setScene(scene);
-    	    applicationStage.show();
-    	  } catch (Exception e) {
-    	  }
+   		   FXMLLoader loader = new FXMLLoader();
+   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+   		   ActivitiesController controller = (ActivitiesController)loader.getController();
+   		   controller.applicationStage = applicationStage;
+   		   
+   		   Scene scene = new Scene(root);
+   		   applicationStage.setScene(scene);
+   		   applicationStage.show();
+   	   } catch(Exception e) {
+   		   e.printStackTrace();
+   	   }
     }
 
     @FXML
