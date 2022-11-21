@@ -259,17 +259,19 @@ public class ActivitiesController {
   	   strengthTrainingStack.getChildren().addAll(stackRectangle5, strengthTrainingContainer);
   	   
   	   // Create button container
-  	   HBox uploadWorkoutInfoButtonContainer = new HBox();
+  	   VBox uploadWorkoutInfoButtonContainer = new VBox();
   	   Button submitWorkoutDataButton = new Button("SUBMIT DATA");
 	   submitWorkoutDataButton.setMinSize(177, 44);
 	   submitWorkoutDataButton.setTextFill(Color.WHITE);
 	   submitWorkoutDataButton.setFont(labelFont);
 	   submitWorkoutDataButton.setStyle("-fx-background-color: MEDIUMVIOLETRED");
-	   uploadWorkoutInfoButtonContainer.getChildren().add(submitWorkoutDataButton);
-	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> applicationStage.setScene(displayTrainingPage) );
+	   uploadWorkoutInfoButtonContainer.getChildren().addAll(submitWorkoutDataButton);
+	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
+	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
+	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> applicationStage.setScene(displayTrainingPage));
   	   
   	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
-  			   weightTrainingStack, strengthTrainingStack, submitWorkoutDataButton);
+  			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
   	   
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
