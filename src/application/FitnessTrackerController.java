@@ -7,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,14 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class FitnessTrackerController {
@@ -56,11 +46,6 @@ public class FitnessTrackerController {
     void trackSleep(ActionEvent event) {
 
     }
-    
-    @FXML
-    void trackWaterIntake(ActionEvent event) {
-    
-	}
 
     @FXML
     void trackNutrition(ActionEvent event) {
