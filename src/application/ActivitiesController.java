@@ -57,6 +57,7 @@ public class ActivitiesController {
   	   workoutHeaderLabel.setTextFill(Color.MEDIUMVIOLETRED);
   	   Font font = Font.font("System", FontWeight.BOLD, 30);
   	   workoutHeaderLabel.setFont(font);
+  	   workoutHeaderLabel.setPadding(new Insets(25,0,25,60));
   	   
   	   LocalDateTime workoutSectionDate = LocalDateTime.now();  
   	   DateTimeFormatter formatWorkoutSectionDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
@@ -64,6 +65,7 @@ public class ActivitiesController {
   	   Font dateFont = Font.font("System", 24);
   	   Label currentDateLabel = new Label(formattedDate);
   	   currentDateLabel.setFont(dateFont);
+  	   currentDateLabel.setPadding(new Insets(0,0,0,200));
   	   
   	   // Create stacks for widgets
    	   StackPane sportsStack = new StackPane();
