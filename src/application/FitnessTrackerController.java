@@ -18,17 +18,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class FitnessTrackerController {
+public class FitnessTrackerController extends UserGoalsDisplay {
 	Stage applicationStage;
 	
 	@FXML
-
 	private TextField amountOfWater;
 	
 	@FXML 
 	private Label waterProgress;
   
-  @FXML
+	@FXML
+    private Label stepsGoalLabelDashboard;
+	
+	@FXML
 	private Button goalsButton;
 
 	
@@ -40,6 +42,10 @@ public class FitnessTrackerController {
     @FXML
     void trackSteps(ActionEvent event) {
 
+    }
+    
+    public void setStepsGoalLabel(String stepsGoals) {
+        stepsGoalLabelDashboard.setText(String.format(stepsGoals +  " Steps"));
     }
 
     @FXML
