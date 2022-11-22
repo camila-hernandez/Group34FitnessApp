@@ -91,10 +91,18 @@ public class ActivitiesController implements Initializable {
     public void setExerciseDurationGoals(double progress) {
     	this.progress = progress;
     }
+    
+    public void updateProgress() {
+    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay(getExerciseGoal(exercise));
+    	double limit = stepsGoal;
+    	progress += 
+    }
     */
     public void getTotalWorkoutDuration(double minutes) {
-    	totalWorkoutDuration = minutes;
+    	totalWorkoutDuration += minutes;
+    	todayExerciseLabel.setText(Double.toString(totalWorkoutDuration) + "/goal minutes");
     }
+    
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
@@ -337,8 +345,12 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
-		   getTotalWorkoutDuration(Double.parseDouble(sportsExerciseTextfield.getText() + cardioExerciseTextfield.getText() +
-				   flexibilityExerciseTextfield.getText() + weightExerciseTextfield.getText() + strengthExerciseTextfield.getText()));});
+		   getTotalWorkoutDuration(Double.parseDouble(sportsExerciseTextfield.getText()));
+		   getTotalWorkoutDuration(Double.parseDouble(cardioExerciseTextfield.getText()));
+		   getTotalWorkoutDuration(Double.parseDouble(flexibilityExerciseTextfield.getText()));
+		   getTotalWorkoutDuration(Double.parseDouble(weightExerciseTextfield.getText()));
+		   getTotalWorkoutDuration(Double.parseDouble(strengthExerciseTextfield.getText()));
+		   });
   	   
   	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
   			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
