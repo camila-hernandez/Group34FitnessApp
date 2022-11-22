@@ -33,6 +33,9 @@ public class FitnessTrackerController {
 
 	@FXML
 	private Button goalsButton;
+	
+	@FXML
+	private Label sleepDisplayLabel;
 
 
 	@FXML

@@ -15,54 +15,48 @@
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6" height="159.0" stroke="#52d4ff" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="481.0" />
-            <Label text="Water Intake" textFill="WHITE">
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#47a0c6" height="121.0" stroke="#52d4ff" strokeType="INSIDE" width="468.0" />
+            <Label text="WATER INTAKE" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="58.0" />
+                  <Font name="System Bold" size="50.0" />
                </font>
             </Label>
          </children>
       </StackPane>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="495.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#57aeffe8" height="66.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
-                  <Label prefHeight="46.0" prefWidth="390.0" text="your water intake in Liters:" textFill="WHITE">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6e8" height="66.0" stroke="#52d4ff" strokeType="INSIDE" width="548.0" />
+                  <Label prefHeight="46.0" prefWidth="508.0" text="Enter your water intake amount:  (L)" textFill="WHITE">
                      <font>
                         <Font size="31.0" />
                      </font>
                   </Label>
                </children>
             </StackPane>
-            <TextField fx:id="amountOfWater" prefHeight="99.0" prefWidth="447.0" />
-            <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="progress" />
+            <HBox prefHeight="198.0" prefWidth="609.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="amountOfWater" alignment="CENTER" prefHeight="51.0" prefWidth="130.0" />
+                  <ImageView fitHeight="150.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="Update Water Progress" textFill="#0c79b9" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
-   <right>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-   </right>
-   <left>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-   </left>
    <bottom>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="380.0">
-               <children>
-                  <Label fx:id="waterProgress" prefHeight="28.0" prefWidth="288.0" text="progress to goal:" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" onAction = "#returnToMain" prefHeight="36.0" prefWidth="139.0" text="return to main" />
-                     </children>
-                  </HBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </VBox>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#returnToMain" prefHeight="65.0" prefWidth="272.0" text="Return to Main" textFill="#6944c5">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Label fx:id="waterProgress1" prefHeight="91.0" prefWidth="288.0" text="progress to goal:" />
          </children>
       </VBox>
    </bottom>

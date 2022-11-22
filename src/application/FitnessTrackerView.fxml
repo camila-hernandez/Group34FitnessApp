@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sleepTextInMain" layoutX="329.0" layoutY="-60.0" text="0 h 00 min">
+                  <Label fx:id="sleepDisplayLabel" layoutX="329.0" layoutY="-60.0" text="0 h 00 min">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
