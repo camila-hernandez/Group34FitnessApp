@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class UserGoalsDisplay {
@@ -49,6 +50,7 @@ public class UserGoalsDisplay {
     @FXML
     private Button homeButton;
 
+    // Display user health and fitness goals based on their input
     Font newLabelFont = Font.font("System", 24);
     void displayStepsGoals(String stepsInformation) {
     	stepGoalsLabel.setFont(newLabelFont);
@@ -88,11 +90,14 @@ public class UserGoalsDisplay {
   		   FXMLLoader loader = new FXMLLoader();
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+  		   
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
   		   applicationStage.setScene(scene);
   		   applicationStage.show();
+  		   
+  		
   	   } catch(Exception e) {
   		   e.printStackTrace();
   	   }
@@ -223,7 +228,13 @@ public class UserGoalsDisplay {
 	   displayWeightGoals(weightGoalsTextfield.getText());
 	   displayCaloriesBurnedGoals(caloriesBurnedGoalsTextfield.getText());
 	   displayExerciseGoals(exerciseDurationGoalsTextfield.getText());
- 	   });
+	   getStepsGoals(stepsGoalsTextfield.getText());
+	   getSleepGoals(sleepGoalsTextfield.getText());
+	   getWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+	   getWeightGoals(weightGoalsTextfield.getText());
+	   getCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
+	   getExerciseGoals(exerciseDurationGoalsTextfield.getText());
+	   });
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
@@ -236,6 +247,31 @@ public class UserGoalsDisplay {
  	   applicationStage.setScene(updatedUserFitnessGoalsScene);	 
  	  
     }
+
+	public String getStepsGoals(String steps) {
+		return steps;
+	}
+	
+	public String getSleepGoals(String sleep) {
+		return sleep;
+	}
+	
+	public String getWaterIntakeGoals(String water) {
+		return water;
+	}
+	
+	public String getWeightGoals(String weight) {
+		return weight;
+	}
+	
+	public String getCaloriesGoals(String calories) {
+		return calories;
+	}
+	
+	public String getExerciseGoals(String exercise) {
+		return exercise;
+	}
+	
 
 }
 
