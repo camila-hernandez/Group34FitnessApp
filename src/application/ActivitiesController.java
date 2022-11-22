@@ -64,6 +64,9 @@ public class ActivitiesController implements Initializable {
     @FXML
     private ProgressBar workoutProgressBar;
     
+    @FXML
+    private Label progressLabel;
+    
     double progress;
     double totalWorkoutDuration;
     
@@ -87,20 +90,36 @@ public class ActivitiesController implements Initializable {
     	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
 	}
-    /*
-    public void setExerciseDurationGoals(double progress) {
-    	this.progress = progress;
-    }
     
-    public void updateProgress() {
-    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay(getExerciseGoal(exercise));
-    	double limit = stepsGoal;
-    	progress += 
+    public void updateProgress(String m) {
+    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
+    	if (progress < 1) {
+    		progress = getTotalWorkoutDuration(totalWorkoutDuration);
+    		workoutProgressBar.setProgress(progress / Double.parseDouble(exerciseGoal.getExerciseGoals(m)));
+    		progressLabel.setText((progress / Double.parseDouble(exerciseGoal.getExerciseGoals(m))) * 100 + "%");
+    		
+    	}
     }
-    */
-    public void getTotalWorkoutDuration(double minutes) {
-    	totalWorkoutDuration += minutes;
-    	todayExerciseLabel.setText(Double.toString(totalWorkoutDuration) + "/goal minutes");
+   /* 
+    public void setTodaysExerciseLabel(String goal) {
+    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
+    	if (exerciseGoal.getExerciseGoals(goal) == null && totalWorkoutDuration == 0.0) {
+    		todayExerciseLabel.setText("0.0/0.0 minutes");
+    	}
+    	if (exerciseGoal.getExerciseGoals(goal) != null && totalWorkoutDuration == 0.0) {
+    		todayExerciseLabel.setText("0.0/" + 
+        	    	Double.parseDouble(exerciseGoal.getExerciseGoals(goal)) + " minutes");
+    	}
+    	if (exerciseGoal.getExerciseGoals(goal) == null && totalWorkoutDuration > 0.0) {
+    		todayExerciseLabel.setText(getTotalWorkoutDuration(totalWorkoutDuration) + "/0.0 minutes");
+    	}
+    	if (exerciseGoal.getExerciseGoals(goal) != null && totalWorkoutDuration > 0.0) {
+    		todayExerciseLabel.setText(getTotalWorkoutDuration(totalWorkoutDuration) + "/" + 
+    				Double.parseDouble(exerciseGoal.getExerciseGoals(goal)) + " minutes");
+    	}
+   */
+    public double getTotalWorkoutDuration(double minutes) {
+    	return totalWorkoutDuration += minutes;
     }
     
     @FXML
