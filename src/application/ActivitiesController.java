@@ -2,21 +2,30 @@ package application;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,7 +34,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ActivitiesController {
+public class ActivitiesController implements Initializable {
 	Stage applicationStage;
 
     @FXML
@@ -36,14 +45,73 @@ public class ActivitiesController {
 
     @FXML
     private Label durationOfExerciseLabel;
+    
+    @FXML
+    private Label todayExerciseLabel;
 
     @FXML
-    void returnToDashboard(ActionEvent event) {
+    private ImageView statsImage;
+    
+    @FXML
+    private ImageView workoutImage;
 
+    @FXML
+    private Label healthYWorkoutTip;
+
+    @FXML
+    private Label todayMotivationLabel;
+    
+    @FXML
+    private ProgressBar workoutProgressBar;
+    
+    double progress;
+    double totalWorkoutDuration;
+    
+    @FXML
+    private BarChart<?, ?> overallWorkoutBarGraph;
+    /*
+    public void generateWorkoutBarGraph() {
+    	XYChart.Series<X,Y> series = new XYChart.Series<>();
     }
-   
-    public void changeSceneRecentActivityTab() {
+*/
+    // Loads image onto stats button
+    // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
+    // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+    	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
+    	statsImage.setImage(statsIconImage);
     	
+    	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
+    	workoutImage.setImage(workoutIconImage);
+    	
+    	workoutProgressBar.setStyle("-fx-accent: purple;");
+	}
+    /*
+    public void setExerciseDurationGoals(double progress) {
+    	this.progress = progress;
+    }
+    */
+    public void getTotalWorkoutDuration(double minutes) {
+    	totalWorkoutDuration = minutes;
+    }
+    @FXML
+    void returnToDashboard(ActionEvent event) {
+    	 try {
+    		   FXMLLoader loader = new FXMLLoader();
+    		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+    		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+    		   
+    		   controller.applicationStage = applicationStage;
+    		   
+    		   Scene scene = new Scene(root);
+    		   applicationStage.setScene(scene);
+    		   applicationStage.show();
+    		   
+    		
+    	   } catch(Exception e) {
+    		   e.printStackTrace();
+    	   }
     }
     
     public void updateWorkouts(ActionEvent event) {
@@ -268,7 +336,9 @@ public class ActivitiesController {
 	   uploadWorkoutInfoButtonContainer.getChildren().addAll(submitWorkoutDataButton);
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
-	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> applicationStage.setScene(displayTrainingPage));
+	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
+		   getTotalWorkoutDuration(Double.parseDouble(sportsExerciseTextfield.getText() + cardioExerciseTextfield.getText() +
+				   flexibilityExerciseTextfield.getText() + weightExerciseTextfield.getText() + strengthExerciseTextfield.getText()));});
   	   
   	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
   			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
