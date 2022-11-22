@@ -48,7 +48,7 @@
                </font>
             </Label>
             <Button layoutX="292.0" layoutY="487.0" mnemonicParsing="false" text="update" />
-            <Button layoutX="253.0" layoutY="686.0" mnemonicParsing="false" text="return to main" />
+            <Button layoutX="253.0" layoutY="686.0" onAction ="#returnToMain" mnemonicParsing="false" text="return to main" />
          </children>
       </Pane>
    </left>

@@ -46,7 +46,7 @@ public class FitnessTrackerController {
 	}
 
 	@FXML
-	void trackSleep(ActionEvent setSleepEvent) {
+	void trackSleep(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
