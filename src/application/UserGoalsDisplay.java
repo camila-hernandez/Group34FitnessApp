@@ -224,18 +224,18 @@ public class UserGoalsDisplay {
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
  	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {applicationStage.setScene(displayUserFitnessGoalsScene);
- 	   displayStepsGoals(stepsGoalsTextfield.getText());
-	   displaySleepGoals(sleepGoalsTextfield.getText());
-	   displayWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
-	   displayWeightGoals(weightGoalsTextfield.getText());
-	   displayCaloriesBurnedGoals(caloriesBurnedGoalsTextfield.getText());
-	   displayExerciseGoals(exerciseDurationGoalsTextfield.getText());
-	   getStepsGoals(stepsGoalsTextfield.getText());
-	   getSleepGoals(sleepGoalsTextfield.getText());
-	   getWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
-	   getWeightGoals(weightGoalsTextfield.getText());
-	   getCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
-	   getExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	   setStepsGoals(stepsGoalsTextfield.getText());
+	   setSleepGoals(sleepGoalsTextfield.getText());
+	   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+	   setWeightGoals(weightGoalsTextfield.getText());
+	   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
+	   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	   displayStepsGoals();
+	   displaySleepGoals();
+	   displayWaterIntakeGoals();
+	   displayWeightGoals();
+	   displayCaloriesBurnedGoals();
+	   displayExerciseGoals();
 	   });
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
@@ -250,26 +250,26 @@ public class UserGoalsDisplay {
  	  
     }
     
-    public String setStepsGoals(String steps) {
+    public void setStepsGoals(String steps) {
     	stepsInformation = steps;
     }
     
-    public String setSleepGoals(String sleep) {
+    public void setSleepGoals(String sleep) {
     	sleepInformation = sleep;
     }
-    public String setWaterIntakeGoals(String water) {
+    public void setWaterIntakeGoals(String water) {
     	waterInformation = water;
     }
     
-    public String setWeightGoals(String weight) {
+    public void setWeightGoals(String weight) {
     	weightInformation = weight;
     }
     
-    public String setCaloriesGoals(String calories) {
+    public void setCaloriesGoals(String calories) {
     	caloriesBurnedInformation = calories;
     }
     
-    public String setExerciseGoals(String exercise) {
+    public void setExerciseGoals(String exercise) {
     	exerciseInformation = exercise;
     }
 
