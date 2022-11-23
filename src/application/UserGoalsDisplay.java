@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -20,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class UserGoalsDisplay {
@@ -107,7 +105,13 @@ public class UserGoalsDisplay {
 
     @FXML
     void updateFitnessGoals(ActionEvent event) {
- 	   Scene displayUserFitnessGoalsScene = applicationStage.getScene(); 
+ 	   Scene displayUserFitnessGoalsScene = applicationStage.getScene();
+ 	   displayStepsGoals();
+ 	   displaySleepGoals();
+ 	   displayWaterIntakeGoals();
+ 	   displayWeightGoals();
+ 	   displayCaloriesBurnedGoals();
+ 	   displayExerciseGoals();
 	   
  	   // Create new scene that displays the user's health and fitness goals
  	   VBox updateFitnessGoalsContainer = new VBox();
@@ -224,12 +228,12 @@ public class UserGoalsDisplay {
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
  	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {applicationStage.setScene(displayUserFitnessGoalsScene);
- 	   setStepsGoals(stepsGoalsTextfield.getText());
-	   setSleepGoals(sleepGoalsTextfield.getText());
-	   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
-	   setWeightGoals(weightGoalsTextfield.getText());
-	   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
-	   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	  setStepsGoals(stepsGoalsTextfield.getText());
+ 	  setSleepGoals(sleepGoalsTextfield.getText());
+ 	  setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+ 	  setWeightGoals(weightGoalsTextfield.getText());
+ 	  setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
+ 	  setExerciseGoals(exerciseDurationGoalsTextfield.getText());
  	   displayStepsGoals();
 	   displaySleepGoals();
 	   displayWaterIntakeGoals();
