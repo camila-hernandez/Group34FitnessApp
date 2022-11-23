@@ -49,36 +49,38 @@ public class UserGoalsDisplay {
 
     @FXML
     private Button homeButton;
+    
+    private String stepsInformation, sleepInformation, waterInformation, weightInformation, caloriesBurnedInformation, exerciseInformation;
 
     // Display user health and fitness goals based on their input
     Font newLabelFont = Font.font("System", 24);
-    void displayStepsGoals(String stepsInformation) {
+    void displayStepsGoals() {
     	stepGoalsLabel.setFont(newLabelFont);
  		stepGoalsLabel.setText(String.format(stepsInformation + " steps"));
     }
     
-    void displaySleepGoals(String sleepInformation) {
+    void displaySleepGoals() {
     	sleepGoalsLabel.setFont(newLabelFont);
     	sleepGoalsLabel.setText(String.format(sleepInformation + " hours"));
     }
     
-    void displayWaterIntakeGoals(String waterInformation) {
+    void displayWaterIntakeGoals() {
     	waterIntakeGoalsLabel.setFont(newLabelFont);
     	waterIntakeGoalsLabel.setText(String.format(waterInformation + " cups"));
     }
     
-    void displayWeightGoals(String weightInformation) {
+    void displayWeightGoals() {
     	weightGoalsLabel.setFont(newLabelFont);
     	weightGoalsLabel.setText(String.format(weightInformation + " kg"));
     }
     
-    void displayCaloriesBurnedGoals(String caloriesBurnedInformation) {
+    void displayCaloriesBurnedGoals() {
     	caloriesBurnedGoalsLabel.setFont(newLabelFont);
     	caloriesBurnedGoalsLabel.setText(caloriesBurnedInformation + " cal");
     	caloriesBurnedGoalsLabel.setAlignment(Pos.CENTER);
     }
     
-    void displayExerciseGoals(String exerciseInformation) {
+    void displayExerciseGoals() {
     	exerciseGoalsLabel.setFont(newLabelFont);
     	exerciseGoalsLabel.setText(exerciseInformation + " minutes");
     	exerciseGoalsLabel.setAlignment(Pos.CENTER);
@@ -247,29 +249,52 @@ public class UserGoalsDisplay {
  	   applicationStage.setScene(updatedUserFitnessGoalsScene);	 
  	  
     }
+    
+    public String setStepsGoals(String steps) {
+    	stepsInformation = steps;
+    }
+    
+    public String setSleepGoals(String sleep) {
+    	sleepInformation = sleep;
+    }
+    public String setWaterIntakeGoals(String water) {
+    	waterInformation = water;
+    }
+    
+    public String setWeightGoals(String weight) {
+    	weightInformation = weight;
+    }
+    
+    public String setCaloriesGoals(String calories) {
+    	caloriesBurnedInformation = calories;
+    }
+    
+    public String setExerciseGoals(String exercise) {
+    	exerciseInformation = exercise;
+    }
 
-	public String getStepsGoals(String steps) {
-		return steps;
+	public String getStepsGoals() {
+		return stepsInformation;
 	}
 	
-	public String getSleepGoals(String sleep) {
-		return sleep;
+	public String getSleepGoals() {
+		return sleepInformation;
 	}
 	
-	public String getWaterIntakeGoals(String water) {
-		return water;
+	public String getWaterIntakeGoals() {
+		return waterInformation;
 	}
 	
-	public String getWeightGoals(String weight) {
-		return weight;
+	public String getWeightGoals() {
+		return weightInformation;
 	}
 	
-	public String getCaloriesGoals(String calories) {
-		return calories;
+	public String getCaloriesGoals() {
+		return caloriesBurnedInformation;
 	}
 	
-	public String getExerciseGoals(String exercise) {
-		return exercise;
+	public String getExerciseGoals() {
+		return exerciseInformation;
 	}
 	
 
