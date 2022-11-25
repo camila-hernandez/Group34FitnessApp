@@ -17,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	/*
 	public static void readUsingBufferedReader() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("create a file"));
+		BufferedReader reader = new BufferedReader(new FileReader("FitnessTrackerFile.txt"));
 		String line = reader.readLine();
 		while (line != null) {
 			String[] w = line.split(" ");
@@ -31,8 +31,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			AnchorPane root = loader.load(new FileInputStream("src/application/Main.fxml"));
-			FitnessController controller = (FitnessController)loader.getController();
+			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 			controller.applicationStage = primaryStage;
 		
 			Scene scene = new Scene(root);
