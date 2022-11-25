@@ -68,6 +68,18 @@ public class FitnessTrackerController {
 
 	@FXML
 	void trackNutrition(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
+			NutritionTrackerController controller = (NutritionTrackerController)loader.getController();
+			controller.applicationStage = applicationStage;
+
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

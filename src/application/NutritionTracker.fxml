@@ -11,49 +11,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserSleepTrackerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NutritionTrackerController">
    <left>
       <Pane prefHeight="909.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="163.0" prefWidth="609.0">
+            <TextField fx:id="CalorieIntake" layoutX="359.0" layoutY="29.0" prefHeight="28.0" prefWidth="169.0" />
+            <Button layoutX="387.0" layoutY="81.0" mnemonicParsing="false" onAction="#setCalorieIntake" text = "SET INTAKE" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" textFill="WHITE" />
+            <StackPane layoutX="10.0" layoutY="151.0" prefHeight="22.0" prefWidth="327.0">
                <children>
-                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#6944c5" height="91.0" opacity="0.76" stroke="#6944c5" strokeType="INSIDE" width="450.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="233.0" prefWidth="517.0" text="SLEEP" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="50.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-            <TextField fx:id="hoursSleep" layoutX="210.0" layoutY="205.0" />
-            <Label alignment="CENTER" layoutX="34.0" layoutY="185.0" prefHeight="79.0" prefWidth="199.0" text="Hours" textFill="#101010" underline="true">
+                  <Label fx:id="CalorieIntakeDisplay" alignment="CENTER" maxWidth="-Infinity" prefHeight="104.0" prefWidth="327.0" text="Label" textAlignment="CENTER" />
+               </children></StackPane>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffc600" height="44.0" layoutX="14.0" layoutY="26.0" opacity="0.76" stroke="ORANGE" strokeType="INSIDE" width="325.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="26.0" prefHeight="44.0" prefWidth="334.0" text="Enter your Calorie Intake:" textFill="WHITE">
                <font>
-                  <Font size="35.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="34.0" layoutY="276.0" prefHeight="79.0" prefWidth="199.0" text="Minutes" textFill="#0d0d0d" underline="true">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-            <TextField fx:id="minutesSleep" layoutX="210.0" layoutY="296.0" />
-            <Label fx:id="sleepProgress" alignment="CENTER" layoutX="20.0" layoutY="561.0" prefHeight="79.0" prefWidth="521.0" text="compared to your goals">
-               <font>
-                  <Font size="38.0" />
-               </font>
-            </Label>
-            <Button layoutX="160.0" layoutY="393.0" mnemonicParsing="false" onAction="#setSleep" prefHeight="70.0" prefWidth="267.0" text="update amount of sleep" textFill="#6945c4">
-               <font>
-                  <Font size="21.0" />
-               </font></Button>
-            <Button layoutX="169.0" layoutY="777.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="65.0" prefWidth="272.0" text="Return to Main" textFill="#6944c5">
-               <font>
-                  <Font size="30.0" />
-               </font></Button>
          </children>
       </Pane>
    </left>
    <center>
       <VBox prefHeight="856.0" prefWidth="360.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#returnToMain" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" text="RETURN TO MAIN" textFill="WHITE" />
+   </bottom>
+   <top>
+      <StackPane prefHeight="163.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="ORANGE" height="91.0" opacity="0.76" stroke="ORANGE" strokeType="INSIDE" width="450.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="233.0" prefWidth="517.0" text="NUTRITION" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </top>
 </BorderPane>

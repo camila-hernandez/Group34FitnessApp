@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class UserSleepTrackerController {
+public class UserSleepTrackerController{
 	Stage applicationStage;
 	
 	@FXML
@@ -25,8 +25,9 @@ public class UserSleepTrackerController {
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		double hours = Double.parseDouble(hoursSleep.getText());
-		double minutes = Double.parseDouble(minutesSleep.getText());
+		Double hours = Double.parseDouble(hoursSleep.getText());
+		Double minutes = Double.parseDouble(minutesSleep.getText());
+		sleepProgress.setText(hours + "h " + minutes + "min");
 	}
 	
 	@FXML
@@ -40,6 +41,7 @@ public class UserSleepTrackerController {
   		   Scene scene = new Scene(root);
   		   applicationStage.setScene(scene);
   		   applicationStage.show();
+  		   
   	   } catch(Exception e) {
   		   e.printStackTrace();
   	   }
