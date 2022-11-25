@@ -32,7 +32,7 @@ public class FitnessTrackerController {
     	 try {
   		   FXMLLoader loader = new FXMLLoader();
   		   AnchorPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
-  		   UserGoalsDisplay controller = (UserGoalsDisplay)loader.getController();
+  		   StepsController controller = (StepsController)loader.getController();
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
