@@ -54,7 +54,7 @@ public class ActivitiesController implements Initializable {
     private Label healthyWorkoutTip;
 
     @FXML
-    private Label todayMotivationLabel;
+    private Label todayExerciseMotivationLabel;
     
     @FXML
     private ProgressBar workoutProgressBar;
