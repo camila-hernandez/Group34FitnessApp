@@ -18,7 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class FitnessTrackerController extends UserGoalsDisplay {
+public class FitnessTrackerController {
 	Stage applicationStage;
 	
 	@FXML
@@ -32,7 +32,12 @@ public class FitnessTrackerController extends UserGoalsDisplay {
 	
 	@FXML
 	private Button goalsButton;
-
+	
+	Storage storage = new Storage();
+	
+	public void setStorage(Storage storage) {
+    	this.storage = storage;
+    }
 	
     @FXML
     void openUserProfile(ActionEvent event) {
@@ -43,11 +48,7 @@ public class FitnessTrackerController extends UserGoalsDisplay {
     void trackSteps(ActionEvent event) {
 
     }
-    
-    public void setStepsGoalLabel(String stepsGoals) {
-        stepsGoalLabelDashboard.setText(String.format(stepsGoals +  " Steps"));
-    }
-
+   
     @FXML
     void trackSleep(ActionEvent event) {
 
@@ -114,10 +115,14 @@ public class FitnessTrackerController extends UserGoalsDisplay {
     
    @FXML
    void showUserFitnessGoals(ActionEvent event) {
-	   try {
+	   try {		   
 		   FXMLLoader loader = new FXMLLoader();
 		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
 		   UserGoalsDisplay controller = (UserGoalsDisplay)loader.getController();
+		   
+		   controller.setStorage(Storage.storage);
+		   controller.updateGoalValues();
+		   
 		   controller.applicationStage = applicationStage;
 		   
 		   Scene scene = new Scene(root);
@@ -125,8 +130,7 @@ public class FitnessTrackerController extends UserGoalsDisplay {
 		   applicationStage.show();
 	   } catch(Exception e) {
 		   e.printStackTrace();
-	   }
-	   
+	   }  
    }
 }
     	
