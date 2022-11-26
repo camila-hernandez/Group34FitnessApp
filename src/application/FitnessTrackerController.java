@@ -33,6 +33,9 @@ public class FitnessTrackerController {
 	@FXML
 	private Button goalsButton;
 	
+	@FXML
+	private Label sleepDisplayLabel;
+	
 	Storage storage = new Storage();
 	
 	public void setStorage(Storage storage) {
@@ -61,6 +64,8 @@ public class FitnessTrackerController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		sleepDisplayLabel.setText(Storage.storage.getSleepGoals() + " h");
 
 
 	}

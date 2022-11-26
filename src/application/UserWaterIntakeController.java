@@ -38,7 +38,6 @@ public class UserWaterIntakeController{
 		if (goalAmount - IntakeAmount == 0 || goalAmount - IntakeAmount < 0) {
 			waterProgress.setText("You have reached your water intake goal");
 		}
-
 	}
 
 	@FXML
