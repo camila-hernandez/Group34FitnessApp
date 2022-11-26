@@ -53,7 +53,7 @@
          <font>
             <Font size="25.0" />
          </font></Label>
-      <Label fx:id="todayExerciseMotivationLabel" layoutX="116.0" layoutY="619.0" text="Label" textFill="WHITE">
+      <Label fx:id="todayExerciseMotivationLabel" layoutX="116.0" layoutY="619.0" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font></Label>
@@ -66,5 +66,11 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Label layoutX="203.0" layoutY="189.0" text="Work hard to become strong!" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="headerImage" fitHeight="138.0" fitWidth="134.0" layoutX="81.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

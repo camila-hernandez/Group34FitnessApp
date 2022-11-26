@@ -49,9 +49,9 @@ public class ActivitiesController implements Initializable {
     
     @FXML
     private ImageView workoutImage;
-
+    
     @FXML
-    private Label healthyWorkoutTip;
+    private ImageView headerImage;
 
     @FXML
     private Label todayExerciseMotivationLabel;
@@ -78,12 +78,16 @@ public class ActivitiesController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+    	// <a href="https://www.flaticon.com/free-icons/training" title="training icons">Training icons created by Freepik - Flaticon</a>
     	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
     	
     	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
     	workoutImage.setImage(workoutIconImage);
+    	
+    	Image headerIconImage = new Image(getClass().getResourceAsStream("training.png"));
+    	headerImage.setImage(headerIconImage);
     	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
 	}
@@ -110,11 +114,7 @@ public class ActivitiesController implements Initializable {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
-    
-   // public void setHealthyWorkoutTipLabel() {
-    //	healthyWorkoutTip.setText("Patience and consistency is key.");
-    //}
-    
+
     public void setCurrentDateLabel(String o) {
     	LocalDateTime currentDate = LocalDateTime.now();  
    	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
@@ -133,7 +133,7 @@ public class ActivitiesController implements Initializable {
     		updateTodaysExerciseLabel(storage.todayExerciseLabel);
     	}
     }
-    
+
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
