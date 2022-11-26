@@ -54,7 +54,7 @@ public class ActivitiesController implements Initializable {
     private Label healthyWorkoutTip;
 
     @FXML
-    private Label todayMotivationLabel;
+    private Label todayExerciseMotivationLabel;
     
     @FXML
     private ProgressBar workoutProgressBar;
@@ -67,7 +67,7 @@ public class ActivitiesController implements Initializable {
     
     Storage storage;
     
-    double progress;
+    double progress = 0.0;
     double totalWorkoutDuration;
     
     public void setStorage(Storage storage) {
@@ -87,16 +87,18 @@ public class ActivitiesController implements Initializable {
     	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
 	}
-    /*
-    public void updateProgress(String m) {
-    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
+    
+    public void updateProgress(String time) {
+    	
+    	//workoutProgressBar.setProgress(0);
+    	//progressLabel.setText(0.0 + "%");
     	if (progress < 1) {
-    		progress = getTotalWorkoutDuration(totalWorkoutDuration);
-    		workoutProgressBar.setProgress(progress / Double.parseDouble(exerciseGoal.getExerciseGoals()));
-    		progressLabel.setText((progress / Double.parseDouble(exerciseGoal.getExerciseGoals())) * 100 + "%");
+    		progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
+    		workoutProgressBar.setProgress(progress / 100);
+    		progressLabel.setText(progress + "%");
     	}
     }
-    */
+    
    // public void setHealthyWorkoutTipLabel() {
     //	healthyWorkoutTip.setText("Patience and consistency is key.");
     //}
@@ -106,30 +108,10 @@ public class ActivitiesController implements Initializable {
    	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
    	   String formattedDate = currentDate.format(formatCurrentDate);  
    	   currentDateLabel.setText(formattedDate);
-    }
-    
-   /* 
-    public void setTodaysExerciseLabel(String goal) {
-    	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
-    	if (exerciseGoal.getExerciseGoals(goal) == null && totalWorkoutDuration == 0.0) {
-    		todayExerciseLabel.setText("0.0/0.0 minutes");
-    	}
-    	if (exerciseGoal.getExerciseGoals(goal) != null && totalWorkoutDuration == 0.0) {
-    		todayExerciseLabel.setText("0.0/" + 
-        	    	Double.parseDouble(exerciseGoal.getExerciseGoals(goal)) + " minutes");
-    	}
-    	if (exerciseGoal.getExerciseGoals(goal) == null && totalWorkoutDuration > 0.0) {
-    		todayExerciseLabel.setText(getTotalWorkoutDuration(totalWorkoutDuration) + "/0.0 minutes");
-    	}
-    	if (exerciseGoal.getExerciseGoals(goal) != null && totalWorkoutDuration > 0.0) {
-    		todayExerciseLabel.setText(getTotalWorkoutDuration(totalWorkoutDuration) + "/" + 
-    				Double.parseDouble(exerciseGoal.getExerciseGoals(goal)) + " minutes");
-    	}
-   
-   */
+    }  
     
     public void updateTodaysExerciseLabel(String exercise) {
-    	todayExerciseLabel.setText(exercise + "/" + Storage.storage.getExerciseGoals() + " minutes");
+    	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
     	Storage.storage.setTodaysExerciseLabel(exercise);
     	storage.setTodaysExerciseLabel(exercise);
     }
@@ -386,6 +368,7 @@ public class ActivitiesController implements Initializable {
 		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(weightExerciseTextfield.getText()) + 
 		  Double.parseDouble(strengthExerciseTextfield.getText()));  
 		  updateTodaysExerciseLabel(duration);
+		  updateProgress(duration);
 		  });
   	   
   	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
