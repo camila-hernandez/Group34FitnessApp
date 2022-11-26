@@ -127,6 +127,7 @@ public class ActivitiesController implements Initializable {
     	}
    
    */
+    
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Storage.storage.getExerciseGoals() + " minutes");
     	Storage.storage.setTodaysExerciseLabel(exercise);
