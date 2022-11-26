@@ -95,7 +95,7 @@ public class ActivitiesController implements Initializable {
     	// Update progress bar
     	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
-    	progressLabel.setText(progress + "%");
+    	progressLabel.setText(Math.round(progress) + ".0%");
     }
     
    // public void setHealthyWorkoutTipLabel() {
