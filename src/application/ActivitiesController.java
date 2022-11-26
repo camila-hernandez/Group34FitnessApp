@@ -89,6 +89,7 @@ public class ActivitiesController implements Initializable {
 	}
     
     public void updateProgress(String time) {
+    	
     	//workoutProgressBar.setProgress(0);
     	//progressLabel.setText(0.0 + "%");
     	if (progress < 1) {
