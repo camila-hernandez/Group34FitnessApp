@@ -66,7 +66,29 @@ public class FitnessTrackerController {
 		}
 
 
+<<<<<<< Upstream, based on origin/Camila_Hernandez
 	}
+=======
+    @FXML
+    void trackActivities(ActionEvent event) {
+    	try {
+   		   FXMLLoader loader = new FXMLLoader();
+   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+   		   ActivitiesController controller = (ActivitiesController)loader.getController();
+   		   
+   		   controller.setStorage(Storage.storage);
+		   controller.updateTodaysExerciseValues();  
+   		   
+   		   controller.applicationStage = applicationStage;
+   		   
+   		   Scene scene = new Scene(root);
+   		   applicationStage.setScene(scene);
+   		   applicationStage.show();
+   	   } catch(Exception e) {
+   		   e.printStackTrace();
+   	   }
+    }
+>>>>>>> 5f7cb62 Updated trackActivities() to get the stored data before showing scene
 
 	@FXML
 	void trackNutrition(ActionEvent event) {
