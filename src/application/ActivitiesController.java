@@ -1,7 +1,6 @@
 package application;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,18 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -56,7 +51,7 @@ public class ActivitiesController implements Initializable {
     private ImageView workoutImage;
 
     @FXML
-    private Label healthYWorkoutTip;
+    private Label healthyWorkoutTip;
 
     @FXML
     private Label todayMotivationLabel;
@@ -65,23 +60,25 @@ public class ActivitiesController implements Initializable {
     private ProgressBar workoutProgressBar;
     
     @FXML
+    private Label currentDateLabel;
+    
+    @FXML
     private Label progressLabel;
+    
+    Storage storage;
     
     double progress;
     double totalWorkoutDuration;
     
-    @FXML
-    private BarChart<?, ?> overallWorkoutBarGraph;
-    /*
-    public void generateWorkoutBarGraph() {
-    	XYChart.Series<X,Y> series = new XYChart.Series<>();
+    public void setStorage(Storage storage) {
+    	this.storage = storage;
     }
-*/
-    // Loads image onto stats button
-    // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
-    // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+   
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+        // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
+        // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+    	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
     	
@@ -90,16 +87,27 @@ public class ActivitiesController implements Initializable {
     	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
 	}
-    
+    /*
     public void updateProgress(String m) {
     	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
     	if (progress < 1) {
     		progress = getTotalWorkoutDuration(totalWorkoutDuration);
-    		workoutProgressBar.setProgress(progress / Double.parseDouble(exerciseGoal.getExerciseGoals(m)));
-    		progressLabel.setText((progress / Double.parseDouble(exerciseGoal.getExerciseGoals(m))) * 100 + "%");
-    		
+    		workoutProgressBar.setProgress(progress / Double.parseDouble(exerciseGoal.getExerciseGoals()));
+    		progressLabel.setText((progress / Double.parseDouble(exerciseGoal.getExerciseGoals())) * 100 + "%");
     	}
     }
+    */
+   // public void setHealthyWorkoutTipLabel() {
+    //	healthyWorkoutTip.setText("Patience and consistency is key.");
+    //}
+    
+    public void setCurrentDateLabel(String o) {
+    	LocalDateTime currentDate = LocalDateTime.now();  
+   	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
+   	   String formattedDate = currentDate.format(formatCurrentDate);  
+   	   currentDateLabel.setText(formattedDate);
+    }
+    
    /* 
     public void setTodaysExerciseLabel(String goal) {
     	UserGoalsDisplay exerciseGoal = new UserGoalsDisplay();
@@ -117,9 +125,19 @@ public class ActivitiesController implements Initializable {
     		todayExerciseLabel.setText(getTotalWorkoutDuration(totalWorkoutDuration) + "/" + 
     				Double.parseDouble(exerciseGoal.getExerciseGoals(goal)) + " minutes");
     	}
+   
    */
-    public double getTotalWorkoutDuration(double minutes) {
-    	return totalWorkoutDuration += minutes;
+    
+    public void updateTodaysExerciseLabel(String exercise) {
+    	todayExerciseLabel.setText(exercise + "/" + Storage.storage.getExerciseGoals() + " minutes");
+    	Storage.storage.setTodaysExerciseLabel(exercise);
+    	storage.setTodaysExerciseLabel(exercise);
+    }
+    
+    public void updateTodaysExerciseValues() {
+    	if (todayExerciseLabel != null) {
+    		updateTodaysExerciseLabel(storage.todayExerciseLabel);
+    	}
     }
     
     @FXML
@@ -364,12 +382,11 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
-		   getTotalWorkoutDuration(Double.parseDouble(sportsExerciseTextfield.getText()));
-		   getTotalWorkoutDuration(Double.parseDouble(cardioExerciseTextfield.getText()));
-		   getTotalWorkoutDuration(Double.parseDouble(flexibilityExerciseTextfield.getText()));
-		   getTotalWorkoutDuration(Double.parseDouble(weightExerciseTextfield.getText()));
-		   getTotalWorkoutDuration(Double.parseDouble(strengthExerciseTextfield.getText()));
-		   });
+		  String duration = Double.toString(Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
+		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(weightExerciseTextfield.getText()) + 
+		  Double.parseDouble(strengthExerciseTextfield.getText()));  
+		  updateTodaysExerciseLabel(duration);
+		  });
   	   
   	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
   			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
