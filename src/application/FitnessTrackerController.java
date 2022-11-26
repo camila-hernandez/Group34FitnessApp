@@ -20,9 +20,6 @@ import javafx.stage.Stage;
 
 public class FitnessTrackerController {
 	Stage applicationStage;
-
-	@FXML
-	private Button goalsButton;
 	
 	@FXML
 	private TextField amountOfWater;
@@ -66,29 +63,7 @@ public class FitnessTrackerController {
 		}
 
 
-<<<<<<< Upstream, based on origin/Camila_Hernandez
 	}
-=======
-    @FXML
-    void trackActivities(ActionEvent event) {
-    	try {
-   		   FXMLLoader loader = new FXMLLoader();
-   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
-   		   ActivitiesController controller = (ActivitiesController)loader.getController();
-   		   
-   		   controller.setStorage(Storage.storage);
-		   controller.updateTodaysExerciseValues();  
-   		   
-   		   controller.applicationStage = applicationStage;
-   		   
-   		   Scene scene = new Scene(root);
-   		   applicationStage.setScene(scene);
-   		   applicationStage.show();
-   	   } catch(Exception e) {
-   		   e.printStackTrace();
-   	   }
-    }
->>>>>>> 5f7cb62 Updated trackActivities() to get the stored data before showing scene
 
 	@FXML
 	void trackNutrition(ActionEvent event) {
@@ -110,18 +85,22 @@ public class FitnessTrackerController {
 	@FXML
 	void trackActivities(ActionEvent event) {
 		try {
-			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
-			ActivitiesController controller = (ActivitiesController)loader.getController();
-			controller.applicationStage = applicationStage;
-
-			Scene scene = new Scene(root);
-			applicationStage.setScene(scene);
-			applicationStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	   		   FXMLLoader loader = new FXMLLoader();
+	   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+	   		   ActivitiesController controller = (ActivitiesController)loader.getController();
+	   		   
+	   		   controller.setStorage(Storage.storage);
+			   controller.updateTodaysExerciseValues();  
+	   		   
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+	    }
 
 	@FXML
 	void showHealthyRecipes(ActionEvent event) {
@@ -144,28 +123,6 @@ public class FitnessTrackerController {
 			e.printStackTrace();
 		}
 	}
-
-	@FXML
-	void showRecommendations(ActionEvent event) {
-
-	}
-
-
-	@FXML
-	void showUserFitnessGoals(ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-    	    BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
-    	    FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
-    	    controller.applicationStage = applicationStage;
-    	    Scene scene = new Scene(root);
-    	    applicationStage.setScene(scene);
-    	    applicationStage.show();
-    	  } catch (IOException e) {
-    		  
-    	  }
-    	
-    }
 
     @FXML
     void showRecommendations(ActionEvent event) {
@@ -192,16 +149,4 @@ public class FitnessTrackerController {
 		   e.printStackTrace();
 	   }  
    }
-			AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
-			UserGoalsDisplay controller = (UserGoalsDisplay)loader.getController();
-			controller.applicationStage = applicationStage;
-
-			Scene scene = new Scene(root);
-			applicationStage.setScene(scene);
-			applicationStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 }
