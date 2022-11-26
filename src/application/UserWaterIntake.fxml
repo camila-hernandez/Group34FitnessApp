@@ -25,19 +25,19 @@
       </StackPane>
    </top>
    <center>
-      <VBox prefHeight="495.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="486.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6e8" height="66.0" stroke="#52d4ff" strokeType="INSIDE" width="548.0" />
-                  <Label prefHeight="46.0" prefWidth="508.0" text="Enter your water intake amount:  (L)" textFill="WHITE">
+                  <Label prefHeight="46.0" prefWidth="508.0" text="Enter your water intake amount: (cups)" textFill="WHITE">
                      <font>
-                        <Font size="31.0" />
+                        <Font size="28.0" />
                      </font>
                   </Label>
                </children>
             </StackPane>
-            <HBox prefHeight="198.0" prefWidth="609.0">
+            <HBox prefHeight="82.0" prefWidth="609.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" />
                   <TextField fx:id="amountOfWater" alignment="CENTER" prefHeight="51.0" prefWidth="130.0" />
@@ -45,19 +45,23 @@
                   <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="Update Water Progress" textFill="#0c79b9" />
                </children>
             </HBox>
+            <Label fx:id="waterProgress" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="progress to goal:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </center>
    <bottom>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="102.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#returnToMain" prefHeight="65.0" prefWidth="272.0" text="Return to Main" textFill="#6944c5">
+            <Button alignment="CENTER" layoutX="169.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="64.0" prefWidth="287.0" text="RETURN TO MAIN" textFill="#47a0c6">
                <font>
-                  <Font size="30.0" />
+                  <Font size="28.0" />
                </font>
             </Button>
-            <Label fx:id="waterProgress1" prefHeight="91.0" prefWidth="288.0" text="progress to goal:" />
          </children>
-      </VBox>
+      </Pane>
    </bottom>
 </BorderPane>
