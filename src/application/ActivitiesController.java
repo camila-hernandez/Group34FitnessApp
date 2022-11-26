@@ -96,6 +96,19 @@ public class ActivitiesController implements Initializable {
     	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
     	progressLabel.setText(Math.round(progress) + ".0%");
+    	
+    	if (progress < 50) {
+    		todayExerciseMotivationLabel.setText("You got this! Keep going!");
+    	}
+    	if (progress == 50) {
+    		todayExerciseMotivationLabel.setText("Halfway there! Don't stop now, keep going!");
+    	}
+    	if (progress > 50 && progress != 100) {
+    		todayExerciseMotivationLabel.setText("Almost to the finish line!");
+    	}
+    	if (progress == 100) {
+    		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
+    	}
     }
     
    // public void setHealthyWorkoutTipLabel() {
