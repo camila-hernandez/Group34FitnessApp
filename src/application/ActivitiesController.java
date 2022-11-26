@@ -89,14 +89,13 @@ public class ActivitiesController implements Initializable {
 	}
     
     public void updateProgress(String time) {
-    	
-    	//workoutProgressBar.setProgress(0);
-    	//progressLabel.setText(0.0 + "%");
-    	if (progress < 1) {
-    		progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
-    		workoutProgressBar.setProgress(progress / 100);
-    		progressLabel.setText(progress + "%");
-    	}
+    	// Initialize progress and label to 0
+    	workoutProgressBar.setProgress(0);
+    	progressLabel.setText(0.0 + "%");
+    	// Update progress bar
+    	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
+    	workoutProgressBar.setProgress(progress / 100);
+    	progressLabel.setText(progress + "%");
     }
     
    // public void setHealthyWorkoutTipLabel() {
