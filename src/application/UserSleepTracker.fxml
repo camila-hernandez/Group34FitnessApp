@@ -26,29 +26,29 @@
                </children>
             </StackPane>
             <TextField fx:id="hoursSleep" layoutX="210.0" layoutY="205.0" />
-            <Label alignment="CENTER" layoutX="34.0" layoutY="185.0" prefHeight="79.0" prefWidth="199.0" text="Hours" textFill="#101010" underline="true">
+            <Label alignment="CENTER" layoutX="34.0" layoutY="185.0" prefHeight="79.0" prefWidth="199.0" text="HOURS" textFill="#101010">
                <font>
-                  <Font size="35.0" />
+                  <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="34.0" layoutY="276.0" prefHeight="79.0" prefWidth="199.0" text="Minutes" textFill="#0d0d0d" underline="true">
+            <Label alignment="CENTER" layoutX="20.0" layoutY="276.0" prefHeight="79.0" prefWidth="199.0" text="MINUTES" textFill="#0d0d0d">
                <font>
-                  <Font size="35.0" />
+                  <Font size="27.0" />
                </font>
             </Label>
             <TextField fx:id="minutesSleep" layoutX="210.0" layoutY="296.0" />
-            <Label fx:id="sleepProgress" alignment="CENTER" layoutX="20.0" layoutY="561.0" prefHeight="79.0" prefWidth="521.0" text="compared to your goals">
+            <Label fx:id="sleepProgress" alignment="CENTER" layoutX="34.0" layoutY="480.0" prefHeight="219.0" prefWidth="521.0" text="   " textAlignment="CENTER">
                <font>
-                  <Font size="38.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="160.0" layoutY="393.0" mnemonicParsing="false" onAction="#setSleep" prefHeight="70.0" prefWidth="267.0" text="update amount of sleep" textFill="#6945c4">
+            <Button layoutX="243.0" layoutY="361.0" mnemonicParsing="false" onAction="#setSleep" prefHeight="45.0" prefWidth="157.0" text="update sleep" textFill="#6945c4">
                <font>
                   <Font size="21.0" />
                </font></Button>
-            <Button layoutX="169.0" layoutY="777.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="65.0" prefWidth="272.0" text="Return to Main" textFill="#6944c5">
+            <Button layoutX="199.0" layoutY="780.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="54.0" prefWidth="211.0" text="Return to Main" textFill="#6944c5">
                <font>
-                  <Font size="30.0" />
+                  <Font size="24.0" />
                </font></Button>
          </children>
       </Pane>

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 public class UserSleepTrackerController{
 	Stage applicationStage;
+	Storage storage;
 	
 	@FXML
 	private TextField hoursSleep;
@@ -23,11 +24,23 @@ public class UserSleepTrackerController{
 	@FXML
 	private Label sleepProgress;
 	
+	public void setStorage(Storage storage) {
+		this.storage = storage;
+	}
+	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		Double hours = Double.parseDouble(hoursSleep.getText());
-		Double minutes = Double.parseDouble(minutesSleep.getText());
-		sleepProgress.setText(hours + "h " + minutes + "min");
+		double hours = Double.parseDouble(hoursSleep.getText());
+		double minutes = Double.parseDouble(minutesSleep.getText());
+		double sleepGoal = Double.parseDouble(Storage.storage.getSleepGoals());
+		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
+			sleepProgress.setText("You have reached" + '\n' + "your sleep goal.");
+		}
+		
+		if (sleepGoal - hours > 0) {
+			sleepProgress.setText("you have not" + '\n' + "reached your sleep goal.");
+		}
+		
 	}
 	
 	@FXML
