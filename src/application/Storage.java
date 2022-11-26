@@ -22,6 +22,7 @@ public class Storage {
     public String sleepGoalsLabel;
     
     public String todayExerciseLabel;
+    public String todayExerciseMotivationalLabel;
     
     @FXML
     private Button updateGoalsButton;
@@ -118,4 +119,7 @@ public class Storage {
 		 this.todayExerciseLabel = exercise;
 	 }
 	
+	 public void setTodaysExerciseMotivationalLabel(String motivation) {
+		 this.todayExerciseMotivationalLabel = motivation;
+	 }
 }
