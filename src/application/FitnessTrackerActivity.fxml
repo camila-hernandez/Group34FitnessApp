@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ActivitiesController">
+   <children>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#6b4191" height="196.0" layoutX="62.0" layoutY="559.0" stroke="#6b4191" strokeType="INSIDE" width="486.0">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3e9acf" height="166.0" layoutX="62.0" layoutY="122.0" stroke="#3e9acf" strokeType="INSIDE" width="486.0">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Rectangle>
+      <Button alignment="BOTTOM_LEFT" layoutX="67.0" layoutY="358.0" mnemonicParsing="false" onAction="#updateWorkouts" prefHeight="138.0" prefWidth="223.0" style="-fx-background-radius: 10; -fx-background-color: #8b3991;" text="Workouts" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Button>
+      <Label layoutX="74.0" layoutY="310.0" text="Start your fitness journey:">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="510.0" text="This is today's progress:">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Button alignment="BOTTOM_LEFT" layoutX="325.0" layoutY="359.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="223.0" style="-fx-background-radius: 10; -fx-background-color: #b8409c;" text="Stats" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Button>
+      <Label fx:id="currentDateLabel" layoutX="277.0" layoutY="70.0" text="Label" />
+      <Label fx:id="todayExerciseLabel" layoutX="116.0" layoutY="598.0" text="Label" textFill="WHITE" />
+      <Label fx:id="todayExerciseMotivationLabel" layoutX="116.0" layoutY="633.0" text="Label" textFill="WHITE" />
+      <ProgressBar fx:id="workoutProgressBar" layoutX="150.0" layoutY="688.0" prefHeight="36.0" prefWidth="317.0" progress="0.0" />
+      <ImageView fx:id="workoutImage" fitHeight="72.0" fitWidth="70.0" layoutX="81.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="statsImage" fitHeight="72.0" fitWidth="70.0" layoutX="348.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="returnToMainButton" layoutX="209.0" layoutY="775.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-radius: 10;" text="Return to Main" />
+   </children>
+</AnchorPane>
