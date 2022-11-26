@@ -129,7 +129,6 @@ public class UserGoalsDisplay {
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
   		   
-  		   
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
@@ -267,6 +266,12 @@ public class UserGoalsDisplay {
  	   updateWeightGoalsLabel(weightGoalsTextfield.getText());
  	   updateCaloriesBurnedGoalsLabel(caloriesBurnedGoalsTextfield.getText());
  	   updateExerciseGoalsLabel(exerciseDurationGoalsTextfield.getText());
+ 	   setStepsGoals(stepsGoalsTextfield.getText());
+ 	   setSleepGoals(sleepGoalsTextfield.getText());
+ 	   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+ 	   setWeightGoals(weightGoalsTextfield.getText());
+ 	   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
+ 	   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
 	   });
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
