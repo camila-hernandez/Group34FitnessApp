@@ -17,8 +17,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerLogin.fxml"));
-			UserLoginFormController controller = (UserLoginFormController)loader.getController();
+			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 			controller.applicationStage = primaryStage;
 		
 			Scene scene = new Scene(root);

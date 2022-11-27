@@ -16,7 +16,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="47.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="211.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Steps">
+                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="47.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="211.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Steps" onAction="#trackSteps">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>

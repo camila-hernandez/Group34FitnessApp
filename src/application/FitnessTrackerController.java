@@ -10,12 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class FitnessTrackerController {
 	Stage applicationStage;
+	
+	public Steps stepsCount;
 	
     @FXML
     void openUserProfile(ActionEvent event) {
@@ -24,23 +27,24 @@ public class FitnessTrackerController {
 
     @FXML
     void trackSteps(ActionEvent event) {
-
+    	Steps userSteps = new Steps("0");
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
+			StepsController controller = (StepsController)loader.getController();
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void trackSleep(ActionEvent event) {
-    	 try {
-  		   FXMLLoader loader = new FXMLLoader();
-  		   AnchorPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
-  		   StepsController controller = (StepsController)loader.getController();
-  		   controller.applicationStage = applicationStage;
-  		   
-  		   Scene scene = new Scene(root);
-  		   applicationStage.setScene(scene);
-  		   applicationStage.show();
-  	   } catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
+
     }
 
     @FXML
