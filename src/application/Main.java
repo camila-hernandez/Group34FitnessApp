@@ -40,12 +40,19 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws IOException {
 		launch(args);
-		
-		File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
-		FileWriter fw = new FileWriter(f);
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("Hello");
-		bw.close();
-		fw.close();
+		// create a file if it doesnt exist
+		try {
+			File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
+			if (!f.exists()) {
+				f.createNewFile();
+			}
+			FileWriter fw = new FileWriter(f);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("Bye");
+			bw.close();
+			fw.close();
+		} catch (Exception e) {
+			System.out.println("File cannot be created");
+		}
 	}
 }
