@@ -130,8 +130,6 @@ public class ActivitiesController implements Initializable {
     	storage.setTodaysExerciseLabel(exercise);
     }
     
-   // public void updateProgressLabelAndBar()
-    
     public void updateTodaysExerciseValues() {
     	if (todayExerciseLabel != null) {
     		updateTodaysExerciseLabel(storage.todayExerciseLabel);
