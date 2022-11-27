@@ -107,6 +107,8 @@ public class ActivitiesController implements Initializable {
     	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
     	progressLabel.setText(Math.round(progress) + ".0%");
+    	Storage.storage.setProgress(time);
+    	storage.setProgress(time);
     	
     	if (progress < 50) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
@@ -127,6 +129,8 @@ public class ActivitiesController implements Initializable {
     	Storage.storage.setTodaysExerciseLabel(exercise);
     	storage.setTodaysExerciseLabel(exercise);
     }
+    
+   // public void updateProgressLabelAndBar()
     
     public void updateTodaysExerciseValues() {
     	if (todayExerciseLabel != null) {

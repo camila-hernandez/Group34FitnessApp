@@ -7,22 +7,24 @@ import javafx.scene.control.Label;
 public class Storage {
 	public static Storage storage = new Storage();
 	
-	private String stepsInformation;
-	private String sleepInformation;
-	private String waterInformation;
-	private String weightInformation;
-	private String caloriesBurnedInformation;
-	private String exerciseInformation;  
+	private String stepsInformation = "0";
+	private String sleepInformation = "0";
+	private String waterInformation = "0";
+	private String weightInformation = "0";
+	private String caloriesBurnedInformation = "0";
+	private String exerciseInformation = "0";  
 
-    public String stepGoalsLabel;
-    public String waterIntakeGoalsLabel;
-    public String weightGoalsLabel;
-    public String exerciseGoalsLabel;
-    public String caloriesBurnedGoalsLabel;
-    public String sleepGoalsLabel;
+    public String stepGoalsLabel = "0";
+    public String waterIntakeGoalsLabel = "0";
+    public String weightGoalsLabel = "0";
+    public String exerciseGoalsLabel = "0";
+    public String caloriesBurnedGoalsLabel = "0";
+    public String sleepGoalsLabel = "0";
     
-    public String todayExerciseLabel;
+    public String todayExerciseLabel = "0";
     public String todayExerciseMotivationalLabel;
+    
+    public double progress;
     
     @FXML
     private Button updateGoalsButton;
@@ -122,4 +124,11 @@ public class Storage {
 	 public void setTodaysExerciseMotivationalLabel(String motivation) {
 		 this.todayExerciseMotivationalLabel = motivation;
 	 }
+	 
+	 public void setProgress(String progressLabel) {
+		 this.progress = Double.parseDouble(progressLabel);
+	 }
+	 
+	 //update DayInfo
 }
+
