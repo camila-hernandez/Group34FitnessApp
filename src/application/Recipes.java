@@ -653,7 +653,83 @@ public class Recipes {
 
     @FXML
     void showGrilledChickenRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-chicken-with-avocado-pesto-3796532
+    	VBox chickenRecipeContainer = new VBox();
+    	chickenRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox chickenNameContainer = new HBox();
+    	Label chickenRecipeIngredients = new Label();
+    	Label chickenNameLabel = new Label("Grilled Chicken with Avocado Pesto");
+    	chickenNameContainer.getChildren().add(chickenNameLabel);
+    	chickenNameContainer.setAlignment(Pos.CENTER);
+    	chickenNameLabel.setFont(font);
+    	Label chickenIngredients = new Label("Ingredients:");
+    	chickenIngredients.setFont(ingredientsFont);
+    	chickenRecipeIngredients.setText(
+    			"4 tablespoons extra-virgin olive oil, plus more for brushing the grill grates"
+    			+ "\r\n"
+    			+ "Zest of 1 lemon plus 2 tablespoons juice"
+    			+ "\r\n"
+    			+ "2 1/4 pounds boneless, skinless chicken breasts, cut into 1-inch pieces"
+    			+ "\r\n"
+    			+ "Kosher salt and freshly ground black pepper"
+    			+ "\r\n"
+    			+ "1/4 cup pine nuts"
+    			+ "\r\n"
+    			+ "1 cup loosely packed fresh basil leaves"
+    			+ "\r\n"
+    			+ "1 cup loosely packed fresh parsley leaves"
+    			+ "\r\n"
+    			+ "1 clove garlic, crushed and peeled"
+    			+ "\r\n"
+    			+ "1 large ripe avocado"
+    			+ "\r\n");
+    	Label chickenDirectionsLabel = new Label("Directions:");
+    	chickenDirectionsLabel.setFont(directionsFont);
+    	Label chickenRecipe = new Label();
+    	chickenRecipe.setText(
+    			"\r\n"
+    			+ "Special equipment: Six 12-inch metal skewers or twelve 6-inch bamboo skewers"
+    			+ "\r\n"
+    			+ "\r\n"
+    			+ "Prepare an outdoor grill or a grill pan for medium heat."
+    			+ "\r\n"
+    			+ "Whisk together 1 tablespoon of the oil and the lemon zest in a large bowl."
+    			+ "\r\n"
+    			+ "Add the chicken to the oil and toss to coat. Sprinkle with salt and pepper."
+    			+ "\r\n"
+    			+ "Divide the chicken and thread onto metal or bamboo skewers."
+    			+ "\r\n"
+    			+ "Toast the pine nuts in a small skillet over medium heat, tossing frequently,"
+    			+ "\r\n"
+    			+ "until light golden, 3 to 4 minutes. Let cool."
+    			+ "\r\n"
+    			+ "Combine the pine nuts, basil, parsley, garlic, 1/2 teaspoon salt and several grinds of pepper in a"
+    			+ "\r\n"
+    			+ "food processor. Process to make a coarse paste. Add the avocado, lemon juice and"
+    			+ "\r\n"
+    			+ "remaining 3 tablespoons oil and process until mostly smooth."
+    			+ "\r\n"
+    			+ "Grill the chicken, turning often, until just cooked through, 5 to 7 minutes."
+    			+ "\r\n"
+    			+ "Serve the chicken dolloped with the pesto and any extra pesto on the side.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	chickenRecipeContainer.getChildren().addAll(chickenNameContainer, chickenIngredients, chickenRecipeIngredients, 
+    			chickenDirectionsLabel, chickenRecipe, doneButtonContainer);
+    	
+    	Scene chickenScene = new Scene(chickenRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(chickenScene);
     }
 
     @FXML
