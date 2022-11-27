@@ -513,7 +513,7 @@ public class Recipes {
     void showRoastedSalmonRecipe(ActionEvent event) {
     	Scene mainScene = applicationStage.getScene();
     	
-    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/chicken-tacos-with-avocado-salad-3364227
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/mustard-maple-roasted-salmon-recipe-2112041
     	VBox salmonRecipeContainer = new VBox();
     	salmonRecipeContainer.setStyle("-fx-background-color: white");
     	HBox salmonNameContainer = new HBox();
@@ -572,7 +572,83 @@ public class Recipes {
 
     @FXML
     void showBeefStirFryRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/beef-stir-fry-3364942
+    	VBox stirFryRecipeContainer = new VBox();
+    	stirFryRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox stirFryNameContainer = new HBox();
+    	Label stirFryRecipeIngredients = new Label();
+    	Label stirFryNameLabel = new Label("Beef Stir Fry");
+    	stirFryNameContainer.getChildren().add(stirFryNameLabel);
+    	stirFryNameContainer.setAlignment(Pos.CENTER);
+    	stirFryNameLabel.setFont(font);
+    	Label stirFryIngredients = new Label("Ingredients:");
+    	stirFryIngredients.setFont(ingredientsFont);
+    	stirFryRecipeIngredients.setText(
+    			"1 1/2 pounds skirt steak, cut into 4-inch-long pieces, then cut against the grain into 1/4-inch-thick slices"
+    			+ "\r\n"
+    			+ "Salt and freshly ground pepper"
+    			+ "\r\n"
+    			+ "1/4 cup low-sodium soy sauce"
+    			+ "\r\n"
+    			+ "1 serrano chile pepper, seeded and finely chopped"
+    			+ "\r\n"
+    			+ "2 teaspoons sugar"
+    			+ "\r\n"
+    			+ "2 tablespoons freshly squeezed lime juice (1 to 2 limes)"
+    			+ "\r\n"
+    			+ "2 tablespoons olive oil"
+    			+ "\r\n"
+    			+ "2 cloves garlic, grated"
+    			+ "\r\n"
+    			+ "1 bunch scallions, thinly sliced"
+    			+ "\r\n"
+    			+ "6 ounces fresh mushrooms, sliced"
+    			+ "\r\n"
+    			+ "1/4 pound snow peas or green beans"
+    			+ "\r\n"
+    			+ "1 12-ounce can baby corn, drained"
+    			+ "\r\n"
+    			+ "1 red bell pepper, thinly sliced (optional)"
+    			+ "\r\n");
+    	Label stirFryDirectionsLabel = new Label("Directions:");
+    	stirFryDirectionsLabel.setFont(directionsFont);
+    	Label stirFryRecipe = new Label();
+    	stirFryRecipe.setText(
+    			"Season the steak with salt and pepper. In a medium bowl, whisk together the soy sauce, chile pepper,"
+    			+ "\r\n"
+    			+ "sugar and lime juice until the sugar is dissolved. Add the beef, toss to coat and set aside."
+    			+ "\r\n"
+    			+ "In a large skillet over medium-high heat, heat the oil until shimmering, about 1 minute."
+    			+ "\r\n"
+    			+ "Add the beef and cook, stirring, until cooked through, 3 to 5 minutes."
+    			+ "\r\n"
+    			+ "Remove the beef from the skillet and set aside. Allow the liquid in the pan to reduce until thickened,"
+    			+ "\r\n"
+    			+ " about 4 minutes."
+    			+ "\r\n"
+    			+ "Add the garlic and scallions and cook 1 minute more. Add the mushrooms and cook for 2 to 3 minutes more."
+    			+ "\r\n"
+    			+ "Add the snow peas, baby corn and bell pepper and continue cooking until all the"
+    			+ "\r\n"
+    			+ "vegetables are crisp-tender, about 2 minutes. Return the beef to the skillet and toss to combine.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	stirFryRecipeContainer.getChildren().addAll(stirFryNameContainer, stirFryIngredients, stirFryRecipeIngredients, 
+    			stirFryDirectionsLabel, stirFryRecipe, doneButtonContainer);
+    	
+    	Scene stirFryScene = new Scene(stirFryRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(stirFryScene);
     }
 
     @FXML
