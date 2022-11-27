@@ -100,7 +100,7 @@ public class FitnessTrackerController {
 	   		   ActivitiesController controller = (ActivitiesController)loader.getController();
 	   		   
 	   		   controller.setStorage(Storage.storage);
-			   controller.updateTodaysExerciseValues();  
+			   controller.updateTodaysExerciseValues();
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   

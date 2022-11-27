@@ -49,11 +49,28 @@
          </effect>
       </Button>
       <Label fx:id="currentDateLabel" layoutX="277.0" layoutY="70.0" text="Label" />
-      <Label fx:id="todayExerciseLabel" layoutX="116.0" layoutY="598.0" text="Label" textFill="WHITE" />
-      <Label fx:id="todayExerciseMotivationLabel" layoutX="116.0" layoutY="633.0" text="Label" textFill="WHITE" />
+      <Label fx:id="todayExerciseLabel" layoutX="116.0" layoutY="583.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
+      <Label fx:id="todayExerciseMotivationLabel" layoutX="116.0" layoutY="619.0" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
       <ProgressBar fx:id="workoutProgressBar" layoutX="150.0" layoutY="688.0" prefHeight="36.0" prefWidth="317.0" progress="0.0" />
       <ImageView fx:id="workoutImage" fitHeight="72.0" fitWidth="70.0" layoutX="81.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="statsImage" fitHeight="72.0" fitWidth="70.0" layoutX="348.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="returnToMainButton" layoutX="209.0" layoutY="775.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-radius: 10;" text="Return to Main" />
+      <Label fx:id="progressLabel" layoutX="273.0" layoutY="654.0" text="00.00%" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="203.0" layoutY="189.0" text="Work hard to become strong!" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="headerImage" fitHeight="138.0" fitWidth="134.0" layoutX="81.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

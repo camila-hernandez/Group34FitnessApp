@@ -49,9 +49,9 @@ public class ActivitiesController implements Initializable {
     
     @FXML
     private ImageView workoutImage;
-
+    
     @FXML
-    private Label healthyWorkoutTip;
+    private ImageView headerImage;
 
     @FXML
     private Label todayExerciseMotivationLabel;
@@ -78,6 +78,7 @@ public class ActivitiesController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+    	// <a href="https://www.flaticon.com/free-icons/training" title="training icons">Training icons created by Freepik - Flaticon</a>
     	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
@@ -85,24 +86,35 @@ public class ActivitiesController implements Initializable {
     	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
     	workoutImage.setImage(workoutIconImage);
     	
+    	Image headerIconImage = new Image(getClass().getResourceAsStream("training.png"));
+    	headerImage.setImage(headerIconImage);
+    	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
 	}
     
     public void updateProgress(String time) {
+    	// Initialize progress and label to 0
+    	workoutProgressBar.setProgress(0);
+    	progressLabel.setText(0.0 + "%");
+    	// Update progress bar
+    	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
+    	workoutProgressBar.setProgress(progress / 100);
+    	progressLabel.setText(Math.round(progress) + ".0%");
     	
-    	//workoutProgressBar.setProgress(0);
-    	//progressLabel.setText(0.0 + "%");
-    	if (progress < 1) {
-    		progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
-    		workoutProgressBar.setProgress(progress / 100);
-    		progressLabel.setText(progress + "%");
+    	if (progress < 50) {
+    		todayExerciseMotivationLabel.setText("You got this! Keep going!");
+    	}
+    	if (progress == 50) {
+    		todayExerciseMotivationLabel.setText("Halfway there! Don't stop now, keep going!");
+    	}
+    	if (progress > 50 && progress != 100) {
+    		todayExerciseMotivationLabel.setText("Almost to the finish line!");
+    	}
+    	if (progress == 100) {
+    		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
-    
-   // public void setHealthyWorkoutTipLabel() {
-    //	healthyWorkoutTip.setText("Patience and consistency is key.");
-    //}
-    
+
     public void setCurrentDateLabel(String o) {
     	LocalDateTime currentDate = LocalDateTime.now();  
    	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
@@ -121,7 +133,7 @@ public class ActivitiesController implements Initializable {
     		updateTodaysExerciseLabel(storage.todayExerciseLabel);
     	}
     }
-    
+
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
