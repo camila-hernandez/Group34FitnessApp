@@ -200,33 +200,42 @@ public class Recipes {
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/breakfast-casserole-3362652
     	VBox casseroleRecipeContainer = new VBox();
-    	Label casseroleRecipe = new Label();
+    	casseroleRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox casseroleNameContainer = new HBox();
+    	Label casseroleRecipeIngredients = new Label();
     	Label casseroleNameLabel = new Label("Breakfast Casserole");
+    	casseroleNameContainer.getChildren().add(casseroleNameLabel);
+    	casseroleNameContainer.setAlignment(Pos.CENTER);
+    	casseroleNameLabel.setFont(font);
+    	Label casseroleIngredients = new Label("Ingredients:");
+    	casseroleIngredients.setFont(ingredientsFont);
+    	casseroleRecipeIngredients.setText(
+    			"8 ounces spicy or sweet turkey sausage links, casings removed, meat crumbled"
+    			+ "\r\n"
+    			+ "2 scallions, sliced"
+    			+ "\r\n"
+    			+ "6 large eggs and 6 large egg whites"
+    			+ "\r\n"
+    			+ "1 3/4 cups 1-percent milk"
+    			+ "\r\n"
+    			+ "Kosher salt and freshly ground black pepper"
+    			+ "\r\n"
+    			+ "One 9-ounce package frozen chopped spinach, thawed and drained of excess liquid"
+    			+ "\r\n"
+    			+ "3/4 cup shredded Cheddar"
+    			+ "\r\n"
+    			+ "1/2 cup grated Parmesan"
+    			+ "\r\n"
+    			+ "1/2 whole wheat baguette, cut into 3/4-inch cubes (about 4 cups)"
+    			+ "\r\n"
+    			+ "Cooking spray"
+    			+ "\r\n");
+    	
+    	Label casseroleDirectionsLabel = new Label("Directions:");
+    	casseroleDirectionsLabel.setFont(directionsFont);
+    	Label casseroleRecipe = new Label();
     	casseroleRecipe.setText(
-    			"Ingredients\r\n"
-    			+ "\r\n"
-    			+ "8 ounces spicy or sweet turkey sausage links, casings removed, meat crumbled\r\n"
-    			+ "\r\n"
-    			+ "2 scallions, sliced\r\n"
-    			+ "\r\n"
-    			+ "6 large eggs and 6 large egg whites\r\n"
-    			+ "\r\n"
-    			+ "1 3/4 cups 1-percent milk\r\n"
-    			+ "\r\n"
-    			+ "Kosher salt and freshly ground black pepper\r\n"
-    			+ "\r\n"
-    			+ "One 9-ounce package frozen chopped spinach, thawed and drained of excess liquid\r\n"
-    			+ "\r\n"
-    			+ "3/4 cup shredded Cheddar\r\n"
-    			+ "\r\n"
-    			+ "1/2 cup grated Parmesan\r\n"
-    			+ "\r\n"
-    			+ "1/2 whole wheat baguette, cut into 3/4-inch cubes (about 4 cups)\r\n"
-    			+ "\r\n"
-    			+ "Cooking spray\r\n"
-    			+ "Recipe"
-    			+ "\r\n"
-    			+ "Heat a large nonstick skillet over medium heat"
+    			"Heat a large nonstick skillet over medium heat."
     			+ "\r\n"
     			+ "Add the turkey and scallions and cook, stirring to break up any large chunks, until browned"
     			+ "\r\n"
@@ -243,9 +252,19 @@ public class Recipes {
     			+ "Preheat the oven to 350 degrees F. Bake the casserole, uncovered, until set and lightly browned on top,"
     			+ "\r\n"
     			+ "about 30 minutes.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
-    	casseroleRecipeContainer.getChildren().addAll(casseroleNameLabel, casseroleRecipe, doneButton);
+    	casseroleRecipeContainer.getChildren().addAll(casseroleNameLabel, casseroleIngredients, casseroleRecipeIngredients, 
+    			casseroleDirectionsLabel, casseroleRecipe, doneButton);
     	
     	Scene breakfastCasseroleScene = new Scene(casseroleRecipeContainer, 609, 856);
    	   	applicationStage.setScene(breakfastCasseroleScene);
@@ -253,6 +272,79 @@ public class Recipes {
 
     @FXML
     void showMisoSoupRecipe(ActionEvent event) {
+Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/miso-soup-recipe-2102742
+    	VBox soupRecipeContainer = new VBox();
+    	soupRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox soupNameContainer = new HBox();
+    	Label soupRecipeIngredients = new Label();
+    	Label soupNameLabel = new Label("Miso Soup");
+    	soupNameContainer.getChildren().add(soupNameLabel);
+    	soupNameContainer.setAlignment(Pos.CENTER);
+    	soupNameLabel.setFont(font);
+    	Label soupIngredients = new Label("Ingredients:");
+    	soupIngredients.setFont(ingredientsFont);
+    	soupRecipeIngredients.setText(
+    			"4 to 5 cups dashi, recipe follows"
+    			+ "\r\n"
+    			+ "2 tablespoons brown miso paste, plus more to taste"
+    			+ "\r\n"
+    			+ "2 tablespoons white miso paste, plus more to taste"
+    			+ "\r\n"
+    			+ "6 ounces firm tofu, cut into 1/2-inch cubes"
+    			+ "\r\n"
+    			+ "2 scallions, white and green, thinly sliced on the diagonal"
+    			+ "\r\n"
+    			+ "2 tablespoons aji mirin (sweetened rice wine), optional\r\n"
+    			+ "\r\n"
+    			+ "DASHI:"
+    			+ "\r\n"
+    			+ "6 cups cold water"
+    			+ "\r\n"
+    			+ "One 12-inch long piece of kombu, wiped with a damp cloth"
+    			+ "\r\n"
+    			+ "One .88-ounce/25 grams package shaved dried bonito flakes"
+    			+ "\r\n");
+    	Label soupDirectionsLabel = new Label("Directions:");
+    	soupDirectionsLabel.setFont(directionsFont);
+    	Label soupRecipe = new Label();
+    	soupRecipe.setText(
+    			"In a saucepan heat the dashi and whisk in the miso pastes."
+    			+ "\r\n"
+    			+ "Bring to a simmer and add the tofu, scallions, and mirin, if using."
+    			+ "\r\n"
+    			+ "Remove from the heat and serve immediately.\r\n"
+    			+ "\r\n"
+    			+ "DASHI:"
+    			+ "\r\n"
+    			+ "Yield: About 4 to 5 cups"
+    			+ "\r\n"
+    			+ "In a saucepan, combine the water and kombu. Bring to a simmer, uncovered, over medium heat."
+    			+ "\r\n"
+    			+ "Remove the kombu and discard. Bring the liquid to a boil, add the bonito flakes and"
+    			+ "\r\n"
+    			+ "immediately remove the pan from the heat. Allow the dashi to sit undisturbed for 2 minutes."
+    			+ "\r\n"
+    			+ "Strain through a fine mesh strainer into a medium bowl. Discard the bonito flakes."
+    			+ "\r\n"
+    			+ "Use immediately or store, covered, in the refrigerator for up to 3 days.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	soupRecipeContainer.getChildren().addAll(soupNameContainer, soupIngredients, soupRecipeIngredients, 
+    			soupDirectionsLabel, soupRecipe, doneButtonContainer);
+    	
+    	Scene misoSoupScene = new Scene(soupRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(misoSoupScene);
     }
 
     @FXML
