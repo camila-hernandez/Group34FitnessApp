@@ -59,7 +59,6 @@
       <ProgressBar fx:id="workoutProgressBar" layoutX="150.0" layoutY="688.0" prefHeight="36.0" prefWidth="317.0" progress="0.0" />
       <ImageView fx:id="workoutImage" fitHeight="72.0" fitWidth="70.0" layoutX="81.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="statsImage" fitHeight="72.0" fitWidth="70.0" layoutX="348.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="returnToMainButton" layoutX="209.0" layoutY="775.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-radius: 10;" text="Return to Main" />
       <Label fx:id="progressLabel" layoutX="273.0" layoutY="654.0" text="00.00%" textFill="WHITE">
          <font>
             <Font size="20.0" />
@@ -75,5 +74,13 @@
          <font>
             <Font size="24.5" />
          </font></Label>
+      <Button layoutX="209.0" layoutY="781.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Return to home" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

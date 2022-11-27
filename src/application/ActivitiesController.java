@@ -69,7 +69,6 @@ public class ActivitiesController implements Initializable {
     Storage storage;
     
     double progress = 0.0;
-    double totalWorkoutDuration;
     
     public void setStorage(Storage storage) {
     	this.storage = storage;
