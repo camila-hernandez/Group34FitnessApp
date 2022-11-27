@@ -1,32 +1,25 @@
 package application;
 	
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 
 
 public class Main extends Application {
-	/*
-	public static void readUsingBufferedReader() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("FitnessTrackerFile.txt"));
-		String line = reader.readLine();
-		while (line != null) {
-			String[] w = line.split(" ");
-			if (w[0] = "water goals") {
-				setWaterGoals(w[2]);
-			}
-		}
-	}
-	*/
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -45,7 +38,14 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		launch(args);
+		
+		File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
+		FileWriter fw = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write("Hello");
+		bw.close();
+		fw.close();
 	}
 }
