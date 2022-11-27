@@ -3,6 +3,7 @@ package application;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -60,7 +61,7 @@ public class ActivitiesController implements Initializable {
     private ProgressBar workoutProgressBar;
     
     @FXML
-    private Label currentDateLabel;
+    private Label dateLabel;
     
     @FXML
     private Label progressLabel;
@@ -90,6 +91,12 @@ public class ActivitiesController implements Initializable {
     	headerImage.setImage(headerIconImage);
     	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
+    	
+    	// Sets the current date label
+    	LocalDateTime currentDateTime = LocalDateTime.now();
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+    	String formattedDate = currentDateTime.format(dtf);
+    	dateLabel.setText(formattedDate);
 	}
     
     public void updateProgress(String time) {
@@ -114,14 +121,7 @@ public class ActivitiesController implements Initializable {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
-
-    public void setCurrentDateLabel(String o) {
-    	LocalDateTime currentDate = LocalDateTime.now();  
-   	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
-   	   String formattedDate = currentDate.format(formatCurrentDate);  
-   	   currentDateLabel.setText(formattedDate);
-    }  
-    
+ 
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
     	Storage.storage.setTodaysExerciseLabel(exercise);
@@ -388,7 +388,6 @@ public class ActivitiesController implements Initializable {
   	   
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
-  	   //updateStack.setPadding(new Insets(25,0,25,0));
   	    
     } 
 }

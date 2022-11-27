@@ -48,7 +48,6 @@
             <DropShadow color="#00000080" />
          </effect>
       </Button>
-      <Label fx:id="currentDateLabel" layoutX="277.0" layoutY="70.0" text="Label" />
       <Label fx:id="todayExerciseLabel" layoutX="116.0" layoutY="583.0" text="Label" textFill="WHITE">
          <font>
             <Font size="25.0" />
@@ -72,5 +71,9 @@
          </font>
       </Label>
       <ImageView fx:id="headerImage" fitHeight="138.0" fitWidth="134.0" layoutX="81.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="dateLabel" layoutX="177.0" layoutY="70.0" text="Date">
+         <font>
+            <Font size="24.5" />
+         </font></Label>
    </children>
 </AnchorPane>
