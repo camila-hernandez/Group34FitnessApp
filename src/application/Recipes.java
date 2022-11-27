@@ -272,7 +272,7 @@ public class Recipes {
 
     @FXML
     void showMisoSoupRecipe(ActionEvent event) {
-Scene mainScene = applicationStage.getScene();
+    	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/miso-soup-recipe-2102742
     	VBox soupRecipeContainer = new VBox();
@@ -349,7 +349,83 @@ Scene mainScene = applicationStage.getScene();
 
     @FXML
     void showSandwichRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/miso-soup-recipe-2102742
+    	VBox sandwichRecipeContainer = new VBox();
+    	sandwichRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox sandwichNameContainer = new HBox();
+    	Label sandwichRecipeIngredients = new Label();
+    	Label sandwichNameLabel = new Label("Veggie Club Sandwich");
+    	sandwichNameContainer.getChildren().add(sandwichNameLabel);
+    	sandwichNameContainer.setAlignment(Pos.CENTER);
+    	sandwichNameLabel.setFont(font);
+    	Label sandwichIngredients = new Label("Ingredients:");
+    	sandwichIngredients.setFont(ingredientsFont);
+    	sandwichRecipeIngredients.setText(
+    			"1/2 Hass avocado, pitted"
+    			+ "\r\n"
+    			+ "2 tablespoons white balsamic or white wine vinegar"
+    			+ "\r\n"
+    			+ "1 tablespoon finely chopped fresh oregano"
+    			+ "\r\n"
+    			+ "1 tablespoon fat-free plain Greek yogurt"
+    			+ "\r\n"
+    			+ "2 large cloves garlic, minced"
+    			+ "\r\n"
+    			+ "12 slices whole wheat or sprouted grain bread, lightly toasted, if desired"
+    			+ "\r\n"
+    			+ "1 cup packed baby arugula or mizuna"
+    			+ "\r\n"
+    			+ "2 1/2 ounces thinly sliced ready-to-eat smoked tofu or smoked mozzarella cheese"
+    			+ "\r\n"
+    			+ "1/2 cup thinly sliced red onion"
+    			+ "\r\n"
+    			+ "1/3 cup packed sun-dried tomatoes, fully rehydrated"
+    			+ "\r\n"
+    			+ "1/2 cup thinly sliced unpeeled English cucumber"
+    			+ "\r\n"
+    			+ "1/3 cup thinly sliced pepperoncini (about 1 ounce)"
+    			+ "\r\n"
+    			+ "2 1/2 ounces thinly sliced provolone"
+    			+ "\r\n"
+    			+ "1 large freshly roasted orange or red bell pepper, cut into 12 pieces, or 1/3 cup store-bought roasted peppers"
+    			+ "\r\n");
+    	Label soupDirectionsLabel = new Label("Directions:");
+    	soupDirectionsLabel.setFont(directionsFont);
+    	Label soupRecipe = new Label();
+    	soupRecipe.setText(
+    			"Squeeze or scoop the avocado from the skin into a small bowl."
+    			+ "\r\n"
+    			+ "Mash with a fork and stir in the vinegar, oregano, yogurt and garlic to make a smooth spread."
+    			+ "\r\n"
+    			+ "Thinly spread the avocado mixture onto one side of each slice of bread."
+    			+ "\r\n"
+    			+ "Top 4 of the slices of bread with the arugula, tofu, onions and sun-dried tomatoes."
+    			+ "\r\n"
+    			+ "Place 4 of the remaining slices on top, avocado-side down."
+    			+ "\r\n"
+    			+ "Top with the cucumbers, pepperoncini, provolone and roasted peppers."
+    			+ "\r\n"
+    			+ "Place the remaining bread slices on top, avocado-side down."
+    			+ "\r\n"
+    			+ "Insert bamboo picks into each sandwich, cut in half on the diagonal with a bread knife and serve.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	sandwichRecipeContainer.getChildren().addAll(sandwichNameContainer, sandwichIngredients, sandwichRecipeIngredients, 
+    			soupDirectionsLabel, soupRecipe, doneButtonContainer);
+    	
+    	Scene misoSoupScene = new Scene(sandwichRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(misoSoupScene);
     }
 
     @FXML
