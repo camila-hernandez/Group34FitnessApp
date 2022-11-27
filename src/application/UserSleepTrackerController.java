@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -24,6 +25,9 @@ public class UserSleepTrackerController{
 	@FXML
 	private Label sleepProgress;
 	
+	@FXML
+	private ProgressBar sleepProgressBar; 
+	
 	public void setStorage(Storage storage) {
 		this.storage = storage;
 	}
@@ -33,13 +37,17 @@ public class UserSleepTrackerController{
 		double hours = Double.parseDouble(hoursSleep.getText());
 		double minutes = Double.parseDouble(minutesSleep.getText());
 		double sleepGoal = Double.parseDouble(Storage.storage.getSleepGoals());
+		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		
 		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
 			sleepProgress.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
 		if (sleepGoal - hours > 0) {
-			sleepProgress.setText("you have not" + '\n' + "reached your sleep goal.");
+			sleepProgress.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
 		}
+		
+		sleepProgressBar.setProgress(hours/sleepGoal);
 		
 	}
 	
