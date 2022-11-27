@@ -146,7 +146,59 @@ public class Recipes {
 
     @FXML
     void showBreakfastCasseroleRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/breakfast-casserole-3362652
+    	VBox casseroleRecipeContainer = new VBox();
+    	Label casseroleRecipe = new Label();
+    	Label casseroleNameLabel = new Label("Breakfast Casserole");
+    	casseroleRecipe.setText(
+    			"Ingredients\r\n"
+    			+ "\r\n"
+    			+ "8 ounces spicy or sweet turkey sausage links, casings removed, meat crumbled\r\n"
+    			+ "\r\n"
+    			+ "2 scallions, sliced\r\n"
+    			+ "\r\n"
+    			+ "6 large eggs and 6 large egg whites\r\n"
+    			+ "\r\n"
+    			+ "1 3/4 cups 1-percent milk\r\n"
+    			+ "\r\n"
+    			+ "Kosher salt and freshly ground black pepper\r\n"
+    			+ "\r\n"
+    			+ "One 9-ounce package frozen chopped spinach, thawed and drained of excess liquid\r\n"
+    			+ "\r\n"
+    			+ "3/4 cup shredded Cheddar\r\n"
+    			+ "\r\n"
+    			+ "1/2 cup grated Parmesan\r\n"
+    			+ "\r\n"
+    			+ "1/2 whole wheat baguette, cut into 3/4-inch cubes (about 4 cups)\r\n"
+    			+ "\r\n"
+    			+ "Cooking spray\r\n"
+    			+ "Recipe"
+    			+ "\r\n"
+    			+ "Heat a large nonstick skillet over medium heat"
+    			+ "\r\n"
+    			+ "Add the turkey and scallions and cook, stirring to break up any large chunks, until browned"
+    			+ "\r\n"
+    			+ "and cooked through, about 10 minutes. Remove from heat and let cool slightly."
+    			+ "\r\n"
+    			+ "Whisk the eggs, egg whites, milk and 1/2 teaspoon each salt and pepper in a large bowl until combined."
+    			+ "\r\n"
+    			+ "Add the cooked sausage, spinach, cheeses and bread and toss to distribute the ingredients evenly."
+    			+ "\r\n"
+    			+ "Spray a 3-quart casserole dish with cooking spray. Spread the egg mixture evenly in the dish."
+    			+ "\r\n"
+    			+ "Cover and refrigerate for at least 6 hours or preferably overnight."
+    			+ "\r\n"
+    			+ "Preheat the oven to 350 degrees F. Bake the casserole, uncovered, until set and lightly browned on top,"
+    			+ "\r\n"
+    			+ "about 30 minutes.");
+    	Button doneButton = new Button("Done");
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	casseroleRecipeContainer.getChildren().addAll(casseroleNameLabel, casseroleRecipe, doneButton);
+    	
+    	Scene breakfastCasseroleScene = new Scene(casseroleRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(breakfastCasseroleScene);
     }
 
     @FXML
