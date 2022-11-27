@@ -82,7 +82,66 @@ public class Recipes {
 
     @FXML
     void showApplePancakesRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/ellie-krieger/whole-wheat-apple-pancakes-recipe-2012287
+    	VBox pancakesRecipeContainer = new VBox();
+    	Label pancakesRecipe = new Label();
+    	Label pancakesNameLabel = new Label("Whole-Wheat Apple Pancakes");
+    	pancakesRecipe.setText(
+    			"Ingredients\r\n"
+    			+ "\r\n"
+    			+ "1 cup low-fat buttermilk\r\n"
+    			+ "\r\n"
+    			+ "3/4 cup nonfat milk\r\n"
+    			+ "\r\n"
+    			+ "2 large eggs\r\n"
+    			+ "\r\n"
+    			+ "1 tablespoon honey\r\n"
+    			+ "\r\n"
+    			+ "6 tablespoons pure maple syrup\r\n"
+    			+ "\r\n"
+    			+ "1 medium apple, diced\r\n"
+    			+ "\r\n"
+    			+ "3/4 cup all-purpose flour\r\n"
+    			+ "\r\n"
+    			+ "3/4 cup whole-wheat four\r\n"
+    			+ "\r\n"
+    			+ "2 teaspoons baking powder\r\n"
+    			+ "1/2 teaspoon baking soda\r\n"
+    			+ "\r\n"
+    			+ "1/4 teaspoon salt\r\n"
+    			+ "Recipe"
+    			+ "\r\n"
+    			+ "Preheat the oven to 250. Put the apple in a microwave-safe bowl and tightly cover with plastic wrap;"
+    			+ "\r\n"
+    			+ "microwave on high until softened, about 2 minutes."
+    			+ "\r\n"
+    			+ "In a large bowl, whisk the flours, baking powder, baking soda and salt."
+    			+ "\r\n"
+    			+ "In a small bowl, whisk the buttermilk, nonfat milk, eggs and honey, then slowly add the dry ingredients,"
+    			+ "\r\n"
+    			+ "stirring until just combined."
+    			+ "\r\n"
+    			+ "Heat a large nonstick griddle or skillet over medium heat."
+    			+ "\r\n"
+    			+ "Spoon 1/4 cup batter onto the griddle for each pancake and sprinkle each with apple,"
+    			+ "\r\n"
+    			+ "then drizzle a little more batter over the apple."
+    			+ "\r\n"
+    			+ "ook until the tops are bubbly and the edges are dry, about 2 minutes."
+    			+ "\r\n"
+    			+ "Flip and cook until golden brown, 1 to 2 more minutes."
+    			+ "Keep the pancakes warm on a baking sheet in the oven while making the rest."
+    			+ "\r\n"
+    			+ "Place 2 pancakes on each plate. Drizzle with the syrup.");
+    	Button doneButton = new Button("Done");
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	pancakesRecipeContainer.getChildren().addAll(pancakesNameLabel, pancakesRecipe, doneButton);
+    	
+    	Scene applePancakesScene = new Scene(pancakesRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(applePancakesScene);
+    
     }
 
     @FXML
