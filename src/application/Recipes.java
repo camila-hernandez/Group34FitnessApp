@@ -18,7 +18,11 @@ import javafx.stage.Stage;
 
 public class Recipes {
 	Stage applicationStage;
-
+	
+	Font font = Font.font("System", FontWeight.BOLD, 18);
+	Font ingredientsFont = Font.font("System", FontWeight.BOLD, 16);
+	Font directionsFont = Font.font("System", FontWeight.BOLD, 16);
+	
     @FXML
     void showBreakfastBurritoRecipe(ActionEvent event) {
     	Scene mainScene = applicationStage.getScene();
@@ -28,13 +32,11 @@ public class Recipes {
     	burritoRecipeContainer.setStyle("-fx-background-color: white");
     	HBox burritoNameContainer = new HBox();
     	Label burritoRecipeIngredients = new Label();
-  	   	Font font = Font.font("System", FontWeight.BOLD, 18);
     	Label burritoNameLabel = new Label("Breakfast Burrito");
     	burritoNameContainer.getChildren().add(burritoNameLabel);
     	burritoNameContainer.setAlignment(Pos.CENTER);
     	burritoNameLabel.setFont(font);
     	Label burritoIngredients = new Label("Ingredients:");
-    	Font ingredientsFont = Font.font("System", FontWeight.BOLD, 16);
     	burritoIngredients.setFont(ingredientsFont);
     	burritoRecipeIngredients.setText(
     			"2 teaspoons canola oil"
@@ -68,7 +70,6 @@ public class Recipes {
     			+ "Hot sauce"
     			+ "\r\n");
     	Label burritoDirectionsLabel = new Label("Directions:");
-    	Font directionsFont = Font.font("System", FontWeight.BOLD, 16);
     	burritoDirectionsLabel.setFont(directionsFont);
     	Label burritoRecipe = new Label();
     	burritoRecipe.setText(
@@ -92,10 +93,15 @@ public class Recipes {
     			+ "\r\n"
     			+ "Season, to taste, with hot sauce. Roll up burrito-style and serve.");
     	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
-    	doneButtonContainer.setPadding(new Insets(20,0,0,0));
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	burritoRecipeContainer.getChildren().addAll(burritoNameContainer, burritoIngredients, burritoRecipeIngredients, 
     			burritoDirectionsLabel, burritoRecipe, doneButtonContainer);
@@ -107,37 +113,46 @@ public class Recipes {
     @FXML
     void showApplePancakesRecipe(ActionEvent event) {
     	Scene mainScene = applicationStage.getScene();
-    	
+    
     	// Source: https://www.foodnetwork.com/recipes/ellie-krieger/whole-wheat-apple-pancakes-recipe-2012287
     	VBox pancakesRecipeContainer = new VBox();
-    	Label pancakesRecipe = new Label();
+    	pancakesRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox pancakesNameContainer = new HBox();
     	Label pancakesNameLabel = new Label("Whole-Wheat Apple Pancakes");
+    	pancakesNameContainer.getChildren().add(pancakesNameLabel);
+    	pancakesNameContainer.setAlignment(Pos.CENTER);
+    	pancakesNameLabel.setFont(font);
+    	Label pancakesIngredients = new Label("Ingredients:");
+    	pancakesIngredients.setFont(ingredientsFont);
+    	Label pancakesRecipeIngredients = new Label();
+    	pancakesRecipeIngredients.setText(
+    			"1 cup low-fat buttermilk"
+    			+ "\r\n"
+    			+ "3/4 cup nonfat milk"
+    			+ "\r\n"
+    			+ "2 large eggs"
+    			+ "\r\n"
+    			+ "1 tablespoon honey"
+    			+ "\r\n"
+    			+ "6 tablespoons pure maple syrup"
+    			+ "\r\n"
+    			+ "1 medium apple, diced"
+    			+ "\r\n"
+    			+ "3/4 cup all-purpose flour"
+    			+ "\r\n"
+    			+ "3/4 cup whole-wheat four"
+    			+ "\r\n"
+    			+ "2 teaspoons baking powder"
+    			+ "1/2 teaspoon baking soda"
+    			+ "\r\n"
+    			+ "1/4 teaspoon salt"
+    			+ "\r\n"
+    			);
+    	Label pancakesDirectionsLabel = new Label("Directions:");
+    	pancakesDirectionsLabel.setFont(directionsFont);
+    	Label pancakesRecipe = new Label();
     	pancakesRecipe.setText(
-    			"Ingredients\r\n"
-    			+ "\r\n"
-    			+ "1 cup low-fat buttermilk\r\n"
-    			+ "\r\n"
-    			+ "3/4 cup nonfat milk\r\n"
-    			+ "\r\n"
-    			+ "2 large eggs\r\n"
-    			+ "\r\n"
-    			+ "1 tablespoon honey\r\n"
-    			+ "\r\n"
-    			+ "6 tablespoons pure maple syrup\r\n"
-    			+ "\r\n"
-    			+ "1 medium apple, diced\r\n"
-    			+ "\r\n"
-    			+ "3/4 cup all-purpose flour\r\n"
-    			+ "\r\n"
-    			+ "3/4 cup whole-wheat four\r\n"
-    			+ "\r\n"
-    			+ "2 teaspoons baking powder\r\n"
-    			+ "1/2 teaspoon baking soda\r\n"
-    			+ "\r\n"
-    			+ "1/4 teaspoon salt\r\n"
-    			+ "Recipe"
-    			+ "\r\n"
-    			+ "Preheat the oven to 250. Put the apple in a microwave-safe bowl and tightly cover with plastic wrap;"
+    			"Preheat the oven to 250. Put the apple in a microwave-safe bowl and tightly cover with plastic wrap;"
     			+ "\r\n"
     			+ "microwave on high until softened, about 2 minutes."
     			+ "\r\n"
@@ -153,15 +168,26 @@ public class Recipes {
     			+ "\r\n"
     			+ "then drizzle a little more batter over the apple."
     			+ "\r\n"
-    			+ "ook until the tops are bubbly and the edges are dry, about 2 minutes."
+    			+ "Cook until the tops are bubbly and the edges are dry, about 2 minutes."
     			+ "\r\n"
     			+ "Flip and cook until golden brown, 1 to 2 more minutes."
+    			+ "\r\n"
     			+ "Keep the pancakes warm on a baking sheet in the oven while making the rest."
     			+ "\r\n"
     			+ "Place 2 pancakes on each plate. Drizzle with the syrup.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
-    	pancakesRecipeContainer.getChildren().addAll(pancakesNameLabel, pancakesRecipe, doneButton);
+    	pancakesRecipeContainer.getChildren().addAll(pancakesNameLabel, pancakesIngredients, pancakesRecipeIngredients, 
+    			pancakesDirectionsLabel, pancakesRecipe, doneButton);
     	
     	Scene applePancakesScene = new Scene(pancakesRecipeContainer, 609, 856);
    	   	applicationStage.setScene(applePancakesScene);
