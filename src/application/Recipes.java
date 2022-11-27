@@ -351,7 +351,7 @@ public class Recipes {
     void showSandwichRecipe(ActionEvent event) {
     	Scene mainScene = applicationStage.getScene();
     	
-    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/miso-soup-recipe-2102742
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/veggie-lovers-club-sandwich-recipe-2120987
     	VBox sandwichRecipeContainer = new VBox();
     	sandwichRecipeContainer.setStyle("-fx-background-color: white");
     	HBox sandwichNameContainer = new HBox();
@@ -424,13 +424,89 @@ public class Recipes {
     	sandwichRecipeContainer.getChildren().addAll(sandwichNameContainer, sandwichIngredients, sandwichRecipeIngredients, 
     			soupDirectionsLabel, soupRecipe, doneButtonContainer);
     	
-    	Scene misoSoupScene = new Scene(sandwichRecipeContainer, 609, 856);
-   	   	applicationStage.setScene(misoSoupScene);
+    	Scene sandwichScene = new Scene(sandwichRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(sandwichScene);
     }
 
     @FXML
     void showTacosAndSaladRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/chicken-tacos-with-avocado-salad-3364227
+    	VBox tacosRecipeContainer = new VBox();
+    	tacosRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox tacosNameContainer = new HBox();
+    	Label tacosRecipeIngredients = new Label();
+    	Label tacosNameLabel = new Label("Chicken Tacos with Avocado Salad");
+    	tacosNameContainer.getChildren().add(tacosNameLabel);
+    	tacosNameContainer.setAlignment(Pos.CENTER);
+    	tacosNameLabel.setFont(font);
+    	Label tacosIngredients = new Label("Ingredients:");
+    	tacosIngredients.setFont(ingredientsFont);
+    	tacosRecipeIngredients.setText(
+    			"1 1/4 pounds skinless, boneless chicken thighs (about 6)"
+    			+ "\r\n"
+    			+ "1 cup jarred salsa"
+    			+ "\r\n"
+    			+ "Juice of 2 limes, plus wedges for serving"
+    			+ "\r\n"
+    			+ "1/4 cup vegetable oil"
+    			+ "\r\n"
+    			+ "1/4 cup sour cream"
+    			+ "\r\n"
+    			+ "1 bunch cilantro, leaves chopped (about 3/4 cup)"
+    			+ "\r\n"
+    			+ "Kosher salt and freshly ground pepper"
+    			+ "\r\n"
+    			+ "1 14-ounce can hearts of palm, drained and sliced 1/2 inch thick"
+    			+ "\r\n"
+    			+ "1 avocado, chopped"
+    			+ "\r\n"
+    			+ "6 radishes, thinly sliced"
+    			+ "\r\n"
+    			+ "16 corn tortillas"
+    			+ "\r\n"
+    			+ "Shredded lettuce and/or diced red onion, for topping"
+    			+ "\r\n");
+    	Label tacosDirectionsLabel = new Label("Directions:");
+    	tacosDirectionsLabel.setFont(directionsFont);
+    	Label tacosRecipe = new Label();
+    	tacosRecipe.setText(
+    			"Toss the chicken with 1/2 cup salsa, the juice of 1 lime and 1 tablespoon vegetable oil in a large bowl;"
+    			+ "\r\n"
+    			+ "let marinate 10 minutes. Mix the remaining 1/2 cup salsa, the sour cream and 2 tablespoons cilantro in a small bowl;"
+    			+ "\r\n"
+    			+ "season with salt and pepper. Cover and refrigerate."
+    			+ "\r\n"
+    			+ "Gently toss the hearts of palm, avocado, radishes, the remaining cilantro, 1 tablespoon vegetable oil and"
+    			+ "\r\n"
+    			+ "the juice of the remaining lime in a medium bowl; season with salt and pepper."
+    			+ "\r\n"
+    			+ "Heat the remaining 2 tablespoons vegetable oil in a large cast-iron skillet or grill pan over medium-high heat."
+    			+ "\r\n"
+    			+ "Add the chicken along with the marinade and cook until slightly charred and cooked through,"
+    			+ "\r\n"
+    			+ "about 7 minutes per side. Transfer to a cutting board and chop; season with salt."
+    			+ "\r\n"
+    			+ "Warm the tortillas as the label directs. Using 2 stacked tortillas per taco, fill with the chicken,"
+    			+ "\r\n"
+    			+ "salsa-sour cream mixture and lettuce and/or red onion. Serve with the avocado salad and lime wedges.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	tacosRecipeContainer.getChildren().addAll(tacosNameContainer, tacosIngredients, tacosRecipeIngredients, 
+    			tacosDirectionsLabel, tacosRecipe, doneButtonContainer);
+    	
+    	Scene tacosScene = new Scene(tacosRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(tacosScene);
     }
 
     @FXML
