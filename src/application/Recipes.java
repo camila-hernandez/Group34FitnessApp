@@ -511,7 +511,63 @@ public class Recipes {
 
     @FXML
     void showRoastedSalmonRecipe(ActionEvent event) {
-
+    	Scene mainScene = applicationStage.getScene();
+    	
+    	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/chicken-tacos-with-avocado-salad-3364227
+    	VBox salmonRecipeContainer = new VBox();
+    	salmonRecipeContainer.setStyle("-fx-background-color: white");
+    	HBox salmonNameContainer = new HBox();
+    	Label salmonRecipeIngredients = new Label();
+    	Label salmonNameLabel = new Label("Maple-Mustard Roasted Salmon");
+    	salmonNameContainer.getChildren().add(salmonNameLabel);
+    	salmonNameContainer.setAlignment(Pos.CENTER);
+    	salmonNameLabel.setFont(font);
+    	Label salmonIngredients = new Label("Ingredients:");
+    	salmonIngredients.setFont(ingredientsFont);
+    	salmonRecipeIngredients.setText(
+    			"2 tablespoons Dijon mustard"
+    			+ "\r\n"
+    			+ "2 tablespoons finely chopped fresh cilantro"
+    			+ "\r\n"
+    			+ "1 tablespoon light mayonnaise"
+    			+ "\r\n"
+    			+ "2 teaspoons pure maple syrup"
+    			+ "\r\n"
+    			+ "Four 5-ounce skinless center-cut salmon fillets"
+    			+ "\r\n"
+    			+ "Kosher salt and freshly ground black pepper"
+    			+ "\r\n");
+    	Label salmonDirectionsLabel = new Label("Directions:");
+    	salmonDirectionsLabel.setFont(directionsFont);
+    	Label salmonRecipe = new Label();
+    	salmonRecipe.setText(
+    			"Preheat the oven to 400 degrees F. Line a rimmed baking sheet with aluminum foil."
+    			+ "\r\n"
+    			+ "Mix together the mustard, 1 tablespoon of the cilantro, the mayonnaise and maple syrup in a bowl."
+    			+ "\r\n"
+    			+ "Put the salmon fillets on the baking sheet and sprinkle with 1/4 teaspoon each salt and pepper."
+    			+ "\r\n"
+    			+ "Spread some of the mustard mixture evenly over each fillet."
+    			+ "\r\n"
+    			+ "Bake until just cooked through, 10 to 12 minute."
+    			+ "\r\n"
+    			+ "Sprinkle with the remaining 1 tablespoon cilantro and serve.");
+    	HBox doneButtonContainer = new HBox();
+    	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
+    	Button doneButton = new Button("Done");
+    	doneButton.setFont(buttonFont);
+    	doneButton.setStyle("-fx-background-color: orange");
+    	doneButton.setTextFill(Color.WHITE);
+    	
+    	doneButtonContainer.getChildren().add(doneButton);
+    	doneButtonContainer.setAlignment(Pos.CENTER);
+    	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
+    	salmonRecipeContainer.getChildren().addAll(salmonNameContainer, salmonIngredients, salmonRecipeIngredients, 
+    			salmonDirectionsLabel, salmonRecipe, doneButtonContainer);
+    	
+    	Scene salmonScene = new Scene(salmonRecipeContainer, 609, 856);
+   	   	applicationStage.setScene(salmonScene);
     }
 
     @FXML
