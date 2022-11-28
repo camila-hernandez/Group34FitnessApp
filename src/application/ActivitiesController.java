@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -160,13 +161,23 @@ public class ActivitiesController implements Initializable {
   	   // Create new scene that displays the user's health and fitness goals
   	   VBox workoutContainer = new VBox();
   	   workoutContainer.setStyle("-fx-background-color: white");
-  	   
-  	   Label workoutHeaderLabel = new Label("WORKOUTS");
-  	   workoutHeaderLabel.setTextFill(Color.MEDIUMVIOLETRED);
-  	   Font font = Font.font("System", FontWeight.BOLD, 30);
-  	   workoutHeaderLabel.setFont(font);
-  	   workoutHeaderLabel.setPadding(new Insets(25,0,25,60));
-  	   
+  	
+  	   // Create header title
+ 	   StackPane workoutStack = new StackPane();
+ 	   
+ 	   Rectangle workoutHeaderRectangle = new Rectangle(87, 58, 435, 93);
+ 	   workoutHeaderRectangle.setFill(Color.PURPLE);
+ 	   workoutHeaderRectangle.setArcHeight(20);
+ 	   workoutHeaderRectangle.setArcWidth(20);
+ 	   
+ 	   Label workoutLabel = new Label("WORKOUTS");
+ 	   workoutLabel.setTextFill(Color.WHITE);
+ 	   Font font = Font.font("System", FontWeight.BOLD, 22);
+ 	   workoutLabel.setFont(font);
+ 	   
+ 	   workoutStack.getChildren().addAll(workoutHeaderRectangle, workoutLabel);
+ 	   workoutStack.setPadding(new Insets(25,0,25,0));
+ /*
   	   LocalDateTime workoutSectionDate = LocalDateTime.now();  
   	   DateTimeFormatter formatWorkoutSectionDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
   	   String formattedDate = workoutSectionDate.format(formatWorkoutSectionDate);  
@@ -174,7 +185,7 @@ public class ActivitiesController implements Initializable {
   	   Label currentDateLabel = new Label(formattedDate);
   	   currentDateLabel.setFont(dateFont);
   	   currentDateLabel.setPadding(new Insets(0,0,0,200));
-  	   
+  	 */  
   	   // Create stacks for widgets
    	   StackPane sportsStack = new StackPane();
    	   sportsStack.setPadding(new Insets(10,0,5,0));
@@ -182,34 +193,27 @@ public class ActivitiesController implements Initializable {
    	   cardioTrainingStack.setPadding(new Insets(0,0,5,0));
    	   StackPane flexibilityTrainingStack = new StackPane();
    	   flexibilityTrainingStack.setPadding(new Insets(0,0,5,0));
-   	   StackPane weightTrainingStack = new StackPane();
-   	   weightTrainingStack.setPadding(new Insets(0,0,5,0));
    	   StackPane strengthTrainingStack = new StackPane();
    	   strengthTrainingStack.setPadding(new Insets(0,0,5,0));
    	   
    	   // Create rectangles for stacks
    	   Rectangle stackRectangle1 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle1.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle1.setFill(Color.PURPLE);
    	   stackRectangle1.setArcHeight(20);
    	   stackRectangle1.setArcWidth(20);
    	   
    	   Rectangle stackRectangle2 = new Rectangle(64, 165, 485, 117);
-	   stackRectangle2.setFill(Color.MEDIUMVIOLETRED);
+	   stackRectangle2.setFill(Color.PURPLE);
 	   stackRectangle2.setArcHeight(20);
 	   stackRectangle2.setArcWidth(20);
 	   
 	   Rectangle stackRectangle3 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle3.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle3.setFill(Color.PURPLE);
    	   stackRectangle3.setArcHeight(20);
    	   stackRectangle3.setArcWidth(20);
-   	   
-   	   Rectangle stackRectangle4 = new Rectangle(64, 165, 485, 117);
-	   stackRectangle4.setFill(Color.MEDIUMVIOLETRED);
-	   stackRectangle4.setArcHeight(20);
-	   stackRectangle4.setArcWidth(20);
 	   
 	   Rectangle stackRectangle5 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle5.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle5.setFill(Color.PURPLE);
    	   stackRectangle5.setArcHeight(20);
    	   stackRectangle5.setArcWidth(20);
    	   
@@ -218,7 +222,7 @@ public class ActivitiesController implements Initializable {
    	   
    	   Label sportsLabel = new Label("Sports");
    	   sportsLabel.setPadding(new Insets(0,0,0,100));
-   	   Font labelFont = Font.font("System", FontWeight.BOLD, 26);
+   	   Font labelFont = Font.font("System", FontWeight.BOLD, 25);
    	   sportsLabel.setFont(labelFont);
    	   sportsLabel.setTextFill(Color.WHITE);
    	   
@@ -301,36 +305,7 @@ public class ActivitiesController implements Initializable {
   	   
   	   flexibilityTrainingContainer.getChildren().addAll(flexibilityLabel, flexibilityCaloriesHBoxContainer, flexibilityExerciseHBoxContainer);
   	   flexibilityTrainingContainer.setPadding(new Insets(10,0,0,0));
-  	   
-  	   // Create weight training container
-  	   VBox weightTrainingContainer = new VBox();
- 	   
- 	   Label weightLabel = new Label("Weight Training");
- 	   weightLabel.setPadding(new Insets(0,0,0,100));
- 	   weightLabel.setFont(labelFont);
- 	   weightLabel.setTextFill(Color.WHITE);
- 	   
- 	   HBox weightCaloriesHBoxContainer = new HBox();
- 	   Label weightCaloriesBurnedLabel = new Label("Calories burned:");
- 	   weightCaloriesBurnedLabel.setPadding(new Insets(0,82.5,0,0));
- 	   weightCaloriesBurnedLabel.setFont(dataFont);
- 	   weightCaloriesBurnedLabel.setTextFill(Color.WHITE);
- 	   TextField weightCaloriesTextfield = new TextField();
- 	   weightCaloriesHBoxContainer.getChildren().addAll(weightCaloriesBurnedLabel, weightCaloriesTextfield);
- 	   weightCaloriesHBoxContainer.setAlignment(Pos.CENTER);
- 	   
- 	   HBox weightExerciseHBoxContainer = new HBox();
- 	   Label weightExerciseLabel = new Label("Duration of exercise:");
- 	   weightExerciseLabel.setPadding(new Insets(0,50,0,0));
- 	   weightExerciseLabel.setFont(dataFont);
- 	   weightExerciseLabel.setTextFill(Color.WHITE);
- 	   TextField weightExerciseTextfield = new TextField();
- 	   weightExerciseHBoxContainer.getChildren().addAll(weightExerciseLabel, weightExerciseTextfield);
- 	   weightExerciseHBoxContainer.setAlignment(Pos.CENTER);
- 	   
- 	   weightTrainingContainer.getChildren().addAll(weightLabel, weightCaloriesHBoxContainer, weightExerciseHBoxContainer);
- 	   weightTrainingContainer.setPadding(new Insets(10,0,0,0));
- 	   
+  	    
  	   // Create strength training container
  	   VBox strengthTrainingContainer = new VBox();
   	   
@@ -363,29 +338,54 @@ public class ActivitiesController implements Initializable {
   	   sportsStack.getChildren().addAll(stackRectangle1, sportsContainer);
   	   cardioTrainingStack.getChildren().addAll(stackRectangle2, cardioTrainingContainer);
   	   flexibilityTrainingStack.getChildren().addAll(stackRectangle3, flexibilityTrainingContainer);
-  	   weightTrainingStack.getChildren().addAll(stackRectangle4, weightTrainingContainer);
   	   strengthTrainingStack.getChildren().addAll(stackRectangle5, strengthTrainingContainer);
+  	   
+  	   // Guide to workouts
+  	   Font guideFont = Font.font("System", 16);
+  	   
+  	   VBox guideContainer = new VBox();
+  	   
+  	   Label guideLabel = new Label("Guide:");
+  	   
+  	   Font guideLabelFont = Font.font("System", FontWeight.BOLD, 16);
+  	   guideLabel.setFont(guideLabelFont);
+  	   
+  	   Label sportsExamplesLabel = new Label("Sports - basketball, soccer, hockey, football, etc.");
+  	   sportsExamplesLabel.setFont(guideFont);
+  	   
+  	   Label cardioExamplesLabel = new Label("Cardio Training - walking, running, swimming, dancing, etc.");
+  	   cardioExamplesLabel.setFont(guideFont);
+  	   
+  	   Label flexibilityExamplesLabel = new Label("Flexibility Training - stretching, yoga, pilates, etc.");
+  	   flexibilityExamplesLabel.setFont(guideFont);
+  	   
+  	   Label strengthExamplesLabel = new Label("Strength Training - weight lifting, body-weight training, etc.");
+  	   strengthExamplesLabel.setFont(guideFont);
+  	   
+  	   guideContainer.getChildren().addAll(guideLabel, sportsExamplesLabel, cardioExamplesLabel, flexibilityExamplesLabel, strengthExamplesLabel);
+  	   guideContainer.setPadding(new Insets(0,0,0,80));
   	   
   	   // Create button container
   	   VBox uploadWorkoutInfoButtonContainer = new VBox();
-  	   Button submitWorkoutDataButton = new Button("SUBMIT DATA");
-	   submitWorkoutDataButton.setMinSize(177, 44);
+  	   Button submitWorkoutDataButton = new Button("Submit data");
+	   submitWorkoutDataButton.setPrefSize(183, 40);
 	   submitWorkoutDataButton.setTextFill(Color.WHITE);
-	   submitWorkoutDataButton.setFont(labelFont);
-	   submitWorkoutDataButton.setStyle("-fx-background-color: MEDIUMVIOLETRED");
+	   Font buttonFont = Font.font("System", FontWeight.BOLD, 20);
+	   submitWorkoutDataButton.setFont(buttonFont);
+	   submitWorkoutDataButton.setStyle("-fx-background-color: PURPLE");
+	   
 	   uploadWorkoutInfoButtonContainer.getChildren().addAll(submitWorkoutDataButton);
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
 		  String duration = Double.toString(Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
-		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(weightExerciseTextfield.getText()) + 
-		  Double.parseDouble(strengthExerciseTextfield.getText()));  
+		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));  
 		  updateTodaysExerciseLabel(duration);
 		  updateProgress(duration);
 		  });
   	   
-  	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
-  			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
+  	   workoutContainer.getChildren().addAll(workoutStack, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
+  			   strengthTrainingStack, guideContainer, uploadWorkoutInfoButtonContainer);
   	   
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
