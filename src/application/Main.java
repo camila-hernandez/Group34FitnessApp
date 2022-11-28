@@ -38,21 +38,51 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException {
-		launch(args);
-		// create a file if it doesnt exist
-		try {
-			File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
-			if (!f.exists()) {
-				f.createNewFile();
+	public static void main(String[] args) throws IOException {		
+		
+		
+		File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		String line = br.readLine();
+		//String words[] = line.split("=");
+		while (line != null) {
+			String words[] = line.split("=");
+			System.out.println(line);
+			line = br.readLine();
+		
+			// Sets goal values in storage when the program starts
+			if (words[0].contentEquals("Steps goal ")) {
+				Storage.storage.setStepsGoals(words[1]);
 			}
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("Bye");
-			bw.close();
-			fw.close();
-		} catch (Exception e) {
-			System.out.println("File cannot be created");
+			if (words[0].contentEquals("Sleep goal ")) {
+				Storage.storage.setSleepGoals(words[1]);
+			}
+			if (words[0].contentEquals("Water intake goal ")) {
+				Storage.storage.setWaterIntakeGoals(words[1]);
+			}
+			if (words[0].contentEquals("Weight goal ")) {
+				Storage.storage.setWeightGoals(words[1]);
+			}
+			if (words[0].contentEquals("Calories burned goal ")) {
+				Storage.storage.setCaloriesGoals(words[1]);
+			}
+			if (words[0].contentEquals("Exercise goal ")) {
+				Storage.storage.setExerciseGoals(words[1]);
+			}	
 		}
+		br.close();
+		fr.close();
+		// if (currentDate == Monday) 
+		// Testing out if it values are stored in storage
+		System.out.println("Steps: " + Storage.storage.getStepsGoals());
+		System.out.println("Sleep: " + Storage.storage.getSleepGoals());
+		System.out.println(" Water: " + Storage.storage.getWaterIntakeGoals());
+		System.out.println("Weight: " + Storage.storage.getWeightGoals());
+		System.out.println("Calories: " + Storage.storage.getCaloriesGoals());
+		System.out.println("Exercise: " + Storage.storage.getExerciseGoals());
+		
+		launch(args);
 	}
+	// line.split(" ");
 }
