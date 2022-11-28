@@ -1,9 +1,10 @@
 package application;
 
 public class User {
+	
 	private String name = "John Doe";
 
-	public User() {
+	public User(String name) {
 		this.name = name;
 	}
 
@@ -24,5 +25,4 @@ public class User {
     	}
 		else throw new InvalidNameException("A name must be alphabetic");
 	}
-
 }
