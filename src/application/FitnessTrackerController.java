@@ -47,9 +47,6 @@ public class FitnessTrackerController implements Initializable {
 	private Label sleepDisplayLabel;
 	
 	@FXML
-    private Button logOutButton;
-	
-	@FXML
     private Button userProfileButton;
 	
 	@FXML
@@ -63,6 +60,18 @@ public class FitnessTrackerController implements Initializable {
 	
     @FXML
     void openUserProfile(ActionEvent event) {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
+			UserProfile controller = (UserProfile)loader.getController();
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 
 	@FXML
@@ -143,7 +152,6 @@ public class FitnessTrackerController implements Initializable {
 	   	   }
 	}
 
-
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -165,7 +173,6 @@ public class FitnessTrackerController implements Initializable {
 
     }
     
-    
    @FXML
    	void showUserFitnessGoals(ActionEvent event) {
 
@@ -186,33 +193,7 @@ public class FitnessTrackerController implements Initializable {
 		   e.printStackTrace();
 	   }  
    }
-   
-   @FXML
-   void userLogOut(ActionEvent event) {
-	   File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
-		try {
-			// If the file doesn't exist, we will create the file
-			if (!f.exists()) {
-				f.createNewFile();
-			}
-			// Write to the file
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("Steps goal = " + Storage.storage.getStepsGoals());
-			bw.write("Sleep goal = " + Storage.storage.getSleepGoals());
-			bw.write("Water intake goal = " + Storage.storage.getWaterIntakeGoals());
-			bw.write("Weight goal = " + Storage.storage.getWeightGoals());
-			bw.write("Calories burned goal = " + Storage.storage.getCaloriesGoals());
-			bw.write("Exercise goal = " + Storage.storage.getExerciseGoals());
-			// Close BufferedWriter and FileWriter			
-			bw.close();
-			fw.close();
-		} catch (Exception e) {
-			System.out.println("File cannot be created");
-		}
-	   applicationStage.close();
 
-   }
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
