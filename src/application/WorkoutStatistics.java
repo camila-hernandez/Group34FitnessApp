@@ -95,7 +95,7 @@ public class WorkoutStatistics implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		XYChart.Series	series = new XYChart.Series();
-		series.setName("Weekly Workout Statistics");
+		series.setName("Daily workout duration (mins)");
 		//Populating the series with data
         series.getData().add(new XYChart.Data("Monday", Double.parseDouble(Storage.storage.getMondayExerciseInfo())));
         series.getData().add(new XYChart.Data("Tuesday", Double.parseDouble(Storage.storage.getTuesdayExerciseInfo())));
@@ -106,6 +106,7 @@ public class WorkoutStatistics implements Initializable {
         series.getData().add(new XYChart.Data("Sunday", Double.parseDouble(Storage.storage.getSundayExerciseInfo())));
         
         XYChart.Series series2 = new XYChart.Series();
+        series2.setName("Daily amount of calories burned (cal)");
         //Populating the series with data
         series2.getData().add(new XYChart.Data("Monday", Double.parseDouble(Storage.storage.getMondayCaloriesBurnedInfo())));
         series2.getData().add(new XYChart.Data("Tuesday", Double.parseDouble(Storage.storage.getTuesdayCaloriesBurnedInfo())));
@@ -127,7 +128,7 @@ public class WorkoutStatistics implements Initializable {
 		   ActivitiesController controller = (ActivitiesController)loader.getController();
 		   
 		   controller.setStorage(Storage.storage);
-		   controller.updateTodaysExerciseValues();
+		  // controller.updateTodaysExerciseValues();
 		   controller.updateProgressValue();
 		   
 		   controller.applicationStage = applicationStage;
