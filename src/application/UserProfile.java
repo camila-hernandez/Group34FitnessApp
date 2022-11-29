@@ -36,6 +36,7 @@ public class UserProfile {
 			bw.write("Weight goal = " + Storage.storage.getWeightGoals() + "\n");
 			bw.write("Calories burned goal = " + Storage.storage.getCaloriesGoals() + "\n");
 			bw.write("Exercise goal = " + Storage.storage.getExerciseGoals() + "\n");
+			bw.write("Daily progress = " + Storage.storage.getProgressValue() + "\n");
 			
 			// Stores exercise information depending on day of the week for statistics in the file
 			Date today = new Date();
@@ -44,24 +45,31 @@ public class UserProfile {
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			if (dayOfWeek == Calendar.MONDAY) {
 				bw.write("Monday exercise duration = " + Storage.storage.getMondayExerciseInfo() + "\n");
+				bw.write("Monday calories burned = " + Storage.storage.getMondayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.TUESDAY) {
 				bw.write("Tuesday exercise duration = " + Storage.storage.getTuesdayExerciseInfo() + "\n");
+				bw.write("Tuesday calories burned = " + Storage.storage.getTuesdayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.WEDNESDAY) {
 				bw.write("Wednesday exercise duration = " + Storage.storage.getWednesdayExerciseInfo() + "\n");
+				bw.write("Wednesday calories burned = " + Storage.storage.getWednesdayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.THURSDAY) {
 				bw.write("Thursday exercise duration = " + Storage.storage.getThursdayExerciseInfo() + "\n");
+				bw.write("Thursday calories burned = " + Storage.storage.getThursdayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.FRIDAY) {
 				bw.write("Friday exercise duration = " + Storage.storage.getFridayExerciseInfo() + "\n");
+				bw.write("Friday calories burned = " + Storage.storage.getFridayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.SATURDAY) {
 				bw.write("Saturday exercise duration = " + Storage.storage.getSaturdayExerciseInfo() + "\n");
+				bw.write("Saturday calories burned = " + Storage.storage.getSaturdayCaloriesBurnedInfo() + "\n");
 			}
 			if (dayOfWeek == Calendar.SUNDAY) {
 				bw.write("Sunday exercise duration = " + Storage.storage.getSundayExerciseInfo() + "\n");
+				bw.write("Sunday calories burned = " + Storage.storage.getSundayCaloriesBurnedInfo() + "\n");
 			}
 			
 			// Close BufferedWriter and FileWriter			
