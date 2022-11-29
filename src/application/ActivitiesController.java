@@ -5,6 +5,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -99,18 +101,18 @@ public class ActivitiesController implements Initializable {
     	dateLabel.setText(formattedDate);
 	}
     
-    public void updateProgress(String time) {
+    public void updateProgress(double time) {
     	// Initialize progress and label to 0
     	workoutProgressBar.setProgress(0);
     	progressLabel.setText(0.0 + "%");
     	// Update progress bar
-    	progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
+    	progress = (time / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
     	progressLabel.setText(Math.round(progress) + ".0%");
     	Storage.storage.setProgress(time);
     	storage.setProgress(time);
-    	
-    	if (progress < 50) {
+    
+    	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
     	}
     	if (progress == 50) {
@@ -123,6 +125,10 @@ public class ActivitiesController implements Initializable {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
+    
+    public void updateProgressValue() {
+    	updateProgress(storage.progress);
+    }
  
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
@@ -133,6 +139,35 @@ public class ActivitiesController implements Initializable {
     public void updateTodaysExerciseValues() {
     	if (todayExerciseLabel != null) {
     		updateTodaysExerciseLabel(storage.todayExerciseLabel);
+    	}
+    }
+    
+    public void updateStats(String day) {
+    	Date today = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(today); 
+		day = Storage.storage.getTodaysExercise();
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+    	if (dayOfWeek == Calendar.MONDAY) {
+    		Storage.storage.setMondayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.TUESDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.WEDNESDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.THURSDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.FRIDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.SATURDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    	}
+    	if (dayOfWeek == Calendar.SUNDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
     	}
     }
 
@@ -177,15 +212,7 @@ public class ActivitiesController implements Initializable {
  	   
  	   workoutStack.getChildren().addAll(workoutHeaderRectangle, workoutLabel);
  	   workoutStack.setPadding(new Insets(25,0,25,0));
- /*
-  	   LocalDateTime workoutSectionDate = LocalDateTime.now();  
-  	   DateTimeFormatter formatWorkoutSectionDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
-  	   String formattedDate = workoutSectionDate.format(formatWorkoutSectionDate);  
-  	   Font dateFont = Font.font("System", 24);
-  	   Label currentDateLabel = new Label(formattedDate);
-  	   currentDateLabel.setFont(dateFont);
-  	   currentDateLabel.setPadding(new Insets(0,0,0,200));
-  	 */  
+
   	   // Create stacks for widgets
    	   StackPane sportsStack = new StackPane();
    	   sportsStack.setPadding(new Insets(10,0,5,0));
@@ -378,10 +405,11 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
-		  String duration = Double.toString(Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
+		  double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
 		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));  
-		  updateTodaysExerciseLabel(duration);
+		  updateTodaysExerciseLabel(Double.toString(duration));
 		  updateProgress(duration);
+		  updateStats(Double.toString(duration));
 		  });
   	   
   	   workoutContainer.getChildren().addAll(workoutStack, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
