@@ -136,14 +136,6 @@ public class Storage {
 		this.exerciseGoalsLabel = exerciseLabel;
 	 }
 	 
-	 public void setTodaysExerciseLabel(String exercise) {
-		 this.todayExerciseLabel = exercise;
-	 }
-	 
-	 public String getTodaysExercise() {
-		 return todayExerciseLabel;
-	 }
-	
 	 public void setTodaysExerciseMotivationalLabel(String motivation) {
 		 this.todayExerciseMotivationalLabel = motivation;
 	 }
@@ -181,7 +173,7 @@ public class Storage {
 	 }
 	 
 	 public void setFridayCaloriesBurnedInfo(String friday) {
-		 this.fridayExerciseInfo = friday;
+		 this.fridayCaloriesBurnedInfo = friday;
 	 }
 	 
 	 public void setSaturdayCaloriesBurnedInfo(String saturday) {
