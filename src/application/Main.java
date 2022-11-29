@@ -98,6 +98,34 @@ public class Main extends Application {
 			if (words[0].contentEquals("Sunday exercise duration ")) {
 				Storage.storage.setSundayExerciseInfo(words[1]);
 			}
+			
+			if (words[0].contentEquals("Monday calories burned ")) {
+				Storage.storage.setMondayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Tuesday calories burned ")) {
+				Storage.storage.setTuesdayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Wednesday calories burned ")) {
+				Storage.storage.setWednesdayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Thursday calories burned ")) {
+				Storage.storage.setThursdayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Friday calories burned ")) {
+				Storage.storage.setFridayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Saturday calories burned ")) {
+				Storage.storage.setSaturdayCaloriesBurnedInfo(words[1]);
+			}
+			
+			if (words[0].contentEquals("Sunday calories burned ")) {
+				Storage.storage.setSundayCaloriesBurnedInfo(words[1]);
+			}
 		}
 		br.close();
 		fr.close();
@@ -108,14 +136,16 @@ public class Main extends Application {
 		System.out.println("Weight: " + Storage.storage.getWeightGoals());
 		System.out.println("Calories: " + Storage.storage.getCaloriesGoals());
 		System.out.println("Exercise: " + Storage.storage.getExerciseGoals());
-		System.out.println("Monday: " + Storage.storage.getMondayExerciseInfo());
+		//System.out.println("Monday: " + Storage.storage.getMondayExerciseInfo());
 		System.out.println("Tuesday: " + Storage.storage.getTuesdayExerciseInfo());
-		System.out.println("Wednesday " + Storage.storage.getWednesdayExerciseInfo());
-		System.out.println("Thursday: " + Storage.storage.getThursdayExerciseInfo());
-		System.out.println("Friday: " + Storage.storage.getFridayExerciseInfo());
-		System.out.println("Saturday: " + Storage.storage.getSaturdayExerciseInfo());
-		System.out.println("Sunday: " + Storage.storage.getSundayExerciseInfo());
-		System.out.println("Todays label: " + Storage.storage.getTodaysExercise());
+		//System.out.println("Wednesday " + Storage.storage.getWednesdayExerciseInfo());
+		System.out.println("Tuesday Calories: " + Storage.storage.getTuesdayCaloriesBurnedInfo());
+		//System.out.println("Thursday: " + Storage.storage.getThursdayExerciseInfo());
+		//System.out.println("Friday: " + Storage.storage.getFridayExerciseInfo());
+		//System.out.println("Saturday: " + Storage.storage.getSaturdayExerciseInfo());
+		//System.out.println("Sunday: " + Storage.storage.getSundayExerciseInfo());
+		//System.out.println("Todays label: " + Storage.storage.getTodaysExercise());
+		System.out.println("Progress: " + Storage.storage.getProgressValue());
 		
 		launch(args);
 	}
