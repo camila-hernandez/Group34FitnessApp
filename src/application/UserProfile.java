@@ -3,6 +3,10 @@ package application;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +27,7 @@ public class UserProfile {
 			if (!f.exists()) {
 				f.createNewFile();
 			}
-			// Write to the file
+			// Write all goals to the file
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("Steps goal = " + Storage.storage.getStepsGoals() + "\n");
@@ -32,6 +36,34 @@ public class UserProfile {
 			bw.write("Weight goal = " + Storage.storage.getWeightGoals() + "\n");
 			bw.write("Calories burned goal = " + Storage.storage.getCaloriesGoals() + "\n");
 			bw.write("Exercise goal = " + Storage.storage.getExerciseGoals() + "\n");
+			
+			// Stores exercise information depending on day of the week for statistics in the file
+			Date today = new Date();
+			Calendar cal = Calendar.getInstance(); 
+			cal.setTime(today); 
+			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+			if (dayOfWeek == Calendar.MONDAY) {
+				bw.write("Monday exercise duration = " + Storage.storage.getMondayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.TUESDAY) {
+				bw.write("Tuesday exercise duration = " + Storage.storage.getTuesdayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.WEDNESDAY) {
+				bw.write("Wednesday exercise duration = " + Storage.storage.getWednesdayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.THURSDAY) {
+				bw.write("Thursday exercise duration = " + Storage.storage.getThursdayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.FRIDAY) {
+				bw.write("Friday exercise duration = " + Storage.storage.getFridayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.SATURDAY) {
+				bw.write("Saturday exercise duration = " + Storage.storage.getSaturdayExerciseInfo() + "\n");
+			}
+			if (dayOfWeek == Calendar.SUNDAY) {
+				bw.write("Sunday exercise duration = " + Storage.storage.getSundayExerciseInfo() + "\n");
+			}
+			
 			// Close BufferedWriter and FileWriter			
 			bw.close();
 			fw.close();
