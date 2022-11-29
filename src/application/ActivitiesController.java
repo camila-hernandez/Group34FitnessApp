@@ -16,6 +16,12 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -25,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -68,6 +75,15 @@ public class ActivitiesController implements Initializable {
     
     @FXML
     private Label progressLabel;
+   
+    @FXML
+    private NumberAxis yAxis;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private BarChart<?, ?> workoutStatsChart;
     
     Storage storage;
     
@@ -109,8 +125,8 @@ public class ActivitiesController implements Initializable {
     	progress = (time / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
     	progressLabel.setText(Math.round(progress) + ".0%");
-    	Storage.storage.setProgress(time);
-    	storage.setProgress(time);
+    	Storage.storage.setProgressValue(time);
+    	storage.setProgressValue(time);
     
     	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
@@ -419,4 +435,25 @@ public class ActivitiesController implements Initializable {
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
   	    
     } 
+    
+    public void showWorkoutStats(ActionEvent event) {
+    	try {
+	   		   FXMLLoader loader = new FXMLLoader();
+	   		   Pane root = loader.load(new FileInputStream("src/application/WorkoutStats.fxml"));
+	   		   WorkoutStatistics controller = (WorkoutStatistics)loader.getController();
+	   		   
+	   		   controller.setStorage(storage);
+	   		   controller.getTuesdayValuesFromStorage();
+	   		   
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+        
+    }
 }
+
