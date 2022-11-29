@@ -12,14 +12,18 @@ public class Storage {
 	private String waterInformation;
 	private String weightInformation;
 	private String caloriesBurnedInformation;
-	private String exerciseInformation;  
-
+	private String exerciseInformation;
+	private String waterIntakeAmount;
+	private String waterProgressAmount;
+	
+	public String waterProgressTotalLabel;
     public String stepGoalsLabel;
     public String waterIntakeGoalsLabel;
     public String weightGoalsLabel;
     public String exerciseGoalsLabel;
     public String caloriesBurnedGoalsLabel;
     public String sleepGoalsLabel;
+    public String waterIntakeLabel;
     
     public String todayExerciseLabel;
     
@@ -64,6 +68,21 @@ public class Storage {
     
     public void setExerciseGoals(String exercise) {
     	this.exerciseInformation = exercise;
+    }
+    
+    public void setWaterIntake(String water) {
+    	this.waterIntakeAmount = water;
+    }
+    
+    public void setWaterProgress(String water) {
+    	this.waterProgressAmount = water;
+    }
+    
+    public String getWaterProgress() {
+    	return waterProgressAmount;
+    }
+    public String getWaterIntakeAmount() {
+    	return waterIntakeAmount;
     }
 
 	public String getStepsGoals() {
@@ -118,4 +137,11 @@ public class Storage {
 		 this.todayExerciseLabel = exercise;
 	 }
 	
+	 public void setWaterIntakeLabel(String waterIntakeLabel) {
+		 this.waterIntakeLabel = waterIntakeLabel;
+	 }
+	 
+	 public void setWaterProgressLabel(String waterProgressLabel) {
+		 this.waterProgressTotalLabel = waterProgressLabel;
+	 }
 }

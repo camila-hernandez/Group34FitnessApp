@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.AnchorPane;
@@ -41,6 +42,9 @@ public class FitnessTrackerController {
 	@FXML
 	private Label sleepDisplayLabel;
 	
+	@FXML
+	private ProgressIndicator waterProgressIndicator;
+	
 	Storage storage = new Storage();
 	
 	public void setStorage(Storage storage) {
@@ -54,7 +58,7 @@ public class FitnessTrackerController {
 	@FXML
 	void trackSteps(ActionEvent event) {
     }
-
+	
 	@FXML
 	void trackSleep(ActionEvent event) {
 		try {
@@ -69,10 +73,6 @@ public class FitnessTrackerController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		sleepDisplayLabel.setText(Storage.storage.getSleepGoals() + " h");
-
-
 	}
 
 	@FXML
@@ -124,6 +124,10 @@ public class FitnessTrackerController {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
 			UserWaterIntakeController controller = (UserWaterIntakeController)loader.getController();
+			
+			controller.setStorage(Storage.storage);
+			controller.updateWaterValues();
+
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
