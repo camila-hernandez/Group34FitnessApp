@@ -124,7 +124,9 @@ public class FitnessTrackerController implements Initializable {
 	   		   
 	   		   controller.setStorage(Storage.storage);
 			   controller.updateTodaysExerciseValues();
+			   controller.updateTotalCaloriesBurnedValues();
 			   controller.updateProgressValue();
+			   //controller.getDailyProgress();
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   
