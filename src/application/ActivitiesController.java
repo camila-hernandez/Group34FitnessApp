@@ -443,7 +443,13 @@ public class ActivitiesController implements Initializable {
 	   		   WorkoutStatistics controller = (WorkoutStatistics)loader.getController();
 	   		   
 	   		   controller.setStorage(storage);
+	   		   controller.getMondayValuesFromStorage();
 	   		   controller.getTuesdayValuesFromStorage();
+	   		   controller.getWednesdayValuesFromStorage();
+	   		   controller.getThursdayValuesFromStorage();
+	   		   controller.getFridayValuesFromStorage();
+	   		   controller.getSaturdayValuesFromStorage();
+	   		   controller.getSundayValuesFromStorage();
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   
@@ -455,5 +461,7 @@ public class ActivitiesController implements Initializable {
 	   	   }
         
     }
+
+
 }
 
