@@ -26,6 +26,15 @@ public class Storage {
     
     public double progress;
     
+    public String mondayExerciseInfo = "0.0";
+    public String tuesdayExerciseInfo = "0.0";
+    public String wednesdayExerciseInfo = "0.0";
+    public String thursdayExerciseInfo = "0.0";
+    public String fridayExerciseInfo = "0.0";
+    public String saturdayExerciseInfo = "0.0";
+    public String sundayExerciseInfo = "0.0";
+    
+    
     @FXML
     private Button updateGoalsButton;
 
@@ -120,15 +129,78 @@ public class Storage {
 	 public void setTodaysExerciseLabel(String exercise) {
 		 this.todayExerciseLabel = exercise;
 	 }
+	 
+	 public String getTodaysExercise() {
+		 return todayExerciseLabel;
+	 }
 	
 	 public void setTodaysExerciseMotivationalLabel(String motivation) {
 		 this.todayExerciseMotivationalLabel = motivation;
 	 }
 	 
-	 public void setProgress(String progressLabel) {
-		 this.progress = Double.parseDouble(progressLabel);
+	 public void setProgress(double time) {
+		 this.progress = time;
 	 }
 	 
-	 //update DayInfo
+	 public double getProgress() {
+		 return progress;
+	 }
+
+	 public void setMondayExerciseInfo(String monday) {
+		 this.mondayExerciseInfo = monday;
+	 }
+	 
+	 public void setTuesdayExerciseInfo(String tuesday) {
+		 this.tuesdayExerciseInfo = tuesday;
+	 }
+	 
+	 public void setWednesdaydayExerciseInfo(String wednesday) {
+		 this.wednesdayExerciseInfo = wednesday;
+	 }
+	 
+	 public void setThursdayExerciseInfo(String thursday) {
+		 this.thursdayExerciseInfo = thursday;
+	 }
+	 
+	 public void setFridayExerciseInfo(String friday) {
+		 this.fridayExerciseInfo = friday;
+	 }
+	 
+	 public void setSaturdayExerciseInfo(String saturday) {
+		 this.saturdayExerciseInfo = saturday;
+	 }
+	 
+	 public void setSundayExerciseInfo(String sunday) {
+		 this.sundayExerciseInfo = sunday;
+	 }
+	 
+	 public String getMondayExerciseInfo() {
+		 return mondayExerciseInfo;
+	 }
+	 
+	 public String getTuesdayExerciseInfo() {
+		 return tuesdayExerciseInfo;
+	 }
+	 
+	 public String getWednesdayExerciseInfo() {
+		 return wednesdayExerciseInfo;
+	 }
+	 
+	 public String getThursdayExerciseInfo() {
+		 return thursdayExerciseInfo;
+	 }
+	 
+	 public String getFridayExerciseInfo() {
+		 return fridayExerciseInfo;
+	 }
+	 
+	 public String getSaturdayExerciseInfo() {
+		 return saturdayExerciseInfo;
+	 }
+	 
+	 public String getSundayExerciseInfo() {
+		 return sundayExerciseInfo;
+	 }
+	 
 }
 
