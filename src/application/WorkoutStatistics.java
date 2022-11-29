@@ -42,6 +42,26 @@ public class WorkoutStatistics implements Initializable {
 	public String getTuesdayValuesFromStorage() {
 		return Storage.storage.getTuesdayExerciseInfo();
 	}
+	
+	public String getWednesdayValuesFromStorage() {
+		return Storage.storage.getWednesdayExerciseInfo();
+	}
+	
+	public String getThursdayValuesFromStorage() {
+		return Storage.storage.getThursdayExerciseInfo();
+	}
+	
+	public String getFridayValuesFromStorage() {
+		return Storage.storage.getFridayExerciseInfo();
+	}
+	
+	public String getSaturdayValuesFromStorage() {
+		return Storage.storage.getSaturdayExerciseInfo();
+	}
+	
+	public String getSundayValuesFromStorage() {
+		return Storage.storage.getSundayExerciseInfo();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
