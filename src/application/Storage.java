@@ -26,6 +26,16 @@ public class Storage {
     
     public double progress;
     
+    public double totalCalories;
+    
+    public String mondayCaloriesBurnedInfo = "0.0";
+    public String tuesdayCaloriesBurnedInfo = "0.0";
+    public String wednesdayCaloriesBurnedInfo = "0.0";
+    public String thursdayCaloriesBurnedInfo = "0.0";
+    public String fridayCaloriesBurnedInfo = "0.0";
+    public String saturdayCaloriesBurnedInfo = "0.0";
+    public String sundayCaloriesBurnedInfo = "0.0";
+    
     public String mondayExerciseInfo = "0.0";
     public String tuesdayExerciseInfo = "0.0";
     public String wednesdayExerciseInfo = "0.0";
@@ -138,12 +148,76 @@ public class Storage {
 		 this.todayExerciseMotivationalLabel = motivation;
 	 }
 	 
-	 public void setProgress(double time) {
+	 public void setTotalCaloriesBurned(double caloriesBurned) {
+		 this.totalCalories = caloriesBurned;
+	 }
+	 
+	 public double getTotalCaloriesBurned() {
+		 return totalCalories;
+	 }
+	 
+	 public void setProgressValue(double time) {
 		 this.progress = time;
 	 }
 	 
-	 public double getProgress() {
+	 public double getProgressValue() {
 		 return progress;
+	 }
+	 
+	 public void setMondayCaloriesBurnedInfo(String monday) {
+		 this.mondayCaloriesBurnedInfo = monday;
+	 }
+	 
+	 public void setTuesdayCaloriesBurnedInfo(String tuesday) {
+		 this.tuesdayCaloriesBurnedInfo = tuesday;
+	 }
+	 
+	 public void setWednesdayCaloriesBurnedInfo(String wednesday) {
+		 this.wednesdayCaloriesBurnedInfo = wednesday;
+	 }
+	 
+	 public void setThursdayCaloriesBurnedInfo(String thursday) {
+		 this.thursdayCaloriesBurnedInfo = thursday;
+	 }
+	 
+	 public void setFridayCaloriesBurnedInfo(String friday) {
+		 this.fridayExerciseInfo = friday;
+	 }
+	 
+	 public void setSaturdayCaloriesBurnedInfo(String saturday) {
+		 this.saturdayCaloriesBurnedInfo = saturday;
+	 }
+	 
+	 public void setSundayCaloriesBurnedInfo(String sunday) {
+		 this.sundayCaloriesBurnedInfo = sunday;
+	 }
+	 
+	 public String getMondayCaloriesBurnedInfo() {
+		 return mondayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getTuesdayCaloriesBurnedInfo() {
+		 return tuesdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getWednesdayCaloriesBurnedInfo() {
+		 return wednesdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getThursdayCaloriesBurnedInfo() {
+		 return thursdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getFridayCaloriesBurnedInfo() {
+		 return fridayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getSaturdayCaloriesBurnedInfo() {
+		 return saturdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getSundayCaloriesBurnedInfo() {
+		 return sundayCaloriesBurnedInfo;
 	 }
 
 	 public void setMondayExerciseInfo(String monday) {
