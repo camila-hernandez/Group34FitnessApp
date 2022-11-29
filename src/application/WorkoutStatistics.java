@@ -62,6 +62,34 @@ public class WorkoutStatistics implements Initializable {
 	public String getSundayValuesFromStorage() {
 		return Storage.storage.getSundayExerciseInfo();
 	}
+	
+	public String getMondayCaloriesBurnedValues() {
+		return Storage.storage.getMondayExerciseInfo();
+	}
+	
+	public String getTuesdayCaloriesBurnedValues() {
+		return Storage.storage.getTuesdayExerciseInfo();
+	}
+	
+	public String getWednesdayCaloriesBurnedValues() {
+		return Storage.storage.getWednesdayExerciseInfo();
+	}
+	
+	public String getThursdayCaloriesBurnedValues() {
+		return Storage.storage.getThursdayExerciseInfo();
+	}
+	
+	public String getFridayCaloriesBurnedValues() {
+		return Storage.storage.getFridayExerciseInfo();
+	}
+	
+	public String getSaturdayCaloriesBurnedValues() {
+		return Storage.storage.getSaturdayExerciseInfo();
+	}
+	
+	public String getSundayCaloriesBurnedValues() {
+		return Storage.storage.getSundayExerciseInfo();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -79,13 +107,13 @@ public class WorkoutStatistics implements Initializable {
         
         XYChart.Series series2 = new XYChart.Series();
         //Populating the series with data
-        series2.getData().add(new XYChart.Data("Monday", 20));
-        series2.getData().add(new XYChart.Data("Tuesday", 20));
-        series2.getData().add(new XYChart.Data("Wednesday", 20));
-        series2.getData().add(new XYChart.Data("Thursday", 20));
-        series2.getData().add(new XYChart.Data("Friday", 20));
-        series2.getData().add(new XYChart.Data("Saturday", 20));
-        series2.getData().add(new XYChart.Data("Sunday", 20));
+        series2.getData().add(new XYChart.Data("Monday", Double.parseDouble(Storage.storage.getMondayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Tuesday", Double.parseDouble(Storage.storage.getTuesdayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Wednesday", Double.parseDouble(Storage.storage.getWednesdayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Thursday", Double.parseDouble(Storage.storage.getThursdayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Friday", Double.parseDouble(Storage.storage.getFridayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Saturday", Double.parseDouble(Storage.storage.getSaturdayCaloriesBurnedInfo())));
+        series2.getData().add(new XYChart.Data("Sunday", Double.parseDouble(Storage.storage.getSundayCaloriesBurnedInfo())));
         
         workoutStatsChart.getData().addAll(series,series2);
        
