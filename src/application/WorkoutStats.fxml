@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
@@ -8,8 +11,7 @@
 
 <AnchorPane prefHeight="856.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutStatistics">
    <children>
-      <Button layoutX="253.0" layoutY="741.0" mnemonicParsing="false" onAction="#returnToActivities" text="Button" />
-      <BarChart fx:id="workoutStatsChart" layoutX="55.0" layoutY="125.0" prefHeight="557.0" prefWidth="500.0">
+      <BarChart fx:id="workoutStatsChart" layoutX="48.0" layoutY="172.0" prefHeight="557.0" prefWidth="500.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
@@ -17,5 +19,23 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </BarChart>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6b4191" height="95.0" layoutX="110.0" layoutY="56.0" stroke="#6b4191" strokeType="INSIDE" width="390.0">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Rectangle>
+      <Label layoutX="170.0" layoutY="86.0" text="WORKOUT STATISTICS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="213.0" layoutY="755.0" mnemonicParsing="false" onAction="#returnToActivities" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Return to home" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
