@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -54,11 +56,14 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
     private ImageView profileImage;
 	
+	@FXML
+	private Label dateLabel;
+	
 	Storage storage = new Storage();
 	
 	public void setStorage(Storage storage) {
     	this.storage = storage;
-    }
+	}
 	
     @FXML
     void openUserProfile(ActionEvent event) {
@@ -127,7 +132,7 @@ public class FitnessTrackerController implements Initializable {
 	   		Date today = new Date();
 			Calendar cal = Calendar.getInstance(); 
 			cal.setTime(today); 
-			int dayOfWeek = Calendar.WEDNESDAY;//cal.get(Calendar.DAY_OF_WEEK);
+			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 	    	if (dayOfWeek == Calendar.MONDAY) {
 	    		controller.updateTodaysExerciseLabel(Storage.storage.getMondayExerciseInfo());
 	    	}
@@ -232,6 +237,12 @@ public class FitnessTrackerController implements Initializable {
 	   //<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
    		Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
    		profileImage.setImage(userIconImage);
+   		
+   		// Sets current date
+   		LocalDateTime currentDateTime = LocalDateTime.now();
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+    	String formattedDate = currentDateTime.format(dtf);
+    	dateLabel.setText(formattedDate);
 	   
-}
+   }
 }
