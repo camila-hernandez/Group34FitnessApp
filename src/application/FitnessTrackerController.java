@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,6 +52,9 @@ public class FitnessTrackerController implements Initializable {
 	private Label sleepDisplayLabel;
 	
 	@FXML
+
+	private ProgressIndicator waterProgressIndicator;
+  @FXML
     private Button userProfileButton;
 	
 	@FXML
@@ -84,13 +88,17 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	void trackSteps(ActionEvent event) {
     }
-
+	
 	@FXML
 	void trackSleep(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
 			UserSleepTrackerController controller = (UserSleepTrackerController)loader.getController();
+			
+			controller.setStorage(Storage.storage);
+			controller.updateSleepValues();
+			
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -99,10 +107,6 @@ public class FitnessTrackerController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		sleepDisplayLabel.setText(Storage.storage.getSleepGoals() + " h");
-
-
 	}
 
 	@FXML
@@ -195,6 +199,10 @@ public class FitnessTrackerController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
 			UserWaterIntakeController controller = (UserWaterIntakeController)loader.getController();
+			
+			controller.setStorage(Storage.storage);
+			controller.updateWaterValues();
+
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
