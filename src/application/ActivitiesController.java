@@ -128,6 +128,35 @@ public class ActivitiesController implements Initializable {
     	progressLabel.setText(Math.round(progress) + ".0%");
     	Storage.storage.setProgressValue(time);
     	storage.setProgressValue(time);
+    	
+    	Date today = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(today); 
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+    	if (dayOfWeek == Calendar.MONDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getMondayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.TUESDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getTuesdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.WEDNESDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getWednesdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.THURSDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getThursdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.FRIDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getFridayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.SATURDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getSaturdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.SUNDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getSundayExerciseInfo());
+    	}
+    	
+    	//updateTodaysExerciseLabel(Double.toString(Storage.storage.get));
+    	//System.out.println("Test: " + Storage.storage.getProgressValue());
     
     	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
@@ -149,42 +178,48 @@ public class ActivitiesController implements Initializable {
  
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
-    	Storage.storage.setTodaysExerciseLabel(exercise);
-    	storage.setTodaysExerciseLabel(exercise);
     }
-    
+    /*
     public void updateTodaysExerciseValues() {
     	if (todayExerciseLabel != null) {
     		updateTodaysExerciseLabel(storage.todayExerciseLabel);
     	}
     }
-    
-    public void updateStats(String day) {
+    */
+    public void updateStats(String day, String calories) {
     	Date today = new Date();
 		Calendar cal = Calendar.getInstance(); 
 		cal.setTime(today); 
-		day = Storage.storage.getTodaysExercise();
+		day = Double.toString(Storage.storage.getProgressValue());
+		calories = Double.toString(Storage.storage.getTotalCaloriesBurned());
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
     	if (dayOfWeek == Calendar.MONDAY) {
     		Storage.storage.setMondayExerciseInfo(day);
+    		Storage.storage.setMondayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.TUESDAY) {
     		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setTuesdayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.WEDNESDAY) {
-    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setWednesdaydayExerciseInfo(day);
+    		Storage.storage.setWednesdayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.THURSDAY) {
-    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setThursdayExerciseInfo(day);
+    		Storage.storage.setThursdayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.FRIDAY) {
-    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setFridayExerciseInfo(day);
+    		Storage.storage.setFridayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.SATURDAY) {
-    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setSaturdayExerciseInfo(day);
+    		Storage.storage.setSaturdayCaloriesBurnedInfo(calories);
     	}
     	if (dayOfWeek == Calendar.SUNDAY) {
-    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setSundayExerciseInfo(day);
+    		Storage.storage.setSundayCaloriesBurnedInfo(calories);
     	}
     }
 
@@ -200,35 +235,7 @@ public class ActivitiesController implements Initializable {
     		totalCaloriesBurned(storage.totalCalories);
     	}
     }
-    
-    public void updateStats2(String calories) {
-    	Date today = new Date();
-		Calendar cal = Calendar.getInstance(); 
-		cal.setTime(today); 
-		calories = Double.toString(Storage.storage.getTotalCaloriesBurned());
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-    	if (dayOfWeek == Calendar.MONDAY) {
-    		Storage.storage.setMondayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.TUESDAY) {
-    		Storage.storage.setTuesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.WEDNESDAY) {
-    		Storage.storage.setWednesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.THURSDAY) {
-    		Storage.storage.setThursdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.FRIDAY) {
-    		Storage.storage.setFridayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SATURDAY) {
-    		Storage.storage.setSaturdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SUNDAY) {
-    		Storage.storage.setSundayCaloriesBurnedInfo(calories);
-    	}
-    }
+   
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
@@ -462,17 +469,16 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.getChildren().addAll(submitWorkoutDataButton);
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
-	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
+	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {
 		  double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
-		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));  
-		  updateTodaysExerciseLabel(Double.toString(duration));
+		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
 		  updateProgress(duration);
-		  updateStats(Double.toString(duration));
 		  double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
 				  Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
 		  totalCaloriesBurned(calories);
-		  updateStats2(Double.toString(calories));
-		  
+		  updateStats(Double.toString(duration), Double.toString(calories));
+		  updateTodaysExerciseLabel(Double.toString(duration)); 
+		  applicationStage.setScene(displayTrainingPage);
 	   });
   	   
   	   workoutContainer.getChildren().addAll(workoutStack, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
