@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -122,11 +124,38 @@ public class FitnessTrackerController implements Initializable {
 	   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
 	   		   ActivitiesController controller = (ActivitiesController)loader.getController();
 	   		   
+	   		Date today = new Date();
+			Calendar cal = Calendar.getInstance(); 
+			cal.setTime(today); 
+			int dayOfWeek = Calendar.WEDNESDAY;//cal.get(Calendar.DAY_OF_WEEK);
+	    	if (dayOfWeek == Calendar.MONDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getMondayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.TUESDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getTuesdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.WEDNESDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getWednesdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.THURSDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getThursdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.FRIDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getFridayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.SATURDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getSaturdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.SUNDAY) {
+	    		controller.updateTodaysExerciseLabel(Storage.storage.getSundayExerciseInfo());
+	    	}
+	    	
 	   		   controller.setStorage(Storage.storage);
-			   controller.updateTodaysExerciseValues();
+			  // controller.updateTodaysExerciseValues();
+			   
+			  // controller.updateTodaysExerciseLabel(Storage.storage.getProgressValue());
 			   controller.updateTotalCaloriesBurnedValues();
 			   controller.updateProgressValue();
-			   //controller.getDailyProgress();
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   
