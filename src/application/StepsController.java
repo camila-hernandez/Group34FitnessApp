@@ -36,15 +36,16 @@ public class StepsController {
     
     @FXML
     void updateStepsNumber(ActionEvent event) {
-    	stepsCount.setStepsCount("0");
-    		
+    	stepsCount.setStepsCount(stepsTextField.getText());  		
     	
     }
     
     @FXML
     void returnToMainPage(ActionEvent event) {
+    	 //UPDATE MAIN PAGE STEPS LABEL HERE
+    	//
+    	//
      	 try {
-      	   
     		   FXMLLoader loader = new FXMLLoader();
     		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
     		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();

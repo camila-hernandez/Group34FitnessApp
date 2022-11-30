@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class FitnessTrackerController {
 	Stage applicationStage;
 	
-	public Steps stepsCount;
+	public Label stepsMainPageLabel;
 	
     @FXML
     void openUserProfile(ActionEvent event) {

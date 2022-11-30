@@ -14,7 +14,7 @@ public class Steps extends User {
 		return stepsCount;
 	}
 	
-	public static boolean isNumeric(String str) { 
+	public static boolean isNumeric(String str) throws NumberFormatException{ 
 		  try {  
 			Integer.parseInt(str);  
 		    return true;
@@ -26,6 +26,7 @@ public class Steps extends User {
 	public void setStepsCount(String stepsCount) {
 		if (isNumeric(stepsCount)) {
 			this.stepsCount = Integer.parseInt(stepsCount);
+			
 		}
 
 	}
