@@ -2,29 +2,59 @@ package application;
 
 import java.io.FileInputStream;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import javafx.scene.layout.AnchorPane;
+
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class FitnessTrackerController {
-	Stage applicationStage;
+  Stage applicationStage;
+  
+	@FXML
+	private TextField amountOfWater;
+	
+	@FXML 
+	private Label waterProgress;
+  
+	@FXML
+    private Label stepsGoalLabelDashboard;
+	
+	@FXML
+	private Button goalsButton;
+	
+	@FXML
+	private Label sleepDisplayLabel;
+	
+	Storage storage = new Storage();
+	
+	public void setStorage(Storage storage) {
+    	this.storage = storage;
+    }
 	
 	public Label stepsMainPageLabel;
 	
     @FXML
     void openUserProfile(ActionEvent event) {
-
     }
 
+<<<<<<< HEAD
     @FXML
     void trackSteps(ActionEvent event) {
     	Steps userSteps = new Steps("0");
@@ -40,72 +70,121 @@ public class FitnessTrackerController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+=======
+	@FXML
+	void trackSteps(ActionEvent event) {
+>>>>>>> branch 'Enes_Gisi' of https://github.com/camila-hernandez/Group34FitnessApp
     }
 
+<<<<<<< HEAD
     @FXML
     void trackSleep(ActionEvent event) {
 
     }
+=======
+	@FXML
+	void trackSleep(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
+			UserSleepTrackerController controller = (UserSleepTrackerController)loader.getController();
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		sleepDisplayLabel.setText(Storage.storage.getSleepGoals() + " h");
+>>>>>>> branch 'Enes_Gisi' of https://github.com/camila-hernandez/Group34FitnessApp
 
-    @FXML
-    void trackNutrition(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void trackWeight(ActionEvent event) {
+	@FXML
+	void trackNutrition(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
+			NutritionTrackerController controller = (NutritionTrackerController)loader.getController();
+			controller.applicationStage = applicationStage;
 
-    }
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
-    @FXML
-    void trackActivities(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void trackActivities(ActionEvent event) {
+		try {
+	   		   FXMLLoader loader = new FXMLLoader();
+	   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+	   		   ActivitiesController controller = (ActivitiesController)loader.getController();
+	   		   
+	   		   controller.setStorage(Storage.storage);
+			   controller.updateTodaysExerciseValues();  
+	   		   
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+	    }
+
+	@FXML
+	void showHealthyRecipes(ActionEvent event) {
+
+	}
+
+
+	@FXML
+    void trackWaterIntake(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
+			UserWaterIntakeController controller = (UserWaterIntakeController)loader.getController();
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     @FXML
     void showRecommendations(ActionEvent event) {
 
     }
-
-    @FXML
-    void setGoals(ActionEvent setGoalsEvent) {
-    	Scene mainScene = applicationStage.getScene();
-    	
-    	VBox goalsContainer = new VBox();
-    	Label setGoalsLabel = new Label("SET GOALS");
-    	
-    	HBox stepGoalsContainer = new HBox();
-    	Label stepGoalsLabel = new Label("STEPS GOALS: ");
-    	TextField stepGoalsTextfield = new TextField();
-    	stepGoalsContainer.getChildren().addAll(stepGoalsLabel, stepGoalsTextfield);
-    	
-    	HBox sleepGoalsContainer = new HBox();
-    	Label sleepGoalsLabel = new Label("SLEEP GOALS: ");
-    	TextField sleepGoalsTextfield = new TextField();
-    	sleepGoalsContainer.getChildren().addAll(sleepGoalsLabel, sleepGoalsTextfield);
-    	
-    	HBox waterIntakeGoalsContainer = new HBox();
-    	Label waterIntakeGoalsLabel = new Label("WATER INTAKE GOALS: ");
-    	TextField waterIntakeGoalsTextfield = new TextField();
-    	waterIntakeGoalsContainer.getChildren().addAll(waterIntakeGoalsLabel, waterIntakeGoalsTextfield);
-    	
-    	HBox weightGoalsContainer = new HBox();
-    	Label weightGoalsLabel = new Label("WEIGHT GOALS: ");
-    	TextField weightGoalsTextfield = new TextField();
-    	weightGoalsContainer.getChildren().addAll(weightGoalsLabel, weightGoalsTextfield);
-    	
-    	Button updateGoalsButton = new Button("UPDATE GOALS");
-    	updateGoalsButton.setOnAction(updateGoalsButtonEvent -> System.out.println("Done button pressed"));
-    	
-    	Button returnToMainPageButton = new Button("RETURN TO MAIN PAGE");
-    	returnToMainPageButton.setOnAction(returnToMainPageEvent -> applicationStage.setScene(mainScene));
-    	
-    	goalsContainer.getChildren().addAll(setGoalsLabel, stepGoalsContainer, sleepGoalsContainer, waterIntakeGoalsContainer,
-    			weightGoalsContainer, updateGoalsButton, returnToMainPageButton);
-    	Scene goalsScene = new Scene(goalsContainer);
-    	applicationStage.setScene(goalsScene);
-    }
-
+    
+    
+   @FXML
+   void showUserFitnessGoals(ActionEvent event) {
+	   try {		   
+		   FXMLLoader loader = new FXMLLoader();
+		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
+		   UserGoalsDisplay controller = (UserGoalsDisplay)loader.getController();
+		   
+		   controller.setStorage(Storage.storage);
+		   controller.updateGoalValues();
+		   
+		   controller.applicationStage = applicationStage;
+		   
+		   Scene scene = new Scene(root);
+		   applicationStage.setScene(scene);
+		   applicationStage.show();
+	   } catch(Exception e) {
+		   e.printStackTrace();
+	   }  
+   }
 }
-
-

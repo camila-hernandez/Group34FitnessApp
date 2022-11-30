@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserWaterIntakeController">
+   <top>
+      <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#47a0c6" height="121.0" stroke="#52d4ff" strokeType="INSIDE" width="468.0" />
+            <Label text="WATER INTAKE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <VBox prefHeight="486.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6e8" height="66.0" stroke="#52d4ff" strokeType="INSIDE" width="548.0" />
+                  <Label prefHeight="46.0" prefWidth="508.0" text="Enter your water intake amount: (cups)" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <HBox prefHeight="82.0" prefWidth="609.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="amountOfWater" alignment="CENTER" prefHeight="51.0" prefWidth="130.0" />
+                  <ImageView fitHeight="150.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="Update Water Progress" textFill="#0c79b9" />
+               </children>
+            </HBox>
+            <Label fx:id="waterProgress" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="progress to goal:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Pane prefHeight="102.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" layoutX="169.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="64.0" prefWidth="287.0" text="RETURN TO MAIN" textFill="#47a0c6">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>
