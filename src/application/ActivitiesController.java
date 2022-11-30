@@ -125,7 +125,12 @@ public class ActivitiesController implements Initializable {
     	// Update progress bar
     	progress = (time / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
-    	progressLabel.setText(Math.round(progress) + ".0%");
+    	if (progress < 100 || progress == 100) {
+    		progressLabel.setText(Math.round(progress) + ".0%");
+    	}
+    	else {
+    		progressLabel.setText("100.0%");
+    	}
     	Storage.storage.setProgressValue(time);
     	storage.setProgressValue(time);
     	
@@ -167,7 +172,7 @@ public class ActivitiesController implements Initializable {
     	if (progress > 50 && progress != 100) {
     		todayExerciseMotivationLabel.setText("Almost to the finish line!");
     	}
-    	if (progress == 100) {
+    	if (progress == 100 || progress > 100) {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
@@ -179,13 +184,7 @@ public class ActivitiesController implements Initializable {
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
     }
-    /*
-    public void updateTodaysExerciseValues() {
-    	if (todayExerciseLabel != null) {
-    		updateTodaysExerciseLabel(storage.todayExerciseLabel);
-    	}
-    }
-    */
+    
     public void updateStats(String day, String calories) {
     	Date today = new Date();
 		Calendar cal = Calendar.getInstance(); 
@@ -457,6 +456,13 @@ public class ActivitiesController implements Initializable {
   	   guideContainer.getChildren().addAll(guideLabel, sportsExamplesLabel, cardioExamplesLabel, flexibilityExamplesLabel, strengthExamplesLabel);
   	   guideContainer.setPadding(new Insets(0,0,0,80));
   	   
+  	   // Create error label
+  	   HBox workoutErrorContainer = new HBox();
+  	   Label workoutErrorLabel = new Label();
+  	   workoutErrorLabel.setTextFill(Color.RED);
+  	   workoutErrorContainer.getChildren().add(workoutErrorLabel);
+  	   workoutErrorContainer.setAlignment(Pos.CENTER);
+  	   
   	   // Create button container
   	   VBox uploadWorkoutInfoButtonContainer = new VBox();
   	   Button submitWorkoutDataButton = new Button("Submit data");
@@ -470,18 +476,22 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {
-		  double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
-		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
-		  updateProgress(duration);
-		  double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
-				  Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
-		  totalCaloriesBurned(calories);
-		  updateStats(Double.toString(duration), Double.toString(calories));
-		  updateTodaysExerciseLabel(Double.toString(duration)); 
-		  applicationStage.setScene(displayTrainingPage);
+		   try {
+			   double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
+					   Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
+			   updateProgress(duration);
+			   double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
+					   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
+			   totalCaloriesBurned(calories);
+			   updateStats(Double.toString(duration), Double.toString(calories));
+			   updateTodaysExerciseLabel(Double.toString(duration)); 
+			   applicationStage.setScene(displayTrainingPage);
+		   } catch (Exception e) {
+			   workoutErrorLabel.setText("This is not a valid data input. Please enter a number greater than 0.");
+		   }
 	   });
   	   
-  	   workoutContainer.getChildren().addAll(workoutStack, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
+  	   workoutContainer.getChildren().addAll(workoutStack, workoutErrorContainer, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
   			   strengthTrainingStack, guideContainer, uploadWorkoutInfoButtonContainer);
   	   
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
