@@ -165,6 +165,9 @@ public class UserGoalsDisplay {
  	   updateStack.getChildren().addAll(updateHeaderRectangle, updateFitnessGoalsLabel);
  	   updateStack.setPadding(new Insets(25,0,25,0));
  	   
+ 	   // Create error label
+ 	   Label goalsErrorLabel = new Label("");
+ 	   
  	   // Create steps container
  	   HBox updateStepsGoalsContainer = new HBox();
  	   Label updateStepsGoalsLabel = new Label("STEPS GOALS:");
@@ -259,26 +262,40 @@ public class UserGoalsDisplay {
  	   saveChangesGoalsButton.setTextFill(Color.WHITE);
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
- 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {applicationStage.setScene(displayUserFitnessGoalsScene);
- 	   updateStepsGoalsLabel(stepsGoalsTextfield.getText());
- 	   updateSleepGoalsLabel(sleepGoalsTextfield.getText());
- 	   updateWaterIntakeGoalsLabel(waterIntakeGoalsTextfield.getText());
- 	   updateWeightGoalsLabel(weightGoalsTextfield.getText());
- 	   updateCaloriesBurnedGoalsLabel(caloriesBurnedGoalsTextfield.getText());
- 	   updateExerciseGoalsLabel(exerciseDurationGoalsTextfield.getText());
- 	   setStepsGoals(stepsGoalsTextfield.getText());
- 	   setSleepGoals(sleepGoalsTextfield.getText());
- 	   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
- 	   setWeightGoals(weightGoalsTextfield.getText());
- 	   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
- 	   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {
+ 		   try {
+ 			   Double.parseDouble(stepsGoalsTextfield.getText());
+ 	   		   Double.parseDouble(sleepGoalsTextfield.getText());
+ 	   		   Double.parseDouble(waterIntakeGoalsTextfield.getText());
+ 	   		   Double.parseDouble(weightGoalsTextfield.getText());
+ 	   		   Double.parseDouble(caloriesBurnedGoalsTextfield.getText());
+ 	   		   Double.parseDouble(exerciseDurationGoalsTextfield.getText());
+ 	   		updateStepsGoalsLabel(stepsGoalsTextfield.getText());
+  		   updateSleepGoalsLabel(sleepGoalsTextfield.getText());
+  		   updateWaterIntakeGoalsLabel(waterIntakeGoalsTextfield.getText());
+  		   updateWeightGoalsLabel(weightGoalsTextfield.getText());
+  		   updateCaloriesBurnedGoalsLabel(caloriesBurnedGoalsTextfield.getText());
+  		   updateExerciseGoalsLabel(exerciseDurationGoalsTextfield.getText());
+  		   setStepsGoals(stepsGoalsTextfield.getText());
+  		   setSleepGoals(sleepGoalsTextfield.getText());
+  		   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
+  		   setWeightGoals(weightGoalsTextfield.getText());
+  		   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
+  		   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
+  		 applicationStage.setScene(displayUserFitnessGoalsScene);
+ 	   	   } catch (Exception e) {
+ 	   		   goalsErrorLabel.setText("This is not a valid goal input. Please enter a number greater than 0.");	
+ 	   		   //throw e;
+ 	   	   }
+ 		   System.out.println("@");
+ 		   
 	   });
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
  	   updateButtonContainer.setPadding(new Insets(10,0,0,0));
  		
- 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
+ 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, goalsErrorLabel, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
  				updateNutritionGoalsLabel, updateNutritionGoalsContainer, updateExerciseGoalsLabel, updateExerciseGoalsContainer, updateCaloriesGoalsContainer, updateButtonContainer);
  		
  	   Scene updatedUserFitnessGoalsScene = new Scene(updateFitnessGoalsContainer, 609, 856);

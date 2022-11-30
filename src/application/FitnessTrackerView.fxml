@@ -23,7 +23,7 @@
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#5a59ab" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction ="#trackSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction="#trackSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -116,7 +116,6 @@
    <top>
       <Pane prefHeight="116.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Circle fill="#282828" layoutX="517.0" layoutY="96.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox layoutX="54.0" layoutY="49.0" prefHeight="200.0" prefWidth="205.0">
                <children>
                   <Label prefHeight="35.0" prefWidth="165.0" text="Welcome,">
@@ -129,9 +128,14 @@
                         <Font size="33.0" />
                      </font>
                   </Label>
-                  <Label text="Current Date" />
+                  <Label fx:id="dateLabel" text="Current Date" />
                </children>
             </VBox>
+            <Button fx:id="userProfileButton" layoutX="450.0" layoutY="58.0" mnemonicParsing="false" onAction="#openUserProfile" prefHeight="99.0" prefWidth="84.0" style="-fx-background-radius: 100; -fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fx:id="profileImage" fitHeight="95.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Button>
          </children>
       </Pane>
    </top>

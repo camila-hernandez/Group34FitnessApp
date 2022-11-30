@@ -3,7 +3,10 @@ package application;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -13,14 +16,22 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -49,9 +60,9 @@ public class ActivitiesController implements Initializable {
     
     @FXML
     private ImageView workoutImage;
-
+    
     @FXML
-    private Label healthyWorkoutTip;
+    private ImageView headerImage;
 
     @FXML
     private Label todayExerciseMotivationLabel;
@@ -60,15 +71,24 @@ public class ActivitiesController implements Initializable {
     private ProgressBar workoutProgressBar;
     
     @FXML
-    private Label currentDateLabel;
+    private Label dateLabel;
     
     @FXML
     private Label progressLabel;
+   
+    @FXML
+    private NumberAxis yAxis;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private BarChart<?, ?> workoutStatsChart;
     
     Storage storage;
     
     double progress = 0.0;
-    double totalWorkoutDuration;
+    double totalCalories = 0.0;
     
     public void setStorage(Storage storage) {
     	this.storage = storage;
@@ -78,6 +98,7 @@ public class ActivitiesController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
+    	// <a href="https://www.flaticon.com/free-icons/training" title="training icons">Training icons created by Freepik - Flaticon</a>
     	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
@@ -85,43 +106,134 @@ public class ActivitiesController implements Initializable {
     	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
     	workoutImage.setImage(workoutIconImage);
     	
+    	Image headerIconImage = new Image(getClass().getResourceAsStream("training.png"));
+    	headerImage.setImage(headerIconImage);
+    	
     	workoutProgressBar.setStyle("-fx-accent: purple;");
+    	
+    	// Sets the current date label
+    	LocalDateTime currentDateTime = LocalDateTime.now();
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+    	String formattedDate = currentDateTime.format(dtf);
+    	dateLabel.setText(formattedDate);
 	}
     
-    public void updateProgress(String time) {
+    public void updateProgress(double time) {
     	
-    	//workoutProgressBar.setProgress(0);
-    	//progressLabel.setText(0.0 + "%");
-    	if (progress < 1) {
-    		progress = (Double.parseDouble(time) / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
-    		workoutProgressBar.setProgress(progress / 100);
-    		progressLabel.setText(progress + "%");
+    	// Initialize progress and label to 0
+    	workoutProgressBar.setProgress(0);
+    	progressLabel.setText(0.0 + "%");
+    	
+    	// Update progress bar
+    	progress = (time / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
+    	workoutProgressBar.setProgress(progress / 100);
+    	if (progress < 100 || progress == 100) {
+    		progressLabel.setText(Math.round(progress) + ".0%");
+    	}
+    	else {
+    		progressLabel.setText("100.0%");
+    	}
+    	// Store progress value
+    	Storage.storage.setProgressValue(time);
+    	storage.setProgressValue(time);
+    	
+    	Date today = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(today); 
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+    	if (dayOfWeek == Calendar.MONDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getMondayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.TUESDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getTuesdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.WEDNESDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getWednesdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.THURSDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getThursdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.FRIDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getFridayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.SATURDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getSaturdayExerciseInfo());
+    	}
+    	if (dayOfWeek == Calendar.SUNDAY) {
+    		updateTodaysExerciseLabel(Storage.storage.getSundayExerciseInfo());
+    	}
+    
+    	if (progress < 50 && progress != 0) {
+    		todayExerciseMotivationLabel.setText("You got this! Keep going!");
+    	}
+    	if (progress == 50) {
+    		todayExerciseMotivationLabel.setText("Halfway there! Don't stop now, keep going!");
+    	}
+    	if (progress > 50 && progress != 100) {
+    		todayExerciseMotivationLabel.setText("Almost to the finish line!");
+    	}
+    	if (progress == 100 || progress > 100) {
+    		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
     
-   // public void setHealthyWorkoutTipLabel() {
-    //	healthyWorkoutTip.setText("Patience and consistency is key.");
-    //}
-    
-    public void setCurrentDateLabel(String o) {
-    	LocalDateTime currentDate = LocalDateTime.now();  
-   	   DateTimeFormatter formatCurrentDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
-   	   String formattedDate = currentDate.format(formatCurrentDate);  
-   	   currentDateLabel.setText(formattedDate);
-    }  
-    
+    public void updateProgressValue() {
+    	updateProgress(storage.progress);
+    }
+ 
     public void updateTodaysExerciseLabel(String exercise) {
     	todayExerciseLabel.setText(exercise + "/" + Double.parseDouble(Storage.storage.getExerciseGoals()) + " minutes");
-    	Storage.storage.setTodaysExerciseLabel(exercise);
-    	storage.setTodaysExerciseLabel(exercise);
     }
     
-    public void updateTodaysExerciseValues() {
-    	if (todayExerciseLabel != null) {
-    		updateTodaysExerciseLabel(storage.todayExerciseLabel);
+    public void updateStats(String day, String calories) {
+    	Date today = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(today); 
+		day = Double.toString(Storage.storage.getProgressValue());
+		calories = Double.toString(Storage.storage.getTotalCaloriesBurned());
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+    	if (dayOfWeek == Calendar.MONDAY) {
+    		Storage.storage.setMondayExerciseInfo(day);
+    		Storage.storage.setMondayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.TUESDAY) {
+    		Storage.storage.setTuesdayExerciseInfo(day);
+    		Storage.storage.setTuesdayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.WEDNESDAY) {
+    		Storage.storage.setWednesdaydayExerciseInfo(day);
+    		Storage.storage.setWednesdayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.THURSDAY) {
+    		Storage.storage.setThursdayExerciseInfo(day);
+    		Storage.storage.setThursdayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.FRIDAY) {
+    		Storage.storage.setFridayExerciseInfo(day);
+    		Storage.storage.setFridayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.SATURDAY) {
+    		Storage.storage.setSaturdayExerciseInfo(day);
+    		Storage.storage.setSaturdayCaloriesBurnedInfo(calories);
+    	}
+    	if (dayOfWeek == Calendar.SUNDAY) {
+    		Storage.storage.setSundayExerciseInfo(day);
+    		Storage.storage.setSundayCaloriesBurnedInfo(calories);
     	}
     }
+
+    public void totalCaloriesBurned(double calories) {
+    	totalCalories = calories;
+    	Storage.storage.setTotalCaloriesBurned(calories);
+    	storage.setTotalCaloriesBurned(calories);
+    }
     
+    public void updateTotalCaloriesBurnedValues() {
+    	if (totalCalories != 0.0) {
+    		totalCaloriesBurned(storage.totalCalories);
+    	}
+    }
+   
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
@@ -147,21 +259,23 @@ public class ActivitiesController implements Initializable {
   	   // Create new scene that displays the user's health and fitness goals
   	   VBox workoutContainer = new VBox();
   	   workoutContainer.setStyle("-fx-background-color: white");
-  	   
-  	   Label workoutHeaderLabel = new Label("WORKOUTS");
-  	   workoutHeaderLabel.setTextFill(Color.MEDIUMVIOLETRED);
-  	   Font font = Font.font("System", FontWeight.BOLD, 30);
-  	   workoutHeaderLabel.setFont(font);
-  	   workoutHeaderLabel.setPadding(new Insets(25,0,25,60));
-  	   
-  	   LocalDateTime workoutSectionDate = LocalDateTime.now();  
-  	   DateTimeFormatter formatWorkoutSectionDate = DateTimeFormatter.ofPattern("E, MMM dd yyyy");  
-  	   String formattedDate = workoutSectionDate.format(formatWorkoutSectionDate);  
-  	   Font dateFont = Font.font("System", 24);
-  	   Label currentDateLabel = new Label(formattedDate);
-  	   currentDateLabel.setFont(dateFont);
-  	   currentDateLabel.setPadding(new Insets(0,0,0,200));
-  	   
+  	
+  	   // Create header title
+ 	   StackPane workoutStack = new StackPane();
+ 	   
+ 	   Rectangle workoutHeaderRectangle = new Rectangle(87, 58, 435, 93);
+ 	   workoutHeaderRectangle.setFill(Color.PURPLE);
+ 	   workoutHeaderRectangle.setArcHeight(20);
+ 	   workoutHeaderRectangle.setArcWidth(20);
+ 	   
+ 	   Label workoutLabel = new Label("WORKOUTS");
+ 	   workoutLabel.setTextFill(Color.WHITE);
+ 	   Font font = Font.font("System", FontWeight.BOLD, 22);
+ 	   workoutLabel.setFont(font);
+ 	   
+ 	   workoutStack.getChildren().addAll(workoutHeaderRectangle, workoutLabel);
+ 	   workoutStack.setPadding(new Insets(25,0,25,0));
+
   	   // Create stacks for widgets
    	   StackPane sportsStack = new StackPane();
    	   sportsStack.setPadding(new Insets(10,0,5,0));
@@ -169,34 +283,27 @@ public class ActivitiesController implements Initializable {
    	   cardioTrainingStack.setPadding(new Insets(0,0,5,0));
    	   StackPane flexibilityTrainingStack = new StackPane();
    	   flexibilityTrainingStack.setPadding(new Insets(0,0,5,0));
-   	   StackPane weightTrainingStack = new StackPane();
-   	   weightTrainingStack.setPadding(new Insets(0,0,5,0));
    	   StackPane strengthTrainingStack = new StackPane();
    	   strengthTrainingStack.setPadding(new Insets(0,0,5,0));
    	   
    	   // Create rectangles for stacks
    	   Rectangle stackRectangle1 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle1.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle1.setFill(Color.PURPLE);
    	   stackRectangle1.setArcHeight(20);
    	   stackRectangle1.setArcWidth(20);
    	   
    	   Rectangle stackRectangle2 = new Rectangle(64, 165, 485, 117);
-	   stackRectangle2.setFill(Color.MEDIUMVIOLETRED);
+	   stackRectangle2.setFill(Color.PURPLE);
 	   stackRectangle2.setArcHeight(20);
 	   stackRectangle2.setArcWidth(20);
 	   
 	   Rectangle stackRectangle3 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle3.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle3.setFill(Color.PURPLE);
    	   stackRectangle3.setArcHeight(20);
    	   stackRectangle3.setArcWidth(20);
-   	   
-   	   Rectangle stackRectangle4 = new Rectangle(64, 165, 485, 117);
-	   stackRectangle4.setFill(Color.MEDIUMVIOLETRED);
-	   stackRectangle4.setArcHeight(20);
-	   stackRectangle4.setArcWidth(20);
 	   
 	   Rectangle stackRectangle5 = new Rectangle(64, 165, 485, 117);
-   	   stackRectangle5.setFill(Color.MEDIUMVIOLETRED);
+   	   stackRectangle5.setFill(Color.PURPLE);
    	   stackRectangle5.setArcHeight(20);
    	   stackRectangle5.setArcWidth(20);
    	   
@@ -205,7 +312,7 @@ public class ActivitiesController implements Initializable {
    	   
    	   Label sportsLabel = new Label("Sports");
    	   sportsLabel.setPadding(new Insets(0,0,0,100));
-   	   Font labelFont = Font.font("System", FontWeight.BOLD, 26);
+   	   Font labelFont = Font.font("System", FontWeight.BOLD, 25);
    	   sportsLabel.setFont(labelFont);
    	   sportsLabel.setTextFill(Color.WHITE);
    	   
@@ -288,36 +395,7 @@ public class ActivitiesController implements Initializable {
   	   
   	   flexibilityTrainingContainer.getChildren().addAll(flexibilityLabel, flexibilityCaloriesHBoxContainer, flexibilityExerciseHBoxContainer);
   	   flexibilityTrainingContainer.setPadding(new Insets(10,0,0,0));
-  	   
-  	   // Create weight training container
-  	   VBox weightTrainingContainer = new VBox();
- 	   
- 	   Label weightLabel = new Label("Weight Training");
- 	   weightLabel.setPadding(new Insets(0,0,0,100));
- 	   weightLabel.setFont(labelFont);
- 	   weightLabel.setTextFill(Color.WHITE);
- 	   
- 	   HBox weightCaloriesHBoxContainer = new HBox();
- 	   Label weightCaloriesBurnedLabel = new Label("Calories burned:");
- 	   weightCaloriesBurnedLabel.setPadding(new Insets(0,82.5,0,0));
- 	   weightCaloriesBurnedLabel.setFont(dataFont);
- 	   weightCaloriesBurnedLabel.setTextFill(Color.WHITE);
- 	   TextField weightCaloriesTextfield = new TextField();
- 	   weightCaloriesHBoxContainer.getChildren().addAll(weightCaloriesBurnedLabel, weightCaloriesTextfield);
- 	   weightCaloriesHBoxContainer.setAlignment(Pos.CENTER);
- 	   
- 	   HBox weightExerciseHBoxContainer = new HBox();
- 	   Label weightExerciseLabel = new Label("Duration of exercise:");
- 	   weightExerciseLabel.setPadding(new Insets(0,50,0,0));
- 	   weightExerciseLabel.setFont(dataFont);
- 	   weightExerciseLabel.setTextFill(Color.WHITE);
- 	   TextField weightExerciseTextfield = new TextField();
- 	   weightExerciseHBoxContainer.getChildren().addAll(weightExerciseLabel, weightExerciseTextfield);
- 	   weightExerciseHBoxContainer.setAlignment(Pos.CENTER);
- 	   
- 	   weightTrainingContainer.getChildren().addAll(weightLabel, weightCaloriesHBoxContainer, weightExerciseHBoxContainer);
- 	   weightTrainingContainer.setPadding(new Insets(10,0,0,0));
- 	   
+  	    
  	   // Create strength training container
  	   VBox strengthTrainingContainer = new VBox();
   	   
@@ -350,33 +428,102 @@ public class ActivitiesController implements Initializable {
   	   sportsStack.getChildren().addAll(stackRectangle1, sportsContainer);
   	   cardioTrainingStack.getChildren().addAll(stackRectangle2, cardioTrainingContainer);
   	   flexibilityTrainingStack.getChildren().addAll(stackRectangle3, flexibilityTrainingContainer);
-  	   weightTrainingStack.getChildren().addAll(stackRectangle4, weightTrainingContainer);
   	   strengthTrainingStack.getChildren().addAll(stackRectangle5, strengthTrainingContainer);
+  	   
+  	   // Guide to workouts
+  	   Font guideFont = Font.font("System", 16);
+  	   
+  	   VBox guideContainer = new VBox();
+  	   
+  	   Label guideLabel = new Label("Guide:");
+  	   
+  	   Font guideLabelFont = Font.font("System", FontWeight.BOLD, 16);
+  	   guideLabel.setFont(guideLabelFont);
+  	   
+  	   Label sportsExamplesLabel = new Label("Sports - basketball, soccer, hockey, football, etc.");
+  	   sportsExamplesLabel.setFont(guideFont);
+  	   
+  	   Label cardioExamplesLabel = new Label("Cardio Training - walking, running, swimming, dancing, etc.");
+  	   cardioExamplesLabel.setFont(guideFont);
+  	   
+  	   Label flexibilityExamplesLabel = new Label("Flexibility Training - stretching, yoga, pilates, etc.");
+  	   flexibilityExamplesLabel.setFont(guideFont);
+  	   
+  	   Label strengthExamplesLabel = new Label("Strength Training - weight lifting, body-weight training, etc.");
+  	   strengthExamplesLabel.setFont(guideFont);
+  	   
+  	   guideContainer.getChildren().addAll(guideLabel, sportsExamplesLabel, cardioExamplesLabel, flexibilityExamplesLabel, strengthExamplesLabel);
+  	   guideContainer.setPadding(new Insets(0,0,0,80));
+  	   
+  	   // Create error label
+  	   HBox workoutErrorContainer = new HBox();
+  	   Label workoutErrorLabel = new Label();
+  	   workoutErrorLabel.setTextFill(Color.RED);
+  	   workoutErrorContainer.getChildren().add(workoutErrorLabel);
+  	   workoutErrorContainer.setAlignment(Pos.CENTER);
   	   
   	   // Create button container
   	   VBox uploadWorkoutInfoButtonContainer = new VBox();
-  	   Button submitWorkoutDataButton = new Button("SUBMIT DATA");
-	   submitWorkoutDataButton.setMinSize(177, 44);
+  	   Button submitWorkoutDataButton = new Button("Submit data");
+	   submitWorkoutDataButton.setPrefSize(183, 40);
 	   submitWorkoutDataButton.setTextFill(Color.WHITE);
-	   submitWorkoutDataButton.setFont(labelFont);
-	   submitWorkoutDataButton.setStyle("-fx-background-color: MEDIUMVIOLETRED");
+	   Font buttonFont = Font.font("System", FontWeight.BOLD, 20);
+	   submitWorkoutDataButton.setFont(buttonFont);
+	   submitWorkoutDataButton.setStyle("-fx-background-color: PURPLE");
+	   
 	   uploadWorkoutInfoButtonContainer.getChildren().addAll(submitWorkoutDataButton);
 	   uploadWorkoutInfoButtonContainer.setAlignment(Pos.CENTER);
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
-	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {applicationStage.setScene(displayTrainingPage);
-		  String duration = Double.toString(Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
-		  Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(weightExerciseTextfield.getText()) + 
-		  Double.parseDouble(strengthExerciseTextfield.getText()));  
-		  updateTodaysExerciseLabel(duration);
-		  updateProgress(duration);
-		  });
+	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {
+		   try {
+			   double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
+					   Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
+			   updateProgress(duration);
+			   double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
+					   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
+			   totalCaloriesBurned(calories);
+			   updateStats(Double.toString(duration), Double.toString(calories));
+			   updateTodaysExerciseLabel(Double.toString(duration)); 
+			   applicationStage.setScene(displayTrainingPage);
+		   } catch (Exception e) {
+			   workoutErrorLabel.setText("This is not a valid data input. Please enter a number greater than 0.");
+		   }
+	   });
   	   
-  	   workoutContainer.getChildren().addAll(workoutHeaderLabel, currentDateLabel, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
-  			   weightTrainingStack, strengthTrainingStack, uploadWorkoutInfoButtonContainer);
+  	   workoutContainer.getChildren().addAll(workoutStack, workoutErrorContainer, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
+  			   strengthTrainingStack, guideContainer, uploadWorkoutInfoButtonContainer);
   	   
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
-  	   //updateStack.setPadding(new Insets(25,0,25,0));
   	    
     } 
+    
+    public void showWorkoutStats(ActionEvent event) {
+    	try {
+	   		   FXMLLoader loader = new FXMLLoader();
+	   		   Pane root = loader.load(new FileInputStream("src/application/WorkoutStats.fxml"));
+	   		   WorkoutStatistics controller = (WorkoutStatistics)loader.getController();
+	   		   
+	   		   controller.setStorage(storage);
+	   		   controller.getMondayValuesFromStorage();
+	   		   controller.getTuesdayValuesFromStorage();
+	   		   controller.getWednesdayValuesFromStorage();
+	   		   controller.getThursdayValuesFromStorage();
+	   		   controller.getFridayValuesFromStorage();
+	   		   controller.getSaturdayValuesFromStorage();
+	   		   controller.getSundayValuesFromStorage();
+	   		   
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+        
+    }
+
+
 }
+
