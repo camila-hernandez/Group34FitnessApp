@@ -50,7 +50,7 @@ public class UserWaterIntakeController{
 	void calculateAmountWater(ActionEvent progressWaterEvent) {
 		//the in take is the value entered in the textField. 
 		setIntakeAmount(Double.parseDouble(amountOfWater.getText()));
-		totalWaterIntake += getIntakeAmount();
+		totalWaterIntake = getIntakeAmount();
 
 		//the goal to compare, is the goal set in the goals window. 
 		setGoalAmount(getGoalAmount() + Double.parseDouble(Storage.storage.getWaterIntakeGoals()));
@@ -114,11 +114,11 @@ public class UserWaterIntakeController{
 		// to access the water in take from storage
 	}
 	public void setWaterProgress(String water) {
-		Storage.storage.setWaterProgress(water);;
+		Storage.storage.setWaterProgressLabel(water);
 	}
 
 	public String getWaterProgress() {
-		return storage.getWaterProgress();
+		return storage.getWaterProgressLabel();
 	}
 
 	@FXML
@@ -137,23 +137,23 @@ public class UserWaterIntakeController{
 		}
 	}
 
-	private double getIntakeAmount() {
+	public double getIntakeAmount() {
 		intakeAmount = Double.parseDouble(amountOfWater.getText());
 		return intakeAmount;
 	}
 
-	private void setIntakeAmount(double intakeAmount) {
+	public void setIntakeAmount(double intakeAmount) {
 		this.intakeAmount = intakeAmount;
 	}
 
-	private double getGoalAmount() {
+	public double getGoalAmount() {
 		if(Storage.storage.getWaterIntakeGoals() != null) {
 			goalAmount = Double.parseDouble(Storage.storage.getWaterIntakeGoals());
 		}
 		return goalAmount;
 	}
 
-	private void setGoalAmount(double goalAmount) {
+	public void setGoalAmount(double goalAmount) {
 		this.goalAmount = goalAmount;
 	}
 

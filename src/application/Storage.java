@@ -14,21 +14,26 @@ public class Storage {
 	private String caloriesBurnedInformation = "0";
 	private String exerciseInformation = "0";  
 
-  public String stepGoalsLabel = "0";
-  public String waterIntakeGoalsLabel = "0";
-  public String weightGoalsLabel = "0";
-  public String exerciseGoalsLabel = "0";
-  public String caloriesBurnedGoalsLabel = "0";
-  public String sleepGoalsLabel = "0";
+	public String stepGoalsLabel = "0";
+	public String waterIntakeGoalsLabel = "0";
+	public String weightGoalsLabel = "0";
+	public String exerciseGoalsLabel = "0";
+	public String caloriesBurnedGoalsLabel = "0";
+	public String sleepGoalsLabel = "0";
     
-  public String todayExerciseLabel = "0";
-  public String todayExerciseMotivationalLabel;
+	public String waterIntakeAmount = "0";
+	public String waterIntakeLabel = "0";
+	public String sleepAmount = "0";
+	public String sleepAmountLabel = "0";
+	
+	public String todayExerciseLabel = "0";
+	public String todayExerciseMotivationalLabel;
     
-  public double progress;
+	public double progress;
     
-  public double totalCalories;
+	public double totalCalories;
     
-  public String mondayCaloriesBurnedInfo = "0.0";
+	public String mondayCaloriesBurnedInfo = "0.0";
     public String tuesdayCaloriesBurnedInfo = "0.0";
     public String wednesdayCaloriesBurnedInfo = "0.0";
     public String thursdayCaloriesBurnedInfo = "0.0";
@@ -50,6 +55,10 @@ public class Storage {
 
     @FXML
     private Button homeButton;
+
+	public String waterProgressTotalLabel;
+
+	public String sleepProgressLabel;
 
 
     public Storage(String stepsData, String sleepData, String waterData, String weightData, String caloriesData, String exerciseData) {
@@ -91,11 +100,11 @@ public class Storage {
     public void setWaterIntake(String water) {
     	this.waterIntakeAmount = water;
     }
-    
+    /*
     public void setWaterProgress(String water) {
     	this.waterProgressAmount = water;
     }
-    
+    */
     public void setSleepAmount(String sleep) {
     	this.sleepAmount = sleep;
     }
@@ -103,10 +112,10 @@ public class Storage {
     public String getSleepAmount() {
     	return sleepAmount;
     }
-    
+    /*
     public String getWaterProgress() {
     	return waterProgressAmount;
-    }
+    }*/
     public String getWaterIntakeAmount() {
     	return waterIntakeAmount;
     }
@@ -167,12 +176,24 @@ public class Storage {
 		 this.waterIntakeLabel = waterIntakeLabel;
 	 }
 	 
+	 public String getWaterIntakeLabel() {
+		 return waterIntakeLabel;
+	 }
+	 
 	 public void setWaterProgressLabel(String waterProgressLabel) {
 		 this.waterProgressTotalLabel = waterProgressLabel;
 	 }
 	 
+	 public String getWaterProgressLabel() {
+		 return waterProgressTotalLabel;
+	 }
+	 
 	 public void setSleepProgressLabel (String sleepProgresLabel) {
 		 this.sleepProgressLabel = sleepProgresLabel;
+	 }
+	 
+	 public String getSleepProgressLabel() {
+		 return sleepProgressLabel;
 	 }
 
 	 public void setTotalCaloriesBurned(double caloriesBurned) {
