@@ -126,6 +126,9 @@ public class Main extends Application {
 			if (words[0].contentEquals("Sunday calories burned ")) {
 				Storage.storage.setSundayCaloriesBurnedInfo(words[1]);
 			}
+			if (words[0].contentEquals("Daily progress ")) {
+				Storage.storage.setProgressValue(Double.parseDouble(words[1]));
+				}
 		}
 		br.close();
 		fr.close();
@@ -149,5 +152,5 @@ public class Main extends Application {
 		
 		launch(args);
 	}
-	// line.split(" ");
+	
 }
