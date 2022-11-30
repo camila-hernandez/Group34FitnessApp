@@ -23,10 +23,12 @@ public class UserSleepTrackerController{
 	private TextField minutesSleep;
 	
 	@FXML
-	private Label sleepProgress;
+	private Label sleepProgressLabel;
 	
 	@FXML
 	private ProgressBar sleepProgressBar; 
+	
+	double totalSleepHours;
 	
 	public void setStorage(Storage storage) {
 		this.storage = storage;
@@ -35,20 +37,49 @@ public class UserSleepTrackerController{
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
 		double hours = Double.parseDouble(hoursSleep.getText());
-		double minutes = Double.parseDouble(minutesSleep.getText());
+		totalSleepHours += hours;
 		double sleepGoal = Double.parseDouble(Storage.storage.getSleepGoals());
-		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		int progressPercent = (int) ((totalSleepHours/sleepGoal)* 100);
 		
-		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
-			sleepProgress.setText("You have reached" + '\n' + "your sleep goal.");
+		updateSleepProgressLabel(String.valueOf(totalSleepHours));
+		setSleepAmount(String.valueOf(totalSleepHours));
+		
+		if (sleepGoal - totalSleepHours == 0 || sleepGoal - totalSleepHours < 0) {
+			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
-		if (sleepGoal - hours > 0) {
-			sleepProgress.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
+		if (sleepGoal - totalSleepHours > 0) {
+			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
 		}
 		
-		sleepProgressBar.setProgress(hours/sleepGoal);
+		sleepProgressBar.setProgress((totalSleepHours)/sleepGoal);
 		
+	}
+	
+	public void updateSleepProgressLabel(String sleep) {
+		if (sleep == null) {
+			sleepProgressLabel.setText("You have no hours of sleep.");
+		}
+		if (sleep != null) {
+			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
+		}
+		
+    	Storage.storage.setSleepProgressLabel(sleep);
+    }
+	
+	public void updateSleepValues() {
+    	if (sleepProgressLabel != null) {
+    		updateSleepProgressLabel(storage.sleepProgressLabel);
+    		getSleepAmount();
+    	}
+	}
+	
+	public void setSleepAmount(String sleep) {
+    	Storage.storage.setSleepAmount(sleep);
+    }
+	
+	public String getSleepAmount() {
+		return storage.getSleepAmount();
 	}
 	
 	@FXML

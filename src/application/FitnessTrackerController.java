@@ -65,6 +65,10 @@ public class FitnessTrackerController {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
 			UserSleepTrackerController controller = (UserSleepTrackerController)loader.getController();
+			
+			controller.setStorage(Storage.storage);
+			controller.updateSleepValues();
+			
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
