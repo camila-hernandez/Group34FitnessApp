@@ -54,7 +54,7 @@ public class FitnessTrackerController {
     void openUserProfile(ActionEvent event) {
     }
 
-<<<<<<< HEAD
+
     @FXML
     void trackSteps(ActionEvent event) {
     	Steps userSteps = new Steps("0");
@@ -69,19 +69,9 @@ public class FitnessTrackerController {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+		  }
 		}
-=======
-	@FXML
-	void trackSteps(ActionEvent event) {
->>>>>>> branch 'Enes_Gisi' of https://github.com/camila-hernandez/Group34FitnessApp
-    }
 
-<<<<<<< HEAD
-    @FXML
-    void trackSleep(ActionEvent event) {
-
-    }
-=======
 	@FXML
 	void trackSleep(ActionEvent event) {
 		try {
@@ -98,7 +88,7 @@ public class FitnessTrackerController {
 		}
 		
 		sleepDisplayLabel.setText(Storage.storage.getSleepGoals() + " h");
->>>>>>> branch 'Enes_Gisi' of https://github.com/camila-hernandez/Group34FitnessApp
+
 
 
 	}
