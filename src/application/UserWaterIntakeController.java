@@ -19,20 +19,30 @@ public class UserWaterIntakeController{
 
 	@FXML 
 	private Label waterIntakeLabel;
-	
+
 	@FXML
 	private Label waterProgressLabel;
-	
+
 	private double intakeAmount;
-	
+
 	private double goalAmount;
-	
-	double totalWaterIntake;
+
+	private double totalWaterIntake;
 
 	Storage storage;
 
 	public void setStorage(Storage storage) {
 		this.storage = storage;
+	}
+
+	// when the water window is opened again, the values previously entered are updated. 
+	public void updateWaterValues() {
+		if (waterIntakeLabel != null) {
+			updateWaterDrankLabel(storage.waterIntakeLabel);
+		}
+		if (waterProgressLabel != null) {
+			updateWaterProgressLabel(storage.waterProgressTotalLabel);
+		}
 	}
 
 	// when update progress button is pressed, the method calculateAmountWater calculates how far away you are from water goal. 
@@ -41,20 +51,20 @@ public class UserWaterIntakeController{
 		//the in take is the value entered in the textField. 
 		setIntakeAmount(Double.parseDouble(amountOfWater.getText()));
 		totalWaterIntake += getIntakeAmount();
-		
+
 		//the goal to compare, is the goal set in the goals window. 
 		setGoalAmount(getGoalAmount() + Double.parseDouble(Storage.storage.getWaterIntakeGoals()));
-		
+
 		// the amount of water consumed compared to the goal.
 		double waterProgress = getGoalAmount() - totalWaterIntake;
-		
+
 		// stores waterIntake and how much progress.
 		updateWaterDrankLabel(String.valueOf(totalWaterIntake));
 		setWaterIntake(String.valueOf(totalWaterIntake));
-		
+
 		updateWaterProgressLabel(String.valueOf(waterProgress));
 		setWaterProgress(String.valueOf(waterProgress));
-		
+
 		// tells user how close they are to their goal. 
 		if (waterProgress > 0) {
 			waterProgressLabel.setText("You are " + (waterProgress) + " cups away from your goal.");
@@ -63,29 +73,29 @@ public class UserWaterIntakeController{
 		if (waterProgress == 0 || waterProgress < 0) {
 			waterProgressLabel.setText("You have reached your water intake goal.");
 		}
-		
+
 	}
 
 	// when the adds their in take, it updates the label. 
 	public void updateWaterDrankLabel(String water) {
-		
+
 		if (water != null) {
 			waterIntakeLabel.setText("You have consumed " + water + " cups of water.");
 		}
 		if (water == null) {
 			waterIntakeLabel.setText("You have consumed 0 cups of water.");
 		}
-    	Storage.storage.setWaterIntakeLabel(water);
-    }
-	
+		Storage.storage.setWaterIntakeLabel(water);
+	}
+
 	public void setWaterIntake(String water) {
-    	Storage.storage.setWaterIntake(water);
-    }
-	
+		Storage.storage.setWaterIntake(water);
+	}
+
 	public String getWaterIntake() {
 		return storage.getWaterIntakeAmount();
 	}
-	
+
 	// the user is shown how far away they are from their goal. 
 	public void updateWaterProgressLabel(String water) {
 		if (water != null) {
@@ -96,32 +106,19 @@ public class UserWaterIntakeController{
 				waterProgressLabel.setText("You have not set a goal.");
 			}
 			else {
-			waterProgressLabel.setText("You are " + getGoalAmount() + " cups away from your goal." );
+				waterProgressLabel.setText("You are " + getGoalAmount() + " cups away from your goal." );
 			}
 		}
 		Storage.storage.setWaterProgressLabel(water);
-		
-	// to access the water in take from storage
+
+		// to access the water in take from storage
 	}
 	public void setWaterProgress(String water) {
-    	Storage.storage.setWaterProgress(water);;
-    }
-	
+		Storage.storage.setWaterProgress(water);;
+	}
+
 	public String getWaterProgress() {
 		return storage.getWaterProgress();
-	}
-	
-	
-	// when the water window is opened again, the values previously entered are shown. 
-	public void updateWaterValues() {
-    	if (waterIntakeLabel != null) {
-    		updateWaterDrankLabel(storage.waterIntakeLabel);
-    		getWaterIntake();
-    	}
-    	if (waterProgressLabel != null) {
-    		updateWaterProgressLabel(storage.waterProgressTotalLabel);
-    		getWaterProgress();
-    	}
 	}
 
 	@FXML
@@ -131,7 +128,7 @@ public class UserWaterIntakeController{
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 			controller.applicationStage = applicationStage;
-			
+
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
