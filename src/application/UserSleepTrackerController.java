@@ -28,7 +28,8 @@ public class UserSleepTrackerController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 	
-	double totalSleepHours;
+	//double totalSleepHours;
+	double hours;
 	
 	public void setStorage(Storage storage) {
 		this.storage = storage;
@@ -36,29 +37,31 @@ public class UserSleepTrackerController{
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		double hours = Double.parseDouble(hoursSleep.getText());
-		totalSleepHours += hours;
+		if (Storage.storage.getSleepAmount() != null) {
+			hours = Double.parseDouble(hoursSleep.getText()) + Double.parseDouble(Storage.storage.getSleepAmount());
+		}
+		if (Storage.storage.getSleepAmount() == null) { hours = Double.parseDouble(hoursSleep.getText());
+		}
+			
 		double sleepGoal = Double.parseDouble(Storage.storage.getSleepGoals());
-		int progressPercent = (int) ((totalSleepHours/sleepGoal)* 100);
+		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		updateSleepProgressLabel(String.valueOf(hours));
+		sleepProgressBar.setProgress((hours)/sleepGoal);
+		setSleepAmount(String.valueOf(hours));
 		
-		updateSleepProgressLabel(String.valueOf(totalSleepHours));
-		setSleepAmount(String.valueOf(totalSleepHours));
-		
-		if (sleepGoal - totalSleepHours == 0 || sleepGoal - totalSleepHours < 0) {
+		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
 			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
-		if (sleepGoal - totalSleepHours > 0) {
+		if (sleepGoal - hours > 0) {
 			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
 		}
-		
-		sleepProgressBar.setProgress((totalSleepHours)/sleepGoal);
 		
 	}
 	
 	public void updateSleepProgressLabel(String sleep) {
 		if (sleep == null) {
-			sleepProgressLabel.setText("You have no hours of sleep.");
+			sleepProgressLabel.setText("You have not entered hours of sleep.");
 		}
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
@@ -70,7 +73,6 @@ public class UserSleepTrackerController{
 	public void updateSleepValues() {
     	if (sleepProgressLabel != null) {
     		updateSleepProgressLabel(storage.sleepProgressLabel);
-    		getSleepAmount();
     	}
 	}
 	
@@ -79,7 +81,7 @@ public class UserSleepTrackerController{
     }
 	
 	public String getSleepAmount() {
-		return storage.getSleepAmount();
+		return Storage.storage.getSleepAmount();
 	}
 	
 	@FXML
