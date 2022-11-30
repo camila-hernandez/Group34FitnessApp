@@ -63,6 +63,7 @@ public class UserProfile {
 			// Close BufferedWriter and FileWriter			
 			bw.close();
 			fw.close();
+			
 		} catch (Exception e) {
 			System.out.println("File cannot be created");
 		}
