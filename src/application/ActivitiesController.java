@@ -119,9 +119,11 @@ public class ActivitiesController implements Initializable {
 	}
     
     public void updateProgress(double time) {
+    	
     	// Initialize progress and label to 0
     	workoutProgressBar.setProgress(0);
     	progressLabel.setText(0.0 + "%");
+    	
     	// Update progress bar
     	progress = (time / Double.parseDouble(Storage.storage.getExerciseGoals())) * 100;
     	workoutProgressBar.setProgress(progress / 100);
@@ -131,6 +133,7 @@ public class ActivitiesController implements Initializable {
     	else {
     		progressLabel.setText("100.0%");
     	}
+    	// Store progress value
     	Storage.storage.setProgressValue(time);
     	storage.setProgressValue(time);
     	
@@ -159,9 +162,6 @@ public class ActivitiesController implements Initializable {
     	if (dayOfWeek == Calendar.SUNDAY) {
     		updateTodaysExerciseLabel(Storage.storage.getSundayExerciseInfo());
     	}
-    	
-    	//updateTodaysExerciseLabel(Double.toString(Storage.storage.get));
-    	//System.out.println("Test: " + Storage.storage.getProgressValue());
     
     	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
@@ -226,7 +226,6 @@ public class ActivitiesController implements Initializable {
     	totalCalories = calories;
     	Storage.storage.setTotalCaloriesBurned(calories);
     	storage.setTotalCaloriesBurned(calories);
-    	System.out.println(totalCalories);
     }
     
     public void updateTotalCaloriesBurnedValues() {
