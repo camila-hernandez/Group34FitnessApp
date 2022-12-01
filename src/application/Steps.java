@@ -1,11 +1,10 @@
 package application;
 
-public class Steps extends User {
+public class Steps {
 	private int stepsCount = 0;
 	
 
 	public Steps(String steps) {
-		super();
 		this.setStepsCount(steps);
 	}
 

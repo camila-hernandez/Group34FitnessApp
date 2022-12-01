@@ -6,28 +6,59 @@ import javafx.scene.control.Label;
 
 public class Storage {
 	public static Storage storage = new Storage();
-	
-	private String stepsInformation;
-	private String sleepInformation;
-	private String waterInformation;
-	private String weightInformation;
-	private String caloriesBurnedInformation;
-	private String exerciseInformation;  
 
-    public String stepGoalsLabel;
-    public String waterIntakeGoalsLabel;
-    public String weightGoalsLabel;
-    public String exerciseGoalsLabel;
-    public String caloriesBurnedGoalsLabel;
-    public String sleepGoalsLabel;
+	private String stepsInformation = "0";
+	private String sleepInformation = "0";
+	private String waterInformation = "0";
+	private String weightInformation = "0";
+	private String caloriesBurnedInformation = "0";
+	private String exerciseInformation = "0";  
+
+	public String stepGoalsLabel = "0";
+	public String waterIntakeGoalsLabel = "0";
+	public String weightGoalsLabel = "0";
+	public String exerciseGoalsLabel = "0";
+	public String caloriesBurnedGoalsLabel = "0";
+	public String sleepGoalsLabel = "0";
     
-    public String todayExerciseLabel;
+	public String waterIntakeAmount = "0";
+	public String waterIntakeLabel = "0";
+	public String sleepAmount = "0";
+	public String sleepAmountLabel = "0";
+	
+	public String todayExerciseLabel = "0";
+	public String todayExerciseMotivationalLabel;
+    
+	public double progress;
+    
+	public double totalCalories;
+    
+	public String mondayCaloriesBurnedInfo = "0.0";
+    public String tuesdayCaloriesBurnedInfo = "0.0";
+    public String wednesdayCaloriesBurnedInfo = "0.0";
+    public String thursdayCaloriesBurnedInfo = "0.0";
+    public String fridayCaloriesBurnedInfo = "0.0";
+    public String saturdayCaloriesBurnedInfo = "0.0";
+    public String sundayCaloriesBurnedInfo = "0.0";
+    
+    public String mondayExerciseInfo = "0.0";
+    public String tuesdayExerciseInfo = "0.0";
+    public String wednesdayExerciseInfo = "0.0";
+    public String thursdayExerciseInfo = "0.0";
+    public String fridayExerciseInfo = "0.0";
+    public String saturdayExerciseInfo = "0.0";
+    public String sundayExerciseInfo = "0.0";
+    
     
     @FXML
     private Button updateGoalsButton;
 
     @FXML
     private Button homeButton;
+
+	public String waterProgressTotalLabel;
+
+	public String sleepProgressLabel;
 
 
     public Storage(String stepsData, String sleepData, String waterData, String weightData, String caloriesData, String exerciseData) {
@@ -64,6 +95,29 @@ public class Storage {
     
     public void setExerciseGoals(String exercise) {
     	this.exerciseInformation = exercise;
+    }
+    
+    public void setWaterIntake(String water) {
+    	this.waterIntakeAmount = water;
+    }
+    /*
+    public void setWaterProgress(String water) {
+    	this.waterProgressAmount = water;
+    }
+    */
+    public void setSleepAmount(String sleep) {
+    	this.sleepAmount = sleep;
+    }
+    
+    public String getSleepAmount() {
+    	return sleepAmount;
+    }
+    /*
+    public String getWaterProgress() {
+    	return waterProgressAmount;
+    }*/
+    public String getWaterIntakeAmount() {
+    	return waterIntakeAmount;
     }
 
 	public String getStepsGoals() {
@@ -114,8 +168,161 @@ public class Storage {
 		this.exerciseGoalsLabel = exerciseLabel;
 	 }
 	 
-	 public void setTodaysExerciseLabel(String exercise) {
-		 this.todayExerciseLabel = exercise;
+	 public void setTodaysExerciseMotivationalLabel(String motivation) {
+		 this.todayExerciseMotivationalLabel = motivation;
 	 }
 	
+	 public void setWaterIntakeLabel(String waterIntakeLabel) {
+		 this.waterIntakeLabel = waterIntakeLabel;
+	 }
+	 
+	 public String getWaterIntakeLabel() {
+		 return waterIntakeLabel;
+	 }
+	 
+	 public void setWaterProgressLabel(String waterProgressLabel) {
+		 this.waterProgressTotalLabel = waterProgressLabel;
+	 }
+	 
+	 public String getWaterProgressLabel() {
+		 return waterProgressTotalLabel;
+	 }
+	 
+	 public void setSleepProgressLabel (String sleepProgresLabel) {
+		 this.sleepProgressLabel = sleepProgresLabel;
+	 }
+	 
+	 public String getSleepProgressLabel() {
+		 return sleepProgressLabel;
+	 }
+
+	 public void setTotalCaloriesBurned(double caloriesBurned) {
+		 this.totalCalories = caloriesBurned;
+	 }
+	 
+	 public double getTotalCaloriesBurned() {
+		 return totalCalories;
+	 }
+	 
+	 public void setProgressValue(double time) {
+		 this.progress = time;
+	 }
+	 
+	 public double getProgressValue() {
+		 return progress;
+	 }
+	 
+	 public void setMondayCaloriesBurnedInfo(String monday) {
+		 this.mondayCaloriesBurnedInfo = monday;
+	 }
+	 
+	 public void setTuesdayCaloriesBurnedInfo(String tuesday) {
+		 this.tuesdayCaloriesBurnedInfo = tuesday;
+	 }
+	 
+	 public void setWednesdayCaloriesBurnedInfo(String wednesday) {
+		 this.wednesdayCaloriesBurnedInfo = wednesday;
+	 }
+	 
+	 public void setThursdayCaloriesBurnedInfo(String thursday) {
+		 this.thursdayCaloriesBurnedInfo = thursday;
+	 }
+	 
+	 public void setFridayCaloriesBurnedInfo(String friday) {
+		 this.fridayCaloriesBurnedInfo = friday;
+	 }
+	 
+	 public void setSaturdayCaloriesBurnedInfo(String saturday) {
+		 this.saturdayCaloriesBurnedInfo = saturday;
+	 }
+	 
+	 public void setSundayCaloriesBurnedInfo(String sunday) {
+		 this.sundayCaloriesBurnedInfo = sunday;
+	 }
+	 
+	 public String getMondayCaloriesBurnedInfo() {
+		 return mondayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getTuesdayCaloriesBurnedInfo() {
+		 return tuesdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getWednesdayCaloriesBurnedInfo() {
+		 return wednesdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getThursdayCaloriesBurnedInfo() {
+		 return thursdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getFridayCaloriesBurnedInfo() {
+		 return fridayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getSaturdayCaloriesBurnedInfo() {
+		 return saturdayCaloriesBurnedInfo;
+	 }
+	 
+	 public String getSundayCaloriesBurnedInfo() {
+		 return sundayCaloriesBurnedInfo;
+	 }
+
+	 public void setMondayExerciseInfo(String monday) {
+		 this.mondayExerciseInfo = monday;
+	 }
+	 
+	 public void setTuesdayExerciseInfo(String tuesday) {
+		 this.tuesdayExerciseInfo = tuesday;
+	 }
+	 
+	 public void setWednesdaydayExerciseInfo(String wednesday) {
+		 this.wednesdayExerciseInfo = wednesday;
+	 }
+	 
+	 public void setThursdayExerciseInfo(String thursday) {
+		 this.thursdayExerciseInfo = thursday;
+	 }
+	 
+	 public void setFridayExerciseInfo(String friday) {
+		 this.fridayExerciseInfo = friday;
+	 }
+	 
+	 public void setSaturdayExerciseInfo(String saturday) {
+		 this.saturdayExerciseInfo = saturday;
+	 }
+	 
+	 public void setSundayExerciseInfo(String sunday) {
+		 this.sundayExerciseInfo = sunday;
+	 }
+	 
+	 public String getMondayExerciseInfo() {
+		 return mondayExerciseInfo;
+	 }
+	 
+	 public String getTuesdayExerciseInfo() {
+		 return tuesdayExerciseInfo;
+	 }
+	 
+	 public String getWednesdayExerciseInfo() {
+		 return wednesdayExerciseInfo;
+	 }
+	 
+	 public String getThursdayExerciseInfo() {
+		 return thursdayExerciseInfo;
+	 }
+	 
+	 public String getFridayExerciseInfo() {
+		 return fridayExerciseInfo;
+	 }
+	 
+	 public String getSaturdayExerciseInfo() {
+		 return saturdayExerciseInfo;
+	 }
+	 
+	 public String getSundayExerciseInfo() {
+		 return sundayExerciseInfo;
+	 }
+	 
 }
+
