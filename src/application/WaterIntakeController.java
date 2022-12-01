@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class UserWaterIntakeController{
+public class WaterIntakeController{
 	Stage applicationStage;
 
 	@FXML
@@ -29,19 +29,19 @@ public class UserWaterIntakeController{
 
 	private double totalWaterIntake;
 
-	Storage storage;
+	User user;
 
-	public void setStorage(Storage storage) {
-		this.storage = storage;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	// when the water window is opened again, the values previously entered are updated. 
 	public void updateWaterValues() {
 		if (waterIntakeLabel != null) {
-			updateWaterDrankLabel(storage.waterIntakeLabel);
+			updateWaterDrankLabel(user.health.getWaterIntakeAmountLabel());
 		}
 		if (waterProgressLabel != null) {
-			updateWaterProgressLabel(storage.waterProgressTotalLabel);
+			updateWaterProgressLabel(user.health.getWaterProgressLabel());
 		}
 	}
 
@@ -53,14 +53,14 @@ public class UserWaterIntakeController{
 		totalWaterIntake = getIntakeAmount();
 
 		//the goal to compare, is the goal set in the goals window. 
-		setGoalAmount(getGoalAmount() + Double.parseDouble(Storage.storage.getWaterIntakeGoals()));
+		setGoalAmount(getGoalAmount() + user.health.getWaterIntakeGoals());
 
 		// the amount of water consumed compared to the goal.
 		double waterProgress = getGoalAmount() - totalWaterIntake;
 
 		// stores waterIntake and how much progress.
 		updateWaterDrankLabel(String.valueOf(totalWaterIntake));
-		setWaterIntake(String.valueOf(totalWaterIntake));
+		setWaterIntake(totalWaterIntake);
 
 		updateWaterProgressLabel(String.valueOf(waterProgress));
 		setWaterProgress(String.valueOf(waterProgress));
@@ -85,15 +85,15 @@ public class UserWaterIntakeController{
 		if (water == null) {
 			waterIntakeLabel.setText("You have consumed 0 cups of water.");
 		}
-		Storage.storage.setWaterIntakeLabel(water);
+		user.health.setWaterIntakeAmountLabel(water);
 	}
 
-	public void setWaterIntake(String water) {
-		Storage.storage.setWaterIntake(water);
+	public void setWaterIntake(double water) {
+		user.health.setWaterIntakeAmount(water);
 	}
 
-	public String getWaterIntake() {
-		return storage.getWaterIntakeAmount();
+	public double getWaterIntake() {
+		return user.health.getWaterIntakeAmount();
 	}
 
 	// the user is shown how far away they are from their goal. 
@@ -109,16 +109,16 @@ public class UserWaterIntakeController{
 				waterProgressLabel.setText("You are " + getGoalAmount() + " cups away from your goal." );
 			}
 		}
-		Storage.storage.setWaterProgressLabel(water);
+		user.health.setWaterProgressLabel(water);
 
 		// to access the water in take from storage
 	}
 	public void setWaterProgress(String water) {
-		Storage.storage.setWaterProgressLabel(water);
+		user.health.setWaterProgressLabel(water);
 	}
 
 	public String getWaterProgress() {
-		return storage.getWaterProgressLabel();
+		return user.health.getWaterProgressLabel();
 	}
 
 	@FXML
@@ -127,6 +127,8 @@ public class UserWaterIntakeController{
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+			
+			controller.setUser(user);
 			controller.applicationStage = applicationStage;
 
 			Scene scene = new Scene(root);
@@ -147,8 +149,8 @@ public class UserWaterIntakeController{
 	}
 
 	public double getGoalAmount() {
-		if(Storage.storage.getWaterIntakeGoals() != null) {
-			goalAmount = Double.parseDouble(Storage.storage.getWaterIntakeGoals());
+		if(user.health.getWaterIntakeGoals() != 0) {
+			goalAmount = user.health.getWaterIntakeGoals();
 		}
 		return goalAmount;
 	}
