@@ -2,6 +2,9 @@ package application;
 
 public class Fitness extends Goals {
 	
+	private double stepGoals;
+	private double caloriesBurnedGoals;
+	private double exerciseGoals;
 	private double progress;
 	private double totalCaloriesBurned;
 	private double mondayExerciseInfo;
@@ -18,9 +21,33 @@ public class Fitness extends Goals {
 	private double fridayCaloriesBurnedInfo;
 	private double saturdayCaloriesBurnedInfo;
 	private double sundayCaloriesBurnedInfo;
+	private String stepsGoalsLabel;
+	private String caloriesBurnedGoalsLabel;
+	private String exerciseGoalsLabel;
+	private String todaysExerciseMotivationalLabel;
+	
+	boolean reachExerciseGoals = false;
 	
 	public Fitness() {
-		// TODO Auto-generated constructor stub
+		stepGoals = 0.0;
+		caloriesBurnedGoals = 0.0;
+		exerciseGoals = 0.0;
+		progress = 0.0;
+		totalCaloriesBurned = 0.0;
+		mondayExerciseInfo = 0.0;
+		tuesdayExerciseInfo = 0.0;
+		wednesdayExerciseInfo = 0.0;
+		thursdayExerciseInfo = 0.0;
+		fridayExerciseInfo = 0.0;
+		saturdayExerciseInfo = 0.0;
+		sundayExerciseInfo = 0.0;
+		mondayCaloriesBurnedInfo = 0.0;
+		tuesdayCaloriesBurnedInfo = 0.0;
+		wednesdayCaloriesBurnedInfo = 0.0;
+		thursdayCaloriesBurnedInfo = 0.0;
+		fridayCaloriesBurnedInfo = 0.0;
+		saturdayCaloriesBurnedInfo = 0.0;
+		sundayCaloriesBurnedInfo = 0.0;
 	}
 	
 	public void checkUserInput(double value) throws InvalidUserInputException {
@@ -40,13 +67,63 @@ public class Fitness extends Goals {
 			}
 		
 			if (value < 0) {
-				throw new InvalidUserInputException("Grade should be between 0 and the maximum value.");
+				throw new InvalidUserInputException("Number should be greater than 0.");
 			}	
 		} catch (Exception e) {
 		}
 	}
+	public void setStepsGoals(double steps) {
+    	try {
+			checkUserInput(steps);
+			this.stepGoals = steps;
+		} catch (InvalidUserInputException e) {
+		}
+    }
+    
+    public void setCaloriesGoals(double calories) {
+    	try {
+			checkUserInput(calories);
+			this.caloriesBurnedGoals = calories;
+		} catch (InvalidUserInputException e) {
+		}
+    	this.caloriesBurnedGoals = calories;
+    }
+    
+    public void setExerciseGoals(double exercise) {
+			this.exerciseGoals = exercise;
+			if ((progress >= exerciseGoals) && (!reachExerciseGoals)) {
+				completeGoal();
+			}
+    }
+    
+    public double getStepsGoals() {
+		return stepGoals;
+	}
 	
-	 public void setTotalCaloriesBurned(double caloriesBurned) {
+	public double getCaloriesGoals() {
+		return caloriesBurnedGoals;
+	}
+	
+	public double getExerciseGoals() {
+		return exerciseGoals;
+	}
+	public void setStepsGoalsLabel(String stepsLabel) {
+		 this.stepsGoalsLabel = stepsLabel;
+	}
+		    
+	public void setCaloriesBurnedGoalsLabel(String caloriesLabel) {
+		 this.caloriesBurnedGoalsLabel = caloriesLabel;
+	}
+		    
+	public void setExerciseGoalsLabel(String exerciseLabel) {
+		this.exerciseGoalsLabel = exerciseLabel;
+	}
+		 
+	public void setTodaysExerciseMotivationalLabel(String motivation) {
+		this.todaysExerciseMotivationalLabel = motivation;
+	}
+		
+	public void setTotalCaloriesBurned(double caloriesBurned) {
 		 try {
 			checkUserInput(caloriesBurned);
 		} catch (InvalidUserInputException e) {
