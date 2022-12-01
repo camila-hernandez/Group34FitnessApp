@@ -94,7 +94,7 @@ public class FitnessTrackerController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
-			UserSleepTrackerController controller = (UserSleepTrackerController)loader.getController();
+			SleepTrackerController controller = (SleepTrackerController)loader.getController();
 			
 			controller.setStorage(Storage.storage);
 			controller.updateSleepValues();
@@ -198,7 +198,7 @@ public class FitnessTrackerController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
-			UserWaterIntakeController controller = (UserWaterIntakeController)loader.getController();
+			WaterIntakeController controller = (WaterIntakeController)loader.getController();
 			
 			controller.setStorage(Storage.storage);
 			controller.updateWaterValues();
