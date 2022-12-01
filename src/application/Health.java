@@ -2,11 +2,18 @@ package application;
 
 public class Health extends Goals {
 	
+	private double sleepGoals;
+	private double waterIntakeGoals;
+	private double weightGoals;
 	private double weight;
 	private double height;
 	private double bodyFat;
 	private double waterIntakeAmount;
+	private String waterIntakeAmountLabel;
+	private String waterProgressTotalLabel;
 	private double sleepDuration;
+	
+	boolean reachSleepGoal = false;
 
 	public Health() {
 		// TODO Auto-generated constructor stub
@@ -34,14 +41,44 @@ public class Health extends Goals {
 		} catch (Exception e) {
 		}
 	}
+
+    public void setSleepGoals(double sleep) {
+    	try {
+			checkUserInput(sleep);
+			this.sleepGoals = sleep;
+		} catch (InvalidUserInputException e) {
+		}
+    }
+    
+    public void setWaterIntakeGoals(double water) {
+    	try {
+			checkUserInput(water);
+			this.waterIntakeGoals = water;
+		} catch (InvalidUserInputException e) {
+		}
+    }
+    
+    public void setWeightGoals(double weight) {
+    	try {
+			checkUserInput(weight);
+			this.weightGoals = weight;
+		} catch (InvalidUserInputException e) {
+		}
+    }
+	
+	public double getSleepGoals() {
+		return sleepGoals;
+	}
+	
+	public double getWaterIntakeGoals() {
+		return waterIntakeGoals;
+	}
+	
+	public double getWeightGoals() {
+		return weightGoals;
+	}
 	
 	public void setWeight(double aWeight) {
-		try {
-			checkUserInput(aWeight);
-		} catch (InvalidUserInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.weight = aWeight;
 	}
 	
@@ -78,13 +115,10 @@ public class Health extends Goals {
 	}
 	
 	public void setWaterIntakeAmount(double water) {
-		try {
-			checkUserInput(waterIntakeAmount);
-		} catch (InvalidUserInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.waterIntakeAmount = water;
+		if (waterIntakeAmount >= waterIntakeGoals) {
+			completeGoal();
+		}
 	}
 	
 	public double getWaterIntakeAmount() {
@@ -92,13 +126,10 @@ public class Health extends Goals {
 	}
 	
 	public void setSleepDuration(double sleep) {
-		try {
-			checkUserInput(sleep);
-		} catch (InvalidUserInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.sleepDuration = sleep;
+		if ((sleepDuration >= sleepGoals) && (!reachSleepGoal)) {
+			completeGoal();
+		}
 	}
 	
 	public double getSleepDuration() {
@@ -120,6 +151,22 @@ public class Health extends Goals {
 	public double calculateLBM() {
 		return weight - calculateBodyFatPercentage();
 	}
+
+	public void setWaterIntakeAmountLabel(String waterIntakeLabel) {
+		 this.waterIntakeAmountLabel = waterIntakeLabel;
+	 }
+	 
+	 public String getWaterIntakeAmountLabel() {
+		 return waterIntakeAmountLabel;
+	 }
+	 
+	 public void setWaterProgressLabel(String waterProgressLabel) {
+		 this.waterProgressTotalLabel = waterProgressLabel;
+	 }
+	 
+	 public String getWaterProgressLabel() {
+		 return waterProgressTotalLabel;
+	 }
 	
 	//double calculateCarbs() {
 		//return (amount in serving size (in g) / 300) * 100;
