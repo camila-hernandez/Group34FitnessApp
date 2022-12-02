@@ -125,7 +125,20 @@
                         <Font size="33.0" />
                      </font>
                   </Label>
+<<<<<<< HEAD
                   <Label text="Current Date" />
+=======
+                  <Label fx:id="dateLabel" text="Current Date">
+                  	<font>
+                  		<Font size="15.0" />
+                  	</font>
+                  </Label>
+                  <Label fx:id="goalsCompletedLabel" text="You have completed 0 goal(s)!">
+                  	<font>
+                  		<Font size="15.0" />
+                  	</font>
+                  </Label>
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
                </children>
             </VBox>
          </children>

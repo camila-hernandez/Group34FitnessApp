@@ -86,10 +86,6 @@ public class ActivitiesController implements Initializable {
     @FXML
     private BarChart<?, ?> workoutStatsChart;
     
-    
-    @FXML
-    private Label goalsCompletedLabel;
-    
     User user;
     
     double progress = 0.0;
@@ -122,10 +118,6 @@ public class ActivitiesController implements Initializable {
     	String formattedDate = currentDateTime.format(dtf);
     	dateLabel.setText(formattedDate);
 	}
-    
-    public void setLabel() {
-    	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + "goal(s)!");
-    }
     
     public void updateProgress(double time) {
     	
@@ -250,6 +242,7 @@ public class ActivitiesController implements Initializable {
     		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
     		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
     		   controller.setUser(user);
+    		   controller.setGoalsCompletedLabel();
     		   controller.applicationStage = applicationStage;
     		   
     		   Scene scene = new Scene(root);
@@ -493,7 +486,6 @@ public class ActivitiesController implements Initializable {
 			   totalCaloriesBurned(calories);
 			   updateStats(duration, calories);
 			   updateTodaysExerciseLabel(duration); 
-			   setLabel();
 			   applicationStage.setScene(displayTrainingPage);
 		   } catch (Exception e) {
 			   workoutErrorLabel.setText("This is not a valid data input. Please enter a number greater than 0.");

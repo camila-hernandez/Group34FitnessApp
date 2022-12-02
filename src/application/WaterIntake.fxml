@@ -50,11 +50,6 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="waterIntakeLabel" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="water intake:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
    </center>

@@ -18,7 +18,47 @@ import javafx.stage.Stage;
 public class FitnessTrackerController {
 	Stage applicationStage;
 	
+<<<<<<< HEAD
 	public Steps stepsCount;
+=======
+	@FXML 
+	private Label waterProgress;
+  
+	@FXML
+    private Label stepsGoalLabelDashboard;
+	
+	@FXML
+	private Button goalsButton;
+	
+	@FXML
+	private Label sleepDisplayLabel;
+	
+	@FXML
+
+	private ProgressIndicator waterProgressIndicator;
+	
+	@FXML
+    private Button userProfileButton;
+	
+	@FXML
+    private ImageView profileImage;
+	
+	@FXML
+	private Label dateLabel;
+	
+	@FXML
+	private Label goalsCompletedLabel;
+	
+	User user;
+	
+	public void setUser(User user) {
+    	this.user = user;
+	}
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
+	
+	public void setGoalsCompletedLabel() {
+    	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
+    }
 	
     @FXML
     void openUserProfile(ActionEvent event) {
@@ -46,6 +86,29 @@ public class FitnessTrackerController {
     void trackSleep(ActionEvent event) {
 
     }
+<<<<<<< HEAD
+=======
+	
+	@FXML
+	void trackSleep(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/SleepTracker.fxml"));
+			SleepController controller = (SleepController)loader.getController();
+			
+			controller.setUser(user);
+			controller.updateSleepValues();
+			
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
     @FXML
     void trackNutrition(ActionEvent event) {
@@ -57,10 +120,40 @@ public class FitnessTrackerController {
 
     }
 
+<<<<<<< HEAD
     @FXML
     void trackActivities(ActionEvent event) {
+=======
+	@FXML
+    void trackWaterIntake(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/WaterIntake.fxml"));
+			WaterIntakeController controller = (WaterIntakeController)loader.getController();
+			
+			controller.setUser(user);
+			controller.updateWaterValues();
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
+<<<<<<< HEAD
     }
+=======
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	void setDisplayLabel(ActionEvent event) {
+		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
+		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
+	}
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
     @FXML
     void showRecommendations(ActionEvent event) {
