@@ -27,12 +27,15 @@ public class Fitness extends Goals {
 	private String exerciseGoalsLabel;
 	private String todaysExerciseMotivationalLabel;
 	
+	private int stepsCount;
+	
 	boolean reachStepsGoals = false;
 	boolean reachExerciseGoals = false;
 	boolean reachCaloriesBurnedGoals = false;
 	
 	public Fitness() {
 		stepGoals = 0.0;
+		stepsCount = 0;
 		caloriesBurnedGoals = 0.0;
 		exerciseGoals = 0.0;
 		progress = 0.0;
@@ -52,11 +55,32 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
-	
+	//STEPS ACTUAL VALUES
 	public void setStepsGoals(double steps) {
 		this.stepGoals = steps;
     }
-    
+	
+	public double getStepsCount() {
+		return stepsCount;
+	}
+	
+	public static boolean isNumeric(String str) throws NumberFormatException{ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+
+	public void setStepsCount(String stepsCount) {
+		if (isNumeric(stepsCount)) {
+			this.stepsCount = Integer.parseInt(stepsCount);
+			
+		}
+
+	}
+    //*****************************************
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoals = calories;
     }
