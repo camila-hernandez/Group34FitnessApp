@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
+   <children>
+      <Button fx:id="logOutButton" layoutX="253.0" layoutY="784.0" mnemonicParsing="false" onAction="#userLogOut" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Log out" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateProfileButton" layoutX="220.0" layoutY="663.0" mnemonicParsing="false" onAction="#updateUserProfile" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Update profile" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6b4191" height="95.0" layoutX="110.0" layoutY="61.0" stroke="#6b4191" strokeType="INSIDE" width="390.0">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Rectangle>
+      <Label layoutX="221.0" layoutY="91.0" text="USER PROFILE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="101.0" layoutY="192.0" prefHeight="100.0" prefWidth="408.0">
+         <children>
+            <Label text="Name:" />
+            <Label fx:id="nameLabel" text="Label">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="101.0" layoutY="292.0" prefHeight="100.0" prefWidth="408.0">
+         <children>
+            <Label text="Age:" />
+            <Label fx:id="ageLabel" text="Label">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="110.0" layoutY="428.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <Label text="Height:" />
+            <Label fx:id="heightLabel" text="Label">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="105.0" layoutY="546.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <Label text="Weight:" />
+            <Label fx:id="weightLabel" text="Label">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="returnHomeButton" layoutX="214.0" layoutY="724.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Return to home" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

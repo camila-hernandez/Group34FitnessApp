@@ -16,14 +16,14 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="47.0" layoutY="-129.0" mnemonicParsing="false" onAction="#trackSteps" prefHeight="211.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Steps">
+                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="47.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="211.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Steps" onAction="#trackSteps">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#5a59ab" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" onAction ="#trackSleep" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="-129.0" mnemonicParsing="false" prefHeight="163.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Sleep">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -31,21 +31,21 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#0e0a83" />
                      </effect>
                   </Button>
-                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="94.0" mnemonicParsing="false" onAction="#trackWaterIntake" prefHeight="185.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Water Intake">
+                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="94.0" mnemonicParsing="false" prefHeight="185.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Water Intake">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#0d96eb" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="46.0" mnemonicParsing="false" onAction="#trackNutrition" prefHeight="235.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Nutrition">
+                  <Button alignment="TOP_LEFT" layoutX="313.0" layoutY="46.0" mnemonicParsing="false" prefHeight="235.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Nutrition">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX" color="#cd570d" />
                      </effect></Button>
-                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="292.0" mnemonicParsing="false" onAction="#trackActivities" prefHeight="125.0" prefWidth="516.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Activities">
+                  <Button alignment="TOP_LEFT" layoutX="47.0" layoutY="292.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="516.0" style="-fx-background-radius: 20; -fx-background-color: #f2f4f7;" text="Activities">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sleepDisplayLabel" layoutX="329.0" layoutY="-60.0" text="0 h 00 min">
+                  <Label layoutX="329.0" layoutY="-60.0" text="8 h 42 min">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
@@ -86,30 +86,26 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#showHealthyRecipes" style="-fx-background-color: transparent;" text="Recipes" textFill="#5a59ab">
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="130.0">
+               <children>
+                  <Hyperlink prefHeight="45.0" prefWidth="186.0" text="Dashboard" textFill="#5a59ab" />
+                  <Circle fill="#5a59ab" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </VBox>
+            <Hyperlink text="Recipes" textFill="#5b5babb2">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="8.0" />
                </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#showRecommendations" style="-fx-background-color: transparent;" text="Recommendations" textFill="#5a59ab">
+            </Hyperlink>
+            <Hyperlink text="Personalization" textFill="#5b5babb2">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="8.0" />
                </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#showUserFitnessGoals" style="-fx-background-color: transparent;" text="Goals" textFill="#5a59ab">
+            </Hyperlink>
+            <Hyperlink alignment="CENTER" text="Goals" textFill="#5b5babb2">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Button>
+                  <Insets bottom="8.0" />
+               </HBox.margin></Hyperlink>
          </children>
       </HBox>
    </bottom>
@@ -129,7 +125,20 @@
                         <Font size="33.0" />
                      </font>
                   </Label>
+<<<<<<< HEAD
                   <Label text="Current Date" />
+=======
+                  <Label fx:id="dateLabel" text="Current Date">
+                  	<font>
+                  		<Font size="15.0" />
+                  	</font>
+                  </Label>
+                  <Label fx:id="goalsCompletedLabel" text="You have completed 0 goal(s)!">
+                  	<font>
+                  		<Font size="15.0" />
+                  	</font>
+                  </Label>
+>>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
                </children>
             </VBox>
          </children>

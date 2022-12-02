@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FitnessTrackerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StepsController">
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,8 +37,8 @@
                   </Label>
                </children>
             </StackPane>
-            <TextField fx:id="amountOfWater" prefHeight="99.0" prefWidth="447.0" />
-            <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="progress" />
+            <TextField fx:id="stepsTextField" prefHeight="99.0" prefWidth="447.0" />
+            <Button mnemonicParsing="false" onAction="#updateStepsNumber" text="progress" />
          </children>
       </VBox>
    </center>
@@ -57,7 +57,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" />
+                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" onAction="#returnToMainPage" />
                      </children>
                   </HBox>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class UserGoalsDisplay {
+public class GoalsController {
 	 Stage applicationStage;
 
     @FXML
@@ -48,76 +48,70 @@ public class UserGoalsDisplay {
     @FXML
     private Button homeButton;
     
-    Storage storage;
+    User user;
     
-    public void setStorage(Storage storage) {
-    	this.storage = storage;
+    public void setUser(User user) {
+    	this.user = user;
     }
     
     // Display user health and fitness goals based on their input
     Font newLabelFont = Font.font("System", 24);
-    public void updateStepsGoalsLabel(String steps) {
+    public void updateStepsGoalsLabel(double steps) {
     	stepGoalsLabel.setFont(newLabelFont);
  		stepGoalsLabel.setText(String.format(steps + " steps"));
- 		Storage.storage.setStepsGoalsLabel(steps);
- 		storage.setStepsGoalsLabel(steps);
+ 		user.fitness.setStepsGoals(steps);
     }
     
-    public void updateSleepGoalsLabel(String sleep) {
+    public void updateSleepGoalsLabel(double sleep) {
     	sleepGoalsLabel.setFont(newLabelFont);
     	sleepGoalsLabel.setText(String.format(sleep + " hours"));
-    	Storage.storage.setSleepGoalsLabel(sleep);
-    	storage.setSleepGoalsLabel(sleep);
+    	user.health.setSleepGoals(sleep);
     }
     
-    public void updateWaterIntakeGoalsLabel(String water) {
+    public void updateWaterIntakeGoalsLabel(double water) {
     	waterIntakeGoalsLabel.setFont(newLabelFont);
     	waterIntakeGoalsLabel.setText(String.format(water + " cups"));
-    	Storage.storage.setWaterIntakeGoalsLabel(water);
-    	storage.setWaterIntakeGoalsLabel(water);
+    	user.health.setWaterIntakeGoals(water);
     }
     
-    public void updateWeightGoalsLabel(String weight) {
+    public void updateWeightGoalsLabel(double weight) {
     	weightGoalsLabel.setFont(newLabelFont);
     	weightGoalsLabel.setText(String.format(weight + " kg"));
-    	Storage.storage.setWeightGoalsLabel(weight);
-    	storage.setWeightGoalsLabel(weight);
+    	user.health.setWeightGoals(weight);
     }
     
-    public void updateCaloriesBurnedGoalsLabel(String calories) {
+    public void updateCaloriesBurnedGoalsLabel(double calories) {
     	caloriesBurnedGoalsLabel.setFont(newLabelFont);
     	caloriesBurnedGoalsLabel.setText(calories + " cal");
-    	Storage.storage.setCaloriesBurnedGoalsLabel(calories);
-    	storage.setCaloriesBurnedGoalsLabel(calories);
+    	user.fitness.setCaloriesGoals(calories);
     	caloriesBurnedGoalsLabel.setAlignment(Pos.CENTER);
     }
     
-    public void updateExerciseGoalsLabel(String exercise) {
+    public void updateExerciseGoalsLabel(double exercise) {
     	exerciseGoalsLabel.setFont(newLabelFont);
     	exerciseGoalsLabel.setText(exercise + " minutes");
-    	Storage.storage.setExerciseGoalsLabel(exercise);
-    	storage.setExerciseGoalsLabel(exercise);
+    	user.fitness.setExerciseGoals(exercise);
     	exerciseGoalsLabel.setAlignment(Pos.CENTER);
     }
     
     public void updateGoalValues() {
     	if (stepGoalsLabel != null) {
-    		updateStepsGoalsLabel(storage.stepGoalsLabel);
+    		updateStepsGoalsLabel(user.fitness.getStepsGoals());
     	}
     	if (sleepGoalsLabel != null) {
-    		updateSleepGoalsLabel(storage.sleepGoalsLabel);
+    		updateSleepGoalsLabel(user.health.getSleepGoals());
     	}
     	if (waterIntakeGoalsLabel != null) {
-    		updateWaterIntakeGoalsLabel(storage.waterIntakeGoalsLabel);
+    		updateWaterIntakeGoalsLabel(user.health.getWaterIntakeGoals());
     	}
     	if (weightGoalsLabel != null) {
-    		updateWeightGoalsLabel(storage.weightGoalsLabel);
+    		updateWeightGoalsLabel(user.health.getWeightGoals());
     	}
     	if (caloriesBurnedGoalsLabel != null) {
-    		updateCaloriesBurnedGoalsLabel(storage.caloriesBurnedGoalsLabel);
+    		updateCaloriesBurnedGoalsLabel(user.fitness.getCaloriesGoals());
     	}
     	if (exerciseGoalsLabel != null) {
-    		updateExerciseGoalsLabel(storage.exerciseGoalsLabel);
+    		updateExerciseGoalsLabel(user.fitness.getExerciseGoals());
     	}
     }
     
@@ -129,6 +123,9 @@ public class UserGoalsDisplay {
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
   		   
+  		   controller.setUser(user);
+  		 System.out.println(user.test);
+  		 System.out.println("Setting user for fitness controller from goals");
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
@@ -164,6 +161,9 @@ public class UserGoalsDisplay {
  	   
  	   updateStack.getChildren().addAll(updateHeaderRectangle, updateFitnessGoalsLabel);
  	   updateStack.setPadding(new Insets(25,0,25,0));
+ 	   
+ 	   // Create error label
+ 	   Label goalsErrorLabel = new Label("");
  	   
  	   // Create steps container
  	   HBox updateStepsGoalsContainer = new HBox();
@@ -259,79 +259,88 @@ public class UserGoalsDisplay {
  	   saveChangesGoalsButton.setTextFill(Color.WHITE);
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
- 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {applicationStage.setScene(displayUserFitnessGoalsScene);
- 	   updateStepsGoalsLabel(stepsGoalsTextfield.getText());
- 	   updateSleepGoalsLabel(sleepGoalsTextfield.getText());
- 	   updateWaterIntakeGoalsLabel(waterIntakeGoalsTextfield.getText());
- 	   updateWeightGoalsLabel(weightGoalsTextfield.getText());
- 	   updateCaloriesBurnedGoalsLabel(caloriesBurnedGoalsTextfield.getText());
- 	   updateExerciseGoalsLabel(exerciseDurationGoalsTextfield.getText());
- 	   setStepsGoals(stepsGoalsTextfield.getText());
- 	   setSleepGoals(sleepGoalsTextfield.getText());
- 	   setWaterIntakeGoals(waterIntakeGoalsTextfield.getText());
- 	   setWeightGoals(weightGoalsTextfield.getText());
- 	   setCaloriesGoals(caloriesBurnedGoalsTextfield.getText());
- 	   setExerciseGoals(exerciseDurationGoalsTextfield.getText());
+ 	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {
+ 		 //  try {
+ 			   System.out.println("fav");
+ 			   updateStepsGoalsLabel(Double.parseDouble(stepsGoalsTextfield.getText()));
+ 			   System.out.println("fav2");
+ 			   updateSleepGoalsLabel(Double.parseDouble(sleepGoalsTextfield.getText()));
+ 			   updateWaterIntakeGoalsLabel(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
+ 			   updateWeightGoalsLabel(Double.parseDouble(weightGoalsTextfield.getText()));
+ 			   updateCaloriesBurnedGoalsLabel(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
+ 			   updateExerciseGoalsLabel(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
+ 			   setStepsGoals(Double.parseDouble(stepsGoalsTextfield.getText()));
+ 			   setSleepGoals(Double.parseDouble(sleepGoalsTextfield.getText()));
+ 			   setWaterIntakeGoals(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
+ 			   setWeightGoals(Double.parseDouble(weightGoalsTextfield.getText()));
+ 			   System.out.println("fav");
+ 			   setCaloriesGoals(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
+ 			   setExerciseGoals(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
+ 			   applicationStage.setScene(displayUserFitnessGoalsScene);
+ 		 /*  } catch (InvalidUserInputException e) {
+ 			   goalsErrorLabel.setText(e.getMessage());
+ 		   }*/
 	   });
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
  	   updateButtonContainer.setPadding(new Insets(10,0,0,0));
  		
- 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
+ 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, goalsErrorLabel, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
  				updateNutritionGoalsLabel, updateNutritionGoalsContainer, updateExerciseGoalsLabel, updateExerciseGoalsContainer, updateCaloriesGoalsContainer, updateButtonContainer);
  		
  	   Scene updatedUserFitnessGoalsScene = new Scene(updateFitnessGoalsContainer, 609, 856);
  	   applicationStage.setScene(updatedUserFitnessGoalsScene);	 
+ 	   System.out.println(user.test);
  	  
     }
     
-    public void setStepsGoals(String steps) {
-    	storage.setStepsGoals(steps);
+    public void setStepsGoals(double steps) {
+    	user.fitness.setStepsGoals(steps);
     }
     
-    public void setSleepGoals(String sleep) {
-    	storage.setSleepGoals(sleep);
+    public void setSleepGoals(double sleep) {
+    	user.health.setSleepGoals(sleep);
     }
     
-    public void setWaterIntakeGoals(String water) {
-    	storage.setWaterIntakeGoals(water);
+    public void setWaterIntakeGoals(double water) {
+    	user.health.setWaterIntakeGoals(water);
     }
     
-    public void setWeightGoals(String weight) {
-    	storage.setWeightGoals(weight);
+    public void setWeightGoals(double weight) {
+    	user.health.setWeightGoals(weight);
     }
     
-    public void setCaloriesGoals(String calories) {
-    	storage.setCaloriesGoals(calories);
+    public void setCaloriesGoals(double calories) {
+    	user.fitness.setCaloriesGoals(calories);
     }
     
-    public void setExerciseGoals(String exercise) {
-    	storage.setExerciseGoals(exercise);
+    public void setExerciseGoals(double exercise) {
+    	user.fitness.setExerciseGoals(exercise);
     }
 
-	public String getStepsGoals() {
-		return storage.getStepsGoals();
+	public double getStepsGoals() {
+		return user.fitness.getStepsGoals();
 	}
 	
-	public String getSleepGoals() {
-		return storage.getSleepGoals();
+	public double getSleepGoals() {
+		return user.health.getSleepGoals();
 	}
 	
-	public String getWaterIntakeGoals() {
-		return storage.getWaterIntakeGoals();
+	public double getWaterIntakeGoals() {
+		return user.health.getWaterIntakeGoals();
 	}
 	
-	public String getWeightGoals() {
-		return storage.getWeightGoals();
+	public double getWeightGoals() {
+		return user.health.getWeightGoals();
 	}
 	
-	public String getCaloriesGoals() {
-		return storage.getCaloriesGoals();
+	public double getCaloriesGoals() {
+		return user.fitness.getCaloriesGoals();
 	}
 	
-	public String getExerciseGoals() {
-		return storage.getExerciseGoals();
+	public double getExerciseGoals() {
+		return user.fitness.getExerciseGoals();
 	}
 	
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserWaterIntakeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WaterIntakeController">
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,7 +45,7 @@
                   <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="Update Water Progress" textFill="#0c79b9" />
                </children>
             </HBox>
-            <Label fx:id="waterProgress" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="progress to goal:">
+            <Label fx:id="waterProgressLabel" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="progress to goal:">
                <font>
                   <Font size="24.0" />
                </font>
@@ -56,11 +56,7 @@
    <bottom>
       <Pane prefHeight="102.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" layoutX="169.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="64.0" prefWidth="287.0" text="RETURN TO MAIN" textFill="#47a0c6">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Button>
+            <Button layoutX="208.0" layoutY="4.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="47.0" prefWidth="194.0" style="-fx-background-radius: 20; -fx-background-color: #47a0c6;" text="RETURN TO MAIN" textFill="WHITE" />
          </children>
       </Pane>
    </bottom>
