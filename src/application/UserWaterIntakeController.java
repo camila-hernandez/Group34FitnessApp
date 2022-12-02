@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class WaterIntakeController{
+public class UserWaterIntakeController{
 	Stage applicationStage;
 
 	@FXML
@@ -49,12 +49,7 @@ public class WaterIntakeController{
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent) {
 		//the in take is the value entered in the textField. 
-		if (Storage.storage.getWaterIntakeAmount() != null) {
-			setIntakeAmount(Double.parseDouble(amountOfWater.getText()) + Double.parseDouble(Storage.storage.getWaterIntakeAmount()));;
-		}
-		if (Storage.storage.getSleepAmount() == null) { setIntakeAmount(Double.parseDouble(amountOfWater.getText()));
-		}
-		
+		setIntakeAmount(Double.parseDouble(amountOfWater.getText()));
 		totalWaterIntake = getIntakeAmount();
 
 		//the goal to compare, is the goal set in the goals window. 
