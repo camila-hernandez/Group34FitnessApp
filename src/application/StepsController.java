@@ -22,7 +22,11 @@ public class StepsController {
     @FXML
     private TextField stepsTextField;
     
-
+    User user;
+    
+    public void setUser(User user) {
+    	this.user = user;
+    }
     
     @FXML
     void updateStepsNumber(ActionEvent event) {

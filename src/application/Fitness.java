@@ -55,11 +55,12 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
-	//STEPS ACTUAL VALUES
+	//STEPS GOALS
 	public void setStepsGoals(double steps) {
 		this.stepGoals = steps;
     }
 	
+	//STEPS VALIDATION + GETTER + SETTER
 	public double getStepsCount() {
 		return stepsCount;
 	}

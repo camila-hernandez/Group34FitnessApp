@@ -72,6 +72,7 @@ public class FitnessTrackerController {
 			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
 			StepsController controller = (StepsController)loader.getController();
 			controller.applicationStage = applicationStage;
+			controller.setUser(user);
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
