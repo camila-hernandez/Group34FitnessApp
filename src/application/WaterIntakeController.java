@@ -17,17 +17,12 @@ public class WaterIntakeController{
 	@FXML
 	private TextField amountOfWater;
 
-	@FXML 
-	private Label waterIntakeLabel;
-
 	@FXML
 	private Label waterProgressLabel;
 
 	private double intakeAmount;
 
 	private double goalAmount;
-
-	private double totalWaterIntake;
 
 	User user;
 
@@ -37,9 +32,6 @@ public class WaterIntakeController{
 
 	// when the water window is opened again, the values previously entered are updated. 
 	public void updateWaterValues() {
-		if (waterIntakeLabel != null) {
-			updateWaterDrankLabel(user.health.getWaterIntakeAmountLabel());
-		}
 		if (waterProgressLabel != null) {
 			updateWaterProgressLabel(user.health.getWaterProgressLabel());
 		}
@@ -49,76 +41,58 @@ public class WaterIntakeController{
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent) {
 		//the in take is the value entered in the textField. 
-		setIntakeAmount(Double.parseDouble(amountOfWater.getText()));
-		totalWaterIntake = getIntakeAmount();
+		if (user.health.getWaterIntakeAmount() != 0.0) {
+			intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
+		}
+		if (user.health.getWaterIntakeAmount() == 0.0) { 
+			intakeAmount = Double.parseDouble(amountOfWater.getText());
+		}
 
-		//the goal to compare, is the goal set in the goals window. 
-		setGoalAmount(getGoalAmount() + user.health.getWaterIntakeGoals());
-
-		// the amount of water consumed compared to the goal.
-		double waterProgress = getGoalAmount() - totalWaterIntake;
-
-		// stores waterIntake and how much progress.
-		updateWaterDrankLabel(String.valueOf(totalWaterIntake));
-		setWaterIntake(totalWaterIntake);
-
-		updateWaterProgressLabel(String.valueOf(waterProgress));
-		setWaterProgress(String.valueOf(waterProgress));
+		double waterGoal = user.health.getWaterIntakeGoals();
+		double waterProgress = waterGoal - intakeAmount;
+		
+		updateWaterProgressLabel(String.valueOf(intakeAmount));
+		setWaterIntakeAmount(intakeAmount);
+		
+		user.health.setWaterIntakeAmount(intakeAmount);
 
 		// tells user how close they are to their goal. 
-		if (waterProgress > 0) {
-			waterProgressLabel.setText("You are " + (waterProgress) + " cups away from your goal.");
-		}
-
 		if (waterProgress == 0 || waterProgress < 0) {
-			waterProgressLabel.setText("You have reached your water intake goal.");
+			waterProgressLabel.setText("You have reached" + '\n' + "your water goal.");
+		}
+		
+		if (waterProgress > 0) {
+			waterProgressLabel.setText( "You are " + waterProgress + " cups away from your goal.");
 		}
 
-	}
-
-	// when the adds their in take, it updates the label. 
-	public void updateWaterDrankLabel(String water) {
-
-		if (water != null) {
-			waterIntakeLabel.setText("You have consumed " + water + " cups of water.");
-		}
-		if (water == null) {
-			waterIntakeLabel.setText("You have consumed 0 cups of water.");
-		}
-		user.health.setWaterIntakeAmountLabel(water);
-	}
-
-	public void setWaterIntake(double water) {
-		user.health.setWaterIntakeAmount(water);
-	}
-
-	public double getWaterIntake() {
-		return user.health.getWaterIntakeAmount();
 	}
 
 	// the user is shown how far away they are from their goal. 
 	public void updateWaterProgressLabel(String water) {
 		if (water != null) {
-			waterProgressLabel.setText("You are " + water + " cups away from your goal.");
+			waterProgressLabel.setText("You have entered " + water + " cups of water.");
 		}
 		if (water == null) {
-			if (getGoalAmount() == 0) {
-				waterProgressLabel.setText("You have not set a goal.");
-			}
-			else {
-				waterProgressLabel.setText("You are " + getGoalAmount() + " cups away from your goal." );
-			}
+			waterProgressLabel.setText("You have not set a goal.");
 		}
 		user.health.setWaterProgressLabel(water);
 
 		// to access the water in take from storage
 	}
-	public void setWaterProgress(String water) {
+	public void setWaterProgressLabel(String water) {
 		user.health.setWaterProgressLabel(water);
 	}
 
-	public String getWaterProgress() {
+	public String getWaterProgressLabel() {
 		return user.health.getWaterProgressLabel();
+	}
+
+	public void setWaterIntakeAmount(double water) {
+		this.intakeAmount = water;
+	}
+
+	public double getWaterIntakeAmount() {
+		return intakeAmount;
 	}
 
 	@FXML
@@ -127,7 +101,7 @@ public class WaterIntakeController{
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
-			
+
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
 
@@ -137,15 +111,6 @@ public class WaterIntakeController{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public double getIntakeAmount() {
-		intakeAmount = Double.parseDouble(amountOfWater.getText());
-		return intakeAmount;
-	}
-
-	public void setIntakeAmount(double intakeAmount) {
-		this.intakeAmount = intakeAmount;
 	}
 
 	public double getGoalAmount() {
