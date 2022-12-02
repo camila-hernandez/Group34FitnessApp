@@ -12,8 +12,11 @@ public class Health extends Goals {
 	private String waterIntakeAmountLabel;
 	private String waterProgressTotalLabel;
 	private double sleepDuration;
+	private String sleepProgressLabel;
 	
 	boolean reachSleepGoal = false;
+	boolean reachWaterIntakeGoal = false;
+	boolean reachWeightGoal = false;
 
 	public Health() {
 		// TODO Auto-generated constructor stub
@@ -167,6 +170,14 @@ public class Health extends Goals {
 	 public String getWaterProgressLabel() {
 		 return waterProgressTotalLabel;
 	 }
+
+	public String getSleepProgressLabel() {
+		return sleepProgressLabel;
+	}
+
+	public void setSleepProgressLabel(String sleepProgressLabel) {
+		this.sleepProgressLabel = sleepProgressLabel;
+	}
 	
 	//double calculateCarbs() {
 		//return (amount in serving size (in g) / 300) * 100;
