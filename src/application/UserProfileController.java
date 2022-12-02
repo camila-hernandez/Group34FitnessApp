@@ -68,35 +68,6 @@ public class UserProfileController {
 		
 		errorLabel.setText("");
 		
-		/*
-		try {
-			checkForInvalidCharacter(nameTextfield.getText());
-		} catch (InvalidUserInputException e) {
-			errorLabel.setText(e.getMessage());
-		}*/
-		System.out.println("yes");
-		try {
-			System.out.println("wtf");
-			checkUserInput(Double.parseDouble(ageTextfield.getText()));
-			System.out.println("no");
-		} catch (InvalidUserInputException e) {
-			errorLabel.setText(e.getMessage());
-			System.out.println("Caught exception");
-			System.out.println("Exception occured: " + e);
-			throw new InvalidUserInputException(e.getMessage());
-		}
-		System.out.println("pls");
-		/*try {
-			checkUserInput(Double.parseDouble(heightTextfield.getText()));
-		} catch (InvalidUserInputException e) {
-			errorLabel.setText(e.getMessage());
-		}
-		try {
-			checkUserInput(Double.parseDouble(weightTextfield.getText()));
-		} catch (InvalidUserInputException e) {
-			errorLabel.setText(e.getMessage());
-		}*/
-		
 		nameLabel.setText(nameTextfield.getText());
 		setNameInMainView(nameTextfield.getText());
 		ageLabel.setText(ageTextfield.getText());
