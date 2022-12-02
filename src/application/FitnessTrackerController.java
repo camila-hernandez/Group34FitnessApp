@@ -215,6 +215,12 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	void setDisplayLabel(ActionEvent event) {
+		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
+		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
+	}
 
     @FXML
     void showRecommendations(ActionEvent event) {

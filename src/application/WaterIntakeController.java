@@ -104,6 +104,7 @@ public class WaterIntakeController{
 
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
+			controller.setDisplayLabel(event);
 
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
