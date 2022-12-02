@@ -29,7 +29,7 @@ public class SleepController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 	
-	double totalSleepHours;
+	double hours;
 	
 	public void setUser(User user) {
     	this.user = user;
@@ -37,29 +37,34 @@ public class SleepController{
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		double hours = Double.parseDouble(hoursSleep.getText());
-		totalSleepHours += hours;
+		if (user.health.getSleepDuration() != 0.0) {
+			hours = Double.parseDouble(hoursSleep.getText()) + user.health.getSleepDuration();
+		}
+		if (user.health.getSleepDuration() == 0.0) { hours = Double.parseDouble(hoursSleep.getText());
+		}
+
 		double sleepGoal = user.health.getSleepGoals();
-		int progressPercent = (int) ((totalSleepHours/sleepGoal)* 100);
+		int progressPercent = (int) ((hours/sleepGoal)* 100);
 		
-		updateSleepProgressLabel(String.valueOf(totalSleepHours));
-		user.health.setSleepDuration(totalSleepHours);
+		updateSleepProgressLabel(String.valueOf(hours));
+		sleepProgressBar.setProgress((hours)/sleepGoal);
+		setSleepAmount(hours);
 		
-		if (sleepGoal - totalSleepHours == 0 || sleepGoal - totalSleepHours < 0) {
+		user.health.setSleepDuration(hours);
+		
+		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
 			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
-		if (sleepGoal - totalSleepHours > 0) {
+		if (sleepGoal - hours > 0) {
 			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
 		}
-		
-		sleepProgressBar.setProgress((totalSleepHours)/sleepGoal);
 		
 	}
 	
 	public void updateSleepProgressLabel(String sleep) {
 		if (sleep == null) {
-			sleepProgressLabel.setText("You have no hours of sleep.");
+			sleepProgressLabel.setText("You have not entered hours of sleep.");
 		}
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
@@ -74,14 +79,25 @@ public class SleepController{
     	}
 	}
 	
+	public void setSleepAmount(double sleep) {
+    	user.health.setSleepDuration(sleep);
+    }
+	
+	public double getSleepAmount() {
+		return user.health.getSleepDuration();
+	}
+
 	@FXML
     void returnToMain(ActionEvent event) {
     	 try {
   		   FXMLLoader loader = new FXMLLoader();
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+  		   
   		   controller.applicationStage = applicationStage;
   		   controller.setUser(user);
+  		   controller.setDisplayLabel(event);
+  		   
   		   Scene scene = new Scene(root);
   		   applicationStage.setScene(scene);
   		   applicationStage.show();

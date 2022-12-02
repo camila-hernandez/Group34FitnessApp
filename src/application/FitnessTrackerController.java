@@ -103,7 +103,7 @@ public class FitnessTrackerController implements Initializable {
 	void trackSleep(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
+			BorderPane root = loader.load(new FileInputStream("src/application/SleepTracker.fxml"));
 			SleepController controller = (SleepController)loader.getController();
 			
 			controller.setUser(user);
@@ -207,7 +207,7 @@ public class FitnessTrackerController implements Initializable {
     void trackWaterIntake(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
+			BorderPane root = loader.load(new FileInputStream("src/application/WaterIntake.fxml"));
 			WaterIntakeController controller = (WaterIntakeController)loader.getController();
 			
 			controller.setUser(user);
@@ -221,6 +221,12 @@ public class FitnessTrackerController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	void setDisplayLabel(ActionEvent event) {
+		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
+		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 	}
 
     @FXML
