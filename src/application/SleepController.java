@@ -12,9 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class UserSleepTrackerController{
+public class SleepController{
 	Stage applicationStage;
-	Storage storage;
+	
+	User user;
 	
 	@FXML
 	private TextField hoursSleep;
@@ -31,9 +32,9 @@ public class UserSleepTrackerController{
 	//double totalSleepHours;
 	double hours;
 	
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
+	public void setUser(User user) {
+    	this.user = user;
+    }
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
@@ -50,6 +51,15 @@ public class UserSleepTrackerController{
 		setSleepAmount(String.valueOf(hours));
 		
 		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
+		double hours = Double.parseDouble(hoursSleep.getText());
+		totalSleepHours += hours;
+		double sleepGoal = user.health.getSleepGoals();
+		int progressPercent = (int) ((totalSleepHours/sleepGoal)* 100);
+		
+		updateSleepProgressLabel(String.valueOf(totalSleepHours));
+		user.health.setSleepDuration(totalSleepHours);
+		
+		if (sleepGoal - totalSleepHours == 0 || sleepGoal - totalSleepHours < 0) {
 			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
@@ -67,7 +77,7 @@ public class UserSleepTrackerController{
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
 		}
 		
-    	Storage.storage.setSleepProgressLabel(sleep);
+		user.health.setSleepProgressLabel(sleep);
     }
 	
 	public void updateSleepValues() {
@@ -83,7 +93,10 @@ public class UserSleepTrackerController{
 	public String getSleepAmount() {
 		return Storage.storage.getSleepAmount();
 	}
-	
+
+    		updateSleepProgressLabel(user.health.getSleepProgressLabel());
+    	}
+	}
 	@FXML
     void returnToMain(ActionEvent event) {
     	 try {
@@ -91,7 +104,7 @@ public class UserSleepTrackerController{
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
   		   controller.applicationStage = applicationStage;
-  		   
+  		   controller.setUser(user);
   		   Scene scene = new Scene(root);
   		   applicationStage.setScene(scene);
   		   applicationStage.show();

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserGoalsDisplay">
+<AnchorPane prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GoalsController">
    <children>
       <Label layoutX="87.0" layoutY="267.0" prefHeight="35.0" prefWidth="164.0" text="SLEEP GOALS:" textFill="LIGHTBLUE">
          <font>

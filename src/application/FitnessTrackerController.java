@@ -54,7 +54,8 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 
 	private ProgressIndicator waterProgressIndicator;
-  @FXML
+	
+	@FXML
     private Button userProfileButton;
 	
 	@FXML
@@ -63,10 +64,10 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	private Label dateLabel;
 	
-	Storage storage = new Storage();
+	User user;
 	
-	public void setStorage(Storage storage) {
-    	this.storage = storage;
+	public void setUser(User user) {
+    	this.user = user;
 	}
 	
     @FXML
@@ -74,7 +75,8 @@ public class FitnessTrackerController implements Initializable {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
-			UserProfile controller = (UserProfile)loader.getController();
+			UserProfileController controller = (UserProfileController)loader.getController();
+			controller.setUser(user);
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -87,6 +89,7 @@ public class FitnessTrackerController implements Initializable {
 
 	@FXML
 	void trackSteps(ActionEvent event) {
+	//	controller.setUser(user);
     }
 	
 	@FXML
@@ -94,9 +97,9 @@ public class FitnessTrackerController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserSleepTracker.fxml"));
-			UserSleepTrackerController controller = (UserSleepTrackerController)loader.getController();
+			SleepController controller = (SleepController)loader.getController();
 			
-			controller.setStorage(Storage.storage);
+			controller.setUser(user);
 			controller.updateSleepValues();
 			
 			controller.applicationStage = applicationStage;
@@ -114,9 +117,9 @@ public class FitnessTrackerController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
-			NutritionTrackerController controller = (NutritionTrackerController)loader.getController();
+			NutritionController controller = (NutritionController)loader.getController();
 			controller.applicationStage = applicationStage;
-
+			controller.setUser(user);
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
@@ -129,42 +132,42 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	void trackActivities(ActionEvent event) {
 		try {
-	   		   FXMLLoader loader = new FXMLLoader();
-	   		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
-	   		   ActivitiesController controller = (ActivitiesController)loader.getController();
-	   		   
+			FXMLLoader loader = new FXMLLoader();
+	   		Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+	   		ActivitiesController controller = (ActivitiesController)loader.getController();
+	   		
+	   		controller.setUser(user);
+	   		System.out.println("Setting user for actviities controller from fitness");
+	   		
 	   		Date today = new Date();
 			Calendar cal = Calendar.getInstance(); 
 			cal.setTime(today); 
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 	    	if (dayOfWeek == Calendar.MONDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getMondayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getMondayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.TUESDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getTuesdayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getTuesdayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.WEDNESDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getWednesdayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getWednesdayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.THURSDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getThursdayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getThursdayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.FRIDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getFridayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getFridayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.SATURDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getSaturdayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getSaturdayExerciseInfo());
 	    	}
 	    	if (dayOfWeek == Calendar.SUNDAY) {
-	    		controller.updateTodaysExerciseLabel(Storage.storage.getSundayExerciseInfo());
+	    		controller.updateTodaysExerciseLabel(user.fitness.getSundayExerciseInfo());
 	    	}
 	    	
-	   		   controller.setStorage(Storage.storage);
-			  // controller.updateTodaysExerciseValues();
-			   
-			  // controller.updateTodaysExerciseLabel(Storage.storage.getProgressValue());
 			   controller.updateTotalCaloriesBurnedValues();
 			   controller.updateProgressValue();
+			   System.out.println(user.test);
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   
@@ -181,8 +184,8 @@ public class FitnessTrackerController implements Initializable {
 		try {
 	   		   FXMLLoader loader = new FXMLLoader();
 	   		   AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
-	   		   Recipes controller = (Recipes)loader.getController();
-	   		  
+	   		   RecipesController controller = (RecipesController)loader.getController();
+	   		controller.setUser(user);
 	   		   controller.applicationStage = applicationStage;
 	   		   
 	   		   Scene scene = new Scene(root);
@@ -198,9 +201,9 @@ public class FitnessTrackerController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/UserWaterIntake.fxml"));
-			UserWaterIntakeController controller = (UserWaterIntakeController)loader.getController();
+			WaterIntakeController controller = (WaterIntakeController)loader.getController();
 			
-			controller.setStorage(Storage.storage);
+			controller.setUser(user);
 			controller.updateWaterValues();
 
 			controller.applicationStage = applicationStage;
@@ -224,10 +227,12 @@ public class FitnessTrackerController implements Initializable {
 	   try {		   
 		   FXMLLoader loader = new FXMLLoader();
 		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
-		   UserGoalsDisplay controller = (UserGoalsDisplay)loader.getController();
+		   GoalsController controller = (GoalsController)loader.getController();
 		   
-		   controller.setStorage(Storage.storage);
+		   controller.setUser(user);
+		   System.out.println("Setting user for goals controller from fitness");
 		   controller.updateGoalValues();
+		   System.out.println(user.test);
 		   
 		   controller.applicationStage = applicationStage;
 		   
@@ -238,7 +243,6 @@ public class FitnessTrackerController implements Initializable {
 		   e.printStackTrace();
 	   }  
    }
-
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
