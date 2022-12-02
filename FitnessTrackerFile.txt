@@ -1,1 +1,21 @@
-aString
+Steps goal = 10000.0
+Sleep goal = 9.0
+Water intake goal = 8.0
+Weight goal = 45.0
+Calories burned goal = 300.0
+Exercise goal = 45.0
+Daily progress = 36.0
+Monday exercise duration = 0.0
+Monday calories burned = 0.0
+Tuesday exercise duration = 0.0
+Tuesday calories burned = 0.0
+Wednesday exercise duration = 0.0
+Wednesday calories burned = 0.0
+Thursday exercise duration = 0.0
+Thursday calories burned = 0.0
+Friday exercise duration = 36.0
+Friday calories burned = 36.0
+Saturday exercise duration = 0.0
+Saturday calories burned = 0.0
+Sunday exercise duration = 0.0
+Sunday calories burned = 0.0
