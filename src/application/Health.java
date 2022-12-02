@@ -9,7 +9,6 @@ public class Health extends Goals {
 	private double height;
 	private double bodyFat;
 	private double waterIntakeAmount;
-	private String waterIntakeAmountLabel;
 	private String waterProgressTotalLabel;
 	private double sleepDuration;
 	private String sleepProgressLabel;
@@ -154,14 +153,6 @@ public class Health extends Goals {
 	public double calculateLBM() {
 		return weight - calculateBodyFatPercentage();
 	}
-
-	public void setWaterIntakeAmountLabel(String waterIntakeLabel) {
-		 this.waterIntakeAmountLabel = waterIntakeLabel;
-	 }
-	 
-	 public String getWaterIntakeAmountLabel() {
-		 return waterIntakeAmountLabel;
-	 }
 	 
 	 public void setWaterProgressLabel(String waterProgressLabel) {
 		 this.waterProgressTotalLabel = waterProgressLabel;
