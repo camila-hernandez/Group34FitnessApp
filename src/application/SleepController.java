@@ -29,7 +29,6 @@ public class SleepController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 	
-	//double totalSleepHours;
 	double hours;
 	
 	public void setUser(User user) {
@@ -38,28 +37,23 @@ public class SleepController{
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		if (Storage.storage.getSleepAmount() != null) {
-			hours = Double.parseDouble(hoursSleep.getText()) + Double.parseDouble(Storage.storage.getSleepAmount());
+		if (user.health.getSleepDuration() != 0.0) {
+			hours = Double.parseDouble(hoursSleep.getText()) + user.health.getSleepDuration();
 		}
-		if (Storage.storage.getSleepAmount() == null) { hours = Double.parseDouble(hoursSleep.getText());
+		if (user.health.getSleepDuration() == 0.0) { hours = Double.parseDouble(hoursSleep.getText());
 		}
-			
-		double sleepGoal = Double.parseDouble(Storage.storage.getSleepGoals());
+
+		double sleepGoal = user.health.getSleepGoals();
 		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		
 		updateSleepProgressLabel(String.valueOf(hours));
 		sleepProgressBar.setProgress((hours)/sleepGoal);
-		setSleepAmount(String.valueOf(hours));
+		setSleepAmount(hours);
+		
+		updateSleepProgressLabel(String.valueOf(hours));
+		user.health.setSleepDuration(hours);
 		
 		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
-		double hours = Double.parseDouble(hoursSleep.getText());
-		totalSleepHours += hours;
-		double sleepGoal = user.health.getSleepGoals();
-		int progressPercent = (int) ((totalSleepHours/sleepGoal)* 100);
-		
-		updateSleepProgressLabel(String.valueOf(totalSleepHours));
-		user.health.setSleepDuration(totalSleepHours);
-		
-		if (sleepGoal - totalSleepHours == 0 || sleepGoal - totalSleepHours < 0) {
 			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
 		}
 		
@@ -82,21 +76,18 @@ public class SleepController{
 	
 	public void updateSleepValues() {
     	if (sleepProgressLabel != null) {
-    		updateSleepProgressLabel(storage.sleepProgressLabel);
-    	}
-	}
-	
-	public void setSleepAmount(String sleep) {
-    	Storage.storage.setSleepAmount(sleep);
-    }
-	
-	public String getSleepAmount() {
-		return Storage.storage.getSleepAmount();
-	}
-
     		updateSleepProgressLabel(user.health.getSleepProgressLabel());
     	}
 	}
+	
+	public void setSleepAmount(double sleep) {
+    	user.health.setSleepDuration(sleep);
+    }
+	
+	public double getSleepAmount() {
+		return user.health.getSleepDuration();
+	}
+
 	@FXML
     void returnToMain(ActionEvent event) {
     	 try {
