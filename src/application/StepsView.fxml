@@ -37,7 +37,41 @@
                   </Label>
                </children>
             </StackPane>
-            <TextField fx:id="stepsTextField" prefHeight="99.0" prefWidth="447.0" />
+            <HBox prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Day of the month:">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Steps taken:">
+                     <HBox.margin>
+                        <Insets left="115.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox prefHeight="50.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin></ChoiceBox>
+                  <Label prefHeight="7.0" text="&gt;">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="45.0" right="45.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="stepsTextField" alignment="CENTER" prefHeight="50.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
             <Button mnemonicParsing="false" onAction="#updateStepsNumber" text="progress" />
          </children>
       </VBox>
@@ -57,8 +91,11 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" onAction="#returnToMainPage" />
+                        <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="139.0" text="return to main" />
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </HBox>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>

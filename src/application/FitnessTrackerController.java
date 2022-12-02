@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 public class FitnessTrackerController {
 	Stage applicationStage;
 	
-<<<<<<< HEAD
+
 	public Steps stepsCount;
-=======
+
 	@FXML 
 	private Label waterProgress;
   
@@ -54,7 +54,6 @@ public class FitnessTrackerController {
 	public void setUser(User user) {
     	this.user = user;
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 	
 	public void setGoalsCompletedLabel() {
     	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
@@ -82,12 +81,6 @@ public class FitnessTrackerController {
 		}
     }
 
-    @FXML
-    void trackSleep(ActionEvent event) {
-
-    }
-<<<<<<< HEAD
-=======
 	
 	@FXML
 	void trackSleep(ActionEvent event) {
@@ -108,7 +101,7 @@ public class FitnessTrackerController {
 			e.printStackTrace();
 		}
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
+
 
     @FXML
     void trackNutrition(ActionEvent event) {
@@ -120,10 +113,10 @@ public class FitnessTrackerController {
 
     }
 
-<<<<<<< HEAD
     @FXML
     void trackActivities(ActionEvent event) {
-=======
+    }
+
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -133,11 +126,7 @@ public class FitnessTrackerController {
 			
 			controller.setUser(user);
 			controller.updateWaterValues();
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
-<<<<<<< HEAD
-    }
-=======
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -153,7 +142,6 @@ public class FitnessTrackerController {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
     @FXML
     void showRecommendations(ActionEvent event) {
