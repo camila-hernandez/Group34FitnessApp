@@ -50,7 +50,6 @@ public class SleepController{
 		sleepProgressBar.setProgress((hours)/sleepGoal);
 		setSleepAmount(hours);
 		
-		updateSleepProgressLabel(String.valueOf(hours));
 		user.health.setSleepDuration(hours);
 		
 		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
