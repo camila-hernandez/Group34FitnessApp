@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class NutritionTrackerController {
+public class NutritionController {
 
 	public Stage applicationStage;
 
@@ -21,8 +21,11 @@ public class NutritionTrackerController {
 	
 	public Label bmiDisplay;
 	
+	User user;
 	
-	
+	public void setUser(User user) {
+    	this.user = user;
+    }
 	
 	@FXML
 	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) {

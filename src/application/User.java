@@ -2,27 +2,37 @@ package application;
 
 public class User {
 	
-	private String name = "John Doe";
+	private String name;
+	private double age;
+	private String gender;
 
-	public User(String name) {
-		this.name = name;
+	User user;
+	Health health = new Health();
+	Fitness fitness = new Fitness();
+	
+	public String test = "Test";
+	
+	public void setName(String aName) {
+		name = aName;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String newName) throws InvalidNameException {
-		boolean validName = true;
-		for (char c : newName.toCharArray()) {
-    		if (!Character.isAlphabetic(c) && c!=32) {
-    			validName = false;
-    			throw new InvalidNameException("A name must be alphabetic");
-    		}
-    	}	
-    	if (validName) {
-    		name = String.valueOf(newName);
-    	}
-		else throw new InvalidNameException("A name must be alphabetic");
+	
+	public void setAge(double anAge) {
+		age = anAge;
+	}
+	
+	public double getAge() {
+		return age;
+	}
+	
+	public void setGender(String aGender) {
+		gender = aGender;
+	}
+	
+	public String getGender() {
+		return gender;
 	}
 }

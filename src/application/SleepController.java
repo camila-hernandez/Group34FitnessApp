@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class UserSleepTrackerController{
+public class SleepController{
 	Stage applicationStage;
 	Storage storage;
 	

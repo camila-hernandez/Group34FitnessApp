@@ -19,7 +19,9 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
-
+	
+	User user = new User();
+	 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -27,6 +29,9 @@ public class Main extends Application {
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 			controller.applicationStage = primaryStage;
+			
+			controller.setUser(user);
+			System.out.println("Setting user for fitness controller from main");
 		
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -45,7 +50,7 @@ public class Main extends Application {
 		FileReader fr = new FileReader(f);
 		BufferedReader br = new BufferedReader(fr);
 		String line = br.readLine();
-		//String words[] = line.split("=");
+
 		while (line != null) {
 			String words[] = line.split("=");
 			System.out.println(line);

@@ -2,6 +2,7 @@ package application;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,14 +11,107 @@ import java.util.Date;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class UserProfile {
+public class UserProfileController {
 	Stage applicationStage;
+	
+	@FXML
+	private Button logOutButton;
 
-    @FXML
-    private Button logOutButton;
+	@FXML
+	private Label weightLabel;
+
+	@FXML
+	private Button updateProfileButton;
+
+	@FXML
+	private Button returnHomeButton;
+
+	@FXML
+	private Label ageLabel;
+
+	@FXML
+	private Label heightLabel;
+
+	@FXML
+	private Label nameLabel;
+	
+	User user;
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	@FXML
+	void updateUserProfile(ActionEvent event) {
+	    Scene userProfileScene = applicationStage.getScene();
+	    
+	    VBox userProfileContainer = new VBox();
+	    
+	    Label updateProfileLabel = new Label();
+	    	
+	    Label updateNameLabel = new Label("Name: ");
+	    
+	    Label updateAgeLabel = new Label("Age: ");
+	    
+	    Label updateHeightLabel = new Label("Height: ");
+	    
+	    Label updateWeightLabel = new Label("Weight: ");
+	    
+	    TextField updateNameTextfield = new TextField();
+	    
+	    TextField updateAgeTextfield = new TextField();
+	    
+	    TextField updateHeightTextfield = new TextField();
+	    
+	    TextField updateWeightTextfield = new TextField();
+	    
+	    HBox nameContainer = new HBox();
+	    HBox ageContainer = new HBox();
+	    HBox heightContainer = new HBox();
+	    HBox weightContainer = new HBox();
+	    
+	    nameContainer.getChildren().addAll(updateNameLabel, updateNameTextfield);
+	    ageContainer.getChildren().addAll(updateAgeLabel, updateAgeTextfield);
+	    heightContainer.getChildren().addAll(updateHeightLabel, updateHeightTextfield);
+	    weightContainer.getChildren().addAll(updateWeightLabel, updateWeightTextfield);
+	    
+	    Button doneButton = new Button("Done");
+	    doneButton.setOnAction(doneEvent -> applicationStage.setScene(userProfileScene));
+	    
+	    userProfileContainer.getChildren().addAll(updateProfileLabel, nameContainer, ageContainer, heightContainer, weightContainer, doneButton);
+	    
+	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
+	  	applicationStage.setScene(updateUserProfileScene);
+	 }
+
+	 @FXML
+	 void returnToDashboard(ActionEvent event) {
+	   	 try {
+	   		 FXMLLoader loader = new FXMLLoader();
+	    	 BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+	    		   
+	    	 controller.applicationStage = applicationStage;
+	    		   
+	    	 Scene scene = new Scene(root);
+	    	 applicationStage.setScene(scene);
+	    	 applicationStage.show();
+	    		   
+	    		
+	   	 } catch(Exception e) {
+	    	   e.printStackTrace();
+	   	 }
+	}
 
     @FXML
     void userLogOut(ActionEvent event) {
@@ -69,5 +163,4 @@ public class UserProfile {
 		}
 	   applicationStage.close();
     }
-
 }

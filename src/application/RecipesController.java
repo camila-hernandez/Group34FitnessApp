@@ -20,8 +20,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class Recipes {
+public class RecipesController {
 	Stage applicationStage;
+	
+	User user;
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	Font font = Font.font("System", FontWeight.BOLD, 18);
 	Font ingredientsFont = Font.font("System", FontWeight.BOLD, 16);
@@ -743,6 +749,7 @@ public class Recipes {
  		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
  		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
  		   
+ 		   controller.setUser(user);
  		   controller.applicationStage = applicationStage;
  		   
  		   Scene scene = new Scene(root);
@@ -754,5 +761,4 @@ public class Recipes {
  		   e.printStackTrace();
  	   }
     }
-
 }
