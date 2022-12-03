@@ -62,6 +62,9 @@ public class FitnessTrackerController implements Initializable {
     private ImageView profileImage;
 	
 	@FXML
+	private Label nameLabel;
+	
+	@FXML
 	private Label dateLabel;
 	
 	@FXML
@@ -71,6 +74,10 @@ public class FitnessTrackerController implements Initializable {
 	
 	public void setUser(User user) {
     	this.user = user;
+	}
+	
+	public void setNameLabel() {
+		nameLabel.setText(user.getName());
 	}
 	
 	public void setGoalsCompletedLabel() {
