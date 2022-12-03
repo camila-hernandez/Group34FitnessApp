@@ -61,13 +61,9 @@ public class UserProfileController {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	Label errorLabel = new Label("Nooooooooooooo");
 	
 	void setUserProperties(Scene userProfileScene, TextField nameTextfield, ChoiceBox<Object> genderChoiceBox, TextField ageTextfield,
 			TextField heightTextfield, TextField weightTextfield) throws InvalidUserInputException {
-		
-		errorLabel.setText("");
-		
 		nameLabel.setText(nameTextfield.getText());
 		setNameInMainView(nameTextfield.getText());
 		ageLabel.setText(ageTextfield.getText());
@@ -129,6 +125,13 @@ public class UserProfileController {
 	    
 	    TextField weightTextfield = new TextField();
 	    
+	    VBox userProfileErrorLabelContainer = new VBox();
+	 	Label userProfileErrorLabel = new Label(" ");
+	 	Font errorLabelFont = Font.font("System", 16);
+	 	userProfileErrorLabel.setFont(errorLabelFont);
+	 	userProfileErrorLabel.setTextFill(Color.RED);
+	 	userProfileErrorLabelContainer.getChildren().add(userProfileErrorLabel);
+	 	userProfileErrorLabelContainer.setAlignment(Pos.CENTER);
 	    
 	    ChoiceBox<Object> genderChoiceBox = new ChoiceBox<Object>();
 	    genderChoiceBox.getItems().add("Female");
@@ -169,20 +172,49 @@ public class UserProfileController {
 	    buttonContainer.setPadding(new Insets(75,0,0,0));
 	    buttonContainer.setAlignment(Pos.CENTER);
 	    doneButton.setOnAction(doneEvent -> {
-				try {
-					setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield,
-							heightTextfield, weightTextfield);
-				} catch (InvalidUserInputException e) {
-					errorLabel.setText(" ");
-				}
+	    	try {
+	    		user.checkName(nameTextfield.getText());
+				user.checkAge(ageTextfield.getText());
+				user.health.checkInput(heightTextfield.getText());
+				user.health.checkInput(weightTextfield.getText());
+				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, heightTextfield, weightTextfield);
+				applicationStage.setScene(userProfileScene);
+	    	} catch (InvalidUserInputException e) {
+	    		userProfileErrorLabel.setText(e.getMessage());
+			}
 	    });
 	    
-	    userProfileContainer.getChildren().addAll(updateUserProfileStack, errorLabel, nameContainer, ageContainer, genderContainer, heightContainer, weightContainer, buttonContainer);
+	    userProfileContainer.getChildren().addAll(updateUserProfileStack, userProfileErrorLabelContainer, nameContainer, ageContainer, genderContainer, heightContainer, weightContainer, buttonContainer);
 	    
 	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
 	  	applicationStage.setScene(updateUserProfileScene);
 	 }
-
+	    
+	// Checks user input for height and weight
+	public void checkUserInput(double value) throws InvalidUserInputException {
+		try {
+			boolean decimalEncountered = false;
+			for (char c : Double.toString(value).toCharArray()) {
+				// Check if the character is a '.'
+				// If the character is a '.' and the for loop has not encountered a '.' yet, 
+				// then it will indicate this '.' to be a decimal.
+				if (c == '.' && !decimalEncountered) {
+					decimalEncountered = true;
+				}
+				// Check if the character is a digit if it's not a decimal
+				else if (!Character.isDigit(c)) {
+					throw new InvalidUserInputException("Make sure to enter a valid number.");
+				}
+			}
+		
+			//if (value < 0) {
+			//	throw new InvalidUserInputException("Number should be greater than 0.");
+			//}	
+		} catch (Exception e) {
+			throw new InvalidUserInputException(e.getMessage());
+		}
+	}
+	
 	 @FXML
 	 void returnToDashboard(ActionEvent event) {
 	   	 try {
