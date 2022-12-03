@@ -50,13 +50,15 @@ public class GoalsController {
     
     User user;
     
+    Label goalsErrorLabel = new Label();
+    
     public void setUser(User user) {
     	this.user = user;
     }
     
     // Display user health and fitness goals based on their input
     Font newLabelFont = Font.font("System", 24);
-    public void updateStepsGoalsLabel(double steps) {
+    public void updateStepsGoalsLabel(double steps) throws InvalidUserInputException {
     	stepGoalsLabel.setFont(newLabelFont);
  		stepGoalsLabel.setText(String.format(steps + " steps"));
  		user.fitness.setStepsGoals(steps);
@@ -94,7 +96,7 @@ public class GoalsController {
     	exerciseGoalsLabel.setAlignment(Pos.CENTER);
     }
     
-    public void updateGoalValues() {
+    public void updateGoalValues() throws InvalidUserInputException {
     	if (stepGoalsLabel != null) {
     		updateStepsGoalsLabel(user.fitness.getStepsGoals());
     	}
@@ -124,6 +126,8 @@ public class GoalsController {
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
   		   
   		   controller.setUser(user);
+  		   controller.setNameLabel();
+  		   controller.setGoalsCompletedLabel();
   		 System.out.println(user.test);
   		 System.out.println("Setting user for fitness controller from goals");
   		   controller.applicationStage = applicationStage;
@@ -139,7 +143,7 @@ public class GoalsController {
     }
 
     @FXML
-    void updateFitnessGoals(ActionEvent event) {
+    void updateFitnessGoals(ActionEvent event) throws InvalidUserInputException {
  	   Scene displayUserFitnessGoalsScene = applicationStage.getScene();
 	   
  	   // Create new scene that displays the user's health and fitness goals
@@ -260,27 +264,30 @@ public class GoalsController {
  	   saveChangesGoalsButton.setFont(labelFont);
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
  	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {
- 		 //  try {
- 			   System.out.println("fav");
- 			   updateStepsGoalsLabel(Double.parseDouble(stepsGoalsTextfield.getText()));
- 			   System.out.println("fav2");
- 			   updateSleepGoalsLabel(Double.parseDouble(sleepGoalsTextfield.getText()));
- 			   updateWaterIntakeGoalsLabel(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
- 			   updateWeightGoalsLabel(Double.parseDouble(weightGoalsTextfield.getText()));
- 			   updateCaloriesBurnedGoalsLabel(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
- 			   updateExerciseGoalsLabel(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
- 			   setStepsGoals(Double.parseDouble(stepsGoalsTextfield.getText()));
- 			   setSleepGoals(Double.parseDouble(sleepGoalsTextfield.getText()));
- 			   setWaterIntakeGoals(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
- 			   setWeightGoals(Double.parseDouble(weightGoalsTextfield.getText()));
- 			   System.out.println("fav");
- 			   setCaloriesGoals(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
- 			   setExerciseGoals(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
- 			   applicationStage.setScene(displayUserFitnessGoalsScene);
- 		 /*  } catch (InvalidUserInputException e) {
- 			   goalsErrorLabel.setText(e.getMessage());
- 		   }*/
-	   });
+				try {
+					user.fitness.checkInput(stepsGoalsTextfield.getText());
+					updateStepsGoalsLabel(Double.parseDouble(stepsGoalsTextfield.getText()));
+					setStepsGoals(Double.parseDouble(stepsGoalsTextfield.getText()));
+		    		user.health.checkInput(sleepGoalsTextfield.getText());
+		    		updateSleepGoalsLabel(Double.parseDouble(sleepGoalsTextfield.getText()));
+		    		setSleepGoals(sleepGoalsTextfield.getText());
+		    		user.health.checkInput(waterIntakeGoalsTextfield.getText());
+		    		updateWaterIntakeGoalsLabel(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
+		    		setWaterIntakeGoals(Double.parseDouble(waterIntakeGoalsTextfield.getText()));
+		    		user.health.checkInput(weightGoalsTextfield.getText());
+		    		updateWeightGoalsLabel(Double.parseDouble(weightGoalsTextfield.getText()));
+		    		setWeightGoals(Double.parseDouble(weightGoalsTextfield.getText()));
+		    		user.fitness.checkInput(caloriesBurnedGoalsTextfield.getText());
+		    		updateCaloriesBurnedGoalsLabel(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
+		    		setCaloriesGoals(Double.parseDouble(caloriesBurnedGoalsTextfield.getText()));
+		    		user.fitness.checkInput(exerciseDurationGoalsTextfield.getText());
+		    		updateExerciseGoalsLabel(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
+		    		setExerciseGoals(Double.parseDouble(exerciseDurationGoalsTextfield.getText()));
+		    		applicationStage.setScene(displayUserFitnessGoalsScene);
+		        	} catch (InvalidUserInputException e) {
+		        		goalsErrorLabel.setText(e.getMessage());
+		        	}
+ 	   	});
 
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
@@ -299,8 +306,8 @@ public class GoalsController {
     	user.fitness.setStepsGoals(steps);
     }
     
-    public void setSleepGoals(double sleep) {
-    	user.health.setSleepGoals(sleep);
+    public void setSleepGoals(String sleep) {
+    	user.health.setSleepGoals(Double.parseDouble(sleep));
     }
     
     public void setWaterIntakeGoals(double water) {
