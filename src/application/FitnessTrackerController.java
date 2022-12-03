@@ -64,11 +64,18 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	private Label dateLabel;
 	
+	@FXML
+	private Label goalsCompletedLabel;
+	
 	User user;
 	
 	public void setUser(User user) {
     	this.user = user;
 	}
+	
+	public void setGoalsCompletedLabel() {
+    	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
+    }
 	
     @FXML
     void openUserProfile(ActionEvent event) {

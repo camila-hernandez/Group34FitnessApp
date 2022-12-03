@@ -13,6 +13,8 @@ public class Health extends Goals {
 	private double sleepDuration;
 	private String sleepProgressLabel;
 	
+	double value;
+	
 	boolean reachSleepGoal = false;
 	boolean reachWaterIntakeGoal = false;
 	boolean reachWeightGoal = false;
@@ -21,7 +23,16 @@ public class Health extends Goals {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void checkUserInput(double value) throws InvalidUserInputException {
+	public void checkGoalsCompleted() {
+		if ((sleepDuration >= sleepGoals) && (!reachSleepGoal)) {
+			completeGoal();
+		}
+		if (waterIntakeAmount >= waterIntakeGoals && !reachSleepGoal) {
+			completeGoal();
+		}
+	}
+	
+	public void checkInput(String valueEntered) throws InvalidUserInputException {
 		try {
 			boolean decimalEncountered = false;
 			for (char c : Double.toString(value).toCharArray()) {
@@ -36,6 +47,8 @@ public class Health extends Goals {
 					throw new InvalidUserInputException("Make sure to enter a valid number.");
 				}
 			}
+			
+			value = Double.parseDouble(valueEntered);
 		
 			if (value < 0) {
 				throw new InvalidUserInputException("Number should be greater than 0.");
@@ -45,27 +58,15 @@ public class Health extends Goals {
 	}
 
     public void setSleepGoals(double sleep) {
-    	try {
-			checkUserInput(sleep);
-			this.sleepGoals = sleep;
-		} catch (InvalidUserInputException e) {
-		}
+		this.sleepGoals = sleep;
     }
     
     public void setWaterIntakeGoals(double water) {
-    	try {
-			checkUserInput(water);
-			this.waterIntakeGoals = water;
-		} catch (InvalidUserInputException e) {
-		}
+		this.waterIntakeGoals = water;
     }
     
     public void setWeightGoals(double weight) {
-    	try {
-			checkUserInput(weight);
-			this.weightGoals = weight;
-		} catch (InvalidUserInputException e) {
-		}
+		this.weightGoals = weight;
     }
 	
 	public double getSleepGoals() {
@@ -89,12 +90,6 @@ public class Health extends Goals {
 	}
 	
 	public void setHeight(Double aHeight) {
-		try {
-			checkUserInput(aHeight);
-		} catch (InvalidUserInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.height = aHeight;
 	}
 	
@@ -103,12 +98,6 @@ public class Health extends Goals {
 	}
 	
 	public void setBodyFat(double fat) {
-		try {
-			checkUserInput(fat);
-		} catch (InvalidUserInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.bodyFat = fat;
 	}
 	
@@ -118,9 +107,6 @@ public class Health extends Goals {
 	
 	public void setWaterIntakeAmount(double water) {
 		this.waterIntakeAmount = water;
-		if (waterIntakeAmount >= waterIntakeGoals) {
-			completeGoal();
-		}
 	}
 	
 	public double getWaterIntakeAmount() {
@@ -129,9 +115,6 @@ public class Health extends Goals {
 	
 	public void setSleepDuration(double sleep) {
 		this.sleepDuration = sleep;
-		if ((sleepDuration >= sleepGoals) && (!reachSleepGoal)) {
-			completeGoal();
-		}
 	}
 	
 	public double getSleepDuration() {

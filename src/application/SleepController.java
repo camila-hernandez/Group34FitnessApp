@@ -37,35 +37,31 @@ public class SleepController{
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		if (user.health.getSleepDuration() != 0.0) {
-			hours = Double.parseDouble(hoursSleep.getText()) + user.health.getSleepDuration();
-		}
-		if (user.health.getSleepDuration() == 0.0) { hours = Double.parseDouble(hoursSleep.getText());
-		}
 
 		double sleepGoal = user.health.getSleepGoals();
-		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		double hours = Double.parseDouble(hoursSleep.getText());
+		int progressPercent = (int) ((hours/sleepGoal) * 100);
+		setSleepAmount(hours);
 		
 		updateSleepProgressLabel(String.valueOf(hours));
 		sleepProgressBar.setProgress((hours)/sleepGoal);
-		setSleepAmount(hours);
 		
-		user.health.setSleepDuration(hours);
-		
-		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
-			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
+		// Setting progress label
+		if (((sleepGoal - hours) == 0) || (((sleepGoal - hours) < 0))) {
+			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal!");
 		}
 		
 		if (sleepGoal - hours > 0) {
 			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
-		}
-		
+		}	
 	}
 	
 	public void updateSleepProgressLabel(String sleep) {
+		
 		if (sleep == null) {
 			sleepProgressLabel.setText("You have not entered hours of sleep.");
 		}
+		
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
 		}
