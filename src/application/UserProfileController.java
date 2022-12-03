@@ -75,6 +75,11 @@ public class UserProfileController {
 		heightLabel.setText(heightTextfield.getText());
 		weightLabel.setText(weightTextfield.getText());
 		
+		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
+		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
+		user.health.setGender(genderChoiceBox.getValue().toString());
+		user.health.setAge(Double.parseDouble(ageTextfield.getText()));
+		
 		applicationStage.setScene(userProfileScene);
 	}
 	
@@ -191,7 +196,7 @@ public class UserProfileController {
 	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 	    	 controller.setUser(user);
 	  		 controller.setGoalsCompletedLabel();
-	    	 controller.setNameLabel();
+	    	// controller.setNameLabel();
 	    	 controller.applicationStage = applicationStage;
 	    		   
 	    	 Scene scene = new Scene(root);
