@@ -12,6 +12,7 @@ public class Health extends Goals {
 	private String waterProgressTotalLabel;
 	private double sleepDuration;
 	private String sleepProgressLabel;
+	private double currentWeight;
 	
 	double value;
 	
@@ -28,16 +29,17 @@ public class Health extends Goals {
 			completeGoal();
 			reachSleepGoal = true;
 		}
-		if (waterIntakeAmount >= waterIntakeGoals && !reachWaterIntakeGoal) {
+		if (waterIntakeAmount >= waterIntakeGoals && (!reachWaterIntakeGoal)) {
 			completeGoal();
 			reachWaterIntakeGoal = true;
 		}
+		if((currentWeight >= weightGoals) && (!reachWeightGoal)) {
+			completeGoal();
+			reachWeightGoal = true;
+		}
 	}
 	
-	public void checkInput(String valueEntered) throws InvalidUserInputException {
-		if (value < 0) {
-			throw new InvalidUserInputException("Number should be greater than 0.");
-		}	
+	public void checkInput(String valueEntered) throws InvalidUserInputException {	
 		boolean decimalEncountered = false;
 		for (char c :valueEntered.toCharArray()) {
 			// Check if the character is a '.'
@@ -50,6 +52,12 @@ public class Health extends Goals {
 			else if (!Character.isDigit(c)) {
 				throw new InvalidUserInputException("Make sure to enter a valid number.");
 			}
+		}
+		
+		value = Double.parseDouble(valueEntered);
+		
+		if (value < 0) {
+			throw new InvalidUserInputException("Number should be greater than 0.");
 		}
 	}
 
