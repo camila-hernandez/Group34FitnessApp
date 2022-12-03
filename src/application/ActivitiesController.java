@@ -90,11 +90,11 @@ public class ActivitiesController implements Initializable {
     
     double progress = 0.0;
     double totalCalories = 0.0;
-    
+    // needs Javadoc
     public void setUser(User user) {
     	this.user = user;
     }
-   
+   // needs Javadoc
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
@@ -119,6 +119,10 @@ public class ActivitiesController implements Initializable {
     	dateLabel.setText(formattedDate);
 	}
     
+    /**
+     * This method will update every aspect of progress.
+     * @param time is how long the user exercised today
+     */
     public void updateProgress(double time) {
     	
     	// Initialize progress and label to 0
@@ -128,10 +132,10 @@ public class ActivitiesController implements Initializable {
     	// Update progress bar
     	progress = (time / user.fitness.getExerciseGoals()) * 100;
     	workoutProgressBar.setProgress(progress / 100);
-    	if (progress < 100 || progress == 100) {
+    	if (progress < 100) {
     		progressLabel.setText(Math.round(progress) + ".0%");
     	}
-    	else {
+    	else if (progress >= 100){
     		progressLabel.setText("100.0%");
     	}
     	
@@ -177,15 +181,25 @@ public class ActivitiesController implements Initializable {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
-    
+    // needs Javadoc
     public void updateProgressValue() {
     	updateProgress(user.fitness.getProgress());
     }
- 
+    
+    /**
+     * This method will set a label that will indicate to the user their exercise duration compared
+     * to the exercise goal they previously set.
+     * @param exercise is the total exercise duration of the current day
+     */
     public void updateTodaysExerciseLabel(double exercise) {
     	todayExerciseLabel.setText(exercise + "/" + user.fitness.getExerciseGoals() + " minutes");
     }
     
+    /**
+     * This method will update the user's workout statistics to be able to generate a graph based on a weeks exercise.
+     * @param day is today's exercise duration
+     * @param calories is total calories burned today
+     */
     public void updateStats(double day, double calories) {
     	Date today = new Date();
 		Calendar cal = Calendar.getInstance(); 
@@ -223,18 +237,26 @@ public class ActivitiesController implements Initializable {
     		user.fitness.setSundayCaloriesBurnedInfo(calories);
     	}
     }
-
+    
+    /**
+     * This method set the total amount of calories burned for the day in Fitness class
+     * @param calories is the total amount of calories burned in a day through exercise
+     */
     public void totalCaloriesBurned(double calories) {
     	totalCalories = calories;
     	user.fitness.setTotalCaloriesBurned(calories);
     }
-    
+    // needs Javadoc
     public void updateTotalCaloriesBurnedValues() {
     	if (totalCalories != 0.0) {
     		totalCaloriesBurned(user.fitness.getTotalCaloriesBurned());
     	}
     }
-   
+    
+    /**
+    * This method will set the scene to the main scene and will set the labels in the main scene.
+    * @param event This event will return the user back to the main scene
+    */
     @FXML
     void returnToDashboard(ActionEvent event) {
     	 try {
@@ -243,6 +265,7 @@ public class ActivitiesController implements Initializable {
     		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
     		   controller.setUser(user);
     		   controller.setGoalsCompletedLabel();
+    		   controller.setNameLabel();
     		   controller.applicationStage = applicationStage;
     		   
     		   Scene scene = new Scene(root);
@@ -255,6 +278,11 @@ public class ActivitiesController implements Initializable {
     	   }
     }
     
+    /**
+     * This method will open up a new scene where the user can input their workout information such as
+     * calories burned and exercise duration, depending on which exercises are completed.
+     * @param event This event will change the scene so the user can upload their workout information
+     */
     public void updateWorkouts(ActionEvent event) {
     	Scene displayTrainingPage = applicationStage.getScene(); 
  	   
@@ -500,6 +528,10 @@ public class ActivitiesController implements Initializable {
   	    
     } 
     
+    /**
+     * This method will open a new scene where the user can view their weekly workout statistics
+     * @param event This event will change the scene so the user can view the weekly workout statistics
+     */
     public void showWorkoutStats(ActionEvent event) {
     	try {
     		System.out.println(user.test + "1");
@@ -537,7 +569,6 @@ public class ActivitiesController implements Initializable {
 	   	   } catch(Exception e) {
 	   		   e.printStackTrace();
 	   	   }
-        
     }
 }
 
