@@ -21,9 +21,7 @@ public class WaterIntakeController{
 	private Label waterProgressLabel;
 
 	private double intakeAmount;
-
-	private double goalAmount;
-
+	
 	User user;
 
 	public void setUser(User user) {
@@ -91,17 +89,6 @@ public class WaterIntakeController{
 
 	public double getWaterIntakeAmount() {
 		return intakeAmount;
-	}
-	
-	public double getGoalAmount() {
-		if(user.health.getWaterIntakeGoals() != 0) {
-			goalAmount = user.health.getWaterIntakeGoals();
-		}
-		return goalAmount;
-	}
-
-	public void setGoalAmount(double goalAmount) {
-		this.goalAmount = goalAmount;
 	}
 
 	@FXML
