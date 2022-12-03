@@ -2,10 +2,10 @@ package application;
 
 public class Fitness extends Goals {
 	
-	private double stepGoals;
+	private double stepsGoal;
 	private double stepsTaken;
-	private double caloriesBurnedGoals;
-	private double exerciseGoals;
+	private double caloriesBurnedGoal;
+	private double exerciseGoal;
 	private double progress;
 	private double totalCaloriesBurned;
 	private double mondayExerciseInfo;
@@ -27,14 +27,14 @@ public class Fitness extends Goals {
 	private String exerciseGoalsLabel;
 	private String todaysExerciseMotivationalLabel;
 	
-	boolean reachStepsGoals = false;
-	boolean reachExerciseGoals = false;
-	boolean reachCaloriesBurnedGoals = false;
+	boolean reachStepsGoal = false;
+	boolean reachExerciseGoal = false;
+	boolean reachCaloriesBurnedGoal = false;
 	
 	public Fitness() {
-		stepGoals = 0.0;
-		caloriesBurnedGoals = 0.0;
-		exerciseGoals = 0.0;
+		stepsGoal = 0.0;
+		caloriesBurnedGoal = 0.0;
+		exerciseGoal = 0.0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
@@ -53,28 +53,43 @@ public class Fitness extends Goals {
 		sundayCaloriesBurnedInfo = 0.0;
 	}
 	
+	public void checkGoalsCompleted() {
+		if ((stepsTaken >= stepsGoal) && (!reachStepsGoal)) {
+			completeGoal();
+			reachStepsGoal = true;
+		}
+		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
+			completeGoal();
+			reachExerciseGoal = true;
+		}
+		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
+			completeGoal();
+			reachCaloriesBurnedGoal = true;
+		}
+	}
+	
 	public void setStepsGoals(double steps) {
-		this.stepGoals = steps;
+		this.stepsGoal = steps;
     }
     
     public void setCaloriesGoals(double calories) {
-		this.caloriesBurnedGoals = calories;
+		this.caloriesBurnedGoal = calories;
     }
     
     public void setExerciseGoals(double exercise) {
-		this.exerciseGoals = exercise;
+		this.exerciseGoal = exercise;
     }
     
     public double getStepsGoals() {
-		return stepGoals;
+		return stepsGoal;
 	}
 	
 	public double getCaloriesGoals() {
-		return caloriesBurnedGoals;
+		return caloriesBurnedGoal;
 	}
 	
 	public double getExerciseGoals() {
-		return exerciseGoals;
+		return exerciseGoal;
 	}
 	public void setStepsGoalsLabel(String stepsLabel) {
 		 this.stepsGoalsLabel = stepsLabel;
@@ -94,9 +109,6 @@ public class Fitness extends Goals {
 		
 	public void setTotalCaloriesBurned(double caloriesBurned) {
 		 this.totalCaloriesBurned = caloriesBurned;
-		 if ((totalCaloriesBurned >= caloriesBurnedGoals) && (!reachCaloriesBurnedGoals)) {
-				completeGoal();
-			}
 	 }
 	 
 	 public double getTotalCaloriesBurned() {
@@ -105,9 +117,6 @@ public class Fitness extends Goals {
 	 
 	 public void setProgress(double time) {
 		 this.progress = time;
-		 if ((progress >= exerciseGoals) && (!reachExerciseGoals)) {
-				completeGoal();
-			}
 	 }
 	 
 	 public double getProgress() {
@@ -116,9 +125,6 @@ public class Fitness extends Goals {
 	 
 	 public void setStepsTaken(double steps) {
 		 this.stepsTaken = steps;
-		 if ((stepsTaken >= stepGoals) && (!reachStepsGoals)) {
-				completeGoal();
-			}
 	 }
 	 
 	 public double getStepsTaken() {
