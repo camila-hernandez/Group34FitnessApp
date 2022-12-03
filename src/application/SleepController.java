@@ -29,7 +29,7 @@ public class SleepController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 	
-	double hours;
+	private double hours;
 	
 	public void setUser(User user) {
     	this.user = user;
@@ -39,19 +39,19 @@ public class SleepController{
 	void setSleep(ActionEvent trackSleepEvent) {
 
 		double sleepGoal = user.health.getSleepGoals();
-		double hours = Double.parseDouble(hoursSleep.getText());
-		int progressPercent = (int) ((hours/sleepGoal) * 100);
-		setSleepAmount(hours);
+		setHours(Double.parseDouble(hoursSleep.getText()));
+		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+		setSleepAmount(getHours());
 		
-		updateSleepProgressLabel(String.valueOf(hours));
-		sleepProgressBar.setProgress((hours)/sleepGoal);
+		updateSleepProgressLabel(String.valueOf(getHours()));
+		sleepProgressBar.setProgress((getHours())/sleepGoal);
 		
 		// Setting progress label
-		if (((sleepGoal - hours) == 0) || (((sleepGoal - hours) < 0))) {
+		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
 			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal!");
 		}
 		
-		if (sleepGoal - hours > 0) {
+		if (sleepGoal - getHours() > 0) {
 			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
 		}	
 	}
@@ -102,5 +102,13 @@ public class SleepController{
   		   e.printStackTrace();
   	   }
     }
+
+	private double getHours() {
+		return hours;
+	}
+
+	private void setHours(double hours) {
+		this.hours = hours;
+	}
 
 }
