@@ -506,17 +506,32 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {
 		   try {
+			   user.fitness.checkInput(sportsExerciseTextfield.getText());
+			   user.fitness.checkInput(cardioExerciseTextfield.getText());
+			   user.fitness.checkInput(flexibilityExerciseTextfield.getText());
+			   user.fitness.checkInput(strengthExerciseTextfield.getText());
+			   user.fitness.checkInput(sportsCaloriesTextfield.getText());
+			   user.fitness.checkInput(cardioCaloriesTextfield.getText());
+			   user.fitness.checkInput(flexibilityCaloriesTextfield.getText());
+			   user.fitness.checkInput(strengthCaloriesTextfield.getText());
+			   
 			   double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
-					   Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
+			   Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
+			   
 			   updateProgress(duration);
+			   
 			   double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
-					   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
+			   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
+			   
 			   totalCaloriesBurned(calories);
+			   
 			   updateStats(duration, calories);
+			   
 			   updateTodaysExerciseLabel(duration); 
+			   
 			   applicationStage.setScene(displayTrainingPage);
-		   } catch (Exception e) {
-			   workoutErrorLabel.setText("This is not a valid data input. Please enter a number greater than 0.");
+		   } catch (InvalidUserInputException e) {
+			   workoutErrorLabel.setText(e.getMessage());
 		   }
 	   });
   	   
