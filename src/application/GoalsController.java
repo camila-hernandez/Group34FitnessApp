@@ -167,7 +167,13 @@ public class GoalsController {
  	   updateStack.setPadding(new Insets(25,0,25,0));
  	   
  	   // Create error label
+ 	   VBox errorLabelContainer = new VBox();
  	   Label goalsErrorLabel = new Label("");
+ 	   Font errorLabelFont = Font.font("System", 16);
+ 	   goalsErrorLabel.setFont(errorLabelFont);
+ 	   goalsErrorLabel.setTextFill(Color.RED);
+ 	   errorLabelContainer.getChildren().add(goalsErrorLabel);
+ 	   errorLabelContainer.setAlignment(Pos.CENTER);
  	   
  	   // Create steps container
  	   HBox updateStepsGoalsContainer = new HBox();
@@ -293,7 +299,7 @@ public class GoalsController {
  	   updateButtonContainer.setAlignment(Pos.CENTER);
  	   updateButtonContainer.setPadding(new Insets(10,0,0,0));
  		
- 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, goalsErrorLabel, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
+ 	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, errorLabelContainer, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
  				updateNutritionGoalsLabel, updateNutritionGoalsContainer, updateExerciseGoalsLabel, updateExerciseGoalsContainer, updateCaloriesGoalsContainer, updateButtonContainer);
  		
  	   Scene updatedUserFitnessGoalsScene = new Scene(updateFitnessGoalsContainer, 609, 856);
