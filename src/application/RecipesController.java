@@ -750,6 +750,8 @@ public class RecipesController {
  		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
  		   
  		   controller.setUser(user);
+ 		   controller.setGoalsCompletedLabel();
+ 		   controller.setNameLabel();
  		   controller.applicationStage = applicationStage;
  		   
  		   Scene scene = new Scene(root);
