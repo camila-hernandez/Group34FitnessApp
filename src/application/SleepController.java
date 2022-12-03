@@ -92,6 +92,8 @@ public class SleepController{
   		   
   		   controller.applicationStage = applicationStage;
   		   controller.setUser(user);
+  		   controller.setNameLabel();
+  		   controller.setGoalsCompletedLabel();
   		   controller.setDisplayLabel(event);
   		   
   		   Scene scene = new Scene(root);
