@@ -7,8 +7,6 @@ public class Health extends Goals {
 	private double weightGoals;
 	private double weight;
 	private double height;
-	private String gender;
-	private double age;
 	private double bodyFat;
 	private double waterIntakeAmount;
 	private String waterProgressTotalLabel;
@@ -133,13 +131,13 @@ public class Health extends Goals {
 	}
 	
 	public double calculateBodyFatPercentage() {
-		if (getGender().equalsIgnoreCase("female")) {
-			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 5.4;	
-		}
-		
-		if (getGender().equalsIgnoreCase("male")){
-			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 16.2; 	
-		}
+//		if (getGender().equalsIgnoreCase("female")) {
+//			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 5.4;	
+//		}
+//		
+//		if (getGender().equalsIgnoreCase("male")){
+//			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 16.2; 	
+//		}
 		
 		return bodyFat;
 	}
@@ -199,21 +197,5 @@ public class Health extends Goals {
 
 	public void setFiber(double fiber) {
 		this.fiber = fiber;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public double getAge() {
-		return age;
-	}
-
-	public void setAge(double age) {
-		this.age = age;
 	}
 }

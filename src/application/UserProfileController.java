@@ -75,10 +75,8 @@ public class UserProfileController {
 		heightLabel.setText(heightTextfield.getText());
 		weightLabel.setText(weightTextfield.getText());
 		
-		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
 		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
-		user.health.setGender(genderChoiceBox.getValue().toString());
-		user.health.setAge(Double.parseDouble(ageTextfield.getText()));
+		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
 		
 		applicationStage.setScene(userProfileScene);
 	}
