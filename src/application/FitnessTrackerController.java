@@ -44,6 +44,9 @@ public class FitnessTrackerController {
     private ImageView profileImage;
 	
 	@FXML
+	private Label nameLabel;
+	
+	@FXML
 	private Label dateLabel;
 	
 	@FXML
@@ -55,6 +58,10 @@ public class FitnessTrackerController {
     	this.user = user;
 	}
 >>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
+	
+	public void setNameLabel() {
+		nameLabel.setText(user.getName());
+	}
 	
 	public void setGoalsCompletedLabel() {
     	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
