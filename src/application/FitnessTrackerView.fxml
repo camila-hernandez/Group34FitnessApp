@@ -123,7 +123,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Full name">
+                  <Label fx:id="nameLabel" text="Full name">
                      <font>
                         <Font size="33.0" />
                      </font>
