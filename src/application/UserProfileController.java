@@ -74,7 +74,7 @@ public class UserProfileController {
 	}
 	
 	@FXML
-	void updateUserProfile(ActionEvent event) throws InvalidUserInputException {
+	void updateUserProfile(ActionEvent modifyUserProfileEvent) throws InvalidUserInputException {
 	    Scene userProfileScene = applicationStage.getScene();
 	    
 	    Color c = Color.web("#6b4191",1.0);
