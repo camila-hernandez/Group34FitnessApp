@@ -1,26 +1,39 @@
 package application;
-
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-public class FitnessTrackerController {
-	Stage applicationStage;
+public class FitnessTrackerController implements Initializable {
+  Stage applicationStage;
+  
+	@FXML
+	private TextField amountOfWater;
 	
-
-	public Steps stepsCount;
-
 	@FXML 
 	private Label waterProgress;
   
@@ -34,7 +47,6 @@ public class FitnessTrackerController {
 	private Label sleepDisplayLabel;
 	
 	@FXML
-
 	private ProgressIndicator waterProgressIndicator;
 	
 	@FXML
@@ -42,13 +54,13 @@ public class FitnessTrackerController {
 	
 	@FXML
     private ImageView profileImage;
-	
+
 	@FXML
 	private Label nameLabel;
-	
+
 	@FXML
 	private Label dateLabel;
-	
+
 	@FXML
 	private Label goalsCompletedLabel;
 	
@@ -57,29 +69,23 @@ public class FitnessTrackerController {
 	public void setUser(User user) {
     	this.user = user;
 	}
-	
+
 	public void setNameLabel() {
 		nameLabel.setText(user.getName());
 	}
-	
+
 	public void setGoalsCompletedLabel() {
     	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
     }
 	
     @FXML
     void openUserProfile(ActionEvent event) {
-
-    }
-
-    @FXML
-    void trackSteps(ActionEvent event) {
-    	Steps userSteps = new Steps("0");
     	try {
 			FXMLLoader loader = new FXMLLoader();
-			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
-			StepsController controller = (StepsController)loader.getController();
-			controller.applicationStage = applicationStage;
+			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
+			UserProfileController controller = (UserProfileController)loader.getController();
 			controller.setUser(user);
+			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
@@ -88,7 +94,10 @@ public class FitnessTrackerController {
 			e.printStackTrace();
 		}
     }
-
+	@FXML
+	void trackSteps(ActionEvent event) {
+	//	controller.setUser(user);
+    }
 	
 	@FXML
 	void trackSleep(ActionEvent event) {
@@ -109,22 +118,86 @@ public class FitnessTrackerController {
 			e.printStackTrace();
 		}
 	}
-
-
-    @FXML
-    void trackNutrition(ActionEvent event) {
-
-    }
-
-    @FXML
-    void trackWeight(ActionEvent event) {
-
-    }
-
-    @FXML
-    void trackActivities(ActionEvent event) {
-    }
-
+	@FXML
+	void trackNutrition(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
+			NutritionController controller = (NutritionController)loader.getController();
+			controller.applicationStage = applicationStage;
+			controller.setUser(user);
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@FXML
+	void trackActivities(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+	   		AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+	   		ActivitiesController controller = (ActivitiesController)loader.getController();
+	   		
+	   		controller.setUser(user);
+	   		System.out.println("Setting user for actviities controller from fitness");
+	   		
+	   		Date today = new Date();
+			Calendar cal = Calendar.getInstance(); 
+			cal.setTime(today); 
+			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+	    	if (dayOfWeek == Calendar.MONDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getMondayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.TUESDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getTuesdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.WEDNESDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getWednesdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.THURSDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getThursdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.FRIDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getFridayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.SATURDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getSaturdayExerciseInfo());
+	    	}
+	    	if (dayOfWeek == Calendar.SUNDAY) {
+	    		controller.updateTodaysExerciseLabel(user.fitness.getSundayExerciseInfo());
+	    	}
+	    	
+			   controller.updateTotalCaloriesBurnedValues();
+			   controller.updateProgressValue();
+			   System.out.println(user.test);
+	   		   
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+	    }
+	@FXML
+	void showHealthyRecipes(ActionEvent event) {
+		try {
+	   		   FXMLLoader loader = new FXMLLoader();
+	   		   AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
+	   		   RecipesController controller = (RecipesController)loader.getController();
+	   		controller.setUser(user);
+	   		   controller.applicationStage = applicationStage;
+	   		   
+	   		   Scene scene = new Scene(root);
+	   		   applicationStage.setScene(scene);
+	   		   applicationStage.show();
+	   	   } catch(Exception e) {
+	   		   e.printStackTrace();
+	   	   }
+	}
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -134,7 +207,6 @@ public class FitnessTrackerController {
 			
 			controller.setUser(user);
 			controller.updateWaterValues();
-
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -150,50 +222,42 @@ public class FitnessTrackerController {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 	}
-
     @FXML
     void showRecommendations(ActionEvent event) {
-
     }
-
-    @FXML
-    void setGoals(ActionEvent setGoalsEvent) {
-    	Scene mainScene = applicationStage.getScene();
-    	
-    	VBox goalsContainer = new VBox();
-    	Label setGoalsLabel = new Label("SET GOALS");
-    	
-    	HBox stepGoalsContainer = new HBox();
-    	Label stepGoalsLabel = new Label("STEPS GOALS: ");
-    	TextField stepGoalsTextfield = new TextField();
-    	stepGoalsContainer.getChildren().addAll(stepGoalsLabel, stepGoalsTextfield);
-    	
-    	HBox sleepGoalsContainer = new HBox();
-    	Label sleepGoalsLabel = new Label("SLEEP GOALS: ");
-    	TextField sleepGoalsTextfield = new TextField();
-    	sleepGoalsContainer.getChildren().addAll(sleepGoalsLabel, sleepGoalsTextfield);
-    	
-    	HBox waterIntakeGoalsContainer = new HBox();
-    	Label waterIntakeGoalsLabel = new Label("WATER INTAKE GOALS: ");
-    	TextField waterIntakeGoalsTextfield = new TextField();
-    	waterIntakeGoalsContainer.getChildren().addAll(waterIntakeGoalsLabel, waterIntakeGoalsTextfield);
-    	
-    	HBox weightGoalsContainer = new HBox();
-    	Label weightGoalsLabel = new Label("WEIGHT GOALS: ");
-    	TextField weightGoalsTextfield = new TextField();
-    	weightGoalsContainer.getChildren().addAll(weightGoalsLabel, weightGoalsTextfield);
-    	
-    	Button updateGoalsButton = new Button("UPDATE GOALS");
-    	updateGoalsButton.setOnAction(updateGoalsButtonEvent -> System.out.println("Done button pressed"));
-    	
-    	Button returnToMainPageButton = new Button("RETURN TO MAIN PAGE");
-    	returnToMainPageButton.setOnAction(returnToMainPageEvent -> applicationStage.setScene(mainScene));
-    	
-    	goalsContainer.getChildren().addAll(setGoalsLabel, stepGoalsContainer, sleepGoalsContainer, waterIntakeGoalsContainer,
-    			weightGoalsContainer, updateGoalsButton, returnToMainPageButton);
-    	Scene goalsScene = new Scene(goalsContainer);
-    	applicationStage.setScene(goalsScene);
-    }
-
+    
+   @FXML
+   	void showUserFitnessGoals(ActionEvent event) {
+	   try {		   
+		   FXMLLoader loader = new FXMLLoader();
+		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
+		   GoalsController controller = (GoalsController)loader.getController();
+		   
+		   controller.setUser(user);
+		   System.out.println("Setting user for goals controller from fitness");
+		   controller.updateGoalValues();
+		   System.out.println(user.test);
+		   
+		   controller.applicationStage = applicationStage;
+		   
+		   Scene scene = new Scene(root);
+		   applicationStage.setScene(scene);
+		   applicationStage.show();
+	   } catch(Exception e) {
+		   e.printStackTrace();
+	   }  
+   }
+   @Override
+   public void initialize(URL location, ResourceBundle resources) {
+	   //<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+   		//Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
+   		//profileImage.setImage(userIconImage);
+   		
+   		// Sets current date
+   		LocalDateTime currentDateTime = LocalDateTime.now();
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+    	String formattedDate = currentDateTime.format(dtf);
+    	dateLabel.setText(formattedDate);
+	   
+   }
 }
-
