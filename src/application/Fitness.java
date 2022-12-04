@@ -53,8 +53,6 @@ public class Fitness extends Goals {
 		sundayCaloriesBurnedInfo = 0.0;
 	}
 
-	//STEPS GOALS
-	
 	public void checkGoalsCompleted() {
 		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
 			completeGoal();
@@ -96,26 +94,6 @@ public class Fitness extends Goals {
 		this.stepsGoal = steps;
     }
 	
-	//STEPS VALIDATION + GETTER + SETTER
-	/*
-	
-	public static boolean isNumeric(String str) throws NumberFormatException{ 
-		  try {  
-			Integer.parseInt(str);  
-		    return true;
-		  } catch(NumberFormatException e){  
-		    return false;  
-		  }  
-		}
-
-	public void setStepsCount(String stepsCount) {
-		if (isNumeric(stepsCount)) {
-			this.stepsCount = Integer.parseInt(stepsCount);
-			
-		}
-
-	}*/
-    //*****************************************
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoal = calories;
     }
