@@ -61,15 +61,11 @@ public class UserProfileController {
 	void setUserProperties(Scene userProfileScene, TextField nameTextfield, ChoiceBox<Object> genderChoiceBox, TextField ageTextfield,
 			TextField heightTextfield, TextField weightTextfield) throws InvalidUserInputException {
 		nameLabel.setText(nameTextfield.getText());
-		setNameInMainView(nameTextfield.getText());
 		ageLabel.setText(ageTextfield.getText());
 		genderLabel.setText(genderChoiceBox.getValue().toString());
 		heightLabel.setText(heightTextfield.getText());
 		weightLabel.setText(weightTextfield.getText());
-		
-		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
-		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
-		
+				
 		applicationStage.setScene(userProfileScene);
 	}
 	
@@ -177,7 +173,12 @@ public class UserProfileController {
 				user.checkAge(ageTextfield.getText());
 				user.health.checkInput(heightTextfield.getText());
 				user.health.checkInput(weightTextfield.getText());
-				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, heightTextfield, weightTextfield);
+				user.setName(nameTextfield.getText());
+				user.setAge(Integer.parseInt(ageTextfield.getText()));
+				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
+				user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
+				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, 
+				heightTextfield, weightTextfield);
 				applicationStage.setScene(userProfileScene);
 	    	} catch (InvalidUserInputException e) {
 	    		userProfileErrorLabel.setText(e.getMessage());
@@ -196,6 +197,7 @@ public class UserProfileController {
 	   		 FXMLLoader loader = new FXMLLoader();
 	    	 BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+	    	 
 	    	 controller.setUser(user);
 	  		 controller.setGoalsCompletedLabel();
 	    	 controller.setNameLabel();
