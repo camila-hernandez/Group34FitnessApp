@@ -20,8 +20,6 @@ public class WaterIntakeController{
 	@FXML
 	private Label waterProgressLabel;
 
-	private double intakeAmount;
-
 	User user;
 	
 	private double intakeAmount;
