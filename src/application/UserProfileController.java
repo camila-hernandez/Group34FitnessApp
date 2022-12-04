@@ -76,6 +76,7 @@ public class UserProfileController {
 	public void setNameInMainView(String name) {
 		user.setName(name);
 	}
+	
 	@FXML
 	void updateUserProfile(ActionEvent event) throws InvalidUserInputException {
 	    Scene userProfileScene = applicationStage.getScene();
@@ -188,31 +189,6 @@ public class UserProfileController {
 	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
 	  	applicationStage.setScene(updateUserProfileScene);
 	 }
-	    
-	// Checks user input for height and weight
-	public void checkUserInput(double value) throws InvalidUserInputException {
-		try {
-			boolean decimalEncountered = false;
-			for (char c : Double.toString(value).toCharArray()) {
-				// Check if the character is a '.'
-				// If the character is a '.' and the for loop has not encountered a '.' yet, 
-				// then it will indicate this '.' to be a decimal.
-				if (c == '.' && !decimalEncountered) {
-					decimalEncountered = true;
-				}
-				// Check if the character is a digit if it's not a decimal
-				else if (!Character.isDigit(c)) {
-					throw new InvalidUserInputException("Make sure to enter a valid number.");
-				}
-			}
-		
-			//if (value < 0) {
-			//	throw new InvalidUserInputException("Number should be greater than 0.");
-			//}	
-		} catch (Exception e) {
-			throw new InvalidUserInputException(e.getMessage());
-		}
-	}
 	
 	 @FXML
 	 void returnToDashboard(ActionEvent event) {
