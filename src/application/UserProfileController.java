@@ -175,6 +175,7 @@ public class UserProfileController {
 				user.health.checkInput(weightTextfield.getText());
 				user.setName(nameTextfield.getText());
 				user.setAge(Integer.parseInt(ageTextfield.getText()));
+				user.setGender(genderChoiceBox.getValue().toString());
 				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
 				user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
 				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, 
