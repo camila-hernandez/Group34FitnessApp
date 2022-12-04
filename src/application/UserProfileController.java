@@ -4,10 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,6 +66,9 @@ public class UserProfileController {
 		genderLabel.setText(genderChoiceBox.getValue().toString());
 		heightLabel.setText(heightTextfield.getText());
 		weightLabel.setText(weightTextfield.getText());
+		
+		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
+		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
 		
 		applicationStage.setScene(userProfileScene);
 	}

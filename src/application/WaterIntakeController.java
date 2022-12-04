@@ -41,14 +41,17 @@ public class WaterIntakeController{
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent) {
 		//the in take is the value entered in the textField. 
+
+		double waterGoal = user.health.getWaterIntakeGoals();
+		double waterProgress = waterGoal - getWaterIntakeAmount();
+
 		waterGoal = user.health.getWaterIntakeGoals();
 		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
 		waterProgress = waterGoal - intakeAmount;
 		
-		updateWaterProgressLabel(String.valueOf(intakeAmount));
-		setWaterIntakeAmount(intakeAmount);
+		updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
 		
-		user.health.setWaterIntakeAmount(intakeAmount);
+		user.health.setWaterIntakeAmount(getWaterIntakeAmount());
 
 		// tells user how close they are to their goal. 
 		if (waterProgress == 0 || waterProgress < 0) {
@@ -71,7 +74,6 @@ public class WaterIntakeController{
 		}
 		user.health.setWaterProgressLabel(water);
 
-		// to access the water in take from storage
 	}
 	public void setWaterProgressLabel(String water) {
 		user.health.setWaterProgressLabel(water);

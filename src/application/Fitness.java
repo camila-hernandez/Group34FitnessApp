@@ -3,7 +3,7 @@ package application;
 public class Fitness extends Goals {
 	
 	private double stepsGoal;
-	private double stepsTaken;
+	private int stepsCount;
 	private double caloriesBurnedGoal;
 	private double exerciseGoal;
 	private double progress;
@@ -30,13 +30,11 @@ public class Fitness extends Goals {
 	boolean reachStepsGoal = false;
 	boolean reachExerciseGoal = false;
 	boolean reachCaloriesBurnedGoal = false;
-	
+
 	double value;
 	
 	public Fitness() {
-		stepsGoal = 0.0;
-		caloriesBurnedGoal = 0.0;
-		exerciseGoal = 0.0;
+		stepsCount = 0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
@@ -54,9 +52,9 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
-	
+
 	public void checkGoalsCompleted() {
-		if ((stepsTaken >= stepsGoal) && (!reachStepsGoal)) {
+		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
 			completeGoal();
 			reachStepsGoal = true;
 		}
@@ -91,11 +89,11 @@ public class Fitness extends Goals {
 			throw new InvalidUserInputException("Number should be greater than 0.");
 		}
 	}
-	
+
 	public void setStepsGoals(double steps) {
 		this.stepsGoal = steps;
     }
-    
+	
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoal = calories;
     }
@@ -147,12 +145,12 @@ public class Fitness extends Goals {
 		 return progress;
 	 }
 	 
-	 public void setStepsTaken(double steps) {
-		 this.stepsTaken = steps;
+	 public void setStepsCount(int steps) {
+		 this.stepsCount = steps;
 	 }
 	 
-	 public double getStepsTaken() {
-		 return stepsTaken;
+	 public double getStepsCount() {
+		 return stepsCount;
 	 }
 
 	 public void setMondayCaloriesBurnedInfo(double monday) {

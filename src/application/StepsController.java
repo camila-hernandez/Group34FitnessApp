@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 
 public class StepsController {
 	Stage applicationStage;
-	
-    private Steps stepsCount;
     
     @FXML
     private Label stepsCountLabel;
@@ -22,24 +20,29 @@ public class StepsController {
     @FXML
     private TextField stepsTextField;
     
-
+    User user;
+    
+    public void setUser(User user) {
+    	this.user = user;
+    }
     
     @FXML
-    void updateStepsNumber(ActionEvent event) {
-    	stepsCount.setStepsCount(stepsTextField.getText());  		
+    void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
+    	user.fitness.checkInput(stepsTextField.getText());
+    	user.fitness.setStepsCount(Integer.parseInt(stepsTextField.getText()));  		
     	
     }
     
     @FXML
     void returnToMainPage(ActionEvent event) {
-    	 //UPDATE MAIN PAGE STEPS LABEL HERE
-    	//
-    	//
      	 try {
     		   FXMLLoader loader = new FXMLLoader();
     		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
     		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
     		   
+    		   controller.setUser(user);
+    		   controller.setGoalsCompletedLabel();
+    		   controller.setNameLabel();
     		   controller.applicationStage = applicationStage;
     		   
     		   Scene scene = new Scene(root);
