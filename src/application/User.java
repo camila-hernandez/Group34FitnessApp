@@ -36,4 +36,26 @@ public class User {
 		return gender;
 	}
 	
+	// Check user input for name
+	public void checkName(String s) throws InvalidUserInputException {
+		if (!s.matches("^[a-zA-Z]*$")) {
+				throw new InvalidUserInputException("Invalid Character");
+		}
+	}
+	
+	public void checkAge(String valueEntered) throws InvalidUserInputException {	
+		boolean decimalEncountered = false;
+		for (char c :valueEntered.toCharArray()) {
+			// Check if the character is a '.'
+			// If the character is a '.' and the for loop has not encountered a '.' yet, 
+			// then it will indicate this '.' to be a decimal.
+			if (c == '.' && !decimalEncountered) {
+				decimalEncountered = true;
+			}
+			// Check if the character is a digit if it's not a decimal
+			else if (!Character.isDigit(c)) {
+				throw new InvalidUserInputException("Make sure to enter a valid number.");
+			}
+		}
+	}
 }

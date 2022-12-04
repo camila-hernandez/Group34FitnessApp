@@ -12,13 +12,21 @@ import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class UserProfileController {
@@ -45,62 +53,180 @@ public class UserProfileController {
 	@FXML
 	private Label nameLabel;
 	
+	@FXML
+	private Label genderLabel;
+	
 	User user;
 	
 	public void setUser(User user) {
 		this.user = user;
 	}
 	
+	void setUserProperties(Scene userProfileScene, TextField nameTextfield, ChoiceBox<Object> genderChoiceBox, TextField ageTextfield,
+			TextField heightTextfield, TextField weightTextfield) throws InvalidUserInputException {
+		nameLabel.setText(nameTextfield.getText());
+		setNameInMainView(nameTextfield.getText());
+		ageLabel.setText(ageTextfield.getText());
+		genderLabel.setText(genderChoiceBox.getValue().toString());
+		heightLabel.setText(heightTextfield.getText());
+		weightLabel.setText(weightTextfield.getText());
+		
+		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
+		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
+		
+		applicationStage.setScene(userProfileScene);
+	}
+	
+	public void setNameInMainView(String name) {
+		user.setName(name);
+	}
 	@FXML
-	void updateUserProfile(ActionEvent event) {
+	void updateUserProfile(ActionEvent event) throws InvalidUserInputException {
 	    Scene userProfileScene = applicationStage.getScene();
 	    
-	    VBox userProfileContainer = new VBox();
+	    Color c = Color.web("#6b4191",1.0);
 	    
-	    Label updateProfileLabel = new Label();
-	    	
+	    VBox userProfileContainer = new VBox();
+	    userProfileContainer.setStyle("-fx-background-color: white");
+	    
+	    StackPane updateUserProfileStack = new StackPane();
+	 	   
+	 	Rectangle profileHeaderRectangle = new Rectangle(110, 61, 390, 95);
+	 	profileHeaderRectangle.setFill(c);
+	 	profileHeaderRectangle.setArcHeight(20);
+	 	profileHeaderRectangle.setArcWidth(20);
+	 	   
+	 	Label updateProfileLabel = new Label("UPDATE USER PROFILE");
+	 	updateProfileLabel.setTextFill(Color.WHITE);
+	 	Font font = Font.font("System", FontWeight.BOLD, 25);
+	 	updateProfileLabel.setFont(font);
+	 	   
+	 	updateUserProfileStack.getChildren().addAll(profileHeaderRectangle, updateProfileLabel);
+	 	updateUserProfileStack.setPadding(new Insets(60,0,25,0));
+	    
+	 	Font labelFont = Font.font("System", 24.5);
 	    Label updateNameLabel = new Label("Name: ");
+	    updateNameLabel.setFont(labelFont);
 	    
 	    Label updateAgeLabel = new Label("Age: ");
+	    updateAgeLabel.setFont(labelFont);
 	    
-	    Label updateHeightLabel = new Label("Height: ");
+	    Label updateHeightLabel = new Label("Height in cm: ");
+	    updateHeightLabel.setFont(labelFont);
 	    
-	    Label updateWeightLabel = new Label("Weight: ");
+	    Label updateWeightLabel = new Label("Weight in kg: ");
+	    updateWeightLabel.setFont(labelFont);
 	    
-	    TextField updateNameTextfield = new TextField();
+	    Label updateGenderLabel = new Label("Gender: ");
+	    updateGenderLabel.setFont(labelFont);
 	    
-	    TextField updateAgeTextfield = new TextField();
+	    TextField nameTextfield = new TextField();
 	    
-	    TextField updateHeightTextfield = new TextField();
+	    TextField ageTextfield = new TextField();
 	    
-	    TextField updateWeightTextfield = new TextField();
+	    TextField heightTextfield = new TextField();
+	    
+	    TextField weightTextfield = new TextField();
+	    
+	    VBox userProfileErrorLabelContainer = new VBox();
+	 	Label userProfileErrorLabel = new Label(" ");
+	 	Font errorLabelFont = Font.font("System", 16);
+	 	userProfileErrorLabel.setFont(errorLabelFont);
+	 	userProfileErrorLabel.setTextFill(Color.RED);
+	 	userProfileErrorLabelContainer.getChildren().add(userProfileErrorLabel);
+	 	userProfileErrorLabelContainer.setAlignment(Pos.CENTER);
+	    
+	    ChoiceBox<Object> genderChoiceBox = new ChoiceBox<Object>();
+	    genderChoiceBox.getItems().add("Female");
+	    genderChoiceBox.getItems().add("Male");
 	    
 	    HBox nameContainer = new HBox();
 	    HBox ageContainer = new HBox();
 	    HBox heightContainer = new HBox();
 	    HBox weightContainer = new HBox();
+	    HBox genderContainer = new HBox();
 	    
-	    nameContainer.getChildren().addAll(updateNameLabel, updateNameTextfield);
-	    ageContainer.getChildren().addAll(updateAgeLabel, updateAgeTextfield);
-	    heightContainer.getChildren().addAll(updateHeightLabel, updateHeightTextfield);
-	    weightContainer.getChildren().addAll(updateWeightLabel, updateWeightTextfield);
+	    nameContainer.getChildren().addAll(updateNameLabel, nameTextfield);
+	    ageContainer.getChildren().addAll(updateAgeLabel, ageTextfield);
+	    heightContainer.getChildren().addAll(updateHeightLabel, heightTextfield);
+	    weightContainer.getChildren().addAll(updateWeightLabel, weightTextfield);
+	    genderContainer.getChildren().addAll(updateGenderLabel, genderChoiceBox);
 	    
+	    nameContainer.setAlignment(Pos.CENTER);
+	    nameContainer.setPadding(new Insets(0,0,0,50));
+	    ageContainer.setAlignment(Pos.CENTER);
+	    ageContainer.setPadding(new Insets(50,0,0,50));
+	    genderContainer.setAlignment(Pos.CENTER);
+	   	genderContainer.setPadding(new Insets(50,0,0,50));
+	    heightContainer.setAlignment(Pos.CENTER);
+	    heightContainer.setPadding(new Insets(50,0,0,50));
+	    weightContainer.setAlignment(Pos.CENTER);
+	    weightContainer.setPadding(new Insets(50,0,0,50));
+	    
+	    HBox buttonContainer = new HBox();
 	    Button doneButton = new Button("Done");
-	    doneButton.setOnAction(doneEvent -> applicationStage.setScene(userProfileScene));
+		doneButton.setPrefSize(106, 48);
+		doneButton.setTextFill(Color.WHITE);
+		Font buttonFont = Font.font("System", FontWeight.BOLD, 22);
+		doneButton.setFont(buttonFont);
+		doneButton.setStyle("-fx-background-color: #3e9acf");
+		   
+		buttonContainer.getChildren().addAll(doneButton);
+	    buttonContainer.setPadding(new Insets(75,0,0,0));
+	    buttonContainer.setAlignment(Pos.CENTER);
+	    doneButton.setOnAction(doneEvent -> {
+	    	try {
+	    		user.checkName(nameTextfield.getText());
+				user.checkAge(ageTextfield.getText());
+				user.health.checkInput(heightTextfield.getText());
+				user.health.checkInput(weightTextfield.getText());
+				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, heightTextfield, weightTextfield);
+				applicationStage.setScene(userProfileScene);
+	    	} catch (InvalidUserInputException e) {
+	    		userProfileErrorLabel.setText(e.getMessage());
+			}
+	    });
 	    
-	    userProfileContainer.getChildren().addAll(updateProfileLabel, nameContainer, ageContainer, heightContainer, weightContainer, doneButton);
+	    userProfileContainer.getChildren().addAll(updateUserProfileStack, userProfileErrorLabelContainer, nameContainer, ageContainer, genderContainer, heightContainer, weightContainer, buttonContainer);
 	    
 	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
 	  	applicationStage.setScene(updateUserProfileScene);
 	 }
-
+	    
+	// Checks user input for height and weight
+	public void checkUserInput(double value) throws InvalidUserInputException {
+		try {
+			boolean decimalEncountered = false;
+			for (char c : Double.toString(value).toCharArray()) {
+				// Check if the character is a '.'
+				// If the character is a '.' and the for loop has not encountered a '.' yet, 
+				// then it will indicate this '.' to be a decimal.
+				if (c == '.' && !decimalEncountered) {
+					decimalEncountered = true;
+				}
+				// Check if the character is a digit if it's not a decimal
+				else if (!Character.isDigit(c)) {
+					throw new InvalidUserInputException("Make sure to enter a valid number.");
+				}
+			}
+		
+			//if (value < 0) {
+			//	throw new InvalidUserInputException("Number should be greater than 0.");
+			//}	
+		} catch (Exception e) {
+			throw new InvalidUserInputException(e.getMessage());
+		}
+	}
+	
 	 @FXML
 	 void returnToDashboard(ActionEvent event) {
 	   	 try {
 	   		 FXMLLoader loader = new FXMLLoader();
 	    	 BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
 	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
-	    		   
+	    	 controller.setUser(user);
+	  		 controller.setGoalsCompletedLabel();
+	    	// controller.setNameLabel();
 	    	 controller.applicationStage = applicationStage;
 	    		   
 	    	 Scene scene = new Scene(root);
@@ -115,7 +241,7 @@ public class UserProfileController {
 
     @FXML
     void userLogOut(ActionEvent event) {
-    	File f = new File("C:\\Users\\CS219-user\\Documents\\FitnessTrackerFile.txt");
+    	File f = new File("FitnessTrackerFile.txt");
 		try {
 			// If the file doesn't exist, we will create the file
 			if (!f.exists()) {

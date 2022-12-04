@@ -22,9 +22,11 @@ public class WaterIntakeController{
 
 	private double intakeAmount;
 
-	private double goalAmount;
-
 	User user;
+	
+	private double intakeAmount;
+	private double waterGoal;
+	private double waterProgress;
 
 	public void setUser(User user) {
 		this.user = user;
@@ -41,20 +43,17 @@ public class WaterIntakeController{
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent) {
 		//the in take is the value entered in the textField. 
-		if (user.health.getWaterIntakeAmount() != 0.0) {
-			intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
-		}
-		if (user.health.getWaterIntakeAmount() == 0.0) { 
-			intakeAmount = Double.parseDouble(amountOfWater.getText());
-		}
 
 		double waterGoal = user.health.getWaterIntakeGoals();
-		double waterProgress = waterGoal - intakeAmount;
+		double waterProgress = waterGoal - getWaterIntakeAmount();
+
+		waterGoal = user.health.getWaterIntakeGoals();
+		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
+		waterProgress = waterGoal - intakeAmount;
 		
-		updateWaterProgressLabel(String.valueOf(intakeAmount));
-		setWaterIntakeAmount(intakeAmount);
+		updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
 		
-		user.health.setWaterIntakeAmount(intakeAmount);
+		user.health.setWaterIntakeAmount(getWaterIntakeAmount());
 
 		// tells user how close they are to their goal. 
 		if (waterProgress == 0 || waterProgress < 0) {
@@ -73,11 +72,10 @@ public class WaterIntakeController{
 			waterProgressLabel.setText("You have entered " + water + " cups of water.");
 		}
 		if (water == null) {
-			waterProgressLabel.setText("You have not set a goal.");
+			waterProgressLabel.setText("You have not entered your water intake.");
 		}
 		user.health.setWaterProgressLabel(water);
 
-		// to access the water in take from storage
 	}
 	public void setWaterProgressLabel(String water) {
 		user.health.setWaterProgressLabel(water);
@@ -105,6 +103,8 @@ public class WaterIntakeController{
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
 			controller.setDisplayLabel(event);
+			controller.setNameLabel();
+			controller.setGoalsCompletedLabel();
 
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -113,16 +113,4 @@ public class WaterIntakeController{
 			e.printStackTrace();
 		}
 	}
-
-	public double getGoalAmount() {
-		if(user.health.getWaterIntakeGoals() != 0) {
-			goalAmount = user.health.getWaterIntakeGoals();
-		}
-		return goalAmount;
-	}
-
-	public void setGoalAmount(double goalAmount) {
-		this.goalAmount = goalAmount;
-	}
-
 }

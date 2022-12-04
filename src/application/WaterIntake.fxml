@@ -15,39 +15,42 @@
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#47a0c6" height="121.0" stroke="#52d4ff" strokeType="INSIDE" width="468.0" />
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#3e9acf" height="95.0" stroke="#3e9acf" strokeType="INSIDE" width="390.0">
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
+            </Rectangle>
             <Label text="WATER INTAKE" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="50.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
          </children>
       </StackPane>
    </top>
    <center>
-      <VBox prefHeight="486.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="486.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6e8" height="66.0" stroke="#52d4ff" strokeType="INSIDE" width="548.0" />
-                  <Label prefHeight="46.0" prefWidth="508.0" text="Enter your water intake amount: (cups)" textFill="WHITE">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-            <HBox prefHeight="82.0" prefWidth="609.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" />
-                  <TextField fx:id="amountOfWater" alignment="CENTER" prefHeight="51.0" prefWidth="130.0" />
-                  <ImageView fitHeight="150.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" onAction="#calculateAmountWater" text="Update Water Progress" textFill="#0c79b9" />
-               </children>
-            </HBox>
-            <Label fx:id="waterProgressLabel" alignment="CENTER" prefHeight="171.0" prefWidth="539.0" text="progress to goal:">
+            <Label prefHeight="46.0" prefWidth="455.0" text="Enter your water intake amount (in cups):">
                <font>
-                  <Font size="24.0" />
+                  <Font size="24.5" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="amountOfWater" alignment="CENTER" prefHeight="51.0" prefWidth="425.0" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#calculateAmountWater" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Update Water Progress" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
+               <VBox.margin>
+                  <Insets bottom="50.0" top="50.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="waterProgressLabel" text="Label">
+               <font>
+                  <Font size="24.5" />
                </font>
             </Label>
          </children>
@@ -56,7 +59,14 @@
    <bottom>
       <Pane prefHeight="102.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="208.0" layoutY="4.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="47.0" prefWidth="194.0" style="-fx-background-radius: 20; -fx-background-color: #47a0c6;" text="RETURN TO MAIN" textFill="WHITE" />
+            <Button layoutX="199.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="54.0" prefWidth="211.0" style="-fx-background-radius: 5; -fx-background-color: #3e9acf;" text="Return to Main" textFill="WHITE">
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </bottom>

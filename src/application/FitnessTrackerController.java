@@ -44,6 +44,9 @@ public class FitnessTrackerController {
     private ImageView profileImage;
 	
 	@FXML
+	private Label nameLabel;
+	
+	@FXML
 	private Label dateLabel;
 	
 	@FXML
@@ -53,6 +56,10 @@ public class FitnessTrackerController {
 	
 	public void setUser(User user) {
     	this.user = user;
+	}
+	
+	public void setNameLabel() {
+		nameLabel.setText(user.getName());
 	}
 	
 	public void setGoalsCompletedLabel() {

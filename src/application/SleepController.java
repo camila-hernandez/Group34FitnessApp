@@ -29,7 +29,7 @@ public class SleepController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 	
-	double hours;
+	private double hours;
 	
 	public void setUser(User user) {
     	this.user = user;
@@ -37,35 +37,31 @@ public class SleepController{
 	
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) {
-		if (user.health.getSleepDuration() != 0.0) {
-			hours = Double.parseDouble(hoursSleep.getText()) + user.health.getSleepDuration();
-		}
-		if (user.health.getSleepDuration() == 0.0) { hours = Double.parseDouble(hoursSleep.getText());
-		}
 
 		double sleepGoal = user.health.getSleepGoals();
-		int progressPercent = (int) ((hours/sleepGoal)* 100);
+		setHours(Double.parseDouble(hoursSleep.getText()));
+		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+		setSleepAmount(getHours());
 		
-		updateSleepProgressLabel(String.valueOf(hours));
-		sleepProgressBar.setProgress((hours)/sleepGoal);
-		setSleepAmount(hours);
+		updateSleepProgressLabel(String.valueOf(getHours()));
+		sleepProgressBar.setProgress((getHours())/sleepGoal);
 		
-		user.health.setSleepDuration(hours);
-		
-		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
-			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
+		// Setting progress label
+		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal!");
 		}
 		
-		if (sleepGoal - hours > 0) {
+		if (sleepGoal - getHours() > 0) {
 			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
-		}
-		
+		}	
 	}
 	
 	public void updateSleepProgressLabel(String sleep) {
+		
 		if (sleep == null) {
 			sleepProgressLabel.setText("You have not entered hours of sleep.");
 		}
+		
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
 		}
@@ -96,6 +92,8 @@ public class SleepController{
   		   
   		   controller.applicationStage = applicationStage;
   		   controller.setUser(user);
+  		   controller.setNameLabel();
+  		   controller.setGoalsCompletedLabel();
   		   controller.setDisplayLabel(event);
   		   
   		   Scene scene = new Scene(root);
@@ -106,5 +104,13 @@ public class SleepController{
   		   e.printStackTrace();
   	   }
     }
+
+	private double getHours() {
+		return hours;
+	}
+
+	private void setHours(double hours) {
+		this.hours = hours;
+	}
 
 }
