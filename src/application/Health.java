@@ -12,6 +12,10 @@ public class Health extends Goals {
 	private String waterProgressTotalLabel;
 	private double sleepDuration;
 	private String sleepProgressLabel;
+
+	private double carbs;
+	private double fat;
+	private double fiber;
 	private double currentWeight;
 	
 	double value;
@@ -128,15 +132,21 @@ public class Health extends Goals {
 	}
 	
 	public double calculateBMI() {
+		weight = getWeight();
+		height = getHeight()/100;
 		return weight / (height * height);
 	}
 	
 	public double calculateBodyFatPercentage() {
+//		if (getGender().equalsIgnoreCase("female")) {
+//			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 5.4;	
+//		}
+//		
+//		if (getGender().equalsIgnoreCase("male")){
+//			bodyFat = 1.20 * calculateBMI() + 0.23 * getAge() - 16.2; 	
+//		}
+		
 		return bodyFat;
-		// female
-		//return 163.205 * log10(waist + hip - neck) - 97.684 * log10(height) - 78.387;
-		// male
-		//return 86.010 * log10(abdomen - neck) - 70.041 * log10(height) + 36.76;
 	}
 	
 	public double calculateLBM() {
@@ -159,17 +169,40 @@ public class Health extends Goals {
 		this.sleepProgressLabel = sleepProgressLabel;
 	}
 	
-	//double calculateCarbs() {
-		//return (amount in serving size (in g) / 300) * 100;
-	//}
+	double calculateCarbs() {
+		
+		return (getCarbs() / 30) * 100;
+	}
 	
-	//double calculateFat() {
-		//return (amount in serving size (in g) / 65) * 100;
-	//}
+	double calculateFat() {
+		return (getFat() / 65) * 100;
+	}
 	
-	//double calculateFiber() {
-		//return (amount in serving size (in g) / 25) * 100;
-	//}
-	
+	double calculateFiber() {
+		return (getFiber() / 25) * 100;
+	}
 
+	public double getCarbs() {
+		return carbs;
+	}
+
+	public void setCarbs(double carbs) {
+		this.carbs = carbs;
+	}
+
+	public double getFat() {
+		return fat;
+	}
+
+	public void setFat(double fat) {
+		this.fat = fat;
+	}
+
+	public double getFiber() {
+		return fiber;
+	}
+
+	public void setFiber(double fiber) {
+		this.fiber = fiber;
+	}
 }
