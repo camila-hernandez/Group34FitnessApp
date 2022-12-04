@@ -3,7 +3,7 @@ package application;
 public class Fitness extends Goals {
 	
 	private double stepsGoal;
-	private double stepsTaken;
+	private int stepsCount;
 	private double caloriesBurnedGoal;
 	private double exerciseGoal;
 	private double progress;
@@ -27,16 +27,14 @@ public class Fitness extends Goals {
 	private String exerciseGoalsLabel;
 	private String todaysExerciseMotivationalLabel;
 	
-	private int stepsCount;
-	
-	boolean reachStepsGoals = false;
-	boolean reachExerciseGoals = false;
-	boolean reachCaloriesBurnedGoals = false;
+	boolean reachStepsGoal = false;
+	boolean reachExerciseGoal = false;
+	boolean reachCaloriesBurnedGoal = false;
 
 	double value;
 	
 	public Fitness() {
-    stepsCount = 0.0;
+		stepsCount = 0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
@@ -58,7 +56,7 @@ public class Fitness extends Goals {
 	//STEPS GOALS
 	
 	public void checkGoalsCompleted() {
-		if ((stepsTaken >= stepsGoal) && (!reachStepsGoal)) {
+		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
 			completeGoal();
 			reachStepsGoal = true;
 		}
@@ -99,9 +97,7 @@ public class Fitness extends Goals {
     }
 	
 	//STEPS VALIDATION + GETTER + SETTER
-	public double getStepsCount() {
-		return stepsCount;
-	}
+	/*
 	
 	public static boolean isNumeric(String str) throws NumberFormatException{ 
 		  try {  
@@ -118,7 +114,7 @@ public class Fitness extends Goals {
 			
 		}
 
-	}
+	}*/
     //*****************************************
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoal = calories;
@@ -171,12 +167,12 @@ public class Fitness extends Goals {
 		 return progress;
 	 }
 	 
-	 public void setStepsTaken(double steps) {
-		 this.stepsTaken = steps;
+	 public void setStepsCount(int steps) {
+		 this.stepsCount = steps;
 	 }
 	 
-	 public double getStepsTaken() {
-		 return stepsTaken;
+	 public double getStepsCount() {
+		 return stepsCount;
 	 }
 
 	 public void setMondayCaloriesBurnedInfo(double monday) {
