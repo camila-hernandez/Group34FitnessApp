@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 public class FitnessTrackerController {
 	Stage applicationStage;
 	
-<<<<<<< HEAD
+
 	public Steps stepsCount;
-=======
+
 	@FXML 
 	private Label waterProgress;
   
@@ -57,7 +57,6 @@ public class FitnessTrackerController {
 	public void setUser(User user) {
     	this.user = user;
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 	
 	public void setNameLabel() {
 		nameLabel.setText(user.getName());
@@ -80,6 +79,7 @@ public class FitnessTrackerController {
 			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
 			StepsController controller = (StepsController)loader.getController();
 			controller.applicationStage = applicationStage;
+			controller.setUser(user);
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
@@ -89,12 +89,6 @@ public class FitnessTrackerController {
 		}
     }
 
-    @FXML
-    void trackSleep(ActionEvent event) {
-
-    }
-<<<<<<< HEAD
-=======
 	
 	@FXML
 	void trackSleep(ActionEvent event) {
@@ -115,7 +109,7 @@ public class FitnessTrackerController {
 			e.printStackTrace();
 		}
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
+
 
     @FXML
     void trackNutrition(ActionEvent event) {
@@ -127,10 +121,10 @@ public class FitnessTrackerController {
 
     }
 
-<<<<<<< HEAD
     @FXML
     void trackActivities(ActionEvent event) {
-=======
+    }
+
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -140,11 +134,7 @@ public class FitnessTrackerController {
 			
 			controller.setUser(user);
 			controller.updateWaterValues();
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
-<<<<<<< HEAD
-    }
-=======
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -160,7 +150,6 @@ public class FitnessTrackerController {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 	}
->>>>>>> branch 'Camila_Hernandez' of https://github.com/camila-hernandez/Group34FitnessApp
 
     @FXML
     void showRecommendations(ActionEvent event) {

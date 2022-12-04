@@ -29,7 +29,10 @@
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6459e8" height="66.0" stroke="BLACK" strokeType="INSIDE" width="447.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6459e8" height="66.0" stroke="BLACK" strokeType="INSIDE" width="481.0">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin></Rectangle>
                   <Label prefHeight="46.0" prefWidth="390.0" text="how many steps did you take today?">
                      <font>
                         <Font name="Microsoft Tai Le" size="24.0" />
@@ -37,8 +40,54 @@
                   </Label>
                </children>
             </StackPane>
-            <TextField fx:id="stepsTextField" prefHeight="99.0" prefWidth="447.0" />
-            <Button mnemonicParsing="false" onAction="#updateStepsNumber" text="progress" />
+            <HBox prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Day of the month:">
+                     <HBox.margin>
+                        <Insets left="65.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Steps taken:">
+                     <HBox.margin>
+                        <Insets left="135.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox prefHeight="50.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets left="65.0" />
+                     </HBox.margin></ChoiceBox>
+                  <Label prefHeight="7.0" text="&gt;">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="45.0" right="45.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="stepsTextField" alignment="CENTER" prefHeight="50.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#updateStepsNumber" text="Update Daily Steps" textFill="#ff6459">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="65.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="34.5" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect></Button>
          </children>
       </VBox>
    </center>
@@ -53,12 +102,30 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="380.0">
                <children>
-                  <Label fx:id="waterProgress" prefHeight="28.0" prefWidth="288.0" text="progress to goal:" />
+                  <Label text="Your monthly progress:">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="130.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ProgressBar prefHeight="100.0" prefWidth="354.0" progress="0.0">
+                     <VBox.margin>
+                        <Insets left="130.0" />
+                     </VBox.margin>
+                  </ProgressBar>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="139.0" text="return to main" onAction="#returnToMainPage" />
+                        <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="139.0" text="return to main">
+                           <HBox.margin>
+                              <Insets top="40.0" />
+                           </HBox.margin></Button>
                      </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </HBox>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>

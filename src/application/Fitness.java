@@ -27,16 +27,16 @@ public class Fitness extends Goals {
 	private String exerciseGoalsLabel;
 	private String todaysExerciseMotivationalLabel;
 	
-	boolean reachStepsGoal = false;
-	boolean reachExerciseGoal = false;
-	boolean reachCaloriesBurnedGoal = false;
+	private int stepsCount;
 	
+	boolean reachStepsGoals = false;
+	boolean reachExerciseGoals = false;
+	boolean reachCaloriesBurnedGoals = false;
+
 	double value;
 	
 	public Fitness() {
-		stepsGoal = 0.0;
-		caloriesBurnedGoal = 0.0;
-		exerciseGoal = 0.0;
+    stepsCount = 0.0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
@@ -54,6 +54,8 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
+
+	//STEPS GOALS
 	
 	public void checkGoalsCompleted() {
 		if ((stepsTaken >= stepsGoal) && (!reachStepsGoal)) {
@@ -91,11 +93,33 @@ public class Fitness extends Goals {
 			throw new InvalidUserInputException("Number should be greater than 0.");
 		}
 	}
-	
+
 	public void setStepsGoals(double steps) {
 		this.stepsGoal = steps;
     }
-    
+	
+	//STEPS VALIDATION + GETTER + SETTER
+	public double getStepsCount() {
+		return stepsCount;
+	}
+	
+	public static boolean isNumeric(String str) throws NumberFormatException{ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+
+	public void setStepsCount(String stepsCount) {
+		if (isNumeric(stepsCount)) {
+			this.stepsCount = Integer.parseInt(stepsCount);
+			
+		}
+
+	}
+    //*****************************************
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoal = calories;
     }
