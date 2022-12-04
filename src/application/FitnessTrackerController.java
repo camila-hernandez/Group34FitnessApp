@@ -262,8 +262,8 @@ public class FitnessTrackerController implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources) {
 	   //<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
-   		//Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
-   		//profileImage.setImage(userIconImage);
+	   Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
+   	   profileImage.setImage(userIconImage);
    		
    		// Sets current date
    		LocalDateTime currentDateTime = LocalDateTime.now();
