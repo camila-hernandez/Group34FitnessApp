@@ -12,9 +12,11 @@ public class Health extends Goals {
 	private String waterProgressTotalLabel;
 	private double sleepDuration;
 	private String sleepProgressLabel;
+
 	private double carbs;
 	private double fat;
 	private double fiber;
+	private double currentWeight;
 	
 	double value;
 	
@@ -29,34 +31,37 @@ public class Health extends Goals {
 	public void checkGoalsCompleted() {
 		if ((sleepDuration >= sleepGoals) && (!reachSleepGoal)) {
 			completeGoal();
+			reachSleepGoal = true;
 		}
-		if (waterIntakeAmount >= waterIntakeGoals && !reachSleepGoal) {
+		if (waterIntakeAmount >= waterIntakeGoals && (!reachWaterIntakeGoal)) {
 			completeGoal();
+			reachWaterIntakeGoal = true;
+		}
+		if((currentWeight >= weightGoals) && (!reachWeightGoal)) {
+			completeGoal();
+			reachWeightGoal = true;
 		}
 	}
 	
-	public void checkInput(String valueEntered) throws InvalidUserInputException {
-		try {
-			boolean decimalEncountered = false;
-			for (char c : Double.toString(value).toCharArray()) {
-				// Check if the character is a '.'
-				// If the character is a '.' and the for loop has not encountered a '.' yet, 
-				// then it will indicate this '.' to be a decimal.
-				if (c == '.' && !decimalEncountered) {
-					decimalEncountered = true;
-				}
-				// Check if the character is a digit if it's not a decimal
-				else if (!Character.isDigit(c)) {
-					throw new InvalidUserInputException("Make sure to enter a valid number.");
-				}
+	public void checkInput(String valueEntered) throws InvalidUserInputException {	
+		boolean decimalEncountered = false;
+		for (char c :valueEntered.toCharArray()) {
+			// Check if the character is a '.'
+			// If the character is a '.' and the for loop has not encountered a '.' yet, 
+			// then it will indicate this '.' to be a decimal.
+			if (c == '.' && !decimalEncountered) {
+				decimalEncountered = true;
 			}
-			
-			value = Double.parseDouble(valueEntered);
+			// Check if the character is a digit if it's not a decimal
+			else if (!Character.isDigit(c)) {
+				throw new InvalidUserInputException("Make sure to enter a valid number.");
+			}
+		}
 		
-			if (value < 0) {
-				throw new InvalidUserInputException("Number should be greater than 0.");
-			}	
-		} catch (Exception e) {
+		value = Double.parseDouble(valueEntered);
+		
+		if (value < 0) {
+			throw new InvalidUserInputException("Number should be greater than 0.");
 		}
 	}
 
@@ -110,6 +115,7 @@ public class Health extends Goals {
 	
 	public void setWaterIntakeAmount(double water) {
 		this.waterIntakeAmount = water;
+		checkGoalsCompleted();
 	}
 	
 	public double getWaterIntakeAmount() {
@@ -118,6 +124,7 @@ public class Health extends Goals {
 	
 	public void setSleepDuration(double sleep) {
 		this.sleepDuration = sleep;
+		checkGoalsCompleted();
 	}
 	
 	public double getSleepDuration() {

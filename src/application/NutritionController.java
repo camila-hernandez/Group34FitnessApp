@@ -224,6 +224,9 @@ public class NutritionController {
   		   FXMLLoader loader = new FXMLLoader();
   		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
   		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+  		   controller.setUser(user);
+		   controller.setGoalsCompletedLabel();
+  		   controller.setNameLabel();
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
