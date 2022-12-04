@@ -4,10 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -226,7 +222,7 @@ public class UserProfileController {
 	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
 	    	 controller.setUser(user);
 	  		 controller.setGoalsCompletedLabel();
-	    	// controller.setNameLabel();
+	    	 controller.setNameLabel();
 	    	 controller.applicationStage = applicationStage;
 	    		   
 	    	 Scene scene = new Scene(root);
