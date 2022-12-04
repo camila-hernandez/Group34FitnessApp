@@ -23,9 +23,7 @@ public class WaterIntakeController{
 	User user;
 	
 	private double intakeAmount;
-	private double waterGoal;
-	private double waterProgress;
-
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -39,13 +37,12 @@ public class WaterIntakeController{
 
 	// when update progress button is pressed, the method calculateAmountWater calculates how far away you are from water goal. 
 	@FXML
-	void calculateAmountWater(ActionEvent progressWaterEvent) {
+	void calculateAmountWater(ActionEvent progressWaterEvent){
 		//the in take is the value entered in the textField. 
-
+			
 		double waterGoal = user.health.getWaterIntakeGoals();
 		double waterProgress = waterGoal - getWaterIntakeAmount();
 
-		waterGoal = user.health.getWaterIntakeGoals();
 		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
 		waterProgress = waterGoal - intakeAmount;
 		
