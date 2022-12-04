@@ -3,7 +3,7 @@ package application;
 public class User {
 	
 	private String name;
-	private double age;
+	private int age;
 	private String gender;
 
 	User user;
@@ -20,11 +20,11 @@ public class User {
 		return name;
 	}
 	
-	public void setAge(double anAge) {
+	public void setAge(int anAge) {
 		age = anAge;
 	}
 	
-	public double getAge() {
+	public int getAge() {
 		return age;
 	}
 	
