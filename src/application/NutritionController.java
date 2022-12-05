@@ -63,9 +63,9 @@ public class NutritionController {
 	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) {
 		double calorieAmount = Double.parseDouble(CalorieIntake.getText());
 		
-		if (user.getGender().equalsIgnoreCase("female")) {
+		if (user.getGender().equalsIgnoreCase("Female")) {
 			if (calorieAmount < 2000) {
-				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' 
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
 			+ " is less than the average amount required daily for an adult female.");
 			}
 			
@@ -75,14 +75,14 @@ public class NutritionController {
 			}
 			
 			if (calorieAmount > 2500) {
-				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' +
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
 			" is greater than the average amount required daily for an adult female.");
 			}
 		}
 		
-		if (user.getGender().equalsIgnoreCase("male")) {
+		if (user.getGender().equalsIgnoreCase("Male")) {
 			if (calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' +
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
 						" is less than the average amount required daily for an adult male.");
 			}
 			
@@ -92,7 +92,7 @@ public class NutritionController {
 			}
 			
 			if (calorieAmount > 3000) {
-				CalorieIntakeDisplay.setText("Your Calorie intake of " 
+				CalorieIntakeDisplay.setText("Your calorie intake of " 
 			+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
 			}
 		}
@@ -102,16 +102,16 @@ public class NutritionController {
 	
 	@FXML
 	void calculateBMI(ActionEvent calculateBMIevent) {
-		double bmi = user.health.calculateBMI();
-		if (bmi < 18.5) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This displays low weight.", bmi));	
+		double BMI = user.health.calculateBMI();
+		if (BMI < 18.5) {
+			bmiDisplayLabel.setText(String.format("Your BMI is: %.2f " + '\n' + "This displays low weight.", BMI));	
 		}
-		if (bmi > 18.5 && bmi < 25) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This is a healthy weight.", bmi));	
+		if (BMI > 18.5 && BMI < 25) {
+			bmiDisplayLabel.setText(String.format("Your BMI is: %.2f " + '\n' + "This is a healthy weight.", BMI));	
 		}
 		
-		if (bmi > 25) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This displays a high weight.", bmi));	
+		if (BMI > 25) {
+			bmiDisplayLabel.setText(String.format("Your BMI is: %.2f " + '\n' + "This displays a high weight.", BMI));	
 		}
 		
 	}
