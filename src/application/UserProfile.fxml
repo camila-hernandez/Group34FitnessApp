@@ -39,7 +39,7 @@
       </Label>
       <HBox alignment="CENTER" layoutX="101.0" layoutY="192.0" prefHeight="100.0" prefWidth="408.0">
          <children>
-            <Label text="Name:">
+            <Label text="First name:">
                <font>
                   <Font size="24.5" />
                </font></Label>

@@ -224,8 +224,7 @@ public class Health extends Goals {
 	}
 
 	double calculateCarbs() {
-
-		return (getCarbs() *50 / 100);
+		return (getCarbs() * 50 / 100);
 	}
 
 	double calculateFat() {
