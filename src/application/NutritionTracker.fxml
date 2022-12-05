@@ -31,6 +31,10 @@
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Button>
+               <Label fx:id="weightProgressLabel" layoutX="15.0" layoutY="-9.0" prefHeight="47.0" prefWidth="579.0" text="weight start and current">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
          </children>
       </Pane>
    </bottom>
@@ -61,11 +65,11 @@
                   <Font size="19.0" />
                </font></Label>
             <Label fx:id="servingRatioLabel" layoutX="21.0" layoutY="304.0" prefHeight="105.0" prefWidth="270.0" text="Serving Ratio" />
-            <Label fx:id="userWeightLabel" layoutX="23.0" layoutY="534.0" prefHeight="47.0" prefWidth="579.0" text="weight progress">
+            <Label fx:id="userWeightLabel" layoutX="23.0" layoutY="533.0" prefHeight="47.0" prefWidth="420.0" text="weight progress">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <Label fx:id="bmiDisplayLabel" layoutX="326.0" layoutY="421.0" prefHeight="137.0" prefWidth="229.0" text="Bmi display">
+            <Label fx:id="bmiDisplayLabel" layoutX="307.0" layoutY="383.0" prefHeight="94.0" prefWidth="229.0" text="Bmi display">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Label>
@@ -82,6 +86,12 @@
             <TextField fx:id="fatTextField" layoutX="325.0" layoutY="213.0" prefHeight="10.0" prefWidth="192.0" />
             <TextField fx:id="proteinTextField" layoutX="325.0" layoutY="265.0" prefHeight="10.0" prefWidth="192.0" />
             <Button layoutX="183.0" layoutY="337.0" mnemonicParsing="false" onAction="#calculateServingRatio" text="Button" />
+            <TextField fx:id="currentWeightTextField" layoutX="379.0" layoutY="465.0" prefHeight="39.0" prefWidth="157.0" />
+            <Button alignment="CENTER" layoutX="346.0" layoutY="512.0" mnemonicParsing="false" onAction="#setCurrentWeight" prefHeight="44.0" prefWidth="241.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="set current weight" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </center>
