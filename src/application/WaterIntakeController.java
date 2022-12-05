@@ -35,16 +35,20 @@ public class WaterIntakeController{
 		}
 	}
 
-	// when update progress button is pressed, the method calculateAmountWater calculates how far away you are from water goal. 
+	/**
+	 * 
+	 * @param progressWaterEvent - when update water button is pressed, user is shown how far away they are from the goal set.
+	 */
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent){
-		//the in take is the value entered in the textField. 
-			
-		double waterGoal = user.health.getWaterIntakeGoals();
-		double waterProgress = waterGoal - getWaterIntakeAmount();
-
+		
+		// the amount of water entered in textField
 		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
-		waterProgress = waterGoal - intakeAmount;
+		
+		double waterGoal = user.health.getWaterIntakeGoals();
+		
+		//the amount of cups user entered compared to goal.
+		double waterProgress = waterGoal - getWaterIntakeAmount();
 		
 		updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
 		
@@ -52,7 +56,7 @@ public class WaterIntakeController{
 
 		// tells user how close they are to their goal. 
 		if (waterProgress == 0 || waterProgress < 0) {
-			waterProgressLabel.setText("You have reached" + '\n' + "your water goal.");
+			waterProgressLabel.setText("You have reached your water goal.");
 		}
 		
 		if (waterProgress > 0) {
@@ -61,7 +65,7 @@ public class WaterIntakeController{
 
 	}
 
-	// the user is shown how far away they are from their goal. 
+	// the user is shown how many cups they have entered in total. 
 	public void updateWaterProgressLabel(String water) {
 		if (water != null) {
 			waterProgressLabel.setText("You have entered " + water + " cups of water.");
@@ -80,6 +84,7 @@ public class WaterIntakeController{
 		return user.health.getWaterProgressLabel();
 	}
 
+	// setter, getter methods for amount of water entered by user.
 	public void setWaterIntakeAmount(double water) {
 		this.intakeAmount = water;
 	}
@@ -88,6 +93,7 @@ public class WaterIntakeController{
 		return intakeAmount;
 	}
 
+	// takes user back to main window when return to main button is pressed. 
 	@FXML
 	void returnToMain(ActionEvent event) {
 		try {
