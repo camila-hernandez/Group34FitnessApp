@@ -2,12 +2,15 @@ package application;
 
 import java.io.FileInputStream;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import javax.xml.datatype.DatatypeConstants;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,22 +103,30 @@ public class ActivitiesController implements Initializable {
     	this.user = user;
     }
     
-   
+   /**
+    * This method allows imported pictures to appear in the Activities window.
+    * Also, this method sets the progress bar color and displays the current date to the user in the same window.
+    */
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	// These are links to the original icons used.
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
     	// <a href="https://www.flaticon.com/free-icons/training" title="training icons">Training icons created by Freepik - Flaticon</a>
+    	
     	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
     	
+    	// Loads image onto workout button
     	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
     	workoutImage.setImage(workoutIconImage);
     	
+    	// Loads image onto the header
     	Image headerIconImage = new Image(getClass().getResourceAsStream("training.png"));
     	headerImage.setImage(headerIconImage);
     	
+    	// Sets the progress bar to purple
     	workoutProgressBar.setStyle("-fx-accent: purple;");
     	
     	// Sets the current date label
@@ -207,41 +218,42 @@ public class ActivitiesController implements Initializable {
      * @param calories is total calories burned today
      */
     public void updateStats(double day, double calories) {
+    	
+    	Calendar cal = Calendar.getInstance();
     	Date today = new Date();
-		Calendar cal = Calendar.getInstance(); 
 		cal.setTime(today); 
 		day = user.fitness.getProgress();
 		calories = user.fitness.getTotalCaloriesBurned();
-		
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-    	if (dayOfWeek == Calendar.MONDAY) {
-    		user.fitness.setMondayExerciseInfo(day);
-    		user.fitness.setMondayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.TUESDAY) {
-    		user.fitness.setTuesdayExerciseInfo(day);
-    		user.fitness.setTuesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.WEDNESDAY) {
-    		user.fitness.setWednesdaydayExerciseInfo(day);
-    		user.fitness.setWednesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.THURSDAY) {
-    		user.fitness.setThursdayExerciseInfo(day);
-    		user.fitness.setThursdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.FRIDAY) {
-    		user.fitness.setFridayExerciseInfo(day);
-    		user.fitness.setFridayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SATURDAY) {
-    		user.fitness.setSaturdayExerciseInfo(day);
-    		user.fitness.setSaturdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SUNDAY) {
-    		user.fitness.setSundayExerciseInfo(day);
-    		user.fitness.setSundayCaloriesBurnedInfo(calories);
-    	}
+		
+        	if (dayOfWeek == Calendar.MONDAY) {
+        		user.fitness.setMondayExerciseInfo(day);
+        		user.fitness.setMondayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.TUESDAY) {
+        		user.fitness.setTuesdayExerciseInfo(day);
+        		user.fitness.setTuesdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.WEDNESDAY) {
+        		user.fitness.setWednesdaydayExerciseInfo(day);
+        		user.fitness.setWednesdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.THURSDAY) {
+        		user.fitness.setThursdayExerciseInfo(day);
+        		user.fitness.setThursdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.FRIDAY) {
+        		user.fitness.setFridayExerciseInfo(day);
+        		user.fitness.setFridayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.SATURDAY) {
+        		user.fitness.setSaturdayExerciseInfo(day);
+        		user.fitness.setSaturdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.SUNDAY) {
+        		user.fitness.setSundayExerciseInfo(day);
+        		user.fitness.setSundayCaloriesBurnedInfo(calories);
+        	}
     }
     
     /**

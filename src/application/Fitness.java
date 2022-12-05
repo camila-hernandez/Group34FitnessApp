@@ -33,6 +33,8 @@ public class Fitness extends Goals {
 
 	double value;
 	
+	User user;
+	
 	public Fitness() {
 		stepsCount = 0;
 		progress = 0.0;

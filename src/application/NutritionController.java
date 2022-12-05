@@ -135,7 +135,7 @@ public class NutritionController {
 		double fat = user.health.calculateFat();
 		double protein = user.health.calculateProtein();
 		
-		servingRatioLabel.setText(String.format("ratio: %.1f carbs, %.1f fat, %.1f fiber.", carbs,fat,protein));
+		servingRatioLabel.setText(String.format("Ratio: %.1f carbs, %.1f fat, %.1f protein.", carbs,fat,protein));
 	}
 	
 	@FXML
