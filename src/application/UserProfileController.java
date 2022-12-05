@@ -71,7 +71,7 @@ public class UserProfileController {
 		ageLabel.setText(Integer.toString(user.getAge()));
 		genderLabel.setText(user.getGender());
 		heightLabel.setText(Double.toString(user.health.getHeight()));
-		weightLabel.setText(Double.toString(user.health.getWeight()));
+		weightLabel.setText(Double.toString(user.health.getStartingWeight()));
 	}
 	
 	/**
@@ -120,7 +120,7 @@ public class UserProfileController {
 	    Label updateGenderLabel = new Label("Gender: ");
 	    updateGenderLabel.setFont(labelFont);
 	    
-	    // Creating textfields and a choice box for user input
+	    // Creating TextFields and a choice box for user input
 	    TextField nameTextfield = new TextField();
 	    TextField ageTextfield = new TextField();
 	    TextField heightTextfield = new TextField();
@@ -188,7 +188,7 @@ public class UserProfileController {
 				user.setAge(Integer.parseInt(ageTextfield.getText()));
 				user.setGender(genderChoiceBox.getValue().toString());
 				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
-				user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
+				user.health.setStartingWeight(Double.parseDouble(weightTextfield.getText()));
 				// Set labels with user information
 				setUserProfileLabels();
 				
@@ -213,7 +213,7 @@ public class UserProfileController {
 	 */
 	@FXML
 	void returnToDashboard(ActionEvent returnToMainPageEvent) {
-		// Changing the scene using fxml files
+		// Changing the scene using FXML files
 	   	try {
 	   		FXMLLoader loader = new FXMLLoader();
 	    	BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
