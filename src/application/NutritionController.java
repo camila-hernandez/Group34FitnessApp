@@ -48,6 +48,9 @@ public class NutritionController {
 	private Label bmiDisplayLabel;
 	
 	@FXML
+	private Label bfpDisplayLabel;
+	
+	@FXML
 	private Label userWeightLabel;
 	
 	User user;
@@ -102,6 +105,12 @@ public class NutritionController {
 			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " , bmi, + '\n' + "you are over weight."));	
 		}
 		
+	}
+	
+	@FXML
+	void calcBFP(ActionEvent event) {
+		double BFP = user.health.calculateBodyFatPercentage() * 100;
+		bfpDisplayLabel.setText(String.format("Your Body Fat Percentage is: %.2f", BFP));
 	}
 	
 	@FXML
