@@ -90,11 +90,17 @@ public class ActivitiesController implements Initializable {
     
     double progress = 0.0;
     double totalCalories = 0.0;
-    // needs Javadoc
+    
+    /**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
     public void setUser(User user) {
     	this.user = user;
     }
-   // needs Javadoc
+    
+   
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
@@ -549,13 +555,12 @@ public class ActivitiesController implements Initializable {
      */
     public void showWorkoutStats(ActionEvent event) {
     	try {
-    		System.out.println(user.test + "1");
+
 	   		   FXMLLoader loader = new FXMLLoader();
 	   		   AnchorPane root = loader.load(new FileInputStream("src/application/WorkoutStats.fxml"));
 	   		   WorkoutStatisticsController controller = (WorkoutStatisticsController)loader.getController();
-	   		System.out.println(user.test + "2");
+
 	   		   controller.setUser(user);
-	   		   System.out.println("Setting user for workout stats controller from activities");
 	   		   
 	   		   controller.createChart();
 	   		   controller.getMondaysExerciseDuration();
@@ -575,8 +580,6 @@ public class ActivitiesController implements Initializable {
 	   		   controller.getSundayCaloriesBurnedValues();
 	   		   
 	   		   controller.applicationStage = applicationStage;
-	   		   
-	   		   System.out.println(user.test);
 	   		   
 	   		   Scene scene = new Scene(root);
 	   		   applicationStage.setScene(scene);
