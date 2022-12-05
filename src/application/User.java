@@ -88,14 +88,7 @@ public class User {
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
 	 */
 	public void checkAge(String valueEntered) throws InvalidUserInputException {	
-		//boolean decimalEncountered = false;
 		for (char c :valueEntered.toCharArray()) {
-			// Check if the character is a '.'
-			// If the character is a '.' and the for loop has not encountered a '.' yet, 
-			// then it will indicate this '.' to be a decimal.
-			//if (c == '.' && !decimalEncountered) {
-				//decimalEncountered = true;
-			//}
 			// Check if the character is a digit
 			if (!Character.isDigit(c)) {
 				throw new InvalidUserInputException("Make sure to enter a valid number.");
