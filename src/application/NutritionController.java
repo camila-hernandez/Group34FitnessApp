@@ -39,6 +39,9 @@ public class NutritionController {
 	private TextField proteinTextField;
 	
 	@FXML
+	private TextField currentWeightTextField;
+	
+	@FXML
 	private Label servingRatioLabel;
 	
 	@FXML
@@ -52,6 +55,9 @@ public class NutritionController {
 	
 	@FXML
 	private Label userWeightLabel;
+	
+	@FXML 
+	private Label weightProgressLabel;
 	
 	User user;
 	
@@ -135,14 +141,13 @@ public class NutritionController {
 	@FXML
 	void compareWeight(ActionEvent event) {
 		double userWeight = user.health.getCurrentWeight();
+		if (user.health.getCurrentWeight() == 0.0) {
+			userWeight = user.health.getWeight();
+		}
 		double weightGoal = user.health.getWeightGoals();
 		
 		if(weightGoal == 0.0) {
 			userWeightLabel.setText("You have not set a weight goal.");
-		}
-		
-		if(userWeight == 0.0) {
-			userWeightLabel.setText("There is no weight entered in user profile.");
 		}
 		
 		if (weightGoal - userWeight == 0) {
@@ -156,6 +161,20 @@ public class NutritionController {
 			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
 		}
 	}
+	
+	@FXML
+	void setCurrentWeight(ActionEvent setCurrentWeightEvent) {
+		double currentWeight = Double.parseDouble(currentWeightTextField.getText());
+		double startWeight = user.health.getWeight();
+		
+		if (currentWeightTextField.getText() == null) {
+			user.health.setCurrentWeight(startWeight);
+		}
+		user.health.setCurrentWeight(currentWeight);
+		weightProgressLabel.setText("Your starting weight: " + startWeight + "Your current weight: " + currentWeight);
+		
+	}
+	
 
 	@FXML
     void returnToMain(ActionEvent event) {

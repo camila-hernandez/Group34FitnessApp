@@ -34,6 +34,11 @@
             <Button layoutX="199.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="55.0" prefWidth="211.0" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" text="RETURN TO MAIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font></Button>
+               <Label fx:id="weightProgressLabel" layoutX="15.0" layoutY="-9.0" prefHeight="47.0" prefWidth="579.0" text="weight start and current">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
                </font>
                <effect>
                   <DropShadow color="#00000080" />
@@ -122,6 +127,19 @@
                <effect>
                   <DropShadow color="#00000080" />
                </effect>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="16.0" layoutY="173.0" prefHeight="27.0" prefWidth="390.0" text="Enter amount of carbs in serving (g):" />
+            <Label layoutX="8.0" layoutY="271.0" prefHeight="27.0" prefWidth="381.0" text="Enter amount of protein in serving (g):" />
+            <Label layoutX="12.0" layoutY="219.0" prefHeight="27.0" prefWidth="397.0" text="Enter amount of fat in serving (g):" />
+            <TextField fx:id="carbsTextField" layoutX="325.0" layoutY="167.0" prefHeight="20.0" prefWidth="192.0" />
+            <TextField fx:id="fatTextField" layoutX="325.0" layoutY="213.0" prefHeight="10.0" prefWidth="192.0" />
+            <TextField fx:id="proteinTextField" layoutX="325.0" layoutY="265.0" prefHeight="10.0" prefWidth="192.0" />
+            <Button layoutX="183.0" layoutY="337.0" mnemonicParsing="false" onAction="#calculateServingRatio" text="Button" />
+            <TextField fx:id="currentWeightTextField" layoutX="379.0" layoutY="465.0" prefHeight="39.0" prefWidth="157.0" />
+            <Button alignment="CENTER" layoutX="346.0" layoutY="512.0" mnemonicParsing="false" onAction="#setCurrentWeight" prefHeight="44.0" prefWidth="241.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="set current weight" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
