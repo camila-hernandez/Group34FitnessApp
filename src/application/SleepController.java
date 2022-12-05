@@ -37,7 +37,7 @@ public class SleepController{
 
 	/**
 	 * When user opens sleep window, the program will first look to see if any sleep was previously entered.  
-	 * @param sleep is how much hours of sleep the user entered.
+	 * @param sleep is how much hours the user entered.
 	 */
 	public void updateSleepProgressLabel(String sleep) {
 
@@ -92,7 +92,7 @@ public class SleepController{
 
 	/**
 	 * 
-	 * @param hours is the value the user enters in the hoursSleep text field.
+	 * @param hours is the number the user enters in the hoursSleep text field.
 	 */
 	private void setHours(double hours) {
 		this.hours = hours;
@@ -104,7 +104,7 @@ public class SleepController{
 
 	/**
 	 * 
-	 * @param sleep is the number of hours the user enters for sleep. 
+	 * @param sleep stores the number of hours the user enters for sleep in user. 
 	 */
 	public void setSleepAmount(double sleep) {
 		user.health.setSleepDuration(sleep);
@@ -113,7 +113,6 @@ public class SleepController{
 	public double getSleepAmount() {
 		return user.health.getSleepDuration();
 	}
-	
 	
 	// when button return to main is pressed, the user is taken back to the main window.
 	@FXML
