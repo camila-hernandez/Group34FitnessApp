@@ -108,7 +108,7 @@ public class NutritionController {
 	
 	@FXML
 	void calculateBMI(ActionEvent calculateBMIevent) {
-		double BMI = user.health.calculateBMI();
+		double BMI = user.health.calculateBMI(user.health.getCurrentWeight(), user.health.getHeight());
 		if (BMI < 18.5) {
 			bmiDisplayLabel.setText(String.format("Your BMI is: %.2f " + '\n' + "This displays low weight.", BMI));	
 		}
