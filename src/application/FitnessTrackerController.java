@@ -100,8 +100,8 @@ public class FitnessTrackerController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
 			StepsController controller = (StepsController)loader.getController();
-			controller.applicationStage = applicationStage;
 			controller.setUser(user);
+			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
@@ -136,8 +136,10 @@ public class FitnessTrackerController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
 			NutritionController controller = (NutritionController)loader.getController();
-			controller.applicationStage = applicationStage;
+			
 			controller.setUser(user);
+			
+			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
@@ -153,7 +155,6 @@ public class FitnessTrackerController implements Initializable {
 	   		ActivitiesController controller = (ActivitiesController)loader.getController();
 	   		
 	   		controller.setUser(user);
-	   		System.out.println("Setting user for actviities controller from fitness");
 	   		
 	   		Date today = new Date();
 			Calendar cal = Calendar.getInstance(); 
@@ -183,7 +184,6 @@ public class FitnessTrackerController implements Initializable {
 	    	
 			   controller.updateTotalCaloriesBurnedValues();
 			   controller.updateProgressValue();
-			   System.out.println(user.test);
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   
@@ -197,19 +197,20 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	void showHealthyRecipes(ActionEvent event) {
 		try {
-	   		   FXMLLoader loader = new FXMLLoader();
-	   		   AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
-	   		   RecipesController controller = (RecipesController)loader.getController();
+			FXMLLoader loader = new FXMLLoader();
+	   		AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
+	   		RecipesController controller = (RecipesController)loader.getController();
 	   		controller.setUser(user);
-	   		   controller.applicationStage = applicationStage;
+	   		controller.applicationStage = applicationStage;
 	   		   
-	   		   Scene scene = new Scene(root);
-	   		   applicationStage.setScene(scene);
-	   		   applicationStage.show();
-	   	   } catch(Exception e) {
-	   		   e.printStackTrace();
-	   	   }
+	   		Scene scene = new Scene(root);
+	   		applicationStage.setScene(scene);
+	   		applicationStage.show();
+	   	} catch(Exception e) {
+	   		e.printStackTrace();
+	   	}
 	}
+	
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -246,9 +247,7 @@ public class FitnessTrackerController implements Initializable {
 		   GoalsController controller = (GoalsController)loader.getController();
 		   
 		   controller.setUser(user);
-		   System.out.println("Setting user for goals controller from fitness");
 		   controller.updateGoalValues();
-		   System.out.println(user.test);
 		   
 		   controller.applicationStage = applicationStage;
 		   

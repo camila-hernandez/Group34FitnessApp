@@ -134,7 +134,7 @@ public class NutritionController {
 	
 	@FXML
 	void compareWeight(ActionEvent event) {
-		double userWeight = user.health.getWeight();
+		double userWeight = user.health.getCurrentWeight();
 		double weightGoal = user.health.getWeightGoals();
 		
 		if(weightGoal == 0.0) {

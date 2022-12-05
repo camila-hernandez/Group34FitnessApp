@@ -43,7 +43,7 @@
                <font>
                   <Font size="24.5" />
                </font></Label>
-            <Label fx:id="nameLabel" text="Label">
+            <Label fx:id="nameLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -60,7 +60,7 @@
                   <Font size="24.5" />
                </font>
             </Label>
-            <Label fx:id="ageLabel" text="Label">
+            <Label fx:id="ageLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -77,7 +77,7 @@
                   <Font size="24.5" />
                </font>
             </Label>
-            <Label fx:id="genderLabel" text="Label">
+            <Label fx:id="genderLabel" text="">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
@@ -93,7 +93,7 @@
                <font>
                   <Font size="24.5" />
                </font></Label>
-            <Label fx:id="heightLabel" text="Label">
+            <Label fx:id="heightLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -109,7 +109,7 @@
                <font>
                   <Font size="24.5" />
                </font></Label>
-            <Label fx:id="weightLabel" text="Label">
+            <Label fx:id="weightLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>

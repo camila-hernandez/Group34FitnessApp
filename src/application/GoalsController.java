@@ -128,8 +128,7 @@ public class GoalsController {
   		   controller.setUser(user);
   		   controller.setNameLabel();
   		   controller.setGoalsCompletedLabel();
-  		 System.out.println(user.test);
-  		 System.out.println("Setting user for fitness controller from goals");
+
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);
@@ -303,9 +302,7 @@ public class GoalsController {
  				updateNutritionGoalsLabel, updateNutritionGoalsContainer, updateExerciseGoalsLabel, updateExerciseGoalsContainer, updateCaloriesGoalsContainer, updateButtonContainer);
  		
  	   Scene updatedUserFitnessGoalsScene = new Scene(updateFitnessGoalsContainer, 609, 856);
- 	   applicationStage.setScene(updatedUserFitnessGoalsScene);	 
- 	   System.out.println(user.test);
- 	  
+ 	   applicationStage.setScene(updatedUserFitnessGoalsScene);	  	  
     }
     
     public void setStepsGoals(double steps) {
