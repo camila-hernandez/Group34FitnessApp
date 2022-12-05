@@ -30,13 +30,13 @@ public class NutritionController {
 	private TextField CalorieIntake;
 	
 	@FXML
-	private Label carbsLabel;
+	private TextField carbsTextField;
 	
 	@FXML
-	private Label fatLabel;
+	private TextField fatTextField;
 	
 	@FXML
-	private Label fiberLabel;
+	private TextField proteinTextField;
 	
 	@FXML
 	private Label servingRatioLabel;
@@ -59,74 +59,77 @@ public class NutritionController {
     	this.user = user;
     }
 	
-	Label errorLabel = new Label(" ");
-	void setServingProperties(Scene servingScene, TextField carbsTextField, TextField fatTextField, TextField fiberTextField) throws InvalidUserInputException {
-		
-		carbsLabel.setText(carbsTextField.getText());
-		fatLabel.setText(fatTextField.getText());
-		fiberLabel.setText(fiberTextField.getText());
-		
-		applicationStage.setScene(servingScene);
-	}
-	
 	@FXML
 	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) {
 		double calorieAmount = Double.parseDouble(CalorieIntake.getText());
 		
-		if (calorieAmount < 2000) {
-			CalorieIntakeDisplay.setText("Your Calorie intake of " 
-		+ calorieAmount + " is less than the average "
-				+ "amount required daily for an adult.");
+		if (user.getGender().equalsIgnoreCase("female")) {
+			if (calorieAmount < 2000) {
+				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' 
+			+ " is less than the average amount required daily for an adult female.");
+			}
+			
+			if (calorieAmount >= 2000 && calorieAmount < 2500) {
+				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+						+ "amount of calories needed for an adult female.");
+			}
+			
+			if (calorieAmount > 2500) {
+				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' +
+			" is greater than the average amount required daily for an adult female.");
+			}
 		}
 		
-		if (calorieAmount >= 2000 && calorieAmount < 3000) {
-			CalorieIntakeDisplay.setText("You have consumed the average "
-					+ "amount of calories needed for an adult");
+		if (user.getGender().equalsIgnoreCase("male")) {
+			if (calorieAmount < 2500) {
+				CalorieIntakeDisplay.setText("Your Calorie intake of " + calorieAmount + '\n' +
+						" is less than the average amount required daily for an adult male.");
+			}
+			
+			if (calorieAmount >= 2500 && calorieAmount < 3000) {
+				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+						+ "amount of calories needed for an adult male.");
+			}
+			
+			if (calorieAmount > 3000) {
+				CalorieIntakeDisplay.setText("Your Calorie intake of " 
+			+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+			}
 		}
 		
-		if (calorieAmount > 3000) {
-			CalorieIntakeDisplay.setText("Your Calorie intake of " 
-		+ calorieAmount + " is greater than the average "
-				+ "amount required daily for an adult.");
-		}
+		
 	}
 	
 	@FXML
 	void calculateBMI(ActionEvent calculateBMIevent) {
 		double bmi = user.health.calculateBMI();
 		if (bmi < 18.5) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " , bmi, + '\n' + "you are underweight."));	
+			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This displays low weight.", bmi));	
 		}
 		if (bmi > 18.5 && bmi < 25) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " , bmi, + '\n' + "you are at a healthy weight."));	
+			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This is a healthy weight.", bmi));	
 		}
 		
 		if (bmi > 25) {
-			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " , bmi, + '\n' + "you are over weight."));	
+			bmiDisplayLabel.setText(String.format("Your bmi is: %.2f " + '\n' + "This displays a high weight.", bmi));	
 		}
 		
 	}
-	
+
 	@FXML
-	void calcBFP(ActionEvent event) {
-		double BFP = user.health.calculateBodyFatPercentage() * 100;
-		bfpDisplayLabel.setText(String.format("Your Body Fat Percentage is: %.2f", BFP));
-	}
-	
-	@FXML
-	void displayServingRatio(ActionEvent event) {
-		user.health.setCarbs(Double.parseDouble(carbsLabel.getText()));
-		user.health.setFat(Double.parseDouble(fatLabel.getText()));
-		user.health.setFiber(Double.parseDouble(fiberLabel.getText()));	
+	void updateServingRatio(ActionEvent event) {
+		user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
+		user.health.setFat(Double.parseDouble(fatTextField.getText()));
+		user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 	}
 	
 	@FXML
 	void calculateServingRatio(ActionEvent event) {
 		double carbs = user.health.calculateCarbs();
 		double fat = user.health.calculateFat();
-		double fiber = user.health.calculateFiber();
+		double protein = user.health.calculateProtein();
 		
-		servingRatioLabel.setText(String.format("ratio: %.2f carbs, %.2f fat, %.2f fiber.", carbs,fat,fiber));
+		servingRatioLabel.setText(String.format("ratio: %.1f carbs, %.1f fat, %.1f fiber.", carbs,fat,protein));
 	}
 	
 	@FXML
@@ -134,99 +137,26 @@ public class NutritionController {
 		double userWeight = user.health.getWeight();
 		double weightGoal = user.health.getWeightGoals();
 		
-		if (weightGoal - userWeight >= 0) {
+		if(weightGoal == 0.0) {
+			userWeightLabel.setText("You have not set a weight goal.");
+		}
+		
+		if(userWeight == 0.0) {
+			userWeightLabel.setText("There is no weight entered in user profile.");
+		}
+		
+		if (weightGoal - userWeight == 0) {
 			userWeightLabel.setText("You have reached your weight goal.");
 		}
 		
 		if (weightGoal - userWeight < 0) {
 			userWeightLabel.setText("You are " + (userWeight - weightGoal) + " kg away from your weight goal.");
 		}
+		if (weightGoal - userWeight > 0) {
+			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
+		}
 	}
-	
-	@FXML
-	void updateServingRatio(ActionEvent event){
-	    Scene servingScene = applicationStage.getScene();
-	    
-	    Color c = Color.web("#6b4191",1.0);
-	    
-	    VBox servingContainer = new VBox();
-	    servingContainer.setStyle("-fx-background-color: white");
-	    
-	    StackPane updateServingStack = new StackPane();
-	 	   
-	 	Rectangle profileHeaderRectangle = new Rectangle(110, 61, 390, 95);
-	 	profileHeaderRectangle.setFill(c);
-	 	profileHeaderRectangle.setArcHeight(20);
-	 	profileHeaderRectangle.setArcWidth(20);
-	 	   
-	 	Label updateServingLabel = new Label("UPDATE USER SERVING");
-	 	updateServingLabel.setTextFill(Color.WHITE);
-	 	Font font = Font.font("System", FontWeight.BOLD, 25);
-	 	updateServingLabel.setFont(font);
-	 	   
-	 	updateServingStack.getChildren().addAll(profileHeaderRectangle, updateServingLabel);
-	 	updateServingStack.setPadding(new Insets(60,0,25,0));
-	    
-	 	Font labelFont = Font.font("System", 24.5);
-	    Label updateCarbsLabel = new Label("Carbs in serving (g): ");
-	    updateCarbsLabel.setFont(labelFont);
-	    
-	    Label updateFiberLabel = new Label("Fiber in serving (g): ");
-	    updateFiberLabel.setFont(labelFont);
-	    
-	    Label updateFatLabel = new Label("Fat in serving (g) ");
-	    updateFatLabel.setFont(labelFont);
-	    
-	    
-	    TextField carbsTextField = new TextField();
-	    
-	    TextField fatTextField = new TextField();
-	    
-	    TextField fiberTextField = new TextField();
-	    
-	    HBox carbsContainer = new HBox();
-	    HBox fatContainer = new HBox();
-	    HBox fiberContainer = new HBox();
-	    
-	    carbsContainer.getChildren().addAll(updateCarbsLabel, carbsTextField);
-	    fatContainer.getChildren().addAll(updateFatLabel, fatTextField);
-	    fiberContainer.getChildren().addAll(updateFiberLabel, fiberTextField);
 
-	    
-	    carbsContainer.setAlignment(Pos.CENTER);
-	    fiberContainer.setPadding(new Insets(0,0,0,50));
-	    fatContainer.setAlignment(Pos.CENTER);
-	    carbsContainer.setPadding(new Insets(50,0,0,50));
-	    fiberContainer.setAlignment(Pos.CENTER);
-	    fatContainer.setPadding(new Insets(50,0,0,50));
-	    
-	    HBox buttonContainer = new HBox();
-	    Button doneButton = new Button("Done");
-		doneButton.setPrefSize(106, 48);
-		doneButton.setTextFill(Color.WHITE);
-		Font buttonFont = Font.font("System", FontWeight.BOLD, 22);
-		doneButton.setFont(buttonFont);
-		doneButton.setStyle("-fx-background-color: #3e9acf");
-		   
-		buttonContainer.getChildren().addAll(doneButton);
-	    buttonContainer.setPadding(new Insets(75,0,0,0));
-	    buttonContainer.setAlignment(Pos.CENTER);
-	    doneButton.setOnAction(doneEvent -> {
-	    	try {
-				setServingProperties(servingScene, carbsTextField, fatTextField, fiberTextField);
-				displayServingRatio(event);
-				calculateServingRatio(event);
-				
-			} catch (InvalidUserInputException e) {
-				errorLabel.setText(e.getMessage());
-			}
-	    });
-	    
-	    servingContainer.getChildren().addAll(updateServingStack,  carbsContainer, fatContainer, fiberContainer, buttonContainer);
-	    
-	    Scene updateServingScene = new Scene(servingContainer, 609, 856);
-	  	applicationStage.setScene(updateServingScene);
-	 }
 	@FXML
     void returnToMain(ActionEvent event) {
     	 try {
