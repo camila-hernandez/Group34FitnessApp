@@ -86,51 +86,51 @@ public class NutritionController {
 		try {
 			// Checks user input
 			user.health.checkInput(CalorieIntake.getText());
+			
+			// Set the variable with the user input
+			double calorieAmount = Double.parseDouble(CalorieIntake.getText());
+			
+			// Shows average for the typical female
+			if (user.getGender().equalsIgnoreCase("Female")) {
+				if (calorieAmount < 2000) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
+				+ " is less than the average amount required daily for an adult female.");
+				}
+				
+				if (calorieAmount >= 2000 && calorieAmount < 2500) {
+					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+							+ "amount of calories needed for an adult female.");
+				}
+				
+				if (calorieAmount > 2500) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+				" is greater than the average amount required daily for an adult female.");
+				}
+			}
+			
+			// Shows averages for the typical males
+			if (user.getGender().equalsIgnoreCase("Male")) {
+				if (calorieAmount < 2500) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+							" is less than the average amount required daily for an adult male.");
+				}
+				
+				if (calorieAmount >= 2500 && calorieAmount < 3000) {
+					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+							+ "amount of calories needed for an adult male.");
+				}
+				
+				if (calorieAmount > 3000) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " 
+				+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+				}
+			}
+			
 		} catch (InvalidUserInputException e) {
 				errorLabel.setText(e.getMessage());
-			}
-		
-		// Set the variable with the user input
-		double calorieAmount = Double.parseDouble(CalorieIntake.getText());
-		
-		// Shows average for the typical female
-		if (user.getGender().equalsIgnoreCase("Female")) {
-			if (calorieAmount < 2000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
-			+ " is less than the average amount required daily for an adult female.");
-			}
-			
-			if (calorieAmount >= 2000 && calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult female.");
-			}
-			
-			if (calorieAmount > 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-			" is greater than the average amount required daily for an adult female.");
-			}
 		}
-		
-		// Shows averages for the typical males
-		if (user.getGender().equalsIgnoreCase("Male")) {
-			if (calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-						" is less than the average amount required daily for an adult male.");
-			}
-			
-			if (calorieAmount >= 2500 && calorieAmount < 3000) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult male.");
-			}
-			
-			if (calorieAmount > 3000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " 
-			+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
-			}
-		}
-		
-		
 	}
+	
 	/**
 	 * This ActionEvent calculates the user's body mass index (BMI) based on their current weight
 	 * and their height which the user can input in the Nutrition window and User Profile window, respectively.
@@ -173,14 +173,14 @@ public class NutritionController {
 			user.health.checkInput(carbsTextField.getText());
 			user.health.checkInput(fatTextField.getText());
 			user.health.checkInput(proteinTextField.getText());
+			
+			// Sets the carbs, fat and protein the user consumed in Health class
+			user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
+			user.health.setFat(Double.parseDouble(fatTextField.getText()));
+			user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 		} catch (InvalidUserInputException e){
 			errorLabel.setText(e.getMessage());
 		}
-		
-		// Sets the carbs, fat and protein the user consumed in Health class
-		user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
-		user.health.setFat(Double.parseDouble(fatTextField.getText()));
-		user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 	}
 	
 	/**
@@ -254,26 +254,26 @@ public class NutritionController {
 		try {
 			// Checks user input
 			user.health.checkInput(currentWeightTextField.getText());
+			
+			// If the users input is valid, variables will be set
+			double currentWeight = Double.parseDouble(currentWeightTextField.getText());
+			double startWeight = user.health.getStartingWeight();
+			
+			// If the user has entered their most recent weight, it will set their current weight.
+			// If the user has not entered their most recent weight, it will set their current weight as their starting weight.
+			if (currentWeightTextField.getText() != null) {
+				user.health.setCurrentWeight(currentWeight);
+			}
+			else {
+				user.health.setCurrentWeight(startWeight);
+			}
+	    
+			// Displays weight progress to user
+			weightProgressLabel.setText("Your starting weight: " + startWeight + ". Your current weight: " + currentWeight + ".");
+			
 		} catch (InvalidUserInputException e) {
 			errorLabel.setText(e.getMessage());
 		}
-		
-		// If the users input is valid, variables will be set
-		double currentWeight = Double.parseDouble(currentWeightTextField.getText());
-		double startWeight = user.health.getStartingWeight();
-		
-		// If the user has entered their most recent weight, it will set their current weight.
-		// If the user has not entered their most recent weight, it will set their current weight as their starting weight.
-		if (currentWeightTextField.getText() != null) {
-			user.health.setCurrentWeight(currentWeight);
-		}
-		else {
-			user.health.setCurrentWeight(startWeight);
-		}
-    
-		// Displays weight progress to user
-		weightProgressLabel.setText("Your starting weight: " + startWeight + ". Your current weight: " + currentWeight + ".");
-		
 	}
 	
 	/**
