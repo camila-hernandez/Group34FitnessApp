@@ -171,7 +171,7 @@ public class NutritionController {
 			user.health.setCurrentWeight(startWeight);
 		}
 		user.health.setCurrentWeight(currentWeight);
-		weightProgressLabel.setText("Your starting weight: " + startWeight + "Your current weight: " + currentWeight);
+		weightProgressLabel.setText("Your starting weight: " + startWeight + " Your current weight: " + currentWeight);
 		
 	}
 	

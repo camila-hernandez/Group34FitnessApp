@@ -65,7 +65,7 @@
                   <Font size="19.0" />
                </font></Label>
             <Label fx:id="servingRatioLabel" layoutX="21.0" layoutY="304.0" prefHeight="105.0" prefWidth="270.0" text="Serving Ratio" />
-            <Label fx:id="userWeightLabel" layoutX="23.0" layoutY="533.0" prefHeight="47.0" prefWidth="420.0" text="weight progress">
+            <Label fx:id="userWeightLabel" layoutX="23.0" layoutY="530.0" prefHeight="47.0" prefWidth="420.0" text="weight progress">
                <font>
                   <Font size="20.0" />
                </font></Label>
