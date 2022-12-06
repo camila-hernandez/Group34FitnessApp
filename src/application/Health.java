@@ -7,7 +7,8 @@ public class Health extends Goals {
 	private double sleepGoals;
 	private double waterIntakeGoals;
 	private double weightGoals;
-	private double weight;
+	private double startingWeight;
+	private double currentWeight;
 	private double height;
 	private double waterIntakeAmount;
 	private String waterProgressTotalLabel;
@@ -17,7 +18,6 @@ public class Health extends Goals {
 	private double carbs;
 	private double fat;
 	private double protein;
-	private double currentWeight;
 
 	double value;
 
@@ -28,24 +28,6 @@ public class Health extends Goals {
 
 	public Health() {
 		// TODO Auto-generated constructor stub
-	}
-
-
-	public void setWeight(double aWeight) {
-		this.weight = aWeight;
-	}
-
-	public double getWeight() {
-		return weight;
-	}
-
-
-	public void setWaterProgressLabel(String waterProgressLabel) {
-		this.waterProgressTotalLabel = waterProgressLabel;
-	}
-
-	public String getWaterProgressLabel() {
-		return waterProgressTotalLabel;
 	}
 
 	/**
@@ -114,14 +96,14 @@ public class Health extends Goals {
 	 * @param aWeight This double must consist of only numbers, a single decimal point and must be greater than zero.
 	 */
 	public void setStartingWeight(double aWeight) {
-		this.weight = aWeight;
+		this.startingWeight = aWeight;
 	}
 	/**
 	 * This method is used to compare the user's starting weight to their current weight.
 	 * @return This getter method returns the starting weight of the user.
 	 */
 	public double getStartingWeight() {
-		return weight;
+		return startingWeight;
 	}
 
 	/**
@@ -199,7 +181,7 @@ public class Health extends Goals {
 
 	/**
 	 * This method is used to calculate the user's progress to their sleep goal.
-	 * @return This getter method returns the how long the user slept for during one night.
+	 * @return This getter method returns how long the user slept for during one night.
 	 */
 	public double getSleepDuration() {
 		return sleepDuration;
@@ -209,54 +191,125 @@ public class Health extends Goals {
 	 * This method calculates the user's current body mass index (BMI).
 	 * @return Returns the user's body mass index.
 	 */
-	public double calculateBMI() {
-		weight = getCurrentWeight();
-		height = getHeight();
+	public double calculateBMI(double weight, double height) {
 		return ((weight / height) / height) * 10000;
 	}
-
-	public String getSleepProgressLabel() {
-		return sleepProgressLabel;
-	}
-
+	
+	/**
+	 * sleepProgressLabel is the label in the main window that will display how many hours of sleep
+	 * the user got today.
+	 * @param sleepProgressLabel This string gets converted from a double.
+	 */
 	public void setSleepProgressLabel(String sleepProgressLabel) {
 		this.sleepProgressLabel = sleepProgressLabel;
 	}
+	
+	/**
+	 * This method displays the user's sleep duration for the night on the main window.
+	 * @return This getter method is returns the user's daily sleep duration progress in a label.
+	 */
+	public String getSleepProgressLabel() {
+		return sleepProgressLabel;
+	}
+	
+	/**
+	 * waterProgressLabel is the label in the main window that will display how many cups of water
+	 * the user drank today.
+	 * @param waterProgressLabel This string gets converted from a double.
+	 */
+	public void setWaterProgressLabel(String waterProgressLabel) {
+		this.waterProgressTotalLabel = waterProgressLabel;
+	}
 
+	/**
+	 * This method displays the user's water in-take amount for the day on the main window.
+	 * @return This getter method is returns the user's daily water in-take progress in a label.
+	 */
+	public String getWaterProgressLabel() {
+		return waterProgressTotalLabel;
+	}
+
+	/**
+	 * This method calculates the amount of carbohydrates the user consumed for the day.
+	 * @return This method returns the amount of carbohydrates consumed.
+	 */
 	double calculateCarbs() {
 		return (getCarbs() * 50 / 100);
 	}
-
+	
+	/**
+	 * This method calculates the amount of fat the user consumed for the day.
+	 * @return This method returns the amount of fat consumed.
+	 */
 	double calculateFat() {
 		return (getFat() * 30 / 100);
 	}
-
+	
+	/**
+	 * This method calculates the amount of protein the user consumed for the day.
+	 * @return This method returns the amount of protein consumed.
+	 */
 	double calculateProtein() {
 		return (getProtein() * 30 / 100);
 	}
-
+	
+	/**
+	 * This method is used to calculate the user's carbohydrates consumption for the day.
+	 * @return This getter method returns the carbohydrate in-take amount of the user for the day.
+	 */
 	public double getCarbs() {
 		return carbs;
 	}
 
+	/**
+	 * carbs is the how many carbohydrates (in g) the user consumed today.
+	 * The user can input this information in the Nutrition window.
+	 * Their carbohydrate consumption is defaulted to zero.
+	 * @param carbs This double must consist of only numbers, a single decimal point 
+	 * and must be greater than zero.
+	 */
 	public void setCarbs(double carbs) {
 		this.carbs = carbs;
 	}
 
+	/**
+	 * This method is used to calculate the user's fat consumption for the day.
+	 * @return This getter method returns the fat in-take amount of the user for the day.
+	 * @return
+	 */
 	public double getFat() {
 		return fat;
 	}
 
+	/**
+	 * fat is the how much fat (in g) the user consumed today.
+	 * The user can input this information in the Nutrition window.
+	 * Their fat consumption is defaulted to zero.
+	 * @param fat This double must consist of only numbers, a single decimal point 
+	 * and must be greater than zero.
+	 */
 	public void setFat(double fat) {
 		this.fat = fat;
 	}
 
+	/**
+	 * This method is used to calculate the user's protein consumption for the day.
+	 * @return This getter method returns the protein in-take amount of the user for the day.
+	 * @return
+	 */
 	public double getProtein() {
 		return protein;
 	}
-
-	public void setProtein(double fiber) {
-		this.protein = fiber;
+	
+	/**
+	 * protein is the how much protein (in g) the user consumed today.
+	 * The user can input this information in the Nutrition window.
+	 * Their protein consumption is defaulted to zero.
+	 * @param protein This double must consist of only numbers, a single decimal point 
+	 * and must be greater than zero.
+	 */
+	public void setProtein(double protein) {
+		this.protein = protein;
 	}
 
 	/**
