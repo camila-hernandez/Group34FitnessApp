@@ -245,7 +245,7 @@ public class NutritionController {
 		else {
 			user.health.setCurrentWeight(startWeight);
 		}
-		
+    
 		// Displays weight progress to user
 		weightProgressLabel.setText("Your starting weight: " + startWeight + "Your current weight: " + currentWeight);
 		
