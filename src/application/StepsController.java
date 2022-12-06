@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class StepsController implements Initializable{
+public class StepsController implements Initializable {
 	Stage applicationStage;
     
     //@FXML

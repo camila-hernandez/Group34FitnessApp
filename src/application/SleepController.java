@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 public class SleepController{
 	Stage applicationStage;
+	
+	private double hours;
 
 	User user;
 
@@ -32,15 +34,19 @@ public class SleepController{
 	@FXML
 	private ProgressBar sleepProgressBar; 
 
-	private double hours;
-
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
 	/**
-	 * This method willWhen user opens sleep window, the program will first look to see if any sleep was previously entered.  
-	 * @param sleep is how much hours the user entered.
+	 * This method will display how many hours of sleep the user got throughout the night.
+	 * The user can enter this information in the Sleep window.
+	 * @param sleep This string is how much hours of sleep the user entered, taken from the Health class.
 	 */
 	public void updateSleepProgressLabel(String sleep) {
 		// Updates the user's sleep progress label
@@ -54,16 +60,19 @@ public class SleepController{
 		user.health.setSleepProgressLabel(sleep);
 	}
 
+	/**
+	 * This method will call a method that will update the user's hours slept label in the Sleep window.
+	 */
 	public void updateSleepValues() {
 		if (sleepProgressLabel != null) {
 			updateSleepProgressLabel(user.health.getSleepProgressLabel());
 		}
 	}
 	
-	
 	/**
-	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
-	 * @param trackSleepEvent when the button update sleep is pressed.
+	 * This method will verify and store the amount of hours of sleep the user has entered and compare
+	 * the value entered by the user to their sleep duration goal entered in the Goals window.
+	 * @param trackSleepEvent This ActionEvent will display the amount of hours that the user slept throughout the night.
 	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
 	 */
 	@FXML
@@ -106,19 +115,23 @@ public class SleepController{
 	}
 
 	/**
-	 * 
-	 * @param hours is the number the user enters in the hoursSleep text field.
+	 * This method is used to store the amount of hours of sleep the user enters in the Sleep window.
+	 * @param hours This double must consist of only numbers, a single decimal point and must be greater than zero.
 	 */
 	private void setHours(double hours) {
 		this.hours = hours;
 	}
 	
+	/**
+	 * This method is used to retrieve the amount of hours of sleep the user enters in the Sleep window.
+	 * @return This getter method returns the hours of sleep the user got throughout the night.
+	 */
 	private double getHours() {
 		return hours;
 	}
 
 	/**
-	 * 
+	 * This method is used to store ?????????
 	 * @param sleep stores the number of hours the user enters for sleep in user. 
 	 */
 	public void setSleepAmount(double sleep) {
@@ -129,9 +142,13 @@ public class SleepController{
 		return user.health.getSleepDuration();
 	}
 	
-	// when button return to main is pressed, the user is taken back to the main window.
+	/**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainEvent Changes the scene back to the main page.
+	 */
 	@FXML
-	void returnToMain(ActionEvent event) {
+	void returnToMain(ActionEvent returnToMainEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
@@ -141,7 +158,7 @@ public class SleepController{
 			controller.setUser(user);
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
-			controller.setDisplayLabel(event);
+			controller.setDisplayLabel(returnToMainEvent);
 
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
