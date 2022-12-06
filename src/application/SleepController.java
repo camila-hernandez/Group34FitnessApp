@@ -68,7 +68,9 @@ public class SleepController{
 	 */
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
-
+		// Initialize label to empty
+		sleepErrorLabel.setText("");
+		
 		// sleepGoal is the goal entered by user, which is in health.
 		double sleepGoal = user.health.getSleepGoals();
 		
