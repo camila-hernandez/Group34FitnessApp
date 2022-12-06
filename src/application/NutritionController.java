@@ -86,51 +86,51 @@ public class NutritionController {
 		try {
 			// Checks user input
 			user.health.checkInput(CalorieIntake.getText());
+			
+			// Set the variable with the user input
+			double calorieAmount = Double.parseDouble(CalorieIntake.getText());
+			
+			// Shows average for the typical female
+			if (user.getGender().equalsIgnoreCase("Female")) {
+				if (calorieAmount < 2000) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
+				+ " is less than the average amount required daily for an adult female.");
+				}
+				
+				if (calorieAmount >= 2000 && calorieAmount < 2500) {
+					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+							+ "amount of calories needed for an adult female.");
+				}
+				
+				if (calorieAmount > 2500) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+				" is greater than the average amount required daily for an adult female.");
+				}
+			}
+			
+			// Shows averages for the typical males
+			if (user.getGender().equalsIgnoreCase("Male")) {
+				if (calorieAmount < 2500) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+							" is less than the average amount required daily for an adult male.");
+				}
+				
+				if (calorieAmount >= 2500 && calorieAmount < 3000) {
+					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+							+ "amount of calories needed for an adult male.");
+				}
+				
+				if (calorieAmount > 3000) {
+					CalorieIntakeDisplay.setText("Your calorie intake of " 
+				+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+				}
+			}
+			
 		} catch (InvalidUserInputException e) {
 				errorLabel.setText(e.getMessage());
-			}
-		
-		// Set the variable with the user input
-		double calorieAmount = Double.parseDouble(CalorieIntake.getText());
-		
-		// Shows average for the typical female
-		if (user.getGender().equalsIgnoreCase("Female")) {
-			if (calorieAmount < 2000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
-			+ " is less than the average amount required daily for an adult female.");
-			}
-			
-			if (calorieAmount >= 2000 && calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult female.");
-			}
-			
-			if (calorieAmount > 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-			" is greater than the average amount required daily for an adult female.");
-			}
 		}
-		
-		// Shows averages for the typical males
-		if (user.getGender().equalsIgnoreCase("Male")) {
-			if (calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-						" is less than the average amount required daily for an adult male.");
-			}
-			
-			if (calorieAmount >= 2500 && calorieAmount < 3000) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult male.");
-			}
-			
-			if (calorieAmount > 3000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " 
-			+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
-			}
-		}
-		
-		
 	}
+	
 	/**
 	 * This ActionEvent calculates the user's body mass index (BMI) based on their current weight
 	 * and their height which the user can input in the Nutrition window and User Profile window, respectively.
@@ -141,6 +141,9 @@ public class NutritionController {
 	void calculateBMI(ActionEvent calculateBMIevent) {
 		// Uses Health class to calculate BMI
 		double BMI = user.health.calculateBMI(user.health.getCurrentWeight(), user.health.getHeight());
+		if (user.health.getCurrentWeight() == 0) {
+			BMI = user.health.calculateBMI(user.health.getStartingWeight(), user.health.getHeight());
+		}
 		
 		// Displays different messages to user depending on their BMI
 		if (BMI < 18.5) {
@@ -173,14 +176,14 @@ public class NutritionController {
 			user.health.checkInput(carbsTextField.getText());
 			user.health.checkInput(fatTextField.getText());
 			user.health.checkInput(proteinTextField.getText());
+			
+			// Sets the carbs, fat and protein the user consumed in Health class
+			user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
+			user.health.setFat(Double.parseDouble(fatTextField.getText()));
+			user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 		} catch (InvalidUserInputException e){
 			errorLabel.setText(e.getMessage());
 		}
-		
-		// Sets the carbs, fat and protein the user consumed in Health class
-		user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
-		user.health.setFat(Double.parseDouble(fatTextField.getText()));
-		user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 	}
 	
 	/**
@@ -202,7 +205,7 @@ public class NutritionController {
 		protein = user.health.calculateProtein();
 		
 		// Displays serving ratio to user
-		servingRatioLabel.setText(String.format("Ratio: %.1f carbs, %.1f fat, %.1f protein.", carbs,fat,protein));
+		servingRatioLabel.setText(String.format("Ratio: " + '\n' + "%.1f carbs, %.1f fat, %.1f protein." , carbs,fat,protein));
 	}
 	
 	/**
@@ -222,21 +225,24 @@ public class NutritionController {
 			userWeight = user.health.getCurrentWeight();
 		}
 		else {
-			userWeight = user.health.getCurrentWeight();
+			userWeight = user.health.getStartingWeight();
 		}
 		
 		// Displays label to the user
 		if(weightGoal == 0.0) {
 			userWeightLabel.setText("You have not set a weight goal.");
 		}
+		//if the user reaches the exact goal set.
 		if (weightGoal - userWeight == 0) {
 			userWeightLabel.setText("You have reached your weight goal.");
 		}
+		// if the user wants to loose weight. 
 		if (weightGoal - userWeight < 0) {
-			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
+			userWeightLabel.setText("You are " + (userWeight - weightGoal) + " kg away from" + '\n' + "your weight goal.");
 		}
+		// if the user wants to gain weight.
 		if (weightGoal - userWeight > 0) {
-			userWeightLabel.setText("You have surpassed your weight goal.");
+			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from" + '\n' + " your weight goal.");
 		}
 	}
 	
@@ -254,26 +260,26 @@ public class NutritionController {
 		try {
 			// Checks user input
 			user.health.checkInput(currentWeightTextField.getText());
+			
+			// If the users input is valid, variables will be set
+			double currentWeight = Double.parseDouble(currentWeightTextField.getText());
+			double startWeight = user.health.getStartingWeight();
+			
+			// If the user has entered their most recent weight, it will set their current weight.
+			// If the user has not entered their most recent weight, it will set their current weight as their starting weight.
+			if (currentWeightTextField.getText() != null) {
+				user.health.setCurrentWeight(currentWeight);
+			}
+			else {
+				user.health.setCurrentWeight(startWeight);
+			}
+	    
+			// Displays weight progress to user
+			weightProgressLabel.setText("Your starting weight: " + startWeight + ". Your current weight: " + currentWeight + ".");
+			
 		} catch (InvalidUserInputException e) {
 			errorLabel.setText(e.getMessage());
 		}
-		
-		// If the users input is valid, variables will be set
-		double currentWeight = Double.parseDouble(currentWeightTextField.getText());
-		double startWeight = user.health.getStartingWeight();
-		
-		// If the user has entered their most recent weight, it will set their current weight.
-		// If the user has not entered their most recent weight, it will set their current weight as their starting weight.
-		if (currentWeightTextField.getText() != null) {
-			user.health.setCurrentWeight(currentWeight);
-		}
-		else {
-			user.health.setCurrentWeight(startWeight);
-		}
-    
-		// Displays weight progress to user
-		weightProgressLabel.setText("Your starting weight: " + startWeight + ". Your current weight: " + currentWeight + ".");
-		
 	}
 	
 	/**

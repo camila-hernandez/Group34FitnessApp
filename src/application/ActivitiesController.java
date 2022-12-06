@@ -602,7 +602,7 @@ public class ActivitiesController implements Initializable {
 
 	   		   controller.setUser(user);
 	   		   
-	   		   controller.createChart();
+	   		   controller.createWorkoutStatisticsBarGraph();
 	   		   controller.getMondaysExerciseDuration();
 	   		   controller.getTuesdaysExerciseDuration();
 	   		   controller.getWednesdaysExerciseDuration();
@@ -610,14 +610,14 @@ public class ActivitiesController implements Initializable {
 	   		   controller.getFridaysExerciseDuration();
 	   		   controller.getSaturdaysExerciseDuration();
 	   		   controller.getSundaysExerciseDuration();
-	   		   controller.getMondaysCaloriesBurned();
 	   		   
-	   		   controller.getTuesdayCaloriesBurnedValues();
-	   		   controller.getWednesdayCaloriesBurnedValues();
-	   		   controller.getThursdayCaloriesBurnedValues();
-	   		   controller.getFridayCaloriesBurnedValues();
-	   		   controller.getSaturdayCaloriesBurnedValues();
-	   		   controller.getSundayCaloriesBurnedValues();
+	   		   controller.getMondaysCaloriesBurnedValues();
+	   		   controller.getTuesdaysCaloriesBurnedValues();
+	   		   controller.getWednesdaysCaloriesBurnedValues();
+	   		   controller.getThursdaysCaloriesBurnedValues();
+	   		   controller.getFridaysCaloriesBurnedValues();
+	   		   controller.getSaturdaysCaloriesBurnedValues();
+	   		   controller.getSundaysCaloriesBurnedValues();
 	   		   
 	   		   controller.applicationStage = applicationStage;
 	   		   

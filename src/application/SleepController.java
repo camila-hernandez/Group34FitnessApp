@@ -12,6 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The SleepController will verify and store a set of characteristics that are related to sleep
+ * that are unique to the user based on the values entered by the user. The SleepController will compare 
+ * and display the users input as hours to their set goal. Also, this controller will check and 
+ * display errors entered by the user, such as invalid characters or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class SleepController{
 	Stage applicationStage;
 
@@ -34,6 +43,11 @@ public class SleepController{
 
 	private double hours;
 
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -54,6 +68,7 @@ public class SleepController{
 		user.health.setSleepProgressLabel(sleep);
 	}
 
+	// when the sleep window is opened, values will be updated if any were previously entered. 
 	public void updateSleepValues() {
 		if (sleepProgressLabel != null) {
 			updateSleepProgressLabel(user.health.getSleepProgressLabel());
@@ -64,32 +79,45 @@ public class SleepController{
 	/**
 	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
 	 * @param trackSleepEvent when the button update sleep is pressed.
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
 	 */
 	@FXML
-	void setSleep(ActionEvent trackSleepEvent) {
-
+	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
+		// Initialize label to empty
+		sleepErrorLabel.setText("");
+		
 		// sleepGoal is the goal entered by user, which is in health.
 		double sleepGoal = user.health.getSleepGoals();
 		
-		//hours are set to be the string entered in the hoursSleep text field.
-		setHours(Double.parseDouble(hoursSleep.getText()));
+		try {
+			//Checks user input
+			user.health.checkInput(hoursSleep.getText());
 		
-		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
-		setSleepAmount(getHours());
+			//Hours are set to be the string entered in the hoursSleep TextField.
+			setHours(Double.parseDouble(hoursSleep.getText()));
+		
+			// Calculates and stores sleep progress
+			int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+			setSleepAmount(getHours());
 
-		// the label changes when the user enters a different value.
-		updateSleepProgressLabel(String.valueOf(getHours()));
-		sleepProgressBar.setProgress((getHours())/sleepGoal);
+			// The label changes when the user enters a different value.
+			updateSleepProgressLabel(String.valueOf(getHours()));
+			sleepProgressBar.setProgress((getHours())/sleepGoal);
 
-		// if the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal, and the label changes to let the user know.
-		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
-			sleepProgressLabel.setText("You have reached your sleep goal!");
+			// If the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal
+			// and the label changes to let the user know.
+			if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+				sleepProgressLabel.setText("You have reached your sleep goal!");
+			}
+
+			// If the sleepGoal - getHours() > 0, that means the user has not reached their goal, 
+			// and is given a percent of how close they are. 
+			if (sleepGoal - getHours() > 0) {
+				sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
+			}
+		} catch (InvalidUserInputException e) {
+			sleepErrorLabel.setText(e.getMessage());	
 		}
-
-		// if the sleepGoal - getHours() > 0, that means the user has not reached their goal, and is given a percent of how close they are. 
-		if (sleepGoal - getHours() > 0) {
-			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
-		}	
 	}
 
 	/**
@@ -116,7 +144,11 @@ public class SleepController{
 		return user.health.getSleepDuration();
 	}
 	
-	// when button return to main is pressed, the user is taken back to the main window.
+	/**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
 	@FXML
 	void returnToMain(ActionEvent event) {
 		try {
