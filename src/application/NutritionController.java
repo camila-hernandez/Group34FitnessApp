@@ -96,36 +96,34 @@ public class NutritionController {
 		// Shows average for the typical female
 		if (user.getGender().equalsIgnoreCase("Female")) {
 			if (calorieAmount < 2000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
-			+ " is less than the average amount required daily for an adult female.");
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + " is less than the average amount"
+						+ '\n' + "required daily for an adult female.");
 			}
 			
 			if (calorieAmount >= 2000 && calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult female.");
+				CalorieIntakeDisplay.setText("You have consumed the average amount of calories " + '\n' + "required daily for an adult female.");
 			}
 			
 			if (calorieAmount > 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-			" is greater than the average amount required daily for an adult female.");
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount +
+			" is greater than the average amount" + '\n' + "required daily for an adult female.");
 			}
 		}
 		
 		// Shows averages for the typical males
 		if (user.getGender().equalsIgnoreCase("Male")) {
 			if (calorieAmount < 2500) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-						" is less than the average amount required daily for an adult male.");
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + " is less than the average amount" 
+			+ '\n' + "required daily for an adult male.");
 			}
 			
 			if (calorieAmount >= 2500 && calorieAmount < 3000) {
-				CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-						+ "amount of calories needed for an adult male.");
+				CalorieIntakeDisplay.setText("You have consumed the average amount of calories " + '\n' + "required daily for an adult male.");
 			}
 			
 			if (calorieAmount > 3000) {
-				CalorieIntakeDisplay.setText("Your calorie intake of " 
-			+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+				CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount +
+						" is greater than the average amount" + '\n' + "required daily for an adult male.");
 			}
 		}
 		
@@ -141,6 +139,9 @@ public class NutritionController {
 	void calculateBMI(ActionEvent calculateBMIevent) {
 		// Uses Health class to calculate BMI
 		double BMI = user.health.calculateBMI(user.health.getCurrentWeight(), user.health.getHeight());
+		if (user.health.getCurrentWeight() == 0) {
+			BMI = user.health.calculateBMI(user.health.getStartingWeight(), user.health.getHeight());
+		}
 		
 		// Displays different messages to user depending on their BMI
 		if (BMI < 18.5) {
@@ -202,7 +203,7 @@ public class NutritionController {
 		protein = user.health.calculateProtein();
 		
 		// Displays serving ratio to user
-		servingRatioLabel.setText(String.format("Ratio: %.1f carbs, %.1f fat, %.1f protein.", carbs,fat,protein));
+		servingRatioLabel.setText(String.format("Ratio: " + '\n' + "%.1f carbs, %.1f fat, %.1f protein." , carbs,fat,protein));
 	}
 	
 	/**
@@ -222,21 +223,24 @@ public class NutritionController {
 			userWeight = user.health.getCurrentWeight();
 		}
 		else {
-			userWeight = user.health.getCurrentWeight();
+			userWeight = user.health.getStartingWeight();
 		}
 		
 		// Displays label to the user
 		if(weightGoal == 0.0) {
 			userWeightLabel.setText("You have not set a weight goal.");
 		}
+		//if the user reaches the exact goal set.
 		if (weightGoal - userWeight == 0) {
 			userWeightLabel.setText("You have reached your weight goal.");
 		}
+		// if the user wants to loose weight. 
 		if (weightGoal - userWeight < 0) {
-			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
+			userWeightLabel.setText("You are " + (userWeight - weightGoal) + " kg away from" + '\n' + "your weight goal.");
 		}
+		// if the user wants to gain weight.
 		if (weightGoal - userWeight > 0) {
-			userWeightLabel.setText("You have surpassed your weight goal.");
+			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from" + '\n' + " your weight goal.");
 		}
 	}
 	
