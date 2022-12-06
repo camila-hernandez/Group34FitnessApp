@@ -11,6 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The WaterIntakeController will store the characters entered by the user as cups of water.
+ * It will check if the characters are valid, and display an error message. Then compare the amount of 
+ * cups entered, to the goal set by the user, and display the progress. 
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class WaterIntakeController{
 	Stage applicationStage;
 	
@@ -99,7 +107,7 @@ public class WaterIntakeController{
 			waterProgressLabel.setText("You have not entered your water intake.");
 		}
 	}
-	
+
 	/**
 	 * This method will store the water in-take progress label in the Health class.
 	 * @param water This string is the amount of water the user drank today.
