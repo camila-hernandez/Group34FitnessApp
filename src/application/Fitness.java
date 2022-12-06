@@ -1,11 +1,14 @@
 package application;
 
+import java.util.ArrayList;
+
 public class Fitness extends Goals {
 	
-	private double stepGoals;
-	private double stepsTaken;
-	private double caloriesBurnedGoals;
-	private double exerciseGoals;
+	private double stepsGoal;
+	private ArrayList<Integer> stepsArray;
+	private int stepsCount;
+	private double caloriesBurnedGoal;
+	private double exerciseGoal;
 	private double progress;
 	private double totalCaloriesBurned;
 	private double mondayExerciseInfo;
@@ -27,17 +30,16 @@ public class Fitness extends Goals {
 	private String exerciseGoalsLabel;
 	private String todaysExerciseMotivationalLabel;
 	
-	private int stepsCount;
+	boolean reachStepsGoal = false;
+	boolean reachExerciseGoal = false;
+	boolean reachCaloriesBurnedGoal = false;
+
+	double value;
 	
-	boolean reachStepsGoals = false;
-	boolean reachExerciseGoals = false;
-	boolean reachCaloriesBurnedGoals = false;
+	User user;
 	
 	public Fitness() {
-		stepGoals = 0.0;
-		stepsCount = 0;
-		caloriesBurnedGoals = 0.0;
-		exerciseGoals = 0.0;
+		stepsArray = new ArrayList<Integer>(30);  
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
@@ -55,12 +57,50 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
-	//STEPS GOALS
+
+	public void checkGoalsCompleted() {
+		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
+			completeGoal();
+			reachStepsGoal = true;
+		}
+		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
+			completeGoal();
+			reachExerciseGoal = true;
+		}
+		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
+			completeGoal();
+			reachCaloriesBurnedGoal = true;
+		}
+	}
+	
+	public void checkInput(String valueEntered) throws InvalidUserInputException {	
+		boolean decimalEncountered = false;
+		for (char c :valueEntered.toCharArray()) {
+			// Check if the character is a '.'
+			// If the character is a '.' and the for loop has not encountered a '.' yet, 
+			// then it will indicate this '.' to be a decimal.
+			if (c == '.' && !decimalEncountered) {
+				decimalEncountered = true;
+			}
+			// Check if the character is a digit if it's not a decimal
+			else if (!Character.isDigit(c)) {
+				throw new InvalidUserInputException("Make sure to enter a valid number.");
+			}
+		}
+		
+		value = Double.parseDouble(valueEntered);
+		
+		if (value < 0) {
+			throw new InvalidUserInputException("Number should be greater than 0.");
+		}
+	}
+
 	public void setStepsGoals(double steps) {
-		this.stepGoals = steps;
+		this.stepsGoal = steps;
     }
 	
-	//STEPS VALIDATION + GETTER + SETTER
+
+	//STEPS VALIDATION + GETTER + SETTER (make this to deal with the array list)
 	public double getStepsCount() {
 		return stepsCount;
 	}
@@ -73,32 +113,39 @@ public class Fitness extends Goals {
 		    return false;  
 		  }  
 		}
-
-	public void setStepsCount(String stepsCount) {
-		if (isNumeric(stepsCount)) {
-			this.stepsCount = Integer.parseInt(stepsCount);
-			
+	//validation done in array update so no need for it here (for loop in the controller)
+	public void setStepsCount(int monthlySteps) {
+			this.stepsCount = monthlySteps;
+	}
+	
+	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) {
+		if (isNumeric(dailyStepCount)) {
+			stepsArray.set(dayOfMonthChoice, Integer.parseInt(dailyStepCount));
 		}
+		for (int i = 0; i < stepsArray.size(); i++) {
+			  stepsCount += stepsArray.get(i);
+			}
 	}
     //*****************************************
+
     public void setCaloriesGoals(double calories) {
-		this.caloriesBurnedGoals = calories;
+		this.caloriesBurnedGoal = calories;
     }
     
     public void setExerciseGoals(double exercise) {
-		this.exerciseGoals = exercise;
+		this.exerciseGoal = exercise;
     }
     
     public double getStepsGoals() {
-		return stepGoals;
+		return stepsGoal;
 	}
 	
 	public double getCaloriesGoals() {
-		return caloriesBurnedGoals;
+		return caloriesBurnedGoal;
 	}
 	
 	public double getExerciseGoals() {
-		return exerciseGoals;
+		return exerciseGoal;
 	}
 	public void setStepsGoalsLabel(String stepsLabel) {
 		 this.stepsGoalsLabel = stepsLabel;
@@ -118,9 +165,6 @@ public class Fitness extends Goals {
 		
 	public void setTotalCaloriesBurned(double caloriesBurned) {
 		 this.totalCaloriesBurned = caloriesBurned;
-		 if ((totalCaloriesBurned >= caloriesBurnedGoals) && (!reachCaloriesBurnedGoals)) {
-				completeGoal();
-			}
 	 }
 	 
 	 public double getTotalCaloriesBurned() {
@@ -129,24 +173,10 @@ public class Fitness extends Goals {
 	 
 	 public void setProgress(double time) {
 		 this.progress = time;
-		 if ((progress >= exerciseGoals) && (!reachExerciseGoals)) {
-				completeGoal();
-			}
 	 }
 	 
 	 public double getProgress() {
 		 return progress;
-	 }
-	 
-	 public void setStepsTaken(double steps) {
-		 this.stepsTaken = steps;
-		 if ((stepsTaken >= stepGoals) && (!reachStepsGoals)) {
-				completeGoal();
-			}
-	 }
-	 
-	 public double getStepsTaken() {
-		 return stepsTaken;
 	 }
 
 	 public void setMondayCaloriesBurnedInfo(double monday) {

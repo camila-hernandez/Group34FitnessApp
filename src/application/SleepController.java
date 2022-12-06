@@ -14,97 +14,127 @@ import javafx.stage.Stage;
 
 public class SleepController{
 	Stage applicationStage;
-	
+
 	User user;
-	
+
 	@FXML
 	private TextField hoursSleep;
 
 	@FXML
 	private TextField minutesSleep;
-	
+
 	@FXML
 	private Label sleepProgressLabel;
-	
+
 	@FXML
 	private ProgressBar sleepProgressBar; 
-	
-	double hours;
-	
-	public void setUser(User user) {
-    	this.user = user;
-    }
-	
-	@FXML
-	void setSleep(ActionEvent trackSleepEvent) {
-		if (user.health.getSleepDuration() != 0.0) {
-			hours = Double.parseDouble(hoursSleep.getText()) + user.health.getSleepDuration();
-		}
-		if (user.health.getSleepDuration() == 0.0) { hours = Double.parseDouble(hoursSleep.getText());
-		}
 
-		double sleepGoal = user.health.getSleepGoals();
-		int progressPercent = (int) ((hours/sleepGoal)* 100);
-		
-		updateSleepProgressLabel(String.valueOf(hours));
-		sleepProgressBar.setProgress((hours)/sleepGoal);
-		setSleepAmount(hours);
-		
-		user.health.setSleepDuration(hours);
-		
-		if (sleepGoal - hours == 0 || sleepGoal - hours < 0) {
-			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal.");
-		}
-		
-		if (sleepGoal - hours > 0) {
-			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
-		}
-		
+	private double hours;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
+
+	/**
+	 * When user opens sleep window, the program will first look to see if any sleep was previously entered.  
+	 * @param sleep is how much hours the user entered.
+	 */
 	public void updateSleepProgressLabel(String sleep) {
+
 		if (sleep == null) {
 			sleepProgressLabel.setText("You have not entered hours of sleep.");
 		}
+
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
 		}
-		
+
 		user.health.setSleepProgressLabel(sleep);
-    }
-	
+	}
+
 	public void updateSleepValues() {
-    	if (sleepProgressLabel != null) {
-    		updateSleepProgressLabel(user.health.getSleepProgressLabel());
-    	}
+		if (sleepProgressLabel != null) {
+			updateSleepProgressLabel(user.health.getSleepProgressLabel());
+		}
 	}
 	
-	public void setSleepAmount(double sleep) {
-    	user.health.setSleepDuration(sleep);
-    }
 	
+	/**
+	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
+	 * @param trackSleepEvent when the button update sleep is pressed.
+	 */
+	@FXML
+	void setSleep(ActionEvent trackSleepEvent) {
+
+		// sleepGoal is the goal entered by user, which is in health.
+		double sleepGoal = user.health.getSleepGoals();
+		
+		//hours are set to be the string entered in the hoursSleep text field.
+		setHours(Double.parseDouble(hoursSleep.getText()));
+		
+		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+		setSleepAmount(getHours());
+
+		// the label changes when the user enters a different value.
+		updateSleepProgressLabel(String.valueOf(getHours()));
+		sleepProgressBar.setProgress((getHours())/sleepGoal);
+
+		// if the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal, and the label changes to let the user know.
+		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal!");
+		}
+
+		// if the sleepGoal - getHours() > 0, that means the user has not reached their goal, and is given a percent of how close they are. 
+		if (sleepGoal - getHours() > 0) {
+			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
+		}	
+	}
+
+	/**
+	 * 
+	 * @param hours is the number the user enters in the hoursSleep text field.
+	 */
+	private void setHours(double hours) {
+		this.hours = hours;
+	}
+	
+	private double getHours() {
+		return hours;
+	}
+
+	/**
+	 * 
+	 * @param sleep stores the number of hours the user enters for sleep in user. 
+	 */
+	public void setSleepAmount(double sleep) {
+		user.health.setSleepDuration(sleep);
+	}
+
 	public double getSleepAmount() {
 		return user.health.getSleepDuration();
 	}
-
+	
+	// when button return to main is pressed, the user is taken back to the main window.
 	@FXML
-    void returnToMain(ActionEvent event) {
-    	 try {
-  		   FXMLLoader loader = new FXMLLoader();
-  		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
-  		   FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
-  		   
-  		   controller.applicationStage = applicationStage;
-  		   controller.setUser(user);
-  		   controller.setDisplayLabel(event);
-  		   
-  		   Scene scene = new Scene(root);
-  		   applicationStage.setScene(scene);
-  		   applicationStage.show();
-  		   
-  	   } catch(Exception e) {
-  		   e.printStackTrace();
-  	   }
-    }
+	void returnToMain(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+			FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+
+			controller.applicationStage = applicationStage;
+			controller.setUser(user);
+			controller.setNameLabel();
+			controller.setGoalsCompletedLabel();
+			controller.setDisplayLabel(event);
+
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

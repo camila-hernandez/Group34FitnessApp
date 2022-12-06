@@ -39,41 +39,83 @@
       </Label>
       <HBox alignment="CENTER" layoutX="101.0" layoutY="192.0" prefHeight="100.0" prefWidth="408.0">
          <children>
-            <Label text="Name:" />
-            <Label fx:id="nameLabel" text="Label">
+            <Label text="First name:">
+               <font>
+                  <Font size="24.5" />
+               </font></Label>
+            <Label fx:id="nameLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <font>
+                  <Font size="24.5" />
+               </font>
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="101.0" layoutY="292.0" prefHeight="100.0" prefWidth="408.0">
+      <HBox alignment="CENTER" layoutX="102.0" layoutY="286.0" prefHeight="100.0" prefWidth="408.0">
          <children>
-            <Label text="Age:" />
-            <Label fx:id="ageLabel" text="Label">
+            <Label text="Age:">
+               <font>
+                  <Font size="24.5" />
+               </font>
+            </Label>
+            <Label fx:id="ageLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <font>
+                  <Font size="24.5" />
+               </font>
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="110.0" layoutY="428.0" prefHeight="100.0" prefWidth="390.0">
+      <HBox alignment="CENTER" layoutX="111.0" layoutY="378.0" prefHeight="100.0" prefWidth="390.0">
          <children>
-            <Label text="Height:" />
-            <Label fx:id="heightLabel" text="Label">
+            <Label text="Gender:">
+               <font>
+                  <Font size="24.5" />
+               </font>
+            </Label>
+            <Label fx:id="genderLabel" text="">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="24.5" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="110.0" layoutY="463.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <Label text="Height:">
+               <font>
+                  <Font size="24.5" />
+               </font></Label>
+            <Label fx:id="heightLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <font>
+                  <Font size="24.5" />
+               </font>
             </Label>
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="105.0" layoutY="546.0" prefHeight="100.0" prefWidth="390.0">
          <children>
-            <Label text="Weight:" />
-            <Label fx:id="weightLabel" text="Label">
+            <Label text="Weight:">
+               <font>
+                  <Font size="24.5" />
+               </font></Label>
+            <Label fx:id="weightLabel" text="">
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <font>
+                  <Font size="24.5" />
+               </font>
             </Label>
          </children>
       </HBox>

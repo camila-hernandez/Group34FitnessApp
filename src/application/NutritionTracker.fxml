@@ -12,30 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NutritionController">
-   <left>
-      <Pane prefHeight="909.0" prefWidth="609.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="CalorieIntake" layoutX="359.0" layoutY="29.0" prefHeight="28.0" prefWidth="169.0" />
-            <Button layoutX="387.0" layoutY="81.0" mnemonicParsing="false" onAction="#setCalorieIntake" text = "SET INTAKE" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" textFill="WHITE" />
-            <StackPane layoutX="10.0" layoutY="151.0" prefHeight="22.0" prefWidth="327.0">
-               <children>
-                  <Label fx:id="CalorieIntakeDisplay" alignment="CENTER" maxWidth="-Infinity" prefHeight="104.0" prefWidth="327.0" text="Label" textAlignment="CENTER" />
-               </children></StackPane>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffc600" height="44.0" layoutX="14.0" layoutY="26.0" opacity="0.76" stroke="ORANGE" strokeType="INSIDE" width="325.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="26.0" prefHeight="44.0" prefWidth="334.0" text="Enter your Calorie Intake:" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </left>
-   <center>
-      <VBox prefHeight="856.0" prefWidth="360.0" BorderPane.alignment="CENTER" />
-   </center>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#returnToMain" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" text="RETURN TO MAIN" textFill="WHITE" />
-   </bottom>
    <top>
       <StackPane prefHeight="163.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
@@ -48,4 +24,75 @@
          </children>
       </StackPane>
    </top>
+   <bottom>
+      <Pane prefHeight="104.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="199.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="55.0" prefWidth="211.0" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" text="RETURN TO MAIN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+               <Label fx:id="weightProgressLabel" layoutX="15.0" layoutY="-9.0" prefHeight="47.0" prefWidth="579.0" text="weight start and current">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="23.0" layoutY="31.0" mnemonicParsing="false" onAction="#setCalorieIntake" prefHeight="43.0" prefWidth="281.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="SET CALORIE INTAKE" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="14.0" layoutY="484.0" mnemonicParsing="false" onAction="#compareWeight" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="WEIGHT PROGRESS" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="289.0" layoutY="331.0" mnemonicParsing="false" onAction="#updateServingRatio" prefHeight="39.0" prefWidth="283.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="CALCULATE SERVING" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="334.0" layoutY="14.0" prefHeight="27.0" prefWidth="212.0" text="Enter Calorie Intake:">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <Label fx:id="CalorieIntakeDisplay" layoutX="4.0" layoutY="83.0" prefHeight="72.0" prefWidth="603.0" text="Calorie display">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label fx:id="servingRatioLabel" layoutX="21.0" layoutY="304.0" prefHeight="105.0" prefWidth="270.0" text="Serving Ratio" />
+            <Label fx:id="userWeightLabel" layoutX="23.0" layoutY="530.0" prefHeight="47.0" prefWidth="420.0" text="weight progress">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Label fx:id="bmiDisplayLabel" layoutX="307.0" layoutY="383.0" prefHeight="94.0" prefWidth="229.0" text="Bmi display">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <TextField fx:id="CalorieIntake" layoutX="340.0" layoutY="53.0" prefHeight="30.0" prefWidth="162.0" />
+            <Button alignment="CENTER" layoutX="14.0" layoutY="417.0" mnemonicParsing="false" onAction="#calculateBMI" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="CALCULATE BMI" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="16.0" layoutY="173.0" prefHeight="27.0" prefWidth="390.0" text="Enter amount of carbs in serving (g):" />
+            <Label layoutX="8.0" layoutY="271.0" prefHeight="27.0" prefWidth="381.0" text="Enter amount of protein in serving (g):" />
+            <Label layoutX="12.0" layoutY="219.0" prefHeight="27.0" prefWidth="397.0" text="Enter amount of fat in serving (g):" />
+            <TextField fx:id="carbsTextField" layoutX="325.0" layoutY="167.0" prefHeight="20.0" prefWidth="192.0" />
+            <TextField fx:id="fatTextField" layoutX="325.0" layoutY="213.0" prefHeight="10.0" prefWidth="192.0" />
+            <TextField fx:id="proteinTextField" layoutX="325.0" layoutY="265.0" prefHeight="10.0" prefWidth="192.0" />
+            <Button layoutX="183.0" layoutY="337.0" mnemonicParsing="false" onAction="#calculateServingRatio" text="Button" />
+            <TextField fx:id="currentWeightTextField" layoutX="379.0" layoutY="465.0" prefHeight="39.0" prefWidth="157.0" />
+            <Button alignment="CENTER" layoutX="346.0" layoutY="512.0" mnemonicParsing="false" onAction="#setCurrentWeight" prefHeight="44.0" prefWidth="241.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="set current weight" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </center>
 </BorderPane>
