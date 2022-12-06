@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class StepsController {
+public class StepsController{
 	Stage applicationStage;
     
     //@FXML
@@ -27,6 +27,8 @@ public class StepsController {
     @FXML
     private Label stepsErrorLabel;
     
+    private boolean isNumeric = false;
+    
     User user;
     
     public void setUser(User user) {
@@ -37,6 +39,7 @@ public class StepsController {
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+    	isNumeric = true;
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
 
     	
@@ -52,6 +55,9 @@ public class StepsController {
     		   controller.setUser(user);
     		   controller.setGoalsCompletedLabel();
     		   controller.setNameLabel();
+    		   if (isNumeric) {
+    			   controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
+    		   }
     		   controller.applicationStage = applicationStage;
     		   
     		   Scene scene = new Scene(root);
