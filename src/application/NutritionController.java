@@ -141,6 +141,9 @@ public class NutritionController {
 	void calculateBMI(ActionEvent calculateBMIevent) {
 		// Uses Health class to calculate BMI
 		double BMI = user.health.calculateBMI(user.health.getCurrentWeight(), user.health.getHeight());
+		if (user.health.getCurrentWeight() == 0) {
+			BMI = user.health.calculateBMI(user.health.getStartingWeight(), user.health.getHeight());
+		}
 		
 		// Displays different messages to user depending on their BMI
 		if (BMI < 18.5) {
@@ -202,7 +205,7 @@ public class NutritionController {
 		protein = user.health.calculateProtein();
 		
 		// Displays serving ratio to user
-		servingRatioLabel.setText(String.format("Ratio: %.1f carbs, %.1f fat, %.1f protein.", carbs,fat,protein));
+		servingRatioLabel.setText(String.format("Ratio: " + '\n' + "%.1f carbs, %.1f fat, %.1f protein." , carbs,fat,protein));
 	}
 	
 	/**
@@ -222,21 +225,24 @@ public class NutritionController {
 			userWeight = user.health.getCurrentWeight();
 		}
 		else {
-			userWeight = user.health.getCurrentWeight();
+			userWeight = user.health.getStartingWeight();
 		}
 		
 		// Displays label to the user
 		if(weightGoal == 0.0) {
 			userWeightLabel.setText("You have not set a weight goal.");
 		}
+		//if the user reaches the exact goal set.
 		if (weightGoal - userWeight == 0) {
 			userWeightLabel.setText("You have reached your weight goal.");
 		}
+		// if the user wants to loose weight. 
 		if (weightGoal - userWeight < 0) {
-			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
+			userWeightLabel.setText("You are " + (userWeight - weightGoal) + " kg away from" + '\n' + "your weight goal.");
 		}
+		// if the user wants to gain weight.
 		if (weightGoal - userWeight > 0) {
-			userWeightLabel.setText("You have surpassed your weight goal.");
+			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from" + '\n' + " your weight goal.");
 		}
 	}
 	

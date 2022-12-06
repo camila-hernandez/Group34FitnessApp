@@ -252,6 +252,7 @@ public class UserProfileController {
 			
 			// Write user information to the file
 			bw.write("Name = " + user.getName() + "\n");
+			bw.write("Age = " + user.getAge() + "\n");
 			// Write all goals to the file
 			bw.write("Steps goal = " + user.fitness.getStepsGoals() + "\n");
 			bw.write("Sleep goal = " + user.health.getSleepGoals() + "\n");
