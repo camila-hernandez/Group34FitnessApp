@@ -251,7 +251,7 @@ public class UserProfileController {
 			BufferedWriter bw = new BufferedWriter(fw);
 			
 			// Write user information to the file
-			bw.write("Name = " + );
+			bw.write("Name = " + user.getName() + "\n");
 			// Write all goals to the file
 			bw.write("Steps goal = " + user.fitness.getStepsGoals() + "\n");
 			bw.write("Sleep goal = " + user.health.getSleepGoals() + "\n");
