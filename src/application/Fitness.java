@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Fitness extends Goals {
 	
 
-	private double stepsGoal;
+	private int stepsGoal;
 	private ArrayList<Integer> stepsArray;
 	private int stepsCount;
 	private double caloriesBurnedGoal;
@@ -59,21 +59,6 @@ public class Fitness extends Goals {
 		fridayCaloriesBurnedInfo = 0.0;
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
-	}
-
-	public void checkGoalsCompleted() {
-		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
-			completeGoal();
-			reachStepsGoal = true;
-		}
-		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
-			completeGoal();
-			reachExerciseGoal = true;
-		}
-		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
-			completeGoal();
-			reachCaloriesBurnedGoal = true;
-		}
 	}
 	
 	/**
@@ -301,23 +286,28 @@ public class Fitness extends Goals {
 		
 		public void checkInput(String valueEntered) throws InvalidUserInputException {	
 			boolean decimalEncountered = false;
-			for (char c :valueEntered.toCharArray()) {
-				// Check if the character is a '.'
-				// If the character is a '.' and the for loop has not encountered a '.' yet, 
-				// then it will indicate this '.' to be a decimal.
-				if (c == '.' && !decimalEncountered) {
-					decimalEncountered = true;
-				}
-				// Check if the character is a digit if it's not a decimal
-				else if (!Character.isDigit(c)) {
-					throw new InvalidUserInputException("Make sure to enter a valid number.");
-				}
+			if (valueEntered.isEmpty()) {
+				throw new InvalidUserInputException("Please fill out all required TextFields.");
 			}
-			
-			value = Double.parseDouble(valueEntered);
-			
-			if (value < 0) {
-				throw new InvalidUserInputException("Number should be greater than 0.");
+			else {
+				for (char c :valueEntered.toCharArray()) {
+					// Check if the character is a '.'
+					// If the character is a '.' and the for loop has not encountered a '.' yet, 
+					// then it will indicate this '.' to be a decimal.
+					if (c == '.' && !decimalEncountered) {
+						decimalEncountered = true;
+					}
+					// Check if the character is a digit if it's not a decimal
+					else if (!Character.isDigit(c)) {
+						throw new InvalidUserInputException("Make sure to enter a valid number.");
+					}
+				}
+
+				value = Double.parseDouble(valueEntered);
+
+				if (value < 0) {
+					throw new InvalidUserInputException("Number should be greater than 0.");
+				}
 			}
 		}
 
