@@ -39,19 +39,18 @@ public class SleepController{
 	}
 
 	/**
-	 * When user opens sleep window, the program will first look to see if any sleep was previously entered.  
+	 * This method willWhen user opens sleep window, the program will first look to see if any sleep was previously entered.  
 	 * @param sleep is how much hours the user entered.
 	 */
 	public void updateSleepProgressLabel(String sleep) {
-
+		// Updates the user's sleep progress label
 		if (sleep == null) {
 			sleepProgressLabel.setText("You have not entered any hours " + '\n' + "of sleep for today.");
 		}
-
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours" + '\n' +  "of sleep for today.");
 		}
-
+		// Sets and stores the label in Health class
 		user.health.setSleepProgressLabel(sleep);
 	}
 
