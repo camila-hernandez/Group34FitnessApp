@@ -26,12 +26,12 @@
                   <Insets />
                </StackPane.margin>
                <padding>
-                  <Insets left="40.0" />
+                  <Insets left="70.0" />
                </padding>
             </Label>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="stepsIcon" fitHeight="150.0" fitWidth="150.0" layoutX="95.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="stepsIcon" fitHeight="150.0" fitWidth="150.0" layoutX="120.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>
@@ -48,10 +48,10 @@
                      </StackPane.margin></Rectangle>
                   <Label prefHeight="46.0" prefWidth="390.0" text="LOG YOUR DAILY STEP COUNT" textAlignment="CENTER">
                      <font>
-                        <Font name="Yu Gothic UI Regular" size="24.0" />
+                        <Font name="Yu Gothic UI Bold" size="20.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets left="30.0" top="-80.0" />
+                        <Insets left="49.0" top="-80.0" />
                      </StackPane.margin>
                   </Label>
                </children>
@@ -68,7 +68,7 @@
                   </Label>
                   <Label text="Steps taken:" textFill="#ff6459">
                      <HBox.margin>
-                        <Insets left="140.0" />
+                        <Insets left="133.0" />
                      </HBox.margin>
                      <font>
                         <Font name="System Bold" size="15.0" />
@@ -136,12 +136,12 @@
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#updateStepsNumber" prefWidth="378.0" text="Update Daily Steps" textFill="#ff6459">
+            <Button mnemonicParsing="false" onAction="#updateStepsNumber" prefWidth="360.0" text="Update Daily Steps" textFill="#ff6459">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets bottom="10.0" left="30.0" />
+                  <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="30.0" />
@@ -151,12 +151,26 @@
                </effect></Button>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <ProgressBar fx:id="stepsProgressBar" prefHeight="40.0" prefWidth="382.0" progress="0.0">
+                  <ProgressBar fx:id="stepsProgressBar" prefHeight="40.0" prefWidth="372.0" progress="0.0">
                      <padding>
-                        <Insets left="20.0" right="3.0" top="-30.0" />
+                        <Insets left="5.0" right="3.0" top="-30.0" />
                      </padding>
                   </ProgressBar>
-                  <Label text="Your progress" />
+                  <Label fx:id="percentageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="180.0" text="One day, or day 1?">
+                     <padding>
+                        <Insets bottom="60.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="progressLyrics" text="Your progress">
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                     <font>
+                        <Font name="Consolas" size="14.5" />
+                     </font></Label>
                </children>
             </StackPane>
             <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0">
@@ -183,14 +197,6 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="380.0">
                <children>
-                  <Label text="Your monthly progress:">
-                     <font>
-                        <Font name="Malgun Gothic" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="130.0" />
-                     </VBox.margin>
-                  </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="160.0" text="RETURN TO MAIN">
