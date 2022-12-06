@@ -18,6 +18,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The RecipesController class will display healthy recipes the user can recreate to progress through
+ * their health and fitness journey.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class RecipesController {
 	Stage applicationStage;
 	
