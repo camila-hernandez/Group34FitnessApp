@@ -51,7 +51,7 @@
                         <Font name="Yu Gothic UI Bold" size="20.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets left="49.0" top="-80.0" />
+                        <Insets left="35.0" top="-80.0" />
                      </StackPane.margin>
                   </Label>
                </children>
@@ -156,7 +156,7 @@
                         <Insets left="5.0" right="3.0" top="-30.0" />
                      </padding>
                   </ProgressBar>
-                  <Label fx:id="percentageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="180.0" text="One day, or day 1?">
+                  <Label fx:id="percentageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="365.0" text="One day, or day 1?">
                      <padding>
                         <Insets bottom="60.0" />
                      </padding>

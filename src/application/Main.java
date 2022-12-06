@@ -75,9 +75,9 @@ public class Main extends Application {
 			line = br.readLine();
 
 			// Sets goal values in storage when the program starts
-			if (words[0].contentEquals("Steps goal ")) {
-				user.fitness.setStepsGoals(Integer.parseInt(words[1]));
-			}
+			//if (words[0].contentEquals("Steps goal ")) {
+				//user.fitness.setStepsGoals(Integer.parseInt(words[1]));
+			//}
 			if (words[0].contentEquals("Sleep goal ")) {
 				user.health.setSleepGoals(Double.parseDouble(words[1]));
 			}

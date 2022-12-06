@@ -41,6 +41,7 @@ public class Fitness extends Goals {
 	User user;
 	// empty constructor
 	public Fitness() {
+		stepsGoal = 111000;
 		stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
 		stepsCount = 0;
 		progress = 0.0;

@@ -2,6 +2,7 @@ package application;
 
 import java.io.FileInputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -57,6 +58,8 @@ public class StepsController implements Initializable{
     	this.user = user;
     }
     
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
@@ -64,29 +67,32 @@ public class StepsController implements Initializable{
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
     	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
     	
-    	stepsProgressBar.setProgress(user.fitness.getStepsCount()/user.fitness.getStepsGoals());
-    	double goalPercentage = user.fitness.getStepsCount()/user.fitness.getStepsGoals();
-    	percentageLabel.setText(goalPercentage*100 + "%");
-    	//0-20%
-    	if (goalPercentage < 0.2) {
-    		progressLyrics.setText(String.valueOf("Rising up straight to the top"));
+    	if (user.fitness.getStepsGoals() != 0) {
+    		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
+    		double goalPercentage = (double)user.fitness.getStepsCount()/user.fitness.getStepsGoals();
+    		percentageLabel.setText(df.format(goalPercentage * 100) + "%");
+	    	//0-20%
+	    	if (goalPercentage < 0.2) {
+	    		progressLyrics.setText(String.valueOf("Rising up straight to the top"));
+	    	}
+	    	//20-40%
+	    	if (goalPercentage >= 0.2 && goalPercentage < 0.4) {
+	    		progressLyrics.setText(String.valueOf("Had the guts, got the glory"));
+	    	}
+	    	//40-60%
+	    	if (goalPercentage >= 0.4 && goalPercentage < 0.6) {
+	    		progressLyrics.setText(String.valueOf("Went the distance, now I'm not going to stop"));
+	    	}
+	    	//60-80%
+	    	if (goalPercentage >= 0.6 && goalPercentage < 0.8) {
+	    		progressLyrics.setText(String.valueOf("Just a man and his will to survive"));
+	    	}
+	    	//80-infinity%
+	    	if (goalPercentage >= 0.8) {
+	    		progressLyrics.setText(String.valueOf("IT'S THE EYE OF THE TIGER"));
+	    	}
     	}
-    	//20-40%
-    	if (goalPercentage >= 0.2 && goalPercentage < 0.4) {
-    		progressLyrics.setText(String.valueOf("Had the guts, got the glory"));
-    	}
-    	//40-60%
-    	if (goalPercentage >= 0.4 && goalPercentage < 0.6) {
-    		progressLyrics.setText(String.valueOf("Went the distance, now I'm not going to stop"));
-    	}
-    	//60-80%
-    	if (goalPercentage >= 0.6 && goalPercentage < 0.8) {
-    		progressLyrics.setText(String.valueOf("Just a man and his will to survive"));
-    	}
-    	//80-infinity%
-    	if (goalPercentage >= 0.8) {
-    		progressLyrics.setText(String.valueOf("IT'S THE EYE OF THE TIGER"));
-    	}
+    	else {percentageLabel.setText("Please set your monthly steps goal first.");}
     }
     
     @FXML
