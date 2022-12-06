@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,7 +36,13 @@ public class StepsController implements Initializable{
     private Label stepsErrorLabel;
     
     @FXML
+    private Label dayOfMonthErrorLabel;
+    
+    @FXML
     private ImageView stepsIcon;
+    
+    @FXML
+    private ProgressBar stepsProgressBar;
     
     
     User user;
@@ -49,6 +56,9 @@ public class StepsController implements Initializable{
     	try {
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
+    	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
+    	
+    	//stepsProgressBar;
     	
     }
     

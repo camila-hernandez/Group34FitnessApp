@@ -140,7 +140,12 @@
                <effect>
                   <Blend />
                </effect></Button>
-            <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="294.0">
+            <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Label>
+            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0" text="Label">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -167,7 +172,7 @@
                         <Insets left="130.0" />
                      </VBox.margin>
                   </Label>
-                  <ProgressBar prefHeight="100.0" prefWidth="354.0" progress="0.0">
+                  <ProgressBar fx:id="stepsProgressBar" prefHeight="100.0" prefWidth="354.0" progress="0.0">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>

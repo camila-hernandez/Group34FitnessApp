@@ -123,12 +123,12 @@ public class Fitness extends Goals {
 	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
 		stepsCount = 0;
 		if (isNumeric(dailyStepCount)) {
-			stepsArray.set(dayOfMonthChoice-1, Integer.parseInt(dailyStepCount));
-			for (int i = 0; i < stepsArray.size(); i++) {
-				stepsCount += stepsArray.get(i);
+				stepsArray.set(dayOfMonthChoice-1, Integer.parseInt(dailyStepCount));
+				for (int i = 0; i < stepsArray.size(); i++) {
+					stepsCount += stepsArray.get(i);
 				}
 		}
-		else {throw new InvalidUserInputException("Your input must be numeric");}
+		else {throw new InvalidUserInputException("Please enter steps as a numeric value");}
 	}
     //*****************************************
 
