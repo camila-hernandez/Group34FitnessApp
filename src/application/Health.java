@@ -295,7 +295,6 @@ public class Health extends Goals {
 	/**
 	 * This method is used to calculate the user's protein consumption for the day.
 	 * @return This getter method returns the protein in-take amount of the user for the day.
-	 * @return
 	 */
 	public double getProtein() {
 		return protein;
