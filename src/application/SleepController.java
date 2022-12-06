@@ -14,9 +14,10 @@ import javafx.stage.Stage;
 
 /**
  * The SleepController will verify and store a set of characteristics that are related to sleep
- * that are unique to the user based on the values entered by the user. The SleepController will compare 
- * and display the users input as hours to their set goal. Also, this controller will check and 
- * display errors entered by the user, such as invalid characters or those out of acceptable range.
+ * that are unique to the user based on the values entered by the user. 
+ * The SleepController will compare and display the users input as hours to their set goal. 
+ * Also, this controller will check and display errors entered by the user, such as invalid characters 
+ * or those out of acceptable range.
  * 
  * @author Camila Hernandez, Mariam Masri & Enes Gisi
  *
