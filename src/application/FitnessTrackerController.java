@@ -140,7 +140,7 @@ public class FitnessTrackerController implements Initializable {
 	void trackNutrition(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
+			BorderPane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
 			NutritionController controller = (NutritionController)loader.getController();
 			
 			controller.setUser(user);

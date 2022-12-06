@@ -58,7 +58,11 @@ public class NutritionController {
 	@FXML 
 	private Label weightProgressLabel;
 	
+	@FXML
+    private Label errorLabel;
+	
 	User user;
+	
 	
 	/**
 	 * This method will allow for the same User object to be passed between different controllers.
@@ -76,8 +80,15 @@ public class NutritionController {
 	 */
 	@FXML
 	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) throws InvalidUserInputException {
-		// Checks user input
-		user.health.checkInput(CalorieIntake.getText());
+		// Initially set error label to nothing
+		errorLabel.setText("");
+		
+		try {
+			// Checks user input
+			user.health.checkInput(CalorieIntake.getText());
+		} catch (InvalidUserInputException e) {
+				errorLabel.setText(e.getMessage());
+			}
 		
 		// Set the variable with the user input
 		double calorieAmount = Double.parseDouble(CalorieIntake.getText());
@@ -154,10 +165,17 @@ public class NutritionController {
 	 */
 	@FXML
 	void updateServingRatio(ActionEvent servingRatioEvent) throws InvalidUserInputException {
-		// Checks user input
-		user.health.checkInput(carbsTextField.getText());
-		user.health.checkInput(fatTextField.getText());
-		user.health.checkInput(proteinTextField.getText());
+		// Initially set error label to nothing
+		errorLabel.setText("");
+				
+		try {
+			// Checks user input
+			user.health.checkInput(carbsTextField.getText());
+			user.health.checkInput(fatTextField.getText());
+			user.health.checkInput(proteinTextField.getText());
+		} catch (InvalidUserInputException e){
+			errorLabel.setText(e.getMessage());
+		}
 		
 		// Sets the carbs, fat and protein the user consumed in Health class
 		user.health.setCarbs(Double.parseDouble(carbsTextField.getText()));
@@ -215,10 +233,10 @@ public class NutritionController {
 			userWeightLabel.setText("You have reached your weight goal.");
 		}
 		if (weightGoal - userWeight < 0) {
-			userWeightLabel.setText("You are " + (userWeight - weightGoal) + " kg away from your weight goal.");
+			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
 		}
 		if (weightGoal - userWeight > 0) {
-			userWeightLabel.setText("You are " + (weightGoal - userWeight) + " kg away from your weight goal.");
+			userWeightLabel.setText("You have surpassed your weight goal.");
 		}
 	}
 	
@@ -230,8 +248,15 @@ public class NutritionController {
 	 */
 	@FXML
 	void setCurrentWeight(ActionEvent setCurrentWeightEvent) throws InvalidUserInputException {
-		// Checks user input
-		user.health.checkInput(currentWeightTextField.getText());
+		// Initially set error label to nothing
+		errorLabel.setText("");
+		
+		try {
+			// Checks user input
+			user.health.checkInput(currentWeightTextField.getText());
+		} catch (InvalidUserInputException e) {
+			errorLabel.setText(e.getMessage());
+		}
 		
 		// If the users input is valid, variables will be set
 		double currentWeight = Double.parseDouble(currentWeightTextField.getText());
@@ -247,7 +272,7 @@ public class NutritionController {
 		}
     
 		// Displays weight progress to user
-		weightProgressLabel.setText("Your starting weight: " + startWeight + "Your current weight: " + currentWeight);
+		weightProgressLabel.setText("Your starting weight: " + startWeight + ". Your current weight: " + currentWeight + ".");
 		
 	}
 	

@@ -22,6 +22,9 @@ public class SleepController{
 
 	@FXML
 	private TextField minutesSleep;
+	
+	@FXML
+	private Label sleepErrorLabel;
 
 	@FXML
 	private Label sleepProgressLabel;
@@ -36,19 +39,18 @@ public class SleepController{
 	}
 
 	/**
-	 * When user opens sleep window, the program will first look to see if any sleep was previously entered.  
+	 * This method willWhen user opens sleep window, the program will first look to see if any sleep was previously entered.  
 	 * @param sleep is how much hours the user entered.
 	 */
 	public void updateSleepProgressLabel(String sleep) {
-
+		// Updates the user's sleep progress label
 		if (sleep == null) {
-			sleepProgressLabel.setText("You have not entered hours of sleep.");
+			sleepProgressLabel.setText("You have not entered any hours " + '\n' + "of sleep for today.");
 		}
-
 		if (sleep != null) {
-			sleepProgressLabel.setText("You have entered " + sleep + " hours of sleep.");
+			sleepProgressLabel.setText("You have entered " + sleep + " hours" + '\n' +  "of sleep for today.");
 		}
-
+		// Sets and stores the label in Health class
 		user.health.setSleepProgressLabel(sleep);
 	}
 
@@ -81,12 +83,12 @@ public class SleepController{
 
 		// if the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal, and the label changes to let the user know.
 		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
-			sleepProgressLabel.setText("You have reached" + '\n' + "your sleep goal!");
+			sleepProgressLabel.setText("You have reached your sleep goal!");
 		}
 
 		// if the sleepGoal - getHours() > 0, that means the user has not reached their goal, and is given a percent of how close they are. 
 		if (sleepGoal - getHours() > 0) {
-			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + '\n' + "of your sleep goal.");
+			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
 		}	
 	}
 
