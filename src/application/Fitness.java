@@ -2,7 +2,7 @@ package application;
 
 public class Fitness extends Goals {
 	
-	private double stepsGoal;
+	private int stepsGoal;
 	private int stepsCount;
 	private double caloriesBurnedGoal;
 	private double exerciseGoal;
@@ -92,7 +92,7 @@ public class Fitness extends Goals {
 		}
 	}
 
-	public void setStepsGoals(double steps) {
+	public void setStepsGoals(int steps) {
 		this.stepsGoal = steps;
     }
 	
@@ -104,7 +104,7 @@ public class Fitness extends Goals {
 		this.exerciseGoal = exercise;
     }
     
-    public double getStepsGoals() {
+    public int getStepsGoals() {
 		return stepsGoal;
 	}
 	
