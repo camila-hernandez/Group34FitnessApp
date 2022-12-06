@@ -64,7 +64,7 @@ public class SleepController{
 	/**
 	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
 	 * @param trackSleepEvent when the button update sleep is pressed.
-	 * @throws InvalidUserInputException 
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
 	 */
 	@FXML
 	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
