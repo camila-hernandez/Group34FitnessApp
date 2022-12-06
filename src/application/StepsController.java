@@ -47,12 +47,22 @@ public class StepsController implements Initializable{
     
     User user;
     
+    /**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
     public void setUser(User user) {
     	this.user = user;
     }
     
+    /**
+     * This ActionEvent will display the user's overall steps taken count for the month in the main window.
+     * @param updateStepsEvent
+     * @throws InvalidUserInputException
+     */
     @FXML
-    void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
+    void updateStepsNumber(ActionEvent updateStepsEvent) throws InvalidUserInputException {
     	try {
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
@@ -62,8 +72,13 @@ public class StepsController implements Initializable{
     	
     }
     
+    /**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
     @FXML
-    void returnToMainPage(ActionEvent event) {
+    void returnToMainPage(ActionEvent returnToMainPageEvent) {
      	 try {
     		   FXMLLoader loader = new FXMLLoader();
     		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
@@ -87,25 +102,17 @@ public class StepsController implements Initializable{
     }
     
     /**
-     * This method allows imported pictures to appear in the Activities window.
-     * Also, this method sets the progress bar color and displays the current date to the user in the same window.
+     * This method allows imported pictures to appear in the Steps window.
      */
      @Override
  	public void initialize(URL location, ResourceBundle resources) {
     	 //Image attribute:
     	 //<a href="https://www.freepik.com/free-vector/modern-sport-sneakers-blue-color-with-white-shoelaces-realistic-single-image-white-background-isolated-illustration_7251220.htm#query=walking%20shoes&position=3&from_view=keyword">Image by macrovector</a> on Freepik
 
-     	
      	// Loads image onto steps rectangle
      	Image stepsIconVector = new Image(getClass().getResourceAsStream("shoessteps.jpg"));
      	stepsIcon.setImage(stepsIconVector);
-     	
-     	
-     	// Sets the current date label
-     	//LocalDateTime currentDateTime = LocalDateTime.now();
-     	//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
-     	//String formattedDate = currentDateTime.format(dtf);
-     	//dateLabel.setText(formattedDate);
+
  	}
 
 }
