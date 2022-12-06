@@ -1,19 +1,10 @@
 package application;
 	
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -85,7 +76,7 @@ public class Main extends Application {
 
 			// Sets goal values in storage when the program starts
 			if (words[0].contentEquals("Steps goal ")) {
-				user.fitness.setStepsGoals(Double.parseDouble(words[1]));
+				user.fitness.setStepsGoals(Integer.parseInt(words[1]));
 			}
 			if (words[0].contentEquals("Sleep goal ")) {
 				user.health.setSleepGoals(Double.parseDouble(words[1]));
