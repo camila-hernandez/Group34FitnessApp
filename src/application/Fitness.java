@@ -1,27 +1,36 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Fitness extends Goals {
 	
-	private int stepsGoal = 0;
-	private int stepsCount = 0;
-	private double caloriesBurnedGoal = 0.0;
-	private double exerciseGoal = 0.0;
-	private double progress = 0.0;
-	private double totalCaloriesBurned = 0.0;
-	private double mondayExerciseInfo = 0.0;
-	private double tuesdayExerciseInfo = 0.0;
-	private double wednesdayExerciseInfo = 0.0;
-	private double thursdayExerciseInfo = 0.0;
-	private double fridayExerciseInfo = 0.0;
-	private double saturdayExerciseInfo = 0.0;
-	private double sundayExerciseInfo = 0.0;
-	private double mondayCaloriesBurnedInfo = 0.0;
-	private double tuesdayCaloriesBurnedInfo = 0.0;
-	private double wednesdayCaloriesBurnedInfo = 0.0;
-	private double thursdayCaloriesBurnedInfo = 0.0;
-	private double fridayCaloriesBurnedInfo = 0.0;
-	private double saturdayCaloriesBurnedInfo = 0.0;
-	private double sundayCaloriesBurnedInfo = 0.0;
+
+	private double stepsGoal;
+	private ArrayList<Integer> stepsArray;
+	private int stepsCount;
+	private double caloriesBurnedGoal;
+	private double exerciseGoal;
+	private double progress;
+	private double totalCaloriesBurned;
+	private double mondayExerciseInfo;
+	private double tuesdayExerciseInfo;
+	private double wednesdayExerciseInfo;
+	private double thursdayExerciseInfo;
+	private double fridayExerciseInfo;
+	private double saturdayExerciseInfo;
+	private double sundayExerciseInfo;
+	private double mondayCaloriesBurnedInfo;
+	private double tuesdayCaloriesBurnedInfo;
+	private double wednesdayCaloriesBurnedInfo;
+	private double thursdayCaloriesBurnedInfo;
+	private double fridayCaloriesBurnedInfo;
+	private double saturdayCaloriesBurnedInfo;
+	private double sundayCaloriesBurnedInfo;
+	private String stepsGoalsLabel;
+	private String caloriesBurnedGoalsLabel;
+	private String exerciseGoalsLabel;
+	private String todaysExerciseMotivationalLabel;
 	
 	boolean reachStepsGoal = false;
 	boolean reachExerciseGoal = false;
@@ -30,9 +39,41 @@ public class Fitness extends Goals {
 	double value;
 	
 	User user;
-	
-	public Fitness() {
 	// empty constructor
+	public Fitness() {
+		stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
+		stepsCount = 0;
+		progress = 0.0;
+		totalCaloriesBurned = 0.0;
+		mondayExerciseInfo = 0.0;
+		tuesdayExerciseInfo = 0.0;
+		wednesdayExerciseInfo = 0.0;
+		thursdayExerciseInfo = 0.0;
+		fridayExerciseInfo = 0.0;
+		saturdayExerciseInfo = 0.0;
+		sundayExerciseInfo = 0.0;
+		mondayCaloriesBurnedInfo = 0.0;
+		tuesdayCaloriesBurnedInfo = 0.0;
+		wednesdayCaloriesBurnedInfo = 0.0;
+		thursdayCaloriesBurnedInfo = 0.0;
+		fridayCaloriesBurnedInfo = 0.0;
+		saturdayCaloriesBurnedInfo = 0.0;
+		sundayCaloriesBurnedInfo = 0.0;
+	}
+
+	public void checkGoalsCompleted() {
+		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
+			completeGoal();
+			reachStepsGoal = true;
+		}
+		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
+			completeGoal();
+			reachExerciseGoal = true;
+		}
+		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
+			completeGoal();
+			reachCaloriesBurnedGoal = true;
+		}
 	}
 	
 	/**
@@ -43,6 +84,36 @@ public class Fitness extends Goals {
 		this.stepsGoal = steps;
     }
 	
+
+	//STEPS VALIDATION + GETTER + SETTER (make this to deal with the array list)
+	public int getStepsCount() {
+		return stepsCount;
+	}
+	
+	public static boolean isNumeric(String str){ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+	//validation done in array update so no need for it here (for loop in the controller)
+	public void setStepsCount(int monthlySteps) {
+			this.stepsCount = monthlySteps;
+	}
+	
+	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
+		stepsCount = 0;
+		if (isNumeric(dailyStepCount)) {
+				stepsArray.set(dayOfMonthChoice-1, Integer.parseInt(dailyStepCount));
+				for (int i = 0; i < stepsArray.size(); i++) {
+					stepsCount += stepsArray.get(i);
+				}
+		}
+		else {throw new InvalidUserInputException("Please enter steps as a numeric value");}
+	}
+
 	/**
      * This method will set the user's input from the calories burned TextField from the GoalsController class.
      * @param calories This is how many calories the user would like to burn in a day.
@@ -100,14 +171,6 @@ public class Fitness extends Goals {
 	 
 	 public double getProgress() {
 		 return progress;
-	 }
-	 
-	 public void setStepsCount(int steps) {
-		 this.stepsCount = steps;
-	 }
-	 
-	 public double getStepsCount() {
-		 return stepsCount;
 	 }
 
 	 public void setMondayCaloriesBurnedInfo(double monday) {
