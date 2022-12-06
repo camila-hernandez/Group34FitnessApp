@@ -1,8 +1,13 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Fitness extends Goals {
 	
-	private double stepsGoal;
+
+	private int stepsGoal;
+	private ArrayList<Integer> stepsArray;
 	private int stepsCount;
 	private double caloriesBurnedGoal;
 	private double exerciseGoal;
@@ -33,7 +38,10 @@ public class Fitness extends Goals {
 
 	double value;
 	
+	User user;
+	// empty constructor
 	public Fitness() {
+		stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
 		stepsCount = 0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
@@ -52,83 +60,88 @@ public class Fitness extends Goals {
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
 	}
-
-	public void checkGoalsCompleted() {
-		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
-			completeGoal();
-			reachStepsGoal = true;
-		}
-		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
-			completeGoal();
-			reachExerciseGoal = true;
-		}
-		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
-			completeGoal();
-			reachCaloriesBurnedGoal = true;
-		}
-	}
 	
-	public void checkInput(String valueEntered) throws InvalidUserInputException {	
-		boolean decimalEncountered = false;
-		for (char c :valueEntered.toCharArray()) {
-			// Check if the character is a '.'
-			// If the character is a '.' and the for loop has not encountered a '.' yet, 
-			// then it will indicate this '.' to be a decimal.
-			if (c == '.' && !decimalEncountered) {
-				decimalEncountered = true;
-			}
-			// Check if the character is a digit if it's not a decimal
-			else if (!Character.isDigit(c)) {
-				throw new InvalidUserInputException("Make sure to enter a valid number.");
-			}
-		}
-		
-		value = Double.parseDouble(valueEntered);
-		
-		if (value < 0) {
-			throw new InvalidUserInputException("Number should be greater than 0.");
-		}
-	}
-
-	public void setStepsGoals(double steps) {
+	/**
+     * This method will set the user's input from the steps TextField from the GoalsController class.
+     * @param steps This is how many steps the user would like to take in a day.
+	 */
+	public void setStepsGoals(int steps) {
 		this.stepsGoal = steps;
     }
 	
+
+	//STEPS VALIDATION + GETTER + SETTER (make this to deal with the array list)
+	public int getStepsCount() {
+		return stepsCount;
+	}
+	
+	public static boolean isNumeric(String str){ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+	//validation done in array update so no need for it here (for loop in the controller)
+	public void setStepsCount(int monthlySteps) {
+			this.stepsCount = monthlySteps;
+	}
+	
+	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
+		stepsCount = 0;
+		if (isNumeric(dailyStepCount)) {
+				stepsArray.set(dayOfMonthChoice-1, Integer.parseInt(dailyStepCount));
+				for (int i = 0; i < stepsArray.size(); i++) {
+					stepsCount += stepsArray.get(i);
+				}
+		}
+		else {throw new InvalidUserInputException("Please enter steps as a numeric value");}
+	}
+
+	/**
+     * This method will set the user's input from the calories burned TextField from the GoalsController class.
+     * @param calories This is how many calories the user would like to burn in a day.
+     */
     public void setCaloriesGoals(double calories) {
 		this.caloriesBurnedGoal = calories;
     }
-    
+    /**
+     * This method will set the user's input from the exercise duration TextField from the GoalsController class.
+     * @param exercise This is how long the user would like to exercise for in a day.
+     */
     public void setExerciseGoals(double exercise) {
 		this.exerciseGoal = exercise;
     }
     
-    public double getStepsGoals() {
+    /**
+	 * This method is used to compare the daily steps taken by the user to their goal.
+	 * @return This getter method returns the steps goal of the user.
+	 */
+    public int getStepsGoals() {
 		return stepsGoal;
 	}
 	
+    /**
+	 * This method is used to compare the amount of calories burned by the user in a day to their goal.
+	 * @return This getter method returns the calories burned goal of the user.
+	 */
 	public double getCaloriesGoals() {
 		return caloriesBurnedGoal;
 	}
 	
+	/**
+	 * This method is used to compare the user's exercise duration in a day to their goal.
+	 * @return This getter method returns the exercise duration goal of the user.
+	 */
 	public double getExerciseGoals() {
 		return exerciseGoal;
 	}
-	public void setStepsGoalsLabel(String stepsLabel) {
-		 this.stepsGoalsLabel = stepsLabel;
-	}
-		    
-	public void setCaloriesBurnedGoalsLabel(String caloriesLabel) {
-		 this.caloriesBurnedGoalsLabel = caloriesLabel;
-	}
-		    
-	public void setExerciseGoalsLabel(String exerciseLabel) {
-		this.exerciseGoalsLabel = exerciseLabel;
-	}
-		 
-	public void setTodaysExerciseMotivationalLabel(String motivation) {
-		this.todaysExerciseMotivationalLabel = motivation;
-	}
-		
+	
+	/**
+	 * 
+	 * @param caloriesBurned
+	 */
 	public void setTotalCaloriesBurned(double caloriesBurned) {
 		 this.totalCaloriesBurned = caloriesBurned;
 	 }
@@ -143,14 +156,6 @@ public class Fitness extends Goals {
 	 
 	 public double getProgress() {
 		 return progress;
-	 }
-	 
-	 public void setStepsCount(int steps) {
-		 this.stepsCount = steps;
-	 }
-	 
-	 public double getStepsCount() {
-		 return stepsCount;
 	 }
 
 	 public void setMondayCaloriesBurnedInfo(double monday) {
@@ -264,4 +269,46 @@ public class Fitness extends Goals {
 		 return sundayExerciseInfo;
 	 }
 	 
+	 public void checkGoalsCompleted() {
+			if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
+				completeGoal();
+				reachStepsGoal = true;
+			}
+			if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
+				completeGoal();
+				reachExerciseGoal = true;
+			}
+			if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
+				completeGoal();
+				reachCaloriesBurnedGoal = true;
+			}
+		}
+		
+		public void checkInput(String valueEntered) throws InvalidUserInputException {	
+			boolean decimalEncountered = false;
+			if (valueEntered.isEmpty()) {
+				throw new InvalidUserInputException("Please fill out all required TextFields.");
+			}
+			else {
+				for (char c :valueEntered.toCharArray()) {
+					// Check if the character is a '.'
+					// If the character is a '.' and the for loop has not encountered a '.' yet, 
+					// then it will indicate this '.' to be a decimal.
+					if (c == '.' && !decimalEncountered) {
+						decimalEncountered = true;
+					}
+					// Check if the character is a digit if it's not a decimal
+					else if (!Character.isDigit(c)) {
+						throw new InvalidUserInputException("Make sure to enter a valid number.");
+					}
+				}
+
+				value = Double.parseDouble(valueEntered);
+
+				if (value < 0) {
+					throw new InvalidUserInputException("Number should be greater than 0.");
+				}
+			}
+		}
+
 }

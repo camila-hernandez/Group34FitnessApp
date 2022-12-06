@@ -3,7 +3,6 @@ package application;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,21 +17,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -41,6 +35,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The ActivitiesController class will store and verify the user's exercise progress throughout the day.
+ * This controller will display to the user's their exercise progress in a single day as well as their weekly progress.
+ * The ActiviesController class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class ActivitiesController implements Initializable {
 	Stage applicationStage;
 
@@ -90,26 +93,40 @@ public class ActivitiesController implements Initializable {
     
     double progress = 0.0;
     double totalCalories = 0.0;
-    // needs Javadoc
+    
+    /**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
     public void setUser(User user) {
     	this.user = user;
     }
-   // needs Javadoc
+    
+   /**
+    * This method allows imported pictures to appear in the Activities window.
+    * Also, this method sets the progress bar color and displays the current date to the user in the same window.
+    */
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	// These are links to the original icons used.
         // <a href="https://www.flaticon.com/free-icons/statistics" title="statistics icons">Statistics icons created by Freepik - Flaticon</a>
         // <a href="https://www.flaticon.com/free-icons/diet" title="diet icons">Diet icons created by Chattapat - Flaticon</a>
     	// <a href="https://www.flaticon.com/free-icons/training" title="training icons">Training icons created by Freepik - Flaticon</a>
+    	
     	// Loads image onto stats button
     	Image statsIconImage = new Image(getClass().getResourceAsStream("bar-chart.png"));
     	statsImage.setImage(statsIconImage);
     	
+    	// Loads image onto workout button
     	Image workoutIconImage = new Image(getClass().getResourceAsStream("healthy.png"));
     	workoutImage.setImage(workoutIconImage);
     	
+    	// Loads image onto the header
     	Image headerIconImage = new Image(getClass().getResourceAsStream("training.png"));
     	headerImage.setImage(headerIconImage);
     	
+    	// Sets the progress bar to purple
     	workoutProgressBar.setStyle("-fx-accent: purple;");
     	
     	// Sets the current date label
@@ -120,8 +137,11 @@ public class ActivitiesController implements Initializable {
 	}
     
     /**
-     * This method will update every aspect of progress.
-     * @param time is how long the user exercised today
+     * This method will store how long the user exercised today into a file
+     * depending on the day of the week.
+     * The user can input this information in the Workouts tab in the Activities window.
+     * @param time This double must consist of only numbers, a single decimal point 
+	 * and must be greater than zero.
      */
     public void updateProgress(double time) {
     	
@@ -142,6 +162,7 @@ public class ActivitiesController implements Initializable {
     	// Store in user
     	user.fitness.setProgress(time);
     	
+    	// Stores progress into a file depending on the day of the week
     	Date today = new Date();
 		Calendar cal = Calendar.getInstance(); 
 		cal.setTime(today); 
@@ -168,6 +189,7 @@ public class ActivitiesController implements Initializable {
     		updateTodaysExerciseLabel(user.fitness.getSundayExerciseInfo());
     	}
     
+    	// Sets the motivational label depending on the user's progress
     	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
     	}
@@ -181,7 +203,11 @@ public class ActivitiesController implements Initializable {
     		todayExerciseMotivationLabel.setText("Great work! You reached your goal!");
     	}
     }
-    // needs Javadoc
+   
+    /**
+     * This method gets the progress value from the Fitness class and passes it into
+     * the updateProgress() method.
+     */
     public void updateProgressValue() {
     	updateProgress(user.fitness.getProgress());
     }
@@ -189,7 +215,7 @@ public class ActivitiesController implements Initializable {
     /**
      * This method will set a label that will indicate to the user their exercise duration compared
      * to the exercise goal they previously set.
-     * @param exercise is the total exercise duration of the current day
+     * @param exercise is the total exercise duration of the current day.
      */
     public void updateTodaysExerciseLabel(double exercise) {
     	todayExerciseLabel.setText(exercise + "/" + user.fitness.getExerciseGoals() + " minutes");
@@ -197,56 +223,63 @@ public class ActivitiesController implements Initializable {
     
     /**
      * This method will update the user's workout statistics to be able to generate a graph based on a weeks exercise.
+     * This is displayed as a bar graph in the Stats tab in the Activities window.
      * @param day is today's exercise duration
-     * @param calories is total calories burned today
+     * @param calories is total calories burned today.
      */
     public void updateStats(double day, double calories) {
+    	// Updates the user's workout duration and calories burned statistics
+    	Calendar cal = Calendar.getInstance();
     	Date today = new Date();
-		Calendar cal = Calendar.getInstance(); 
 		cal.setTime(today); 
 		day = user.fitness.getProgress();
 		calories = user.fitness.getTotalCaloriesBurned();
-		
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-    	if (dayOfWeek == Calendar.MONDAY) {
-    		user.fitness.setMondayExerciseInfo(day);
-    		user.fitness.setMondayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.TUESDAY) {
-    		user.fitness.setTuesdayExerciseInfo(day);
-    		user.fitness.setTuesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.WEDNESDAY) {
-    		user.fitness.setWednesdaydayExerciseInfo(day);
-    		user.fitness.setWednesdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.THURSDAY) {
-    		user.fitness.setThursdayExerciseInfo(day);
-    		user.fitness.setThursdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.FRIDAY) {
-    		user.fitness.setFridayExerciseInfo(day);
-    		user.fitness.setFridayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SATURDAY) {
-    		user.fitness.setSaturdayExerciseInfo(day);
-    		user.fitness.setSaturdayCaloriesBurnedInfo(calories);
-    	}
-    	if (dayOfWeek == Calendar.SUNDAY) {
-    		user.fitness.setSundayExerciseInfo(day);
-    		user.fitness.setSundayCaloriesBurnedInfo(calories);
-    	}
+		
+        	if (dayOfWeek == Calendar.MONDAY) {
+        		user.fitness.setMondayExerciseInfo(day);
+        		user.fitness.setMondayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.TUESDAY) {
+        		user.fitness.setTuesdayExerciseInfo(day);
+        		user.fitness.setTuesdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.WEDNESDAY) {
+        		user.fitness.setWednesdaydayExerciseInfo(day);
+        		user.fitness.setWednesdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.THURSDAY) {
+        		user.fitness.setThursdayExerciseInfo(day);
+        		user.fitness.setThursdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.FRIDAY) {
+        		user.fitness.setFridayExerciseInfo(day);
+        		user.fitness.setFridayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.SATURDAY) {
+        		user.fitness.setSaturdayExerciseInfo(day);
+        		user.fitness.setSaturdayCaloriesBurnedInfo(calories);
+        	}
+        	if (dayOfWeek == Calendar.SUNDAY) {
+        		user.fitness.setSundayExerciseInfo(day);
+        		user.fitness.setSundayCaloriesBurnedInfo(calories);
+        	}
     }
     
     /**
-     * This method set the total amount of calories burned for the day in Fitness class
-     * @param calories is the total amount of calories burned in a day through exercise
+     * This method sets the total amount of calories burned for the day in Fitness class.
+     * @param calories is the total amount of calories burned in a day through exercise.
      */
     public void totalCaloriesBurned(double calories) {
+    	//Check user input
     	totalCalories = calories;
     	user.fitness.setTotalCaloriesBurned(calories);
     }
-    // needs Javadoc
+    
+    /**
+     *  This method gets the total calories burned value from the Fitness class and passes it
+     *  into the totalCaloriesBurned() method.
+     */
     public void updateTotalCaloriesBurnedValues() {
     	if (totalCalories != 0.0) {
     		totalCaloriesBurned(user.fitness.getTotalCaloriesBurned());
@@ -255,7 +288,7 @@ public class ActivitiesController implements Initializable {
     
     /**
     * This method will set the scene to the main scene and will set the labels in the main scene.
-    * @param event This event will return the user back to the main scene
+    * @param event This ActionEvent will return the user back to the main scene.
     */
     @FXML
     void returnToDashboard(ActionEvent event) {
@@ -280,8 +313,9 @@ public class ActivitiesController implements Initializable {
     
     /**
      * This method will open up a new scene where the user can input their workout information such as
-     * calories burned and exercise duration, depending on which exercises are completed.
-     * @param event This event will change the scene so the user can upload their workout information
+     * calories burned and exercise duration, depending on which exercises they have completed.
+     * This method will also verify and store the values entered by the user and pass these variables into various methods.
+     * @param event This ActionEvent will change the scene so the user can upload their workout information.
      */
     public void updateWorkouts(ActionEvent event) {
     	Scene displayTrainingPage = applicationStage.getScene(); 
@@ -506,6 +540,7 @@ public class ActivitiesController implements Initializable {
 	   uploadWorkoutInfoButtonContainer.setPadding(new Insets(10,0,0,0));
 	   submitWorkoutDataButton.setOnAction(submitWorkoutDataEvent -> {
 		   try {
+			   // Checks user input
 			   user.fitness.checkInput(sportsExerciseTextfield.getText());
 			   user.fitness.checkInput(cardioExerciseTextfield.getText());
 			   user.fitness.checkInput(flexibilityExerciseTextfield.getText());
@@ -514,50 +549,60 @@ public class ActivitiesController implements Initializable {
 			   user.fitness.checkInput(cardioCaloriesTextfield.getText());
 			   user.fitness.checkInput(flexibilityCaloriesTextfield.getText());
 			   user.fitness.checkInput(strengthCaloriesTextfield.getText());
-			   
+		       
+		       // Adds all values from exercise duration into one variable
 			   double duration = (Double.parseDouble(sportsExerciseTextfield.getText()) + Double.parseDouble(cardioExerciseTextfield.getText()) +
 			   Double.parseDouble(flexibilityExerciseTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText())); 
 			   
+			   // Passes duration into method
 			   updateProgress(duration);
 			   
+			   // Adds all values from calories into one variable
 			   double calories = (Double.parseDouble(sportsCaloriesTextfield.getText()) + Double.parseDouble(cardioCaloriesTextfield.getText()) + 
-			   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthExerciseTextfield.getText()));
+			   Double.parseDouble(flexibilityCaloriesTextfield.getText()) + Double.parseDouble(strengthCaloriesTextfield.getText()));
 			   
+			   // Passes calories into method
 			   totalCaloriesBurned(calories);
 			   
+			   // Passes duration and calories into method
 			   updateStats(duration, calories);
 			   
+			   // Updates the exercise progress label with duration value
 			   updateTodaysExerciseLabel(duration); 
 			   
+			   // Sets the scene back to the Activities window
 			   applicationStage.setScene(displayTrainingPage);
 		   } catch (InvalidUserInputException e) {
+			   // Displays error message
 			   workoutErrorLabel.setText(e.getMessage());
 		   }
 	   });
   	   
+	   // Adding all containers into one
   	   workoutContainer.getChildren().addAll(workoutStack, workoutErrorContainer, sportsStack, cardioTrainingStack, flexibilityTrainingStack,
   			   strengthTrainingStack, guideContainer, uploadWorkoutInfoButtonContainer);
   	   
+  	   // Create and set a new scene 
   	   Scene modifyUserWorkoutInfoScene = new Scene(workoutContainer, 609, 856);
   	   applicationStage.setScene(modifyUserWorkoutInfoScene);
   	    
     } 
     
     /**
-     * This method will open a new scene where the user can view their weekly workout statistics
-     * @param event This event will change the scene so the user can view the weekly workout statistics
+     * This method will open a new scene where the user can view their weekly workout statistics,
+     * generated using the user's workout information, entered in the Workouts tab.
+     * @param event This ActionEvent will change the scene.
      */
     public void showWorkoutStats(ActionEvent event) {
     	try {
-    		System.out.println(user.test + "1");
+
 	   		   FXMLLoader loader = new FXMLLoader();
 	   		   AnchorPane root = loader.load(new FileInputStream("src/application/WorkoutStats.fxml"));
 	   		   WorkoutStatisticsController controller = (WorkoutStatisticsController)loader.getController();
-	   		System.out.println(user.test + "2");
+
 	   		   controller.setUser(user);
-	   		   System.out.println("Setting user for workout stats controller from activities");
 	   		   
-	   		   controller.createChart();
+	   		   controller.createWorkoutStatisticsBarGraph();
 	   		   controller.getMondaysExerciseDuration();
 	   		   controller.getTuesdaysExerciseDuration();
 	   		   controller.getWednesdaysExerciseDuration();
@@ -565,18 +610,16 @@ public class ActivitiesController implements Initializable {
 	   		   controller.getFridaysExerciseDuration();
 	   		   controller.getSaturdaysExerciseDuration();
 	   		   controller.getSundaysExerciseDuration();
-	   		   controller.getMondaysCaloriesBurned();
 	   		   
-	   		   controller.getTuesdayCaloriesBurnedValues();
-	   		   controller.getWednesdayCaloriesBurnedValues();
-	   		   controller.getThursdayCaloriesBurnedValues();
-	   		   controller.getFridayCaloriesBurnedValues();
-	   		   controller.getSaturdayCaloriesBurnedValues();
-	   		   controller.getSundayCaloriesBurnedValues();
+	   		   controller.getMondaysCaloriesBurnedValues();
+	   		   controller.getTuesdaysCaloriesBurnedValues();
+	   		   controller.getWednesdaysCaloriesBurnedValues();
+	   		   controller.getThursdaysCaloriesBurnedValues();
+	   		   controller.getFridaysCaloriesBurnedValues();
+	   		   controller.getSaturdaysCaloriesBurnedValues();
+	   		   controller.getSundaysCaloriesBurnedValues();
 	   		   
 	   		   controller.applicationStage = applicationStage;
-	   		   
-	   		   System.out.println(user.test);
 	   		   
 	   		   Scene scene = new Scene(root);
 	   		   applicationStage.setScene(scene);

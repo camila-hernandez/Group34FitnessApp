@@ -54,34 +54,40 @@ public class UserProfileController {
 	
 	User user;
 	
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 	
-	void setUserProperties(Scene userProfileScene, TextField nameTextfield, ChoiceBox<Object> genderChoiceBox, TextField ageTextfield,
-			TextField heightTextfield, TextField weightTextfield) throws InvalidUserInputException {
-		nameLabel.setText(nameTextfield.getText());
-		setNameInMainView(nameTextfield.getText());
-		ageLabel.setText(ageTextfield.getText());
-		genderLabel.setText(genderChoiceBox.getValue().toString());
-		heightLabel.setText(heightTextfield.getText());
-		weightLabel.setText(weightTextfield.getText());
-		
-		user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
-		user.health.setWeight(Double.parseDouble(weightTextfield.getText()));
-		
-		applicationStage.setScene(userProfileScene);
+	/**
+	 * This method will set the labels with the information inputed by the user.
+	 */
+	public void setUserProfileLabels() {
+		nameLabel.setText(user.getName());
+		ageLabel.setText(Integer.toString(user.getAge()));
+		genderLabel.setText(user.getGender());
+		heightLabel.setText(Double.toString(user.health.getHeight()));
+		weightLabel.setText(Double.toString(user.health.getStartingWeight()));
 	}
 	
-	public void setNameInMainView(String name) {
-		user.setName(name);
-	}
+	/**
+	 * This ActionEvent will allow the user to enter their personal information in a new scene.
+	 * @param modifyUserProfileEvent This is the new scene where the user will input their information.
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 */
 	@FXML
-	void updateUserProfile(ActionEvent event) throws InvalidUserInputException {
-	    Scene userProfileScene = applicationStage.getScene();
+	void updateUserProfile(ActionEvent modifyUserProfileEvent) throws InvalidUserInputException {
+	    // Getting the current scene
+		Scene userProfileScene = applicationStage.getScene();
 	    
+		// Creating a custom color to use throughout the scene
 	    Color c = Color.web("#6b4191",1.0);
 	    
+	    // Creating the scene
 	    VBox userProfileContainer = new VBox();
 	    userProfileContainer.setStyle("-fx-background-color: white");
 	    
@@ -100,30 +106,30 @@ public class UserProfileController {
 	 	updateUserProfileStack.getChildren().addAll(profileHeaderRectangle, updateProfileLabel);
 	 	updateUserProfileStack.setPadding(new Insets(60,0,25,0));
 	    
+	 	// Setting up a font to use for each label
 	 	Font labelFont = Font.font("System", 24.5);
+	 	
 	    Label updateNameLabel = new Label("Name: ");
 	    updateNameLabel.setFont(labelFont);
-	    
 	    Label updateAgeLabel = new Label("Age: ");
 	    updateAgeLabel.setFont(labelFont);
-	    
 	    Label updateHeightLabel = new Label("Height in cm: ");
 	    updateHeightLabel.setFont(labelFont);
-	    
 	    Label updateWeightLabel = new Label("Weight in kg: ");
 	    updateWeightLabel.setFont(labelFont);
-	    
 	    Label updateGenderLabel = new Label("Gender: ");
 	    updateGenderLabel.setFont(labelFont);
 	    
+	    // Creating TextFields and a choice box for user input
 	    TextField nameTextfield = new TextField();
-	    
 	    TextField ageTextfield = new TextField();
-	    
 	    TextField heightTextfield = new TextField();
-	    
 	    TextField weightTextfield = new TextField();
+	    ChoiceBox<String> genderChoiceBox = new ChoiceBox<>();
+	    genderChoiceBox.getItems().add("Female");
+	    genderChoiceBox.getItems().add("Male");
 	    
+	    // Creating an error label
 	    VBox userProfileErrorLabelContainer = new VBox();
 	 	Label userProfileErrorLabel = new Label(" ");
 	 	Font errorLabelFont = Font.font("System", 16);
@@ -132,10 +138,7 @@ public class UserProfileController {
 	 	userProfileErrorLabelContainer.getChildren().add(userProfileErrorLabel);
 	 	userProfileErrorLabelContainer.setAlignment(Pos.CENTER);
 	    
-	    ChoiceBox<Object> genderChoiceBox = new ChoiceBox<Object>();
-	    genderChoiceBox.getItems().add("Female");
-	    genderChoiceBox.getItems().add("Male");
-	    
+	 	// Creating containers for each item for their corresponding label and textfield or choice box
 	    HBox nameContainer = new HBox();
 	    HBox ageContainer = new HBox();
 	    HBox heightContainer = new HBox();
@@ -159,6 +162,7 @@ public class UserProfileController {
 	    weightContainer.setAlignment(Pos.CENTER);
 	    weightContainer.setPadding(new Insets(50,0,0,50));
 	    
+	    // Creating a done button
 	    HBox buttonContainer = new HBox();
 	    Button doneButton = new Button("Done");
 		doneButton.setPrefSize(106, 48);
@@ -170,82 +174,86 @@ public class UserProfileController {
 		buttonContainer.getChildren().addAll(doneButton);
 	    buttonContainer.setPadding(new Insets(75,0,0,0));
 	    buttonContainer.setAlignment(Pos.CENTER);
+	    
+	    // Set the action of the button
 	    doneButton.setOnAction(doneEvent -> {
 	    	try {
+	    		// Check user input
 	    		user.checkName(nameTextfield.getText());
 				user.checkAge(ageTextfield.getText());
 				user.health.checkInput(heightTextfield.getText());
 				user.health.checkInput(weightTextfield.getText());
-				setUserProperties(userProfileScene, nameTextfield, genderChoiceBox, ageTextfield, heightTextfield, weightTextfield);
+				// Set properties in User and Health classes
+				user.setName(nameTextfield.getText());
+				user.setAge(Integer.parseInt(ageTextfield.getText()));
+				user.setGender(genderChoiceBox.getValue().toString());
+				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
+				user.health.setStartingWeight(Double.parseDouble(weightTextfield.getText()));
+				// Set labels with user information
+				setUserProfileLabels();
+				
 				applicationStage.setScene(userProfileScene);
 	    	} catch (InvalidUserInputException e) {
 	    		userProfileErrorLabel.setText(e.getMessage());
 			}
 	    });
 	    
+	    // Add every container into the new scene container
 	    userProfileContainer.getChildren().addAll(updateUserProfileStack, userProfileErrorLabelContainer, nameContainer, ageContainer, genderContainer, heightContainer, weightContainer, buttonContainer);
 	    
+	    // Display the scene
 	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
 	  	applicationStage.setScene(updateUserProfileScene);
 	 }
-	    
-	// Checks user input for height and weight
-	public void checkUserInput(double value) throws InvalidUserInputException {
-		try {
-			boolean decimalEncountered = false;
-			for (char c : Double.toString(value).toCharArray()) {
-				// Check if the character is a '.'
-				// If the character is a '.' and the for loop has not encountered a '.' yet, 
-				// then it will indicate this '.' to be a decimal.
-				if (c == '.' && !decimalEncountered) {
-					decimalEncountered = true;
-				}
-				// Check if the character is a digit if it's not a decimal
-				else if (!Character.isDigit(c)) {
-					throw new InvalidUserInputException("Make sure to enter a valid number.");
-				}
-			}
-		
-			//if (value < 0) {
-			//	throw new InvalidUserInputException("Number should be greater than 0.");
-			//}	
-		} catch (Exception e) {
-			throw new InvalidUserInputException(e.getMessage());
-		}
+	
+	/**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
+	@FXML
+	void returnToDashboard(ActionEvent returnToMainPageEvent) {
+		// Changing the scene using FXML files
+	   	try {
+	   		FXMLLoader loader = new FXMLLoader();
+	    	BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
+	    	FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
+	    	 
+	    	// Pass the same User object to each scene
+	    	controller.setUser(user);
+	    	// Set the goals label in the main scene
+	  		controller.setGoalsCompletedLabel();
+	  		// Set name label in the main scene based on the User class
+	    	controller.setNameLabel();
+	    	
+	    	controller.applicationStage = applicationStage;
+	    		   
+	    	Scene scene = new Scene(root);
+	    	applicationStage.setScene(scene);
+	    	applicationStage.show();	   
+	    		
+	   	} catch(Exception e) {
+	   		e.printStackTrace();
+	   	}
 	}
 	
-	 @FXML
-	 void returnToDashboard(ActionEvent event) {
-	   	 try {
-	   		 FXMLLoader loader = new FXMLLoader();
-	    	 BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
-	    	 FitnessTrackerController controller = (FitnessTrackerController)loader.getController();
-	    	 controller.setUser(user);
-	  		 controller.setGoalsCompletedLabel();
-	    	 controller.setNameLabel();
-	    	 controller.applicationStage = applicationStage;
-	    		   
-	    	 Scene scene = new Scene(root);
-	    	 applicationStage.setScene(scene);
-	    	 applicationStage.show();
-	    		   
-	    		
-	   	 } catch(Exception e) {
-	    	   e.printStackTrace();
-	   	 }
-	}
-
-    @FXML
-    void userLogOut(ActionEvent event) {
-    	File f = new File("FitnessTrackerFile.txt");
+	/**
+	 * This method will write the user's data to a file.
+	 */
+	private void writeToFile() {
+		File f = new File("FitnessTrackerFile.txt");
 		try {
 			// If the file doesn't exist, we will create the file
 			if (!f.exists()) {
 				f.createNewFile();
 			}
-			// Write all goals to the file
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
+			
+			// Write user information to the file
+			bw.write("Name = " + user.getName() + "\n");
+			bw.write("Age = " + user.getAge() + "\n");
+			// Write all goals to the file
 			bw.write("Steps goal = " + user.fitness.getStepsGoals() + "\n");
 			bw.write("Sleep goal = " + user.health.getSleepGoals() + "\n");
 			bw.write("Water intake goal = " + user.health.getWaterIntakeGoals() + "\n");
@@ -260,29 +268,40 @@ public class UserProfileController {
 			
 			bw.write("Tuesday exercise duration = " + user.fitness.getTuesdayExerciseInfo() + "\n");
 			bw.write("Tuesday calories burned = " + user.fitness.getTuesdayCaloriesBurnedInfo() + "\n");
-	
+			
 			bw.write("Wednesday exercise duration = " + user.fitness.getWednesdayExerciseInfo() + "\n");
 			bw.write("Wednesday calories burned = " + user.fitness.getWednesdayCaloriesBurnedInfo() + "\n");
 		
 			bw.write("Thursday exercise duration = " + user.fitness.getThursdayExerciseInfo() + "\n");
 			bw.write("Thursday calories burned = " + user.fitness.getThursdayCaloriesBurnedInfo() + "\n");
-		
+			
 			bw.write("Friday exercise duration = " + user.fitness.getFridayExerciseInfo() + "\n");
 			bw.write("Friday calories burned = " + user.fitness.getFridayCaloriesBurnedInfo() + "\n");
-	
+		
 			bw.write("Saturday exercise duration = " + user.fitness.getSaturdayExerciseInfo() + "\n");
 			bw.write("Saturday calories burned = " + user.fitness.getSaturdayCaloriesBurnedInfo() + "\n");
-		
+			
 			bw.write("Sunday exercise duration = " + user.fitness.getSundayExerciseInfo() + "\n");
 			bw.write("Sunday calories burned = " + user.fitness.getSundayCaloriesBurnedInfo() + "\n");
-			
+				
 			// Close BufferedWriter and FileWriter			
 			bw.close();
 			fw.close();
 			
+		// If the file does not exist, then it will print this statement	
 		} catch (Exception e) {
 			System.out.println("File cannot be created");
 		}
-	   applicationStage.close();
+	}
+
+	/**
+	 * This ActionEvent will allow the user to sign out, while saving their information for
+	 * the next time they open the application.
+	 * @param signOutEvent This will close the application.
+	 */
+    @FXML
+    void userLogOut(ActionEvent signOutEvent) {
+    	writeToFile();
+	    applicationStage.close();
     }
 }

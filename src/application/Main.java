@@ -1,15 +1,12 @@
 package application;
 	
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
+import java.util.Calendar;
+import java.util.Date;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +37,32 @@ public class Main extends Application {
 		}
 	}
 	
+	/*private static void checkIfWeekIsTheSameAsLastWeek() {
+		boolean newWeek = false;
+		Calendar cal = Calendar.getInstance();
+    	Date today = new Date();
+		cal.setTime(today);
+		int thisWeek = cal.get(Calendar.WEEK_OF_YEAR);
+		int lastWeek = thisWeek - 1;
+		if ((thisWeek != lastWeek)  && (!newWeek)) {
+	        	user.fitness.setMondayExerciseInfo(0.0);
+	    		user.fitness.setMondayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setTuesdayExerciseInfo(0.0);
+	    		user.fitness.setTuesdayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setWednesdaydayExerciseInfo(0.0);
+	    		user.fitness.setWednesdayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setThursdayExerciseInfo(0.0);
+	    		user.fitness.setThursdayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setFridayExerciseInfo(0.0);
+	    		user.fitness.setFridayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setSaturdayExerciseInfo(0.0);
+	    		user.fitness.setSaturdayCaloriesBurnedInfo(0.0);
+	    		user.fitness.setSundayExerciseInfo(0.0);
+	    		user.fitness.setSundayCaloriesBurnedInfo(0.0);
+	    		newWeek = true;
+		}		
+	}*/
+	
 	private static void readFile() throws IOException, InvalidUserInputException {
 		File f = new File("FitnessTrackerFile.txt");
 		FileReader fr = new FileReader(f);
@@ -52,9 +75,9 @@ public class Main extends Application {
 			line = br.readLine();
 
 			// Sets goal values in storage when the program starts
-			if (words[0].contentEquals("Steps goal ")) {
-				user.fitness.setStepsGoals(Double.parseDouble(words[1]));
-			}
+			//if (words[0].contentEquals("Steps goal ")) {
+				//user.fitness.setStepsGoals(Integer.parseInt(words[1]));
+			//}
 			if (words[0].contentEquals("Sleep goal ")) {
 				user.health.setSleepGoals(Double.parseDouble(words[1]));
 			}
@@ -140,21 +163,22 @@ public class Main extends Application {
 		System.out.println("Weight: " + user.health.getWeightGoals());
 		System.out.println("Calories: " + user.fitness.getCaloriesGoals());
 		System.out.println("Exercise: " + user.fitness.getExerciseGoals());
-		//System.out.println("Monday: " + Storage.storage.getMondayExerciseInfo());
+		System.out.println("Monday: " + user.fitness.getMondayExerciseInfo());
 		System.out.println("Tuesday: " + user.fitness.getTuesdayExerciseInfo());
-		//System.out.println("Wednesday " + Storage.storage.getWednesdayExerciseInfo());
+		System.out.println("Wednesday " + user.fitness.getWednesdayExerciseInfo());
 		System.out.println("Tuesday Calories: " + user.fitness.getTuesdayCaloriesBurnedInfo());
-		//System.out.println("Thursday: " + Storage.storage.getThursdayExerciseInfo());
-		//System.out.println("Friday: " + Storage.storage.getFridayExerciseInfo());
-		//System.out.println("Saturday: " + Storage.storage.getSaturdayExerciseInfo());
-		//System.out.println("Sunday: " + Storage.storage.getSundayExerciseInfo());
-		//System.out.println("Todays label: " + Storage.storage.getTodaysExercise());
+		System.out.println("Thursday: " + user.fitness.getThursdayExerciseInfo());
+		System.out.println("Friday: " + user.fitness.getFridayExerciseInfo());
+		System.out.println("Saturday: " + user.fitness.getSaturdayExerciseInfo());
+		System.out.println("Sunday: " + user.fitness.getSundayExerciseInfo());
+		//System.out.println("Todays label: " + user.fitness..getTodaysExercise());
 		System.out.println("Progress: " + user.fitness.getProgress());
 	
 	}
 
 	public static void main(String[] args) throws IOException, InvalidUserInputException {		
 		readFile();
+		//checkIfWeekIsTheSameAsLastWeek();
 		launch(args);
 	}
 	

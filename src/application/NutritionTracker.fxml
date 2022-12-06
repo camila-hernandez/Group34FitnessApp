@@ -15,10 +15,13 @@
    <top>
       <StackPane prefHeight="163.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="ORANGE" height="91.0" opacity="0.76" stroke="ORANGE" strokeType="INSIDE" width="450.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="ORANGE" height="91.0" opacity="0.76" stroke="ORANGE" strokeType="INSIDE" width="387.0">
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect></Rectangle>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="233.0" prefWidth="517.0" text="NUTRITION" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="50.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
             </Label>
          </children>
@@ -30,48 +33,113 @@
             <Button layoutX="199.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMain" prefHeight="55.0" prefWidth="211.0" style="-fx-background-radius: 20; -fx-background-color: ORANGE;" text="RETURN TO MAIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
-               </font></Button>
+               </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect></Button>
+               <Label fx:id="weightProgressLabel" layoutX="15.0" layoutY="-23.0" prefHeight="47.0" prefWidth="579.0" text="Comparison:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding></Label>
          </children>
       </Pane>
    </bottom>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="24.0" layoutY="39.0" mnemonicParsing="false" onAction="#setCalorieIntake" prefHeight="43.0" prefWidth="281.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="SET CALORIE INTAKE" textAlignment="CENTER" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="81.0" layoutX="321.0" layoutY="272.0" stroke="ORANGE" strokeType="INSIDE" strokeWidth="3.0" width="280.0" />
+            <Button layoutX="23.0" layoutY="22.0" mnemonicParsing="false" onAction="#setCalorieIntake" prefHeight="43.0" prefWidth="281.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="SET CALORIE INTAKE" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
             </Button>
-            <Button alignment="CENTER" layoutX="24.0" layoutY="295.0" mnemonicParsing="false" onAction="#compareWeight" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="WEIGHT PROGRESS" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="22.0" layoutY="452.0" mnemonicParsing="false" onAction="#compareWeight" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="WEIGHT PROGRESS" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
             </Button>
-            <Button alignment="CENTER" layoutX="23.0" layoutY="157.0" mnemonicParsing="false" onAction="#updateServingRatio" prefHeight="39.0" prefWidth="283.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="UPDATE SERVING RATIO" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="22.0" layoutY="273.0" mnemonicParsing="false" onAction="#updateServingRatio" prefHeight="39.0" prefWidth="283.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="UPDATE SERVING" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
             </Button>
-            <Label layoutX="339.0" layoutY="26.0" prefHeight="27.0" prefWidth="212.0" text="Enter Calorie Intake:" />
-            <Label fx:id="CalorieIntakeDisplay" layoutX="351.0" layoutY="83.0" prefHeight="72.0" prefWidth="178.0" text="Calorie display" />
-            <Label fx:id="servingRatioLabel" layoutX="418.0" layoutY="210.0" prefHeight="27.0" prefWidth="169.0" text="Serving Ratio" />
-            <Label fx:id="userWeightLabel" layoutX="329.0" layoutY="301.0" prefHeight="32.0" prefWidth="222.0" text="weight progress" />
-            <Label fx:id="bmiDisplayLabel" layoutX="332.0" layoutY="368.0" prefHeight="73.0" prefWidth="229.0" text="Bmi display" />
-            <Label layoutX="366.0" layoutY="498.0" text="body fat label" />
-            <TextField fx:id="CalorieIntake" layoutX="340.0" layoutY="53.0" prefHeight="30.0" prefWidth="162.0" />
-            <Label fx:id="carbsLabel" layoutX="332.0" layoutY="166.0" prefHeight="27.0" prefWidth="120.0" text="carbs" />
-            <Label fx:id="fatLabel" layoutX="329.0" layoutY="201.0" prefHeight="27.0" prefWidth="120.0" text="fat" />
-            <Label fx:id="fiberLabel" layoutX="329.0" layoutY="237.0" prefHeight="27.0" prefWidth="120.0" text="fiber" />
-            <Button alignment="CENTER" layoutX="24.0" layoutY="383.0" mnemonicParsing="false" onAction="#calculateBMI" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="CALCULATE BMI" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="326.0" layoutY="-5.0" prefHeight="27.0" prefWidth="212.0" text="Enter Calorie Intake:">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <Label fx:id="CalorieIntakeDisplay" layoutX="6.0" layoutY="76.0" prefHeight="54.0" prefWidth="596.0" text="Calorie display:" textFill="DARKBLUE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label fx:id="servingRatioLabel" layoutX="325.0" layoutY="273.0" prefHeight="78.0" prefWidth="272.0" text="Serving Ratio:">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label fx:id="userWeightLabel" layoutX="321.0" layoutY="427.0" prefHeight="95.0" prefWidth="280.0" text="Weight Progress:">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label fx:id="bmiDisplayLabel" layoutX="326.0" layoutY="375.0" prefHeight="58.0" prefWidth="273.0" text="BMI display:">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <TextField fx:id="CalorieIntake" layoutX="339.0" layoutY="25.0" prefHeight="30.0" prefWidth="162.0" />
+            <Button alignment="CENTER" layoutX="22.0" layoutY="393.0" mnemonicParsing="false" onAction="#calculateBMI" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="CALCULATE BMI" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
             </Button>
-            <Button alignment="CENTER" layoutX="24.0" layoutY="490.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="283.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="CALCULATE BFP" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="21.0" layoutY="142.0" prefHeight="27.0" prefWidth="390.0" text="Enter amount of carbs in serving (g):">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label layoutX="15.0" layoutY="227.0" prefHeight="27.0" prefWidth="381.0" text="Enter amount of protein in serving (g):">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <Label layoutX="23.0" layoutY="183.0" prefHeight="27.0" prefWidth="397.0" text="Enter amount of fat in serving (g):">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
+            <TextField fx:id="carbsTextField" layoutX="367.0" layoutY="136.0" prefHeight="20.0" prefWidth="192.0" />
+            <TextField fx:id="fatTextField" layoutX="367.0" layoutY="177.0" prefHeight="10.0" prefWidth="192.0" />
+            <TextField fx:id="proteinTextField" layoutX="367.0" layoutY="221.0" prefHeight="10.0" prefWidth="192.0" />
+            <TextField fx:id="currentWeightTextField" layoutX="343.0" layoutY="521.0" prefHeight="39.0" prefWidth="157.0" />
+            <Button alignment="CENTER" layoutX="21.0" layoutY="518.0" mnemonicParsing="false" onAction="#setCurrentWeight" prefHeight="44.0" prefWidth="287.0" style="-fx-background-color: ORANGE; -fx-background-radius: 10;" text="SET CURRENT WEIGHT" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
             </Button>
+            <Button alignment="CENTER" layoutX="15.0" layoutY="331.0" mnemonicParsing="false" onAction="#calculateServingRatio" prefHeight="44.0" prefWidth="298.0" style="-fx-background-radius: 10; -fx-background-color: ORANGE;" text="CALCULATE SERVING RATIO" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
+            </Button>
+            <Label fx:id="errorLabel" layoutX="171.0" layoutY="-17.0" textFill="RED" />
          </children>
       </Pane>
    </center>
