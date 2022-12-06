@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Fitness extends Goals {
 	
@@ -39,7 +40,7 @@ public class Fitness extends Goals {
 	User user;
 	
 	public Fitness() {
-		stepsArray = new ArrayList<Integer>(30); 
+		stepsArray = new ArrayList<Integer>(Collections.nCopies(60, 0));
 		stepsCount = 0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
@@ -119,14 +120,14 @@ public class Fitness extends Goals {
 			this.stepsCount = monthlySteps;
 	}
 	
-	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) {
+	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
 		if (isNumeric(dailyStepCount)) {
 			stepsArray.set(dayOfMonthChoice, Integer.parseInt(dailyStepCount));
 			for (int i = 0; i < stepsArray.size(); i++) {
 				stepsCount += stepsArray.get(i);
 				}
 		}
-		//else {set an error label}
+		else {throw new InvalidUserInputException("Your input must be numeric");}
 	}
     //*****************************************
 

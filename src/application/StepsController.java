@@ -15,14 +15,17 @@ import javafx.stage.Stage;
 public class StepsController {
 	Stage applicationStage;
     
-    @FXML
-    private Label stepsCountLabel;
-    
-    @FXML
-    private TextField stepsTextField;
+    //@FXML
+    //private Label stepsCountLabel;
     
     @FXML
     private ChoiceBox<Integer> dayOfMonth;
+    
+    @FXML
+    private TextField stepsTextField;
+   
+    @FXML
+    private Label stepsErrorLabel;
     
     User user;
     
@@ -32,8 +35,10 @@ public class StepsController {
     
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
-    	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());  
-    	//add here a for loop and iterate through the array and update stepscount in Fitness
+    	try {
+    	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+    	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
+
     	
     }
     
