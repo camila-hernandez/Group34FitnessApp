@@ -55,9 +55,8 @@ public class StepsController{
     		   controller.setUser(user);
     		   controller.setGoalsCompletedLabel();
     		   controller.setNameLabel();
-    		   if (isNumeric) {
-    			   controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
-    		   }
+    		   controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
+    		   
     		   controller.applicationStage = applicationStage;
     		   
     		   Scene scene = new Scene(root);

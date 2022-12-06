@@ -121,6 +121,7 @@ public class Fitness extends Goals {
 	}
 	
 	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
+		stepsCount = 0;
 		if (isNumeric(dailyStepCount)) {
 			stepsArray.set(dayOfMonthChoice-1, Integer.parseInt(dailyStepCount));
 			for (int i = 0; i < stepsArray.size(); i++) {
