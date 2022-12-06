@@ -58,7 +58,7 @@ public class StepsController implements Initializable{
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
     	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
     	
-    	//stepsProgressBar;
+    	stepsProgressBar.setProgress(user.fitness.getStepsCount()/user.fitness.getStepsGoals());
     	
     }
     
