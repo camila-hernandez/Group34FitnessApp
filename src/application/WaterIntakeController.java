@@ -139,7 +139,7 @@ public class WaterIntakeController{
 	 * @param returnToMainPageEvent Changes the scene back to the main page.
 	 */
 	@FXML
-	void returnToMain(ActionEvent event) {
+	void returnToMain(ActionEvent returnToMainPageEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
@@ -147,7 +147,7 @@ public class WaterIntakeController{
 
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
-			controller.setDisplayLabel(event);
+			controller.setDisplayLabel(returnToMainPageEvent);
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
 

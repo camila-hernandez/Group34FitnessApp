@@ -200,10 +200,10 @@ public class WorkoutStatisticsController {
 	/**
 	 * This ActionEvent changes the scene back to the main page while passing the same User
 	 * object and setting various labels in the main page.
-	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 * @param returnToActivitiesEvent Changes the scene back to the main page.
 	 */
 	@FXML
-    void returnToActivities(ActionEvent event) {
+    void returnToActivities(ActionEvent returnToActivitiesEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 		   Pane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
