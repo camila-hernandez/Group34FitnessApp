@@ -79,7 +79,6 @@ public class Fitness extends Goals {
 			this.stepsCount = Integer.parseInt(stepsCount);
 			
 		}
-
 	}
     //*****************************************
     public void setCaloriesGoals(double calories) {
