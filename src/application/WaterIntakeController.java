@@ -41,31 +41,40 @@ public class WaterIntakeController{
 	/**
 	 * 
 	 * @param progressWaterEvent - when update water button is pressed, user is shown how far away they are from the goal set.
+	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
 	 */
 	@FXML
-	void calculateAmountWater(ActionEvent progressWaterEvent){
+	void calculateAmountWater(ActionEvent progressWaterEvent) throws InvalidUserInputException {
+		// Initialize label to empty
+		waterErrorLabel.setText("");
 		
-		// the amount of water entered in textField
-		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
-		
-		double waterGoal = user.health.getWaterIntakeGoals();
-		
-		//the amount of cups user entered compared to goal.
-		double waterProgress = waterGoal - getWaterIntakeAmount();
-		
-		updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
-		
-		user.health.setWaterIntakeAmount(getWaterIntakeAmount());
+		try {
+			// Checks user input
+			user.health.checkInput(amountOfWater.getText());
+			
+			// the amount of water entered in textField
+			intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
+			
+			double waterGoal = user.health.getWaterIntakeGoals();
+			
+			//the amount of cups user entered compared to goal.
+			double waterProgress = waterGoal - getWaterIntakeAmount();
+			
+			updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
+			
+			user.health.setWaterIntakeAmount(getWaterIntakeAmount());
 
-		// tells user how close they are to their goal. 
-		if (waterProgress == 0 || waterProgress < 0) {
-			waterProgressLabel.setText("You have reached your water goal.");
+			// tells user how close they are to their goal. 
+			if (waterProgress == 0 || waterProgress < 0) {
+				waterProgressLabel.setText("You have reached your water goal.");
+			}
+			
+			if (waterProgress > 0) {
+				waterProgressLabel.setText( "You are " + waterProgress + " cups away from your goal.");
+			}
+		} catch (InvalidUserInputException e) {
+			waterErrorLabel.setText(e.getMessage());
 		}
-		
-		if (waterProgress > 0) {
-			waterProgressLabel.setText( "You are " + waterProgress + " cups away from your goal.");
-		}
-
 	}
 
 	// the user is shown how many cups they have entered in total. 
