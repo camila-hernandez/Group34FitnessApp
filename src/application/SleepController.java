@@ -12,6 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The SleepController will verify and store a set of characteristics that are related to sleep
+ * that are unique to the user based on the values entered by the user. The SleepController will compare 
+ * and display the users input as hours to their set goal. Also, this controller will check and 
+ * display errors entered by the user, such as invalid characters or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class SleepController{
 	Stage applicationStage;
 
@@ -34,6 +43,11 @@ public class SleepController{
 
 	private double hours;
 
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -55,6 +69,7 @@ public class SleepController{
 		user.health.setSleepProgressLabel(sleep);
 	}
 
+	// when the sleep window is opened, values will be updated if any were previously entered. 
 	public void updateSleepValues() {
 		if (sleepProgressLabel != null) {
 			updateSleepProgressLabel(user.health.getSleepProgressLabel());
@@ -79,13 +94,15 @@ public class SleepController{
 			sleepErrorLabel.setText(e.getMessage());
 		}
 		
+		// if the characters entered are valid, the variables will be updated. 
 		//hours are set to be the string entered in the hoursSleep text field.
 		setHours(Double.parseDouble(hoursSleep.getText()));
 		
+		// the percent is used to display
 		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
 		setSleepAmount(getHours());
 
-		// the label changes when the user enters a different value.
+		//the label changes when the user enters a different value.
 		updateSleepProgressLabel(String.valueOf(getHours()));
 		sleepProgressBar.setProgress((getHours())/sleepGoal);
 
@@ -124,7 +141,11 @@ public class SleepController{
 		return user.health.getSleepDuration();
 	}
 	
-	// when button return to main is pressed, the user is taken back to the main window.
+	/**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
 	@FXML
 	void returnToMain(ActionEvent event) {
 		try {
