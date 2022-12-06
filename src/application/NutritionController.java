@@ -90,39 +90,45 @@ public class NutritionController {
 			// Set the variable with the user input
 			double calorieAmount = Double.parseDouble(CalorieIntake.getText());
 			
-			// Shows average for the typical female
-			if (user.getGender().equalsIgnoreCase("Female")) {
-				if (calorieAmount < 2000) {
-					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
-				+ " is less than the average amount required daily for an adult female.");
-				}
-				
-				if (calorieAmount >= 2000 && calorieAmount < 2500) {
-					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-							+ "amount of calories needed for an adult female.");
-				}
-				
-				if (calorieAmount > 2500) {
-					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-				" is greater than the average amount required daily for an adult female.");
-				}
+			if (user.getGender() == null) {
+				CalorieIntakeDisplay.setText("There is no specified gender in user.");
 			}
 			
-			// Shows averages for the typical males
-			if (user.getGender().equalsIgnoreCase("Male")) {
-				if (calorieAmount < 2500) {
-					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
-							" is less than the average amount required daily for an adult male.");
+			else {
+				// Shows average for the typical female
+				if (user.getGender().equalsIgnoreCase("Female")) {
+					if (calorieAmount < 2000) {
+						CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
+					+ " is less than the average amount required daily for an adult female.");
+					}
+					
+					if (calorieAmount >= 2000 && calorieAmount < 2500) {
+						CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+								+ "amount of calories needed for an adult female.");
+					}
+					
+					if (calorieAmount > 2500) {
+						CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+					" is greater than the average amount required daily for an adult female.");
+					}
 				}
 				
-				if (calorieAmount >= 2500 && calorieAmount < 3000) {
-					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
-							+ "amount of calories needed for an adult male.");
-				}
-				
-				if (calorieAmount > 3000) {
-					CalorieIntakeDisplay.setText("Your calorie intake of " 
-				+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+				// Shows averages for the typical males
+				if (user.getGender().equalsIgnoreCase("Male")) {
+					if (calorieAmount < 2500) {
+						CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
+								" is less than the average amount required daily for an adult male.");
+					}
+					
+					if (calorieAmount >= 2500 && calorieAmount < 3000) {
+						CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
+								+ "amount of calories needed for an adult male.");
+					}
+					
+					if (calorieAmount > 3000) {
+						CalorieIntakeDisplay.setText("Your calorie intake of " 
+					+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+					}
 				}
 			}
 			
