@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +21,9 @@ public class StepsController {
     @FXML
     private TextField stepsTextField;
     
+    @FXML
+    private ChoiceBox<Integer> dayOfMonth;
+    
     User user;
     
     public void setUser(User user) {
@@ -28,7 +32,7 @@ public class StepsController {
     
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
-    	user.fitness.setStepsCount(stepsTextField.getText());  
+    	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());  
     	//add here a for loop and iterate through the array and update stepscount in Fitness
     	
     }

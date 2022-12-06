@@ -56,7 +56,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox prefHeight="50.0" prefWidth="120.0">
+                  <ChoiceBox fx:id="dayOfMonth" prefHeight="50.0" prefWidth="120.0">
                      <HBox.margin>
                         <Insets left="65.0" />
                      </HBox.margin></ChoiceBox>

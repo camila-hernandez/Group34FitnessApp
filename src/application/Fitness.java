@@ -105,7 +105,7 @@ public class Fitness extends Goals {
 		return stepsCount;
 	}
 	
-	public static boolean isNumeric(String str) throws NumberFormatException{ 
+	public static boolean isNumeric(String str){ 
 		  try {  
 			Integer.parseInt(str);  
 		    return true;
@@ -121,10 +121,11 @@ public class Fitness extends Goals {
 	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) {
 		if (isNumeric(dailyStepCount)) {
 			stepsArray.set(dayOfMonthChoice, Integer.parseInt(dailyStepCount));
+			for (int i = 0; i < stepsArray.size(); i++) {
+				stepsCount += stepsArray.get(i);
+				}
 		}
-		for (int i = 0; i < stepsArray.size(); i++) {
-			  stepsCount += stepsArray.get(i);
-			}
+		//else {set an error label}
 	}
     //*****************************************
 
