@@ -64,32 +64,43 @@ public class SleepController{
 	/**
 	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
 	 * @param trackSleepEvent when the button update sleep is pressed.
+	 * @throws InvalidUserInputException 
 	 */
 	@FXML
-	void setSleep(ActionEvent trackSleepEvent) {
+	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
 
 		// sleepGoal is the goal entered by user, which is in health.
 		double sleepGoal = user.health.getSleepGoals();
 		
-		//hours are set to be the string entered in the hoursSleep text field.
-		setHours(Double.parseDouble(hoursSleep.getText()));
+		try {
+			//Checks user input
+			user.health.checkInput(hoursSleep.getText());
 		
-		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
-		setSleepAmount(getHours());
+			//Hours are set to be the string entered in the hoursSleep TextField.
+			setHours(Double.parseDouble(hoursSleep.getText()));
+		
+			// Calculates and stores sleep progress
+			int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+			setSleepAmount(getHours());
 
-		// the label changes when the user enters a different value.
-		updateSleepProgressLabel(String.valueOf(getHours()));
-		sleepProgressBar.setProgress((getHours())/sleepGoal);
+			// The label changes when the user enters a different value.
+			updateSleepProgressLabel(String.valueOf(getHours()));
+			sleepProgressBar.setProgress((getHours())/sleepGoal);
 
-		// if the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal, and the label changes to let the user know.
-		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
-			sleepProgressLabel.setText("You have reached your sleep goal!");
+			// If the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal
+			// and the label changes to let the user know.
+			if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+				sleepProgressLabel.setText("You have reached your sleep goal!");
+			}
+
+			// If the sleepGoal - getHours() > 0, that means the user has not reached their goal, 
+			// and is given a percent of how close they are. 
+			if (sleepGoal - getHours() > 0) {
+				sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
+			}
+		} catch (InvalidUserInputException e) {
+			sleepErrorLabel.setText(e.getMessage());	
 		}
-
-		// if the sleepGoal - getHours() > 0, that means the user has not reached their goal, and is given a percent of how close they are. 
-		if (sleepGoal - getHours() > 0) {
-			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
-		}	
 	}
 
 	/**
