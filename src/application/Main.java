@@ -37,7 +37,7 @@ public class Main extends Application {
 		}
 	}
 	
-	private static void checkIfWeekIsTheSameAsLastWeek() {
+	/*private static void checkIfWeekIsTheSameAsLastWeek() {
 		boolean newWeek = false;
 		Calendar cal = Calendar.getInstance();
     	Date today = new Date();
@@ -61,7 +61,7 @@ public class Main extends Application {
 	    		user.fitness.setSundayCaloriesBurnedInfo(0.0);
 	    		newWeek = true;
 		}		
-	}
+	}*/
 	
 	private static void readFile() throws IOException, InvalidUserInputException {
 		File f = new File("FitnessTrackerFile.txt");
@@ -178,7 +178,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) throws IOException, InvalidUserInputException {		
 		readFile();
-		checkIfWeekIsTheSameAsLastWeek();
+		//checkIfWeekIsTheSameAsLastWeek();
 		launch(args);
 	}
 	
