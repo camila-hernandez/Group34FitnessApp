@@ -21,6 +21,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The GoalsController will verify and store a set of characteristics that are related to the user's health 
+ * and fitness goals that are unique to them based on the values entered.
+ * This controller will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class GoalsController {
 	 Stage applicationStage;
 
