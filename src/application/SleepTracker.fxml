@@ -40,7 +40,7 @@
                <font>
                   <Font size="25.0" />
                </font></Label>
-            <Label fx:id="sleepProgressLabel" alignment="CENTER" layoutX="44.0" layoutY="520.0" prefHeight="219.0" prefWidth="521.0" text="   " textAlignment="CENTER">
+            <Label fx:id="sleepProgressLabel" alignment="CENTER" layoutX="44.0" layoutY="582.0" prefHeight="157.0" prefWidth="521.0" text="   " textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -59,7 +59,12 @@
                <effect>
                   <DropShadow color="#00000080" />
                </effect></Button>
-            <ProgressBar fx:id="sleepProgressBar" layoutX="136.0" layoutY="488.0" prefHeight="42.0" prefWidth="340.0" />
+            <ProgressBar fx:id="sleepProgressBar" layoutX="135.0" layoutY="509.0" prefHeight="42.0" prefWidth="340.0" />
+            <Label fx:id="sleepErrorLabel" alignment="CENTER" layoutX="101.0" layoutY="457.0" prefHeight="27.0" prefWidth="430.0" text=" " textFill="RED">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </left>
