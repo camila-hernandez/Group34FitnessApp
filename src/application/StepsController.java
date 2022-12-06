@@ -1,18 +1,25 @@
 package application;
 
 import java.io.FileInputStream;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class StepsController{
+public class StepsController implements Initializable{
 	Stage applicationStage;
     
     //@FXML
@@ -27,7 +34,9 @@ public class StepsController{
     @FXML
     private Label stepsErrorLabel;
     
-    private boolean isNumeric = false;
+    @FXML
+    private ImageView stepsIcon;
+    
     
     User user;
     
@@ -39,9 +48,7 @@ public class StepsController{
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
-    	isNumeric = true;
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
-
     	
     }
     
@@ -68,6 +75,28 @@ public class StepsController{
     		   e.printStackTrace();
     	   }
     }
+    
+    /**
+     * This method allows imported pictures to appear in the Activities window.
+     * Also, this method sets the progress bar color and displays the current date to the user in the same window.
+     */
+     @Override
+ 	public void initialize(URL location, ResourceBundle resources) {
+    	 //Image attribute:
+    	 //<a href="https://www.freepik.com/free-vector/modern-sport-sneakers-blue-color-with-white-shoelaces-realistic-single-image-white-background-isolated-illustration_7251220.htm#query=walking%20shoes&position=3&from_view=keyword">Image by macrovector</a> on Freepik
+
+     	
+     	// Loads image onto steps rectangle
+     	Image stepsIconVector = new Image(getClass().getResourceAsStream("shoessteps.jpg"));
+     	stepsIcon.setImage(stepsIconVector);
+     	
+     	
+     	// Sets the current date label
+     	//LocalDateTime currentDateTime = LocalDateTime.now();
+     	//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+     	//String formattedDate = currentDateTime.format(dtf);
+     	//dateLabel.setText(formattedDate);
+ 	}
 
 }
 	   
