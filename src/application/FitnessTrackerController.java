@@ -38,7 +38,7 @@ public class FitnessTrackerController implements Initializable {
 	private Label waterProgress;
   
 	@FXML
-    private Label stepsGoalLabelDashboard;
+    public Label stepsThisMonth;
 	
 	@FXML
 	private Button goalsButton;
@@ -64,7 +64,13 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	private Label goalsCompletedLabel;
 	
+	public static Label staticStepsLabel;
+	
 	User user;
+	
+	public void initialize() {
+		stepsThisMonth = staticStepsLabel;
+	}
 	
 	public void setUser(User user) {
     	this.user = user;
@@ -134,7 +140,7 @@ public class FitnessTrackerController implements Initializable {
 	void trackNutrition(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
+			BorderPane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
 			NutritionController controller = (NutritionController)loader.getController();
 			
 			controller.setUser(user);

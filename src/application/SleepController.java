@@ -53,19 +53,18 @@ public class SleepController{
 	}
 
 	/**
-	 * When user opens sleep window, the program will first look to see if any sleep was previously entered.  
+	 * This method willWhen user opens sleep window, the program will first look to see if any sleep was previously entered.  
 	 * @param sleep is how much hours the user entered.
 	 */
 	public void updateSleepProgressLabel(String sleep) {
-
+		// Updates the user's sleep progress label
 		if (sleep == null) {
 			sleepProgressLabel.setText("You have not entered any hours " + '\n' + "of sleep for today.");
 		}
-
 		if (sleep != null) {
 			sleepProgressLabel.setText("You have entered " + sleep + " hours" + '\n' +  "of sleep for today.");
 		}
-
+		// Sets and stores the label in Health class
 		user.health.setSleepProgressLabel(sleep);
 	}
 
@@ -80,41 +79,45 @@ public class SleepController{
 	/**
 	 * when the button is pressed the method set sleep gets the value entered, and compares it to the goal. 
 	 * @param trackSleepEvent when the button update sleep is pressed.
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
 	 */
 	@FXML
-	void setSleep(ActionEvent trackSleepEvent) {
-
+	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
+		// Initialize label to empty
+		sleepErrorLabel.setText("");
+		
 		// sleepGoal is the goal entered by user, which is in health.
 		double sleepGoal = user.health.getSleepGoals();
 		
 		try {
-			// Checks user input
+			//Checks user input
 			user.health.checkInput(hoursSleep.getText());
-		} catch (InvalidUserInputException e){
-			sleepErrorLabel.setText(e.getMessage());
-		}
 		
-		// if the characters entered are valid, the variables will be updated. 
-		//hours are set to be the string entered in the hoursSleep text field.
-		setHours(Double.parseDouble(hoursSleep.getText()));
+			//Hours are set to be the string entered in the hoursSleep TextField.
+			setHours(Double.parseDouble(hoursSleep.getText()));
 		
-		// the percent is used to display
-		int progressPercent = (int) ((getHours()/sleepGoal) * 100);
-		setSleepAmount(getHours());
+			// Calculates and stores sleep progress
+			int progressPercent = (int) ((getHours()/sleepGoal) * 100);
+			setSleepAmount(getHours());
 
-		//the label changes when the user enters a different value.
-		updateSleepProgressLabel(String.valueOf(getHours()));
-		sleepProgressBar.setProgress((getHours())/sleepGoal);
+			// The label changes when the user enters a different value.
+			updateSleepProgressLabel(String.valueOf(getHours()));
+			sleepProgressBar.setProgress((getHours())/sleepGoal);
 
-		// if the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal, and the label changes to let the user know.
-		if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
-			sleepProgressLabel.setText("You have reached your sleep goal!");
+			// If the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal
+			// and the label changes to let the user know.
+			if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+				sleepProgressLabel.setText("You have reached your sleep goal!");
+			}
+
+			// If the sleepGoal - getHours() > 0, that means the user has not reached their goal, 
+			// and is given a percent of how close they are. 
+			if (sleepGoal - getHours() > 0) {
+				sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
+			}
+		} catch (InvalidUserInputException e) {
+			sleepErrorLabel.setText(e.getMessage());	
 		}
-
-		// if the sleepGoal - getHours() > 0, that means the user has not reached their goal, and is given a percent of how close they are. 
-		if (sleepGoal - getHours() > 0) {
-			sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
-		}	
 	}
 
 	/**

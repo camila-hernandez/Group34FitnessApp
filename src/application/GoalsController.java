@@ -21,6 +21,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The GoalsController will verify and store a set of characteristics that are related to the user's health 
+ * and fitness goals that are unique to them based on the values entered.
+ * This controller will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class GoalsController {
 	 Stage applicationStage;
 
@@ -52,36 +61,73 @@ public class GoalsController {
     
     Label goalsErrorLabel = new Label();
     
+    /**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
     public void setUser(User user) {
     	this.user = user;
     }
     
+    // Setting font for all labels
     // Display user health and fitness goals based on their input
     Font newLabelFont = Font.font("System", 24);
-    public void updateStepsGoalsLabel(double steps) throws InvalidUserInputException {
+    
+    /**
+     * This method updates the steps goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param steps This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
+    public void updateStepsGoalsLabel(int steps) throws InvalidUserInputException {
     	stepGoalsLabel.setFont(newLabelFont);
  		stepGoalsLabel.setText(String.format(steps + " steps"));
  		user.fitness.setStepsGoals(steps);
     }
     
+    /**
+     * This method updates the sleep duration (in hours) goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param sleep This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateSleepGoalsLabel(double sleep) {
     	sleepGoalsLabel.setFont(newLabelFont);
     	sleepGoalsLabel.setText(String.format(sleep + " hours"));
     	user.health.setSleepGoals(sleep);
     }
     
+    /**
+     * This method updates the water in-take (in cups) goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param water This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateWaterIntakeGoalsLabel(double water) {
     	waterIntakeGoalsLabel.setFont(newLabelFont);
     	waterIntakeGoalsLabel.setText(String.format(water + " cups"));
     	user.health.setWaterIntakeGoals(water);
     }
     
+    /**
+     * This method updates the weight (in kilograms) goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param weight This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateWeightGoalsLabel(double weight) {
     	weightGoalsLabel.setFont(newLabelFont);
     	weightGoalsLabel.setText(String.format(weight + " kg"));
     	user.health.setWeightGoals(weight);
     }
     
+    /**
+     * This method updates the calories burned (in cal) goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param calories This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateCaloriesBurnedGoalsLabel(double calories) {
     	caloriesBurnedGoalsLabel.setFont(newLabelFont);
     	caloriesBurnedGoalsLabel.setText(calories + " cal");
@@ -89,6 +135,12 @@ public class GoalsController {
     	caloriesBurnedGoalsLabel.setAlignment(Pos.CENTER);
     }
     
+    /**
+     * This method updates the exercise duration goal label in the Goals window.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @param exercie This integer must consist of only whole numbers greater than zero.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateExerciseGoalsLabel(double exercise) {
     	exerciseGoalsLabel.setFont(newLabelFont);
     	exerciseGoalsLabel.setText(exercise + " minutes");
@@ -96,6 +148,12 @@ public class GoalsController {
     	exerciseGoalsLabel.setAlignment(Pos.CENTER);
     }
     
+    /**
+     * This method updates the user's health and fitness goals labels in the Goals window.
+     * This updates every time the user opens the application.
+     * The user inputs their information in the Update Goals tab in the Goals window.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     public void updateGoalValues() throws InvalidUserInputException {
     	if (stepGoalsLabel != null) {
     		updateStepsGoalsLabel(user.fitness.getStepsGoals());
@@ -117,8 +175,13 @@ public class GoalsController {
     	}
     }
     
+    /**
+     * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
     @FXML
-    void returnToMainPage(ActionEvent event) {
+    void returnToMainPage(ActionEvent returnToMainPageEvent) {
     	 try {
     	   
   		   FXMLLoader loader = new FXMLLoader();
@@ -141,8 +204,16 @@ public class GoalsController {
   	   }
     }
 
+    /**
+     * This method will create a new scene where the user can input their health and fitness goals, 
+     * such as steps, weight, etc.
+     * This is crucial to progressing through the user's fitness journey.
+     * The user can input this information in the Goals window.
+     * @param updateGoalEvent This ActionEvent will store and update the user's health and fitness goals.
+     * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+     */
     @FXML
-    void updateFitnessGoals(ActionEvent event) throws InvalidUserInputException {
+    void updateFitnessGoals(ActionEvent updateGoalsEvent) throws InvalidUserInputException {
  	   Scene displayUserFitnessGoalsScene = applicationStage.getScene();
 	   
  	   // Create new scene that displays the user's health and fitness goals
@@ -270,9 +341,12 @@ public class GoalsController {
  	   saveChangesGoalsButton.setStyle("-fx-background-color: LIGHTBLUE");
  	   saveChangesGoalsButton.setOnAction(saveChangesGoalsEvent -> {
 				try {
+					// Checks user input
+					// Updates each label in the Goals window
+					// Sets each goal in Fitness class
 					user.fitness.checkInput(stepsGoalsTextfield.getText());
-					updateStepsGoalsLabel(Double.parseDouble(stepsGoalsTextfield.getText()));
-					setStepsGoals(Double.parseDouble(stepsGoalsTextfield.getText()));
+					updateStepsGoalsLabel(Integer.parseInt(stepsGoalsTextfield.getText()));
+					setStepsGoals(Integer.parseInt(stepsGoalsTextfield.getText()));
 		    		user.health.checkInput(sleepGoalsTextfield.getText());
 		    		updateSleepGoalsLabel(Double.parseDouble(sleepGoalsTextfield.getText()));
 		    		setSleepGoals(sleepGoalsTextfield.getText());
@@ -293,66 +367,67 @@ public class GoalsController {
 		        		goalsErrorLabel.setText(e.getMessage());
 		        	}
  	   	});
-
+ 	   
+ 	   // Adjusts button characteristics
  	   updateButtonContainer.getChildren().add(saveChangesGoalsButton);
  	   updateButtonContainer.setAlignment(Pos.CENTER);
  	   updateButtonContainer.setPadding(new Insets(10,0,0,0));
  		
+ 	   // Adds all containers into one container
  	   updateFitnessGoalsContainer.getChildren().addAll(updateStack, errorLabelContainer, updateStepsGoalsContainer, updateSleepGoalsContainer, updateWaterIntakeGoalsContainer,
  				updateNutritionGoalsLabel, updateNutritionGoalsContainer, updateExerciseGoalsLabel, updateExerciseGoalsContainer, updateCaloriesGoalsContainer, updateButtonContainer);
  		
+ 	   // Creates and sets a new scene
  	   Scene updatedUserFitnessGoalsScene = new Scene(updateFitnessGoalsContainer, 609, 856);
  	   applicationStage.setScene(updatedUserFitnessGoalsScene);	  	  
     }
     
-    public void setStepsGoals(double steps) {
+    /**
+     * This method will set the user's input from the steps TextField into the Fitness class.
+     * @param steps This is how many steps the user would like to take in a day.
+     */
+    public void setStepsGoals(int steps) {
     	user.fitness.setStepsGoals(steps);
     }
     
+    /**
+     * This method will set the user's input from the sleep TextField into the Fitness class.
+     * @param sleep This is how many hours of sleep the user would like to get during the night.
+     */
     public void setSleepGoals(String sleep) {
     	user.health.setSleepGoals(Double.parseDouble(sleep));
     }
     
+    /**
+     * This method will set the user's input from the water in-take TextField into the Fitness class.
+     * @param water This is how many cups of water the user would like to drink a day.
+     */
     public void setWaterIntakeGoals(double water) {
     	user.health.setWaterIntakeGoals(water);
     }
     
+    /**
+     * This method will set the user's input from the weight TextField into the Fitness class.
+     * @param sweight This is the use's desired weight.
+     */
     public void setWeightGoals(double weight) {
     	user.health.setWeightGoals(weight);
     }
     
+    /**
+     * This method will set the user's input from the calories burned TextField into the Fitness class.
+     * @param calories This is how many calories the user would like to burn in a day.
+     */
     public void setCaloriesGoals(double calories) {
     	user.fitness.setCaloriesGoals(calories);
     }
     
+    /**
+     * This method will set the user's input from the exercise duration TextField into the Fitness class.
+     * @param steps This is how long the user would like to exercise in a day.
+     */
     public void setExerciseGoals(double exercise) {
     	user.fitness.setExerciseGoals(exercise);
     }
-
-	public double getStepsGoals() {
-		return user.fitness.getStepsGoals();
-	}
-	
-	public double getSleepGoals() {
-		return user.health.getSleepGoals();
-	}
-	
-	public double getWaterIntakeGoals() {
-		return user.health.getWaterIntakeGoals();
-	}
-	
-	public double getWeightGoals() {
-		return user.health.getWeightGoals();
-	}
-	
-	public double getCaloriesGoals() {
-		return user.fitness.getCaloriesGoals();
-	}
-	
-	public double getExerciseGoals() {
-		return user.fitness.getExerciseGoals();
-	}
-	
-
 }
 

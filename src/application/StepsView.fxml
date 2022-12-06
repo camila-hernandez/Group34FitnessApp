@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -10,17 +11,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StepsController">
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a0c6" height="159.0" stroke="#52d4ff" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="481.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#47a0c6" height="159.0" stroke="#52d4ff" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="481.0" />
             <Label text="Steps" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="58.0" />
                </font>
             </Label>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="stepsIcon" fitHeight="150.0" fitWidth="150.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
          </children>
       </StackPane>
    </top>
@@ -29,65 +36,120 @@
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6459e8" height="66.0" stroke="BLACK" strokeType="INSIDE" width="481.0">
+                  <Rectangle arcHeight="30.0" arcWidth="20.0" fill="#ff6459e8" height="66.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="481.0">
                      <StackPane.margin>
                         <Insets />
                      </StackPane.margin></Rectangle>
-                  <Label prefHeight="46.0" prefWidth="390.0" text="how many steps did you take today?">
+                  <Label prefHeight="46.0" prefWidth="390.0" text="LOG YOUR DAILY STEP COUNT" textAlignment="CENTER">
                      <font>
-                        <Font name="Microsoft Tai Le" size="24.0" />
+                        <Font name="Yu Gothic UI Regular" size="24.0" />
                      </font>
+                     <StackPane.margin>
+                        <Insets left="50.0" />
+                     </StackPane.margin>
                   </Label>
                </children>
             </StackPane>
             <HBox prefHeight="10.0" prefWidth="200.0">
                <children>
-                  <Label text="Day of the month:">
+                  <Label text="Day of the month:" textFill="#ff6459">
                      <HBox.margin>
-                        <Insets left="65.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
                   </Label>
-                  <Label text="Steps taken:">
+                  <Label text="Steps taken:" textFill="#ff6459">
                      <HBox.margin>
-                        <Insets left="135.0" />
+                        <Insets left="140.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
                   </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox prefHeight="50.0" prefWidth="120.0">
+                  <ChoiceBox fx:id="dayOfMonth" prefHeight="50.0" prefWidth="128.0">
                      <HBox.margin>
-                        <Insets left="65.0" />
-                     </HBox.margin></ChoiceBox>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <items>
+            		<FXCollections fx:factory="observableArrayList">
+            			<Integer fx:value="1" />
+            			<Integer fx:value="2" />
+            			<Integer fx:value="3" />
+            			<Integer fx:value="4" />
+            			<Integer fx:value="5" />
+            			<Integer fx:value="6" />
+            			<Integer fx:value="7" />
+            			<Integer fx:value="8" />
+            			<Integer fx:value="9" />
+            			<Integer fx:value="10" />
+            			<Integer fx:value="11" />
+            			<Integer fx:value="12" />
+            			<Integer fx:value="13" />
+            			<Integer fx:value="14" />
+            			<Integer fx:value="15" />
+            			<Integer fx:value="16" />
+            			<Integer fx:value="17" />
+            			<Integer fx:value="18" />
+            			<Integer fx:value="19" />
+            			<Integer fx:value="20" />
+            			<Integer fx:value="21" />
+            			<Integer fx:value="22" />
+            			<Integer fx:value="23" />
+            			<Integer fx:value="24" />
+            			<Integer fx:value="25" />
+            			<Integer fx:value="26" />
+            			<Integer fx:value="27" />
+            			<Integer fx:value="28" />
+            			<Integer fx:value="29" />
+            			<Integer fx:value="30" />
+            			<Integer fx:value="31" />   			
+            		</FXCollections>
+            	</items>
+                     </ChoiceBox>
                   <Label prefHeight="7.0" text="&gt;">
                      <font>
                         <Font size="36.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="45.0" right="45.0" />
+                        <Insets bottom="10.0" left="50.0" right="45.0" />
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="stepsTextField" alignment="CENTER" prefHeight="50.0" prefWidth="120.0">
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#updateStepsNumber" text="Update Daily Steps" textFill="#ff6459">
+            <Button mnemonicParsing="false" onAction="#updateStepsNumber" prefWidth="378.0" text="Update Daily Steps" textFill="#ff6459">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets bottom="40.0" left="65.0" />
+                  <Insets bottom="40.0" left="50.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="34.5" />
+                  <Font name="System Bold" size="30.0" />
                </font>
                <effect>
                   <Blend />
                </effect></Button>
+            <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Label>
+            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0" text="Label">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Label>
          </children>
       </VBox>
    </center>
@@ -110,17 +172,16 @@
                         <Insets left="130.0" />
                      </VBox.margin>
                   </Label>
-                  <ProgressBar prefHeight="100.0" prefWidth="354.0" progress="0.0">
+                  <ProgressBar fx:id="stepsProgressBar" prefHeight="100.0" prefWidth="354.0" progress="0.0">
                      <VBox.margin>
                         <Insets left="130.0" />
                      </VBox.margin>
                   </ProgressBar>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="139.0" text="return to main">
+                        <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="160.0" text="RETURN TO MAIN">
                            <HBox.margin>
-                              <Insets top="40.0" />
+                              <Insets left="100.0" right="20.0" top="40.0" />
                            </HBox.margin></Button>
                      </children>
                      <padding>

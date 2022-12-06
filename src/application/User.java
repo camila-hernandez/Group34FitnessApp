@@ -75,10 +75,16 @@ public class User {
 	 * @param s This is the string that the user enters into the TextField as their name.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user' input is invalid.
 	 */
-	public void checkName(String s) throws InvalidUserInputException {
+	public void checkName(String nameString) throws InvalidUserInputException {
+		// Check if user input is empty
+		if (nameString.isEmpty()) {
+			throw new InvalidUserInputException("Please fill out all required TextFields.");
+		}
 		// Check if the string is all alphabetical letters
-		if (!s.matches("^[a-zA-Z]*$")) {
+		else {
+			if (!nameString.matches("^[a-zA-Z]*$")) {
 				throw new InvalidUserInputException("Invalid Character");
+			}
 		}
 	}
 	
@@ -87,11 +93,17 @@ public class User {
 	 * @param valueEntered This is the value that the user entered into the TextField as a string.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
 	 */
-	public void checkAge(String valueEntered) throws InvalidUserInputException {	
-		for (char c :valueEntered.toCharArray()) {
-			// Check if the character is a digit
-			if (!Character.isDigit(c)) {
-				throw new InvalidUserInputException("Make sure to enter a valid number.");
+	public void checkAge(String ageString) throws InvalidUserInputException {	
+		// Check if user input is empty
+		if (ageString.isEmpty()) {
+			throw new InvalidUserInputException("Please fill out all required TextFields.");
+		}
+		else {
+			for (char c : ageString.toCharArray()) {
+				// Check if the character is a digit
+				if (!Character.isDigit(c)) {
+					throw new InvalidUserInputException("Make sure to enter a valid number.");
+				}
 			}
 		}
 	}

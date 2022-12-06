@@ -21,6 +21,8 @@ import javafx.stage.Stage;
  */
 public class WaterIntakeController{
 	Stage applicationStage;
+	
+	private double intakeAmount;
 
 	@FXML
 	private TextField amountOfWater;
@@ -33,8 +35,6 @@ public class WaterIntakeController{
 
 	User user;
 	
-	private double intakeAmount;
-	
 	/**
 	 * This method will allow for the same User object to be passed between different controllers.
 	 * The user can access the same properties in each scene.
@@ -43,53 +43,62 @@ public class WaterIntakeController{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	// when the water window is opened again, the values previously entered are updated. 
+ 
+	/**
+	 * This method updates the values in the progress label when the Water In-take window 
+	 * are opened again by the user.
+	 */
 	public void updateWaterValues() {
 		if (waterProgressLabel != null) {
-			updateWaterProgressLabel(user.health.getWaterProgressLabel());
+			updateWaterProgressLabel(getWaterProgressLabel());
 		}
 	}
 
 	/**
-	 * 
-	 * @param progressWaterEvent - when update water button is pressed, user is shown how far away they are from the goal set.
+	 * This method calculates how far away the user is from reaching their water in-take goal.
+	 * This method will also display the user's progress in the window depending on their water in-take amount.
+	 * @param progressWaterEvent - This ActionEvent will display the user's progress in the window.
+	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
 	 */
 	@FXML
-	void calculateAmountWater(ActionEvent progressWaterEvent){
+	void calculateAmountWater(ActionEvent progressWaterEvent) throws InvalidUserInputException {
+		// Initialize label to empty
+		waterErrorLabel.setText("");
+		
 		try {
 			// Checks user input
 			user.health.checkInput(amountOfWater.getText());
-		} catch (InvalidUserInputException e){
+			
+			// the amount of water entered in textField
+			intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
+			
+			double waterGoal = user.health.getWaterIntakeGoals();
+			
+			//the amount of cups user entered compared to goal.
+			double waterProgress = waterGoal - getWaterIntakeAmount();
+			
+			updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
+			setWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
+			
+			user.health.setWaterIntakeAmount(getWaterIntakeAmount());
+
+			// tells user how close they are to their goal. 
+			if (waterProgress == 0 || waterProgress < 0) {
+				waterProgressLabel.setText("You have reached your water goal.");
+			}
+			
+			if (waterProgress > 0) {
+				waterProgressLabel.setText( "You are " + waterProgress + " cups away from your goal.");
+			}
+		} catch (InvalidUserInputException e) {
 			waterErrorLabel.setText(e.getMessage());
 		}
-		
-		// if the user input is valid, the amount of water entered in textField will be used to set the variable.
-		// the amount the user inputs will be added to the previous total they have inputed.
-		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
-		
-		// the goal user has set for water, stored in health.
-		double waterGoal = user.health.getWaterIntakeGoals();
-		
-		//the amount of cups user entered compared to goal.
-		double waterProgress = waterGoal - getWaterIntakeAmount();
-		
-		updateWaterProgressLabel(String.valueOf(getWaterIntakeAmount()));
-		
-		user.health.setWaterIntakeAmount(getWaterIntakeAmount());
-
-		// displays to the user how close they are to their goal.
-		if (waterProgress == 0 || waterProgress < 0) {
-			waterProgressLabel.setText("You have reached your water goal.");
-		}
-		
-		if (waterProgress > 0) {
-			waterProgressLabel.setText( "You are " + waterProgress + " cups away from your goal.");
-		}
-
 	}
 
-	// the user is shown how many cups they have entered in total when the user reopens the water window. 
+	/**
+	 * This method will display how many cups of water the user has entered in total in the Water In-take window.
+	 * @param water This string is the amount of water the user drank today.
+	 */
 	public void updateWaterProgressLabel(String water) {
 		if (water != null) {
 			waterProgressLabel.setText("You have entered " + water + " cups of water.");
@@ -97,24 +106,37 @@ public class WaterIntakeController{
 		if (water == null) {
 			waterProgressLabel.setText("You have not entered your water intake.");
 		}
-		user.health.setWaterProgressLabel(water);
-
 	}
-	
-	// stores the progress label in health, to be accessed when window is reopened.
+
+	/**
+	 * This method will store the water in-take progress label in the Health class.
+	 * @param water This string is the amount of water the user drank today.
+	 */
 	public void setWaterProgressLabel(String water) {
 		user.health.setWaterProgressLabel(water);
 	}
 
+	/**
+	 * This method is used to retrieve the same label after the user opens the Water In-take window
+	 * multiple times.
+	 * @return This getter method returns the water in-take progress label with the amount of water the user entered.
+	 */
 	public String getWaterProgressLabel() {
 		return user.health.getWaterProgressLabel();
 	}
 
-	// setter, getter methods for amount of water entered by user in text field.
+	/**
+	 * This method stores the user's water in-take amount that the user has entered in the window.
+	 * @param water This double is the amount of water the user drank today.
+	 */
 	public void setWaterIntakeAmount(double water) {
 		this.intakeAmount = water;
 	}
 
+	/**
+	 * This method is used to display the user's progress in the Water In-take window.
+	 * @return This getter method retrieves the user's water in-take amount for today.
+	 */
 	public double getWaterIntakeAmount() {
 		return intakeAmount;
 	}
@@ -125,7 +147,7 @@ public class WaterIntakeController{
 	 * @param returnToMainPageEvent Changes the scene back to the main page.
 	 */
 	@FXML
-	void returnToMain(ActionEvent event) {
+	void returnToMain(ActionEvent returnToMainPageEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
@@ -133,7 +155,7 @@ public class WaterIntakeController{
 
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
-			controller.setDisplayLabel(event);
+			controller.setDisplayLabel(returnToMainPageEvent);
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
 
