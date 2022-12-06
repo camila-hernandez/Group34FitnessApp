@@ -72,6 +72,13 @@ public class SleepController{
 		// sleepGoal is the goal entered by user, which is in health.
 		double sleepGoal = user.health.getSleepGoals();
 		
+		try {
+			// Checks user input
+			user.health.checkInput(hoursSleep.getText());
+		} catch (InvalidUserInputException e){
+			sleepErrorLabel.setText(e.getMessage());
+		}
+		
 		//hours are set to be the string entered in the hoursSleep text field.
 		setHours(Double.parseDouble(hoursSleep.getText()));
 		
