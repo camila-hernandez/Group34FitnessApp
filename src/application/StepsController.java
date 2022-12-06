@@ -66,7 +66,10 @@ public class StepsController implements Initializable{
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
     	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
-    	
+    	updateProgressBar(event);
+    }
+    
+    void updateProgressBar(ActionEvent event) {
     	if (user.fitness.getStepsGoals() != 0) {
     		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
     		double goalPercentage = (double)user.fitness.getStepsCount()/user.fitness.getStepsGoals();
@@ -92,7 +95,9 @@ public class StepsController implements Initializable{
 	    		progressLyrics.setText(String.valueOf("IT'S THE EYE OF THE TIGER"));
 	    	}
     	}
-    	else {percentageLabel.setText("Please set your monthly steps goal first.");}
+    	else {percentageLabel.setText("Please set your monthly steps goal first.");
+    		  progressLyrics.setText("");
+    	}
     }
     
     @FXML
