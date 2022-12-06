@@ -44,7 +44,12 @@ public class WaterIntakeController{
 	 */
 	@FXML
 	void calculateAmountWater(ActionEvent progressWaterEvent){
-		
+		try {
+			// Checks user input
+			user.health.checkInput(amountOfWater.getText());
+		} catch (InvalidUserInputException e){
+			waterErrorLabel.setText(e.getMessage());
+		}
 		// the amount of water entered in textField
 		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
 		
