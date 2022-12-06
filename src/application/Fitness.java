@@ -39,7 +39,8 @@ public class Fitness extends Goals {
 	User user;
 	
 	public Fitness() {
-		stepsArray = new ArrayList<Integer>(30);  
+		stepsArray = new ArrayList<Integer>(30); 
+		stepsCount = 0;
 		progress = 0.0;
 		totalCaloriesBurned = 0.0;
 		mondayExerciseInfo = 0.0;
