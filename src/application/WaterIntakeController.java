@@ -19,6 +19,9 @@ public class WaterIntakeController{
 
 	@FXML
 	private Label waterProgressLabel;
+	
+	@FXML
+	private Label waterErrorLabel;
 
 	User user;
 	
