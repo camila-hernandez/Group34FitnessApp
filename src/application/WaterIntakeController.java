@@ -11,6 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The WaterIntakeController will store the characters entered by the user as cups of water.
+ * It will check if the characters are valid, and display an error message. Then compare the amount of 
+ * cups entered, to the goal set by the user, and display the progress. 
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class WaterIntakeController{
 	Stage applicationStage;
 
@@ -27,6 +35,11 @@ public class WaterIntakeController{
 	
 	private double intakeAmount;
 	
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -50,9 +63,12 @@ public class WaterIntakeController{
 		} catch (InvalidUserInputException e){
 			waterErrorLabel.setText(e.getMessage());
 		}
-		// the amount of water entered in textField
+		
+		// if the user input is valid, the amount of water entered in textField will be used to set the variable.
+		// the amount the user inputs will be added to the previous total they have inputed.
 		intakeAmount = Double.parseDouble(amountOfWater.getText()) + user.health.getWaterIntakeAmount();
 		
+		// the goal user has set for water, stored in health.
 		double waterGoal = user.health.getWaterIntakeGoals();
 		
 		//the amount of cups user entered compared to goal.
@@ -62,7 +78,7 @@ public class WaterIntakeController{
 		
 		user.health.setWaterIntakeAmount(getWaterIntakeAmount());
 
-		// tells user how close they are to their goal. 
+		// displays to the user how close they are to their goal.
 		if (waterProgress == 0 || waterProgress < 0) {
 			waterProgressLabel.setText("You have reached your water goal.");
 		}
@@ -73,7 +89,7 @@ public class WaterIntakeController{
 
 	}
 
-	// the user is shown how many cups they have entered in total. 
+	// the user is shown how many cups they have entered in total when the user reopens the water window. 
 	public void updateWaterProgressLabel(String water) {
 		if (water != null) {
 			waterProgressLabel.setText("You have entered " + water + " cups of water.");
@@ -84,6 +100,8 @@ public class WaterIntakeController{
 		user.health.setWaterProgressLabel(water);
 
 	}
+	
+	// stores the progress label in health, to be accessed when window is reopened.
 	public void setWaterProgressLabel(String water) {
 		user.health.setWaterProgressLabel(water);
 	}
@@ -92,7 +110,7 @@ public class WaterIntakeController{
 		return user.health.getWaterProgressLabel();
 	}
 
-	// setter, getter methods for amount of water entered by user.
+	// setter, getter methods for amount of water entered by user in text field.
 	public void setWaterIntakeAmount(double water) {
 		this.intakeAmount = water;
 	}
@@ -101,7 +119,11 @@ public class WaterIntakeController{
 		return intakeAmount;
 	}
 
-	// takes user back to main window when return to main button is pressed. 
+	/**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main page.
+	 * @param returnToMainPageEvent Changes the scene back to the main page.
+	 */
 	@FXML
 	void returnToMain(ActionEvent event) {
 		try {
