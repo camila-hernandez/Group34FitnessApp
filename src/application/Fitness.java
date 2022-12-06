@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Fitness extends Goals {
 	
 
-	private double stepsGoal;
+	private int stepsGoal;
 	private ArrayList<Integer> stepsArray;
 	private int stepsCount;
 	private double caloriesBurnedGoal;
@@ -59,21 +59,6 @@ public class Fitness extends Goals {
 		fridayCaloriesBurnedInfo = 0.0;
 		saturdayCaloriesBurnedInfo = 0.0;
 		sundayCaloriesBurnedInfo = 0.0;
-	}
-
-	public void checkGoalsCompleted() {
-		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
-			completeGoal();
-			reachStepsGoal = true;
-		}
-		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
-			completeGoal();
-			reachExerciseGoal = true;
-		}
-		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
-			completeGoal();
-			reachCaloriesBurnedGoal = true;
-		}
 	}
 	
 	/**

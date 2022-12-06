@@ -83,7 +83,7 @@ public class StepsController implements Initializable{
     	if (goalPercentage >= 0.6 && goalPercentage < 0.8) {
     		progressLyrics.setText(String.valueOf("Just a man and his will to survive"));
     	}
-    	//80-100%
+    	//80-infinity%
     	if (goalPercentage >= 0.8) {
     		progressLyrics.setText(String.valueOf("IT'S THE EYE OF THE TIGER"));
     	}
@@ -114,8 +114,7 @@ public class StepsController implements Initializable{
     }
     
     /**
-     * This method allows imported pictures to appear in the Activities window.
-     * Also, this method sets the progress bar color and displays the current date to the user in the same window.
+     * This method allows pictures imported from the same directory to appear in the Steps window.
      */
      @Override
  	public void initialize(URL location, ResourceBundle resources) {
