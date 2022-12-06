@@ -71,7 +71,7 @@ public class StepsController implements Initializable{
      * @throws InvalidUserInputException
      */
     @FXML
-    void updateStepsNumber(ActionEvent updateStepsEvent) throws InvalidUserInputException {
+    void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
