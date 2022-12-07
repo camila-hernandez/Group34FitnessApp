@@ -418,17 +418,14 @@ public class Fitness extends Goals {
 	 public void checkGoalsCompleted() {
 		// If the user has reached their goal, it calls a method in the Goals class
 		// and turns booleans true so that the user cannot reach the goal multiple time in one day
-		System.out.println("Steps count: " + stepsCount + "Steps goal: " + stepsGoal);
 		 if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
 			completeGoal();
 			reachStepsGoal = true;
 		}
-		 System.out.println("progress count: " + progress + "progress goal: " + exerciseGoal);
 		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
 			completeGoal();
 			reachExerciseGoal = true;
 		}
-		System.out.println("calories count: " + totalCaloriesBurned + "calories goal: " + caloriesBurnedGoal);
 		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
 			completeGoal();
 			reachCaloriesBurnedGoal = true;
@@ -464,6 +461,21 @@ public class Fitness extends Goals {
 
 			if (value < 0) {
 				throw new InvalidUserInputException("Number should be greater than 0.");
+			}
+		}
+	}
+	
+	public void checkIntegers(String str) throws InvalidUserInputException {	
+		// Check if user input is empty
+		if (str.isEmpty()) {
+			throw new InvalidUserInputException("Please fill out all required TextFields.");
+		}
+		else {
+			for (char c : str.toCharArray()) {
+				// Check if the character is a digit
+				if (!Character.isDigit(c)) {
+					throw new InvalidUserInputException("Make sure to enter a valid number.");
+				}
 			}
 		}
 	}

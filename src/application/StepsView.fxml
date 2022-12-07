@@ -17,7 +17,10 @@
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="stepsErrorLabel" layoutX="201.0" layoutY="163.0" textFill="RED" />
+               </children></AnchorPane>
             <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#3e9acf" height="95.0" stroke="#3e9acf" strokeType="INSIDE" width="390.0">
                <effect>
                   <DropShadow color="#00000080" />
@@ -181,15 +184,21 @@
                      </font></Label>
                </children>
             </StackPane>
-            <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0">
+             <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0" textFill="RED">
                <padding>
                   <Insets left="30.0" />
                </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
-            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0">
+            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0" textFill="RED">
                <padding>
-                  <Insets left="30.0" />
+                  <Insets left="30.0" top="5.0" />
                </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
          </children>
       </VBox>

@@ -103,6 +103,7 @@ public class FitnessTrackerController implements Initializable {
 			StepsController controller = (StepsController)loader.getController();
 			controller.setUser(user);
 			controller.updateProgressBar(event);
+
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
