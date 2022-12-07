@@ -43,7 +43,7 @@ public class SleepController{
 
 	@FXML
 	private ProgressBar sleepProgressBar; 
-
+  
 	/**
 	 * This method will allow for the same User object to be passed between different controllers.
 	 * The user can access the same properties in each scene.
@@ -98,56 +98,39 @@ public class SleepController{
 			user.health.checkInput(hoursSleep.getText());
 		
 			//Hours are set to be the string entered in the hoursSleep TextField.
-			setHours(Double.parseDouble(hoursSleep.getText()));
+			setSleepAmount(Double.parseDouble(hoursSleep.getText()));
 		
 			// Calculates and stores sleep progress
-			int progressPercent = (int) ((getHours()/sleepGoal) * 100);
-			setSleepAmount(getHours());
+			int progressPercent = (int) ((getSleepAmount()/sleepGoal) * 100);
 
 			// The label changes when the user enters a different value.
-			updateSleepProgressLabel(String.valueOf(getHours()));
-			sleepProgressBar.setProgress((getHours())/sleepGoal);
+			updateSleepProgressLabel(String.valueOf(getSleepAmount()));
+			sleepProgressBar.setProgress((getSleepAmount())/sleepGoal);
 
 			// If the sleepGoal - getHours() == 0 or is <0, that means the user has reached their goal
 			// and the label changes to let the user know.
-			if (((sleepGoal - getHours()) == 0) || (((sleepGoal - getHours()) < 0))) {
+			if (((sleepGoal - getSleepAmount()) == 0) || (((sleepGoal - getSleepAmount()) < 0))) {
 				sleepProgressLabel.setText("You have reached your sleep goal!");
 			}
 
 			// If the sleepGoal - getHours() > 0, that means the user has not reached their goal, 
 			// and is given a percent of how close they are. 
-			if (sleepGoal - getHours() > 0) {
+			if (sleepGoal - getSleepAmount() > 0) {
 				sleepProgressLabel.setText( "You have reached " + progressPercent + "%" + " of your sleep goal.");
 			}
 		} catch (InvalidUserInputException e) {
 			sleepErrorLabel.setText(e.getMessage());	
 		}
 	}
-
-	/**
-	 * This method is used to store the amount of hours of sleep the user enters in the Sleep window.
-	 * @param hours This double must consist of only numbers, a single decimal point and must be greater than zero.
-	 */
-	private void setHours(double hours) {
-		this.hours = hours;
-	}
-	
-	/**
-	 * This method is used to retrieve the amount of hours of sleep the user enters in the Sleep window.
-	 * @return This getter method returns the hours of sleep the user got throughout the night.
-	 */
-	private double getHours() {
-		return hours;
-	}
-
-	/**
-	 * This method is used to store ?????????
-	 * @param sleep stores the number of hours the user enters for sleep in user. 
+  /**
+	 * 
+	 * @param sleep is the number of hours user enters in hoursSleepTextField, and is stored in user.
 	 */
 	public void setSleepAmount(double sleep) {
 		user.health.setSleepDuration(sleep);
 	}
 
+	// getSleep() is called to compare the hours to the goal, and update the label when user reopens the window. 
 	public double getSleepAmount() {
 		return user.health.getSleepDuration();
 	}
