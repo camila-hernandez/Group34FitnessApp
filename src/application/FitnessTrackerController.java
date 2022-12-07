@@ -64,12 +64,11 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	private Label goalsCompletedLabel;
 	
-	public static Label staticStepsLabel;
-	
 	User user;
 	
-	public void initialize() {
-		stepsThisMonth = staticStepsLabel;
+	public void getLabel() {
+		System.out.println("Steps count: " + user.fitness.getStepsCount());
+		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
 	}
 	
 	public void setUser(User user) {
@@ -91,6 +90,7 @@ public class FitnessTrackerController implements Initializable {
 			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
 			UserProfileController controller = (UserProfileController)loader.getController();
 			controller.setUser(user);
+			controller.setUserProfileLabels();
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -241,10 +241,7 @@ public class FitnessTrackerController implements Initializable {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 	}
-    @FXML
-    void showRecommendations(ActionEvent event) {
-    }
-    
+   
    @FXML
    	void showUserFitnessGoals(ActionEvent event) {
 	   try {		   

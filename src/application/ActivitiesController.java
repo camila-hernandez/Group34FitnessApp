@@ -144,6 +144,7 @@ public class ActivitiesController implements Initializable {
 	 * and must be greater than zero.
      */
     public void updateProgress(double time) {
+    	todayExerciseMotivationLabel.setText("");
     	
     	// Initialize progress and label to 0
     	workoutProgressBar.setProgress(0);
@@ -190,6 +191,9 @@ public class ActivitiesController implements Initializable {
     	}
     
     	// Sets the motivational label depending on the user's progress
+    	if (progress == 0) {
+    		todayExerciseMotivationLabel.setText("");
+    	}
     	if (progress < 50 && progress != 0) {
     		todayExerciseMotivationLabel.setText("You got this! Keep going!");
     	}
@@ -209,6 +213,7 @@ public class ActivitiesController implements Initializable {
      * the updateProgress() method.
      */
     public void updateProgressValue() {
+    	System.out.println(user.fitness.getProgress());
     	updateProgress(user.fitness.getProgress());
     }
     
@@ -232,8 +237,6 @@ public class ActivitiesController implements Initializable {
     	Calendar cal = Calendar.getInstance();
     	Date today = new Date();
 		cal.setTime(today); 
-		day = user.fitness.getProgress();
-		calories = user.fitness.getTotalCaloriesBurned();
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 		
         	if (dayOfWeek == Calendar.MONDAY) {
