@@ -24,8 +24,7 @@ import javafx.stage.Stage;
  */
 public class SleepController{
 	Stage applicationStage;
-	
-	private double hours;
+
 
 	User user;
 
