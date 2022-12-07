@@ -1,8 +1,13 @@
 package application;
 
 /**
+ * The Health class will verify and store a set of characteristics that are related to the user's health goals
+ * that are unique to them based on the values entered.
+ * The Health class will also perform calculation based on the information entered by the user.
+ * This class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
  * 
- * @author CS219-user
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
  *
  */
 public class Health extends Goals {
@@ -219,7 +224,7 @@ public class Health extends Goals {
 	 * @param waterProgressLabel This string gets converted from a double.
 	 */
 	public void setWaterProgressLabel(String waterProgressLabel) {
-		this.waterProgressLabel = waterProgressLabel;
+		this.waterProgressTotalLabel = waterProgressLabel;
 	}
 
 	/**
@@ -227,7 +232,7 @@ public class Health extends Goals {
 	 * @return This getter method is returns the user's daily water in-take progress in a label.
 	 */
 	public String getWaterProgressLabel() {
-		return waterProgressLabel;
+		return waterProgressTotalLabel;
 	}
 
 	/**

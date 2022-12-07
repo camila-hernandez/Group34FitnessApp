@@ -13,6 +13,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * The WorkoutStatisticsController class will store and display the user's exercise duration
+ * and total calories burned per day based on the values entered by the user.
+ * This will be displayed to the user as a weekly bar graph.
+ * The User class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class WorkoutStatisticsController {
 	Stage applicationStage;
 	

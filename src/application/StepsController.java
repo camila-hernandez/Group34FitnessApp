@@ -2,9 +2,6 @@ package application;
 
 import java.io.FileInputStream;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -21,11 +18,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The StepsController class will store and verify the number of steps that the user has taken over the course
+ * of a month based on the values entered by the user.
+ * The StepsController class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class StepsController implements Initializable {
 	Stage applicationStage;
-    
-    //@FXML
-    //private Label stepsCountLabel;
     
     @FXML
     private ChoiceBox<Integer> dayOfMonth;
@@ -63,29 +66,36 @@ public class StepsController implements Initializable {
     	this.user = user;
     }
     
-   // private static final DecimalFormat df = new DecimalFormat("0.00");
-    
     /**
      * This ActionEvent will display the user's overall steps taken count for the month in the main window.
-     * @param updateStepsEvent
-     * @throws InvalidUserInputException
+     * @param updateStepsEvent This ActionEvent will display the steps the user has taken.
+     * @throws InvalidUserInputException This is the custom exception that is thrown if the user' input is invalid.
      */
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
-    	try {
-
-    		user.fitness.setStepsCount(Integer.parseInt(stepsTextField.getText()));
-        	if(dayOfMonth.getValue()!=null)
-            	dayOfMonthErrorLabel.setText("");
-    	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+    	// Initialize the error label
     	stepsErrorLabel.setText("");
-
-    	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
-    	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
+    	
+    	try {
+    		user.fitness.checkIntegers((stepsTextField.getText()));
+    		user.fitness.setStepsCount(Integer.parseInt(stepsTextField.getText()));
+        	if(dayOfMonth.getValue()!=null) {
+            	dayOfMonthErrorLabel.setText("");
+        		user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+        	}
+    	} catch(InvalidUserInputException e) {
+    		stepsErrorLabel.setText(e.getMessage());
+    	} catch(NullPointerException npe) {
+    		dayOfMonthErrorLabel.setText("Please select a day");
+    	}
     	updateProgressBar(event);
     }
     
-    void updateProgressBar(ActionEvent event) {
+    /**
+     * This method updates the progress bar with the user's step count and compares it to their goal.
+     * @param updateProgressEvent This ActionEvent changes the progress bar.
+     */
+    void updateProgressBar(ActionEvent updateProgressEvent) {
     	if (user.fitness.getStepsGoals() != 0) {
     		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
     		double goalPercentage = (double)user.fitness.getStepsCount()/user.fitness.getStepsGoals();
@@ -148,7 +158,6 @@ public class StepsController implements Initializable {
     
     /**
      * This method allows pictures imported from the same directory to appear in the Steps window.
-     * This method allows imported pictures to appear in the Steps window.
      */
      @Override
  	public void initialize(URL location, ResourceBundle resources) {
