@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class StepsController implements Initializable{
+public class StepsController implements Initializable {
 	Stage applicationStage;
     
     //@FXML
@@ -63,7 +63,7 @@ public class StepsController implements Initializable{
     	this.user = user;
     }
     
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+   // private static final DecimalFormat df = new DecimalFormat("0.00");
     
     /**
      * This ActionEvent will display the user's overall steps taken count for the month in the main window.
@@ -71,16 +71,25 @@ public class StepsController implements Initializable{
      * @throws InvalidUserInputException
      */
     @FXML
-    void updateStepsNumber(ActionEvent updateStepsEvent) throws InvalidUserInputException {
+    void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
+
+    		user.fitness.setStepsCount(Integer.parseInt(stepsTextField.getText()));
+        	if(dayOfMonth.getValue()!=null)
+            	dayOfMonthErrorLabel.setText("");
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+    	stepsErrorLabel.setText("");
+
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
     	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
-    	
+    	updateProgressBar(event);
+    }
+    
+    void updateProgressBar(ActionEvent event) {
     	if (user.fitness.getStepsGoals() != 0) {
     		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
     		double goalPercentage = (double)user.fitness.getStepsCount()/user.fitness.getStepsGoals();
-    		percentageLabel.setText(df.format(goalPercentage * 100) + "%");
+    		percentageLabel.setText((goalPercentage * 100) + "%");
 	    	//0-20%
 	    	if (goalPercentage < 0.2) {
 	    		progressLyrics.setText(String.valueOf("Rising up straight to the top"));
@@ -102,7 +111,9 @@ public class StepsController implements Initializable{
 	    		progressLyrics.setText(String.valueOf("IT'S THE EYE OF THE TIGER"));
 	    	}
     	}
-    	else {percentageLabel.setText("Please set your monthly steps goal first.");}
+    	else {percentageLabel.setText("Please set your monthly steps goal first.");
+    		  progressLyrics.setText("");
+    	}
     }
     
     /**
@@ -120,7 +131,8 @@ public class StepsController implements Initializable{
     		   controller.setUser(user);
     		   controller.setGoalsCompletedLabel();
     		   controller.setNameLabel();
-    		   controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
+    		   controller.setDisplayLabel();
+    		  // controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
     		   
     		   controller.applicationStage = applicationStage;
     		   

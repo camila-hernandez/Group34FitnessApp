@@ -71,6 +71,7 @@ public class UserProfileController {
 		ageLabel.setText(Integer.toString(user.getAge()));
 		genderLabel.setText(user.getGender());
 		heightLabel.setText(Double.toString(user.health.getHeight()));
+		System.out.println("Weight kg" + user.health.getStartingWeight());
 		weightLabel.setText(Double.toString(user.health.getStartingWeight()));
 	}
 	
@@ -189,6 +190,7 @@ public class UserProfileController {
 				user.setGender(genderChoiceBox.getValue().toString());
 				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
 				user.health.setStartingWeight(Double.parseDouble(weightTextfield.getText()));
+				System.out.println("getw eight " + user.health.getStartingWeight());
 				// Set labels with user information
 				setUserProfileLabels();
 				
@@ -225,6 +227,7 @@ public class UserProfileController {
 	  		controller.setGoalsCompletedLabel();
 	  		// Set name label in the main scene based on the User class
 	    	controller.setNameLabel();
+	    	controller.setDisplayLabel();
 	    	
 	    	controller.applicationStage = applicationStage;
 	    		   
@@ -247,9 +250,17 @@ public class UserProfileController {
 			if (!f.exists()) {
 				f.createNewFile();
 			}
-			// Write all goals to the file
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
+			
+			// Write user information to the file
+			bw.write("Name = " + user.getName() + "\n");
+			bw.write("Age = " + user.getAge() + "\n");
+			bw.write("Gender = " + user.getGender() + "\n");
+			bw.write("Height = " + user.health.getHeight() + "\n");
+			bw.write("Starting weight = " + user.health.getStartingWeight() + "\n");
+			
+			// Write all goals to the file
 			bw.write("Steps goal = " + user.fitness.getStepsGoals() + "\n");
 			bw.write("Sleep goal = " + user.health.getSleepGoals() + "\n");
 			bw.write("Water intake goal = " + user.health.getWaterIntakeGoals() + "\n");
