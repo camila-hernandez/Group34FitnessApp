@@ -3,6 +3,13 @@ package application;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Enes Gisi, Camila Hernandez, Mariam Masri
+ * This class manages fitness goals and actual values, initializes instance variables
+ * and validate variables
+ *
+ */
 public class Fitness extends Goals {
 	
 
@@ -71,11 +78,21 @@ public class Fitness extends Goals {
     }
 	
 
-	//STEPS VALIDATION + GETTER + SETTER (make this to deal with the array list)
+	/**
+	 * 
+	 * @return steps count
+	 */
 	public int getStepsCount() {
 		return stepsCount;
 	}
 	
+	/**
+	 * 
+	 * @param str String to be checked if numeric
+	 * @return true if it is numeric, false if not
+	 * 
+	 * This static method will validate Integer values
+	 */
 	public static boolean isNumeric(String str){ 
 		  try {  
 			Integer.parseInt(str);  
@@ -84,11 +101,15 @@ public class Fitness extends Goals {
 		    return false;  
 		  }  
 		}
-	//validation done in array update so no need for it here (for loop in the controller)
-	public void setStepsCount(int monthlySteps) {
-			this.stepsCount = monthlySteps;
-	}
-	
+
+	/**
+	 * 
+	 * @param dayOfMonthChoice which day of the month it is
+	 * @param dailyStepCount how many steps taken that day
+	 * @throws InvalidUserInputException thrown if step value is not numeric
+	 * 
+	 * This method will
+	 */
 	public void updateMonthlySteps(int dayOfMonthChoice, String dailyStepCount) throws InvalidUserInputException{
 		stepsCount = 0;
 		if (isNumeric(dailyStepCount)) {

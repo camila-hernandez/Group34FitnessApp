@@ -2,7 +2,8 @@ package application;
 
 /**
  * 
- * @author CS219-user
+ * @author Mariam Masri, Enes Gisi, Camila Hernandez
+ * This class manages healthy habits that support fitness, such as sleep and water intake
  *
  */
 public class Health extends Goals {

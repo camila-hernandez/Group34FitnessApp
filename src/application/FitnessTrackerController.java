@@ -28,6 +28,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+/**
+ * 
+ * @author Enes Gisi, Camila Hernandez, Mariam Masri
+ * 
+ * This controller manages the main window of the application
+ *
+ */
 public class FitnessTrackerController implements Initializable {
   Stage applicationStage;
   
@@ -100,6 +108,11 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    /**
+     * 
+     * @param event Action when Steps is clicked
+     * This method will update a label and the progress bar on the Steps page and opens it
+     */
 	@FXML
 	void trackSteps(ActionEvent event) {
 		try {

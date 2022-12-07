@@ -30,9 +30,6 @@ import javafx.stage.Stage;
 public class StepsController implements Initializable {
 	Stage applicationStage;
     
-    //@FXML
-    //private Label stepsCountLabel;
-    
     @FXML
     private ChoiceBox<Integer> dayOfMonth;
     
