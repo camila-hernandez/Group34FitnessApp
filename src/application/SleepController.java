@@ -24,8 +24,6 @@ import javafx.stage.Stage;
  */
 public class SleepController{
 	Stage applicationStage;
-	
-	private double hours;
 
 	User user;
 
@@ -122,18 +120,21 @@ public class SleepController{
 			sleepErrorLabel.setText(e.getMessage());	
 		}
 	}
-  /**
-	 * 
-	 * @param sleep is the number of hours user enters in hoursSleepTextField, and is stored in user.
-	 */
+   /**
+   	* This method will store the amount of sleep the user got through the night in the Fitness class.
+	* @param sleep This is the number of hours user enters in hoursSleepTextField, and is stored in user.
+	*/
 	public void setSleepAmount(double sleep) {
 		user.health.setSleepDuration(sleep);
 	}
 
-	// getSleep() is called to compare the hours to the goal, and update the label when user reopens the window. 
-	public double getSleepAmount() {
-		return user.health.getSleepDuration();
-	}
+	/**
+	 * This method is called to compare the hours to the goal, and update the label when user reopens the window.
+	 * @return This getter method returns the number of hours the user has slept for.
+	 */
+	 public double getSleepAmount() {
+		 return user.health.getSleepDuration();
+	 }
 	
 	/**
 	 * This ActionEvent changes the scene back to the main page while passing the same User
