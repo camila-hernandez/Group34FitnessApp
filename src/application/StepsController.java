@@ -73,7 +73,11 @@ public class StepsController implements Initializable{
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
+        	if(dayOfMonth.getValue()!=null)
+            	dayOfMonthErrorLabel.setText("");
     	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+    	stepsErrorLabel.setText("");
+
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
     	 catch(NullPointerException npe) {dayOfMonthErrorLabel.setText("Please select a day");}
     	updateProgressBar(event);
