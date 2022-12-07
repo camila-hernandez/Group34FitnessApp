@@ -1,4 +1,4 @@
-Name = Camila
+Name = John Doe
 Age = 20
 Gender = Female
 Height = 156.0

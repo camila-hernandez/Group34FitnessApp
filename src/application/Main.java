@@ -68,9 +68,9 @@ public class Main extends Application {
 			}
 
 			// Sets goal values in Health and Fitness classes when the program starts
-			if (words[0].contentEquals("Steps goal ")) {
-				user.fitness.setStepsGoals(Integer.parseInt(words[1].trim()));
-			}
+			///if (words[0].contentEquals("Steps goal ")) {
+				//user.fitness.setStepsGoals(Integer.parseInt(words[1].trim()));
+			//}
 			
 			if (words[0].contentEquals("Sleep goal ")) {
 				user.health.setSleepGoals(Double.parseDouble(words[1]));
