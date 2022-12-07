@@ -82,9 +82,10 @@ public class SleepController{
 	 * the value entered by the user to their sleep duration goal entered in the Goals window.
 	 * @param trackSleepEvent This ActionEvent will display the amount of hours that the user slept throughout the night.
 	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 * @throws EmptyInputException 
 	 */
 	@FXML
-	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException {
+	void setSleep(ActionEvent trackSleepEvent) throws InvalidUserInputException, EmptyInputException {
 		// Initialize label to empty
 		sleepErrorLabel.setText("");
 		
@@ -118,7 +119,7 @@ public class SleepController{
 			}
 		} catch (InvalidUserInputException e) {
 			sleepErrorLabel.setText(e.getMessage());	
-		}
+		} catch (EmptyInputException e) {sleepErrorLabel.setText("Input cannot be empty");}
 	}
    /**
    	* This method will store the amount of sleep the user got through the night in the Fitness class.

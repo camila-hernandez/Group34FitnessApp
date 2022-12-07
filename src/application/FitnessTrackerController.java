@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  * or those out of acceptable range.
  * 
  * @author Camila Hernandez, Mariam Masri & Enes Gisi
- *
+ * 
  */
 public class FitnessTrackerController implements Initializable {
 	Stage applicationStage;
@@ -114,21 +114,21 @@ public class FitnessTrackerController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
 
 	/**
 	 * This ActionEvent will open a new scene where the user can track their monthly steps.
 	 * @param trackStepsEvent This ActionEvent will open a new scene to the Steps window.
 	 */
 	@FXML
-	void trackSteps(ActionEvent trackStepsEvent) {
+	void trackSteps(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
 			StepsController controller = (StepsController)loader.getController();
 			controller.setUser(user);
-			controller.updateProgressBar(trackStepsEvent);
-
+			controller.updateProgressBar(event);
+			controller.setStepGoalLabel("Note: Default monthly step goal is set to 111,000 based on \n"
+					+ "Mayoclinic recommendations. Current monthly goal is: " + user.fitness.getStepsGoals());
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);

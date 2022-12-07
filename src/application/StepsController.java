@@ -2,6 +2,9 @@ package application;
 
 import java.io.FileInputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -19,12 +22,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * The StepsController class will store and verify the number of steps that the user has taken over the course
- * of a month based on the values entered by the user.
- * The StepsController class will check and display errors entered by the user, such as invalid characters
- * or those out of acceptable range.
  * 
- * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ * @author Enes Gisi (enes.gisi@ucalgary.ca)
+ * This controller class manages the Steps page.
  *
  */
 public class StepsController implements Initializable {
@@ -60,7 +60,7 @@ public class StepsController implements Initializable {
 	/**
 	 * This method will allow for the same User object to be passed between different controllers.
 	 * The user can access the same properties in each scene.
-	 * @param user This is the User object.
+	 * @param user This is the User object passed from another controller.
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -130,7 +130,7 @@ public class StepsController implements Initializable {
 
 	/**
 	 * This ActionEvent changes the scene back to the main page while passing the same User
-	 * object and setting various labels in the main page.
+	 * object and setting the Steps label in the main page.
 	 * @param returnToMainPageEvent Changes the scene back to the main page.
 	 */
 	@FXML
@@ -171,7 +171,4 @@ public class StepsController implements Initializable {
 		stepsIcon.setImage(stepsIconVector);
 
 	}
-
 }
-
-

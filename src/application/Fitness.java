@@ -3,8 +3,14 @@ package application;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Enes Gisi, Camila Hernandez, Mariam Masri
+ * This class manages fitness goals and actual values, initializes instance variables
+ * and validate variables
+ *
+ */
 public class Fitness extends Goals {
-
 
 	private int stepsGoal = 0;
 	private ArrayList<Integer> stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
@@ -101,6 +107,7 @@ public class Fitness extends Goals {
 		this.stepsCount = monthlySteps;
 		checkGoalsCompleted();
 	}	
+
 	/**
 	 * This method is used to compare the user's steps taken in a day to their goal.
 	 * @return This getter method returns the steps count of the user.
@@ -434,13 +441,16 @@ public class Fitness extends Goals {
 	 * This method gets called in three of the setter methods to check if the user has completed their daily goals.
 	 * This method also calls a method in the Goals class which increments the number of goals completed.
 	 */
-	public void checkGoalsCompleted() {
+	 public void checkGoalsCompleted() {
 		// If the user has reached their goal, it calls a method in the Goals class
 		// and turns booleans true so that the user cannot reach the goal multiple time in one day
 		if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
 			completeGoal();
 			reachStepsGoal = true;
 		}
+
+		 System.out.println("progress count: " + progress + "progress goal: " + exerciseGoal);
+
 		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
 			completeGoal();
 			reachExerciseGoal = true;
@@ -474,16 +484,7 @@ public class Fitness extends Goals {
 				else if (!Character.isDigit(c)) {
 					throw new InvalidUserInputException("Make sure to enter a valid number.");
 				}
-			}
-
-			value = Double.parseDouble(valueEntered);
-
-			if (value < 0) {
-				throw new InvalidUserInputException("Number should be greater than 0.");
-			}
-		}
-	}
-
+        
 	/**
 	 * This method will check if the user's steps count that they have entered in the TextFields in the
 	 * Steps window are valid numbers.

@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -25,24 +26,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-/**
- * The UserProfileController class will store and verify a set of characteristics that are unique to the user based
- * on the values entered by the user.
- * This class will also display personal information to the user in the User Profile window.
- * The UserProfileController class will check and display errors entered by the user, such as invalid characters
- * or those out of acceptable range.
- * 
- * @author Camila Hernandez, Mariam Masri & Enes Gisi
- *
- */
 public class UserProfileController {
 	Stage applicationStage;
 	
 	@FXML
 	private Button logOutButton;
 
-	@FXML
-	private Label weightLabel;
+	@FXML Label weightLabel;
 
 	@FXML
 	private Button updateProfileButton;
@@ -50,17 +40,13 @@ public class UserProfileController {
 	@FXML
 	private Button returnHomeButton;
 
-	@FXML
-	private Label ageLabel;
+	@FXML Label ageLabel;
 
-	@FXML
-	private Label heightLabel;
+	@FXML Label heightLabel;
 
-	@FXML
-	private Label nameLabel;
+	@FXML Label nameLabel;
 	
-	@FXML
-	private Label genderLabel;
+	@FXML Label genderLabel;
 	
 	User user;
 	
@@ -74,13 +60,14 @@ public class UserProfileController {
 	}
 	
 	/**
-	 * This method will set the labels with the information inputed by the user.
+	 * This method will set the labels with the information entered by the user
 	 */
 	public void setUserProfileLabels() {
 		nameLabel.setText(user.getName());
 		ageLabel.setText(Integer.toString(user.getAge()));
 		genderLabel.setText(user.getGender());
 		heightLabel.setText(Double.toString(user.health.getHeight()));
+		System.out.println("Weight kg" + user.health.getStartingWeight());
 		weightLabel.setText(Double.toString(user.health.getStartingWeight()));
 	}
 	
@@ -91,133 +78,20 @@ public class UserProfileController {
 	 */
 	@FXML
 	void updateUserProfile(ActionEvent modifyUserProfileEvent) throws InvalidUserInputException {
-	    // Getting the current scene
-		Scene userProfileScene = applicationStage.getScene();
-	    
-		// Creating a custom color to use throughout the scene
-	    Color c = Color.web("#6b4191",1.0);
-	    
-	    // Creating the scene
-	    VBox userProfileContainer = new VBox();
-	    userProfileContainer.setStyle("-fx-background-color: white");
-	    
-	    StackPane updateUserProfileStack = new StackPane();
-	 	   
-	 	Rectangle profileHeaderRectangle = new Rectangle(110, 61, 390, 95);
-	 	profileHeaderRectangle.setFill(c);
-	 	profileHeaderRectangle.setArcHeight(20);
-	 	profileHeaderRectangle.setArcWidth(20);
-	 	   
-	 	Label updateProfileLabel = new Label("UPDATE USER PROFILE");
-	 	updateProfileLabel.setTextFill(Color.WHITE);
-	 	Font font = Font.font("System", FontWeight.BOLD, 25);
-	 	updateProfileLabel.setFont(font);
-	 	   
-	 	updateUserProfileStack.getChildren().addAll(profileHeaderRectangle, updateProfileLabel);
-	 	updateUserProfileStack.setPadding(new Insets(60,0,25,0));
-	    
-	 	// Setting up a font to use for each label
-	 	Font labelFont = Font.font("System", 24.5);
-	 	
-	    Label updateNameLabel = new Label("Name: ");
-	    updateNameLabel.setFont(labelFont);
-	    Label updateAgeLabel = new Label("Age: ");
-	    updateAgeLabel.setFont(labelFont);
-	    Label updateHeightLabel = new Label("Height in cm: ");
-	    updateHeightLabel.setFont(labelFont);
-	    Label updateWeightLabel = new Label("Weight in kg: ");
-	    updateWeightLabel.setFont(labelFont);
-	    Label updateGenderLabel = new Label("Gender: ");
-	    updateGenderLabel.setFont(labelFont);
-	    
-	    // Creating TextFields and a choice box for user input
-	    TextField nameTextfield = new TextField();
-	    TextField ageTextfield = new TextField();
-	    TextField heightTextfield = new TextField();
-	    TextField weightTextfield = new TextField();
-	    ChoiceBox<String> genderChoiceBox = new ChoiceBox<>();
-	    genderChoiceBox.getItems().add("Female");
-	    genderChoiceBox.getItems().add("Male");
-	    
-	    // Creating an error label
-	    VBox userProfileErrorLabelContainer = new VBox();
-	 	Label userProfileErrorLabel = new Label(" ");
-	 	Font errorLabelFont = Font.font("System", 16);
-	 	userProfileErrorLabel.setFont(errorLabelFont);
-	 	userProfileErrorLabel.setTextFill(Color.RED);
-	 	userProfileErrorLabelContainer.getChildren().add(userProfileErrorLabel);
-	 	userProfileErrorLabelContainer.setAlignment(Pos.CENTER);
-	    
-	 	// Creating containers for each item for their corresponding label and textfield or choice box
-	    HBox nameContainer = new HBox();
-	    HBox ageContainer = new HBox();
-	    HBox heightContainer = new HBox();
-	    HBox weightContainer = new HBox();
-	    HBox genderContainer = new HBox();
-	    
-	    nameContainer.getChildren().addAll(updateNameLabel, nameTextfield);
-	    ageContainer.getChildren().addAll(updateAgeLabel, ageTextfield);
-	    heightContainer.getChildren().addAll(updateHeightLabel, heightTextfield);
-	    weightContainer.getChildren().addAll(updateWeightLabel, weightTextfield);
-	    genderContainer.getChildren().addAll(updateGenderLabel, genderChoiceBox);
-	    
-	    nameContainer.setAlignment(Pos.CENTER);
-	    nameContainer.setPadding(new Insets(0,0,0,50));
-	    ageContainer.setAlignment(Pos.CENTER);
-	    ageContainer.setPadding(new Insets(50,0,0,50));
-	    genderContainer.setAlignment(Pos.CENTER);
-	   	genderContainer.setPadding(new Insets(50,0,0,50));
-	    heightContainer.setAlignment(Pos.CENTER);
-	    heightContainer.setPadding(new Insets(50,0,0,50));
-	    weightContainer.setAlignment(Pos.CENTER);
-	    weightContainer.setPadding(new Insets(50,0,0,50));
-	    
-	    // Creating a done button
-	    HBox buttonContainer = new HBox();
-	    Button doneButton = new Button("Done");
-		doneButton.setPrefSize(106, 48);
-		doneButton.setTextFill(Color.WHITE);
-		Font buttonFont = Font.font("System", FontWeight.BOLD, 22);
-		doneButton.setFont(buttonFont);
-		doneButton.setStyle("-fx-background-color: #3e9acf");
-		   
-		buttonContainer.getChildren().addAll(doneButton);
-	    buttonContainer.setPadding(new Insets(75,0,0,0));
-	    buttonContainer.setAlignment(Pos.CENTER);
-	    
-	    // Set the action of the button
-	    doneButton.setOnAction(doneEvent -> {
-	    	try {
-	    		// Check user input
-	    		user.checkName(nameTextfield.getText());
-				user.checkAge(ageTextfield.getText());
-				user.checkGender(genderChoiceBox.getValue()
-						);
-				user.health.checkInput(heightTextfield.getText());
-				user.health.checkInput(weightTextfield.getText());
-				// Set properties in User and Health classes
-				user.setName(nameTextfield.getText());
-				user.setAge(Integer.parseInt(ageTextfield.getText()));
-				user.setGender(genderChoiceBox.getValue().toString());
-				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
-				user.health.setStartingWeight(Double.parseDouble(weightTextfield.getText()));
-				
-				// Set labels with user information
-				setUserProfileLabels();
-				
-				applicationStage.setScene(userProfileScene);
-	    	} catch (InvalidUserInputException e) {
-	    		userProfileErrorLabel.setText(e.getMessage());
-			}
-	    });
-	    
-	    // Add every container into the new scene container
-	    userProfileContainer.getChildren().addAll(updateUserProfileStack, userProfileErrorLabelContainer, nameContainer, ageContainer, genderContainer, heightContainer, weightContainer, buttonContainer);
-	    
-	    // Display the scene
-	    Scene updateUserProfileScene = new Scene(userProfileContainer, 609, 856);
-	  	applicationStage.setScene(updateUserProfileScene);
-	 }
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfileUpdate.fxml"));
+			UserUpdateController controller = (UserUpdateController)loader.getController();
+			controller.setUser(user);
+			controller.applicationStage = applicationStage;
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
 	
 	/**
 	 * This ActionEvent changes the scene back to the main page while passing the same User
