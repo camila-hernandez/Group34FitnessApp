@@ -235,11 +235,11 @@ public class NutritionController {
 		
 		// Displays label to the user
 		if(weightGoal == 0.0) {
-			userWeightLabel.setText("You have not set a weight goal.");
+			userWeightLabel.setText("You have not set a " + '\n' + "weight goal.");
 		}
 		//if the user reaches the exact goal set.
 		if (weightGoal - userWeight == 0) {
-			userWeightLabel.setText("You have reached your weight goal.");
+			userWeightLabel.setText("You have reached your " + '\n' + "weight goal.");
 		}
 		// if the user wants to loose weight. 
 		if (weightGoal - userWeight < 0) {

@@ -33,31 +33,31 @@ import javafx.stage.Stage;
  * 
  */
 public class FitnessTrackerController implements Initializable {
-  Stage applicationStage;
-  
+	Stage applicationStage;
+
 	@FXML
 	private TextField amountOfWater;
-	
+
 	@FXML 
 	private Label waterProgress;
-  
+
 	@FXML
-    public Label stepsThisMonth;
-	
+	public Label stepsThisMonth;
+
 	@FXML
 	private Button goalsButton;
-	
+
 	@FXML
 	private Label sleepDisplayLabel;
-	
+
 	@FXML
 	private ProgressIndicator waterProgressIndicator;
-	
+
 	@FXML
-    private Button userProfileButton;
-	
+	private Button userProfileButton;
+
 	@FXML
-    private ImageView profileImage;
+	private ImageView profileImage;
 
 	@FXML
 	private Label nameLabel;
@@ -67,7 +67,7 @@ public class FitnessTrackerController implements Initializable {
 
 	@FXML
 	private Label goalsCompletedLabel;
-	
+
 	User user;
 
 	/**
@@ -76,7 +76,7 @@ public class FitnessTrackerController implements Initializable {
 	 * @param user This is the User object.
 	 */
 	public void setUser(User user) {
-    	this.user = user;
+		this.user = user;
 	}
 
 	/**
@@ -90,17 +90,17 @@ public class FitnessTrackerController implements Initializable {
 	 * This method displays how many overall goals the user has completed today.
 	 */
 	public void setGoalsCompletedLabel() {
-    	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
-    }
-	
+		goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
+	}
+
 	/**
 	 * This ActionEvent will open a new scene where the user can view and modify their personal information,
 	 * as well as log out of the application.
 	 * @param userProfileEvent This ActionEvent will open a new scene to the user profile.
 	 */
-    @FXML
-    void openUserProfile(ActionEvent userProfileEvent) {
-    	try {
+	@FXML
+	void openUserProfile(ActionEvent userProfileEvent) {
+		try {
 			FXMLLoader loader = new FXMLLoader();
 			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
 			UserProfileController controller = (UserProfileController)loader.getController();
@@ -110,12 +110,15 @@ public class FitnessTrackerController implements Initializable {
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-    }
 
+	/**
+	 * This ActionEvent will open a new scene where the user can track their monthly steps.
+	 * @param trackStepsEvent This ActionEvent will open a new scene to the Steps window.
+	 */
 	@FXML
 	void trackSteps(ActionEvent event) {
 		try {
@@ -130,12 +133,12 @@ public class FitnessTrackerController implements Initializable {
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-    }
-	
+	}
+
 	/**
 	 * This ActionEvent will open a new scene where the user can track their sleep and compare their sleep duration
 	 * to their goal.
@@ -147,20 +150,20 @@ public class FitnessTrackerController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/SleepTracker.fxml"));
 			SleepController controller = (SleepController)loader.getController();
-			
+
 			controller.setUser(user);
 			controller.updateSleepValues();
-			
+
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This ActionEvent will open a new scene where the user can track their nutrition and compare their weight goal
 	 * to their current goal.
@@ -172,9 +175,9 @@ public class FitnessTrackerController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
 			NutritionController controller = (NutritionController)loader.getController();
-			
+
 			controller.setUser(user);
-			
+
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
@@ -183,7 +186,7 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This ActionEvent will open a new scene where the user can track their workouts and view their
 	 * weekly statistics.
@@ -193,50 +196,59 @@ public class FitnessTrackerController implements Initializable {
 	void trackActivities(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-	   		AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
-	   		ActivitiesController controller = (ActivitiesController)loader.getController();
-	   		
-	   		controller.setUser(user);
-	   		
-	   		Date today = new Date();
+			AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerActivity.fxml"));
+			ActivitiesController controller = (ActivitiesController)loader.getController();
+
+			controller.setUser(user);
+
+			Date today = new Date();
 			Calendar cal = Calendar.getInstance(); 
 			cal.setTime(today); 
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-	    	if (dayOfWeek == Calendar.MONDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getMondayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.TUESDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getTuesdayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.WEDNESDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getWednesdayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.THURSDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getThursdayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.FRIDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getFridayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.SATURDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getSaturdayExerciseInfo());
-	    	}
-	    	if (dayOfWeek == Calendar.SUNDAY) {
-	    		controller.updateTodaysExerciseLabel(user.fitness.getSundayExerciseInfo());
-	    	}
-	    	
-			   controller.updateTotalCaloriesBurnedValues();
-			   controller.updateProgressValue();
-	   		   
-	   		   controller.applicationStage = applicationStage;
-	   		   
-	   		   Scene scene = new Scene(root);
-	   		   applicationStage.setScene(scene);
-	   		   applicationStage.show();
-	   	   } catch(Exception e) {
-	   		   e.printStackTrace();
-	   	   }
+			if (dayOfWeek == Calendar.MONDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getMondayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getMondayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.TUESDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getTuesdayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getTuesdayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.WEDNESDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getWednesdayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getWednesdayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.THURSDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getThursdayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getThursdayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.FRIDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getFridayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getFridayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.SATURDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getSaturdayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getSaturdayExerciseInfo());
+			}
+			if (dayOfWeek == Calendar.SUNDAY) {
+				controller.updateTodaysExerciseLabel(user.fitness.getSundayExerciseInfo());
+				user.fitness.setProgress(user.fitness.getSundayExerciseInfo());
+			}
+
+
+
+			controller.updateTotalCaloriesBurnedValues();
+			controller.updateProgressValue();
+
+			controller.applicationStage = applicationStage;
+
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	/**
 	 * This ActionEvent will open a new scene where the user can view healthy recipes.
 	 * @param userProfileEvent This ActionEvent will open a new scene to the Recipes window.
@@ -245,43 +257,43 @@ public class FitnessTrackerController implements Initializable {
 	void showHealthyRecipes(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-	   		AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
-	   		RecipesController controller = (RecipesController)loader.getController();
-	   		controller.setUser(user);
-	   		controller.applicationStage = applicationStage;
-	   		   
-	   		Scene scene = new Scene(root);
-	   		applicationStage.setScene(scene);
-	   		applicationStage.show();
-	   	} catch(Exception e) {
-	   		e.printStackTrace();
-	   	}
+			AnchorPane root = loader.load(new FileInputStream("src/application/Recipes.fxml"));
+			RecipesController controller = (RecipesController)loader.getController();
+			controller.setUser(user);
+			controller.applicationStage = applicationStage;
+
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	/**
 	 * This ActionEvent will open a new scene where the user can track and compare their daily water in-take amount to
 	 * their goal set in the Goals window.
 	 * @param userProfileEvent This ActionEvent will open a new scene to the Water In-take window.
 	 */
 	@FXML
-    void trackWaterIntake(ActionEvent event) {
+	void trackWaterIntake(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/WaterIntake.fxml"));
 			WaterIntakeController controller = (WaterIntakeController)loader.getController();
-			
+
 			controller.setUser(user);
 			controller.updateWaterValues();
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
 			applicationStage.show();
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method will display progress labels with regards water in-take, sleep duration and monthly steps.
 	 */
@@ -290,45 +302,45 @@ public class FitnessTrackerController implements Initializable {
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
 	}
-   
+
 	/**
 	 * This ActionEvent will open a new scene where the user can view and modify their health and fitness goals.
 	 * @param fitnessGoalsEvent This ActionEvent will open a new scene to the Health and Fitness Goals window.
 	 */
-   @FXML
-   	void showUserFitnessGoals(ActionEvent fitnessGoalsEvent) {
-	   try {		   
-		   FXMLLoader loader = new FXMLLoader();
-		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
-		   GoalsController controller = (GoalsController)loader.getController();
-		   
-		   controller.setUser(user);
-		   controller.updateGoalValues();
-		   
-		   controller.applicationStage = applicationStage;
-		   
-		   Scene scene = new Scene(root);
-		   applicationStage.setScene(scene);
-		   applicationStage.show();
-	   } catch(Exception e) {
-		   e.printStackTrace();
-	   }  
-   }
-   
-   /**
-    * This method sets imported images and the current date label in the main window.
-    */
-   @Override
-   public void initialize(URL location, ResourceBundle resources) {
-	   //<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
-	   Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
-   	   profileImage.setImage(userIconImage);
-   		
-   		// Sets current date
-   		LocalDateTime currentDateTime = LocalDateTime.now();
-    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
-    	String formattedDate = currentDateTime.format(dtf);
-    	dateLabel.setText(formattedDate);
-	   
-   }
+	@FXML
+	void showUserFitnessGoals(ActionEvent fitnessGoalsEvent) {
+		try {		   
+			FXMLLoader loader = new FXMLLoader();
+			AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
+			GoalsController controller = (GoalsController)loader.getController();
+
+			controller.setUser(user);
+			controller.updateGoalValues();
+
+			controller.applicationStage = applicationStage;
+
+			Scene scene = new Scene(root);
+			applicationStage.setScene(scene);
+			applicationStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}  
+	}
+
+	/**
+	 * This method sets imported images and the current date label in the main window.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+		Image userIconImage = new Image(getClass().getResourceAsStream("user.png"));
+		profileImage.setImage(userIconImage);
+
+		// Sets current date
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd yyyy");
+		String formattedDate = currentDateTime.format(dtf);
+		dateLabel.setText(formattedDate);
+
+	}
 }

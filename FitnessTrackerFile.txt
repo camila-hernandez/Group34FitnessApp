@@ -1,6 +1,6 @@
-Name = Enes
-Age = 123
-Gender =   Female
+Name = Mary
+Age = 18
+Gender = Female
 Height = 156.0
 Starting weight = 46.0
 Steps goal = 111000
