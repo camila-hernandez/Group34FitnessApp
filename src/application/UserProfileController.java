@@ -64,7 +64,7 @@ public class UserProfileController {
 	}
 	
 	/**
-	 * This method will set the labels with the information inputed by the user.
+	 * This method will set the labels with the information entered by the user
 	 */
 	public void setUserProfileLabels() {
 		nameLabel.setText(user.getName());
@@ -180,7 +180,7 @@ public class UserProfileController {
 	    	try {
 	    		// Check user input
 	    		user.checkName(nameTextfield.getText());
-				user.checkAge(ageTextfield.getText());
+				user.isNumeric(ageTextfield.getText());
 				user.health.checkInput(heightTextfield.getText());
 				user.health.checkInput(weightTextfield.getText());
 				// Set properties in User and Health classes

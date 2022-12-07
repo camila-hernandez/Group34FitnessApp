@@ -19,6 +19,22 @@ public class User {
 	private String gender;
 	
 	/**
+	 * 
+	 * @param str This parameter is the value of Age textfield
+	 * @return return true if age entered is numeric, false if not
+	 * 
+	 * This method checks if the value entered for age is numeric
+	 */
+	public boolean isNumeric(String str){ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+	
+	/**
 	 * aName is the name of the user that can be inputed in the User Profile window.
 	 * Name is defaulted to an empty string.
 	 * @param aName This string must consist of only alphabetical letters.

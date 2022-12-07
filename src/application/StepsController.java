@@ -46,6 +46,9 @@ public class StepsController implements Initializable{
     private Label percentageLabel;
     
     @FXML
+    private Label stepGoalLabel;
+    
+    @FXML
     private ImageView stepsIcon;
     
     @FXML
@@ -112,6 +115,10 @@ public class StepsController implements Initializable{
     	else {percentageLabel.setText("Please set your monthly steps goal first.");
     		  progressLyrics.setText("");
     	}
+    }
+    
+    public void setStepGoalLabel(String labelMessage) {
+    	stepGoalLabel.setText(labelMessage);
     }
     
     /**
