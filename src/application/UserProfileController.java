@@ -247,9 +247,17 @@ public class UserProfileController {
 			if (!f.exists()) {
 				f.createNewFile();
 			}
-			// Write all goals to the file
 			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(fw);
+			
+			// Write user information to the file
+			bw.write("Name = " + user.getName() + "\n");
+			bw.write("Age = " + user.getAge() + "\n");
+			bw.write("Gender = " + user.getGender() + "\n");
+			bw.write("Height = " + user.health.getHeight() + "\n");
+			bw.write("Starting weight = " + user.health.getStartingWeight() + "\n");
+			
+			// Write all goals to the file
 			bw.write("Steps goal = " + user.fitness.getStepsGoals() + "\n");
 			bw.write("Sleep goal = " + user.health.getSleepGoals() + "\n");
 			bw.write("Water intake goal = " + user.health.getWaterIntakeGoals() + "\n");

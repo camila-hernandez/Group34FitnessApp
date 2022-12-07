@@ -1,5 +1,10 @@
 package application;
 
+/**
+ * 
+ * @author CS219-user
+ *
+ */
 public class Health extends Goals {
 
 	User user;
@@ -25,10 +30,6 @@ public class Health extends Goals {
 	boolean reachSleepGoal = false;
 	boolean reachWaterIntakeGoal = false;
 	boolean reachWeightGoal = false;
-
-	public Health() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * userSleepGoal is how long the user aims to sleep (in hours) without interruptions throughout the night.

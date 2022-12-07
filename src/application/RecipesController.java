@@ -1,7 +1,5 @@
 package application;
 
-
-
 import java.io.FileInputStream;
 
 import javafx.event.ActionEvent;
@@ -20,24 +18,43 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The RecipesController class will display healthy recipes the user can recreate to progress through
+ * their health and fitness journey.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class RecipesController {
 	Stage applicationStage;
 	
 	User user;
 	
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 	
+	// Creating fonts that are used in all recipe labels
 	Font font = Font.font("System", FontWeight.BOLD, 18);
 	Font ingredientsFont = Font.font("System", FontWeight.BOLD, 16);
 	Font directionsFont = Font.font("System", FontWeight.BOLD, 16);
 	
+	/**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make a breakfast burrito.
+     * @param breakfastBurritoRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showBreakfastBurritoRecipe(ActionEvent event) {
+    void showBreakfastBurritoRecipe(ActionEvent breakfastBurritoRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/ellie-krieger/breakfast-burrito-recipe-1953146
+    	
+    	// Creating container and labels
     	VBox burritoRecipeContainer = new VBox();
     	burritoRecipeContainer.setStyle("-fx-background-color: white");
     	HBox burritoNameContainer = new HBox();
@@ -48,6 +65,8 @@ public class RecipesController {
     	burritoNameLabel.setFont(font);
     	Label burritoIngredients = new Label("Ingredients:");
     	burritoIngredients.setFont(ingredientsFont);
+    	
+    	// Writing ingredients
     	burritoRecipeIngredients.setText(
     			"2 teaspoons canola oil"
     			+ "\r\n"
@@ -79,9 +98,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "Hot sauce"
     			+ "\r\n");
+    	
+    	// Creating label for instructions
     	Label burritoDirectionsLabel = new Label("Directions:");
     	burritoDirectionsLabel.setFont(directionsFont);
+    	
     	Label burritoRecipe = new Label();
+    	// Writing recipe
     	burritoRecipe.setText(
     			"Heat the canola oil in a large nonstick skillet over a medium-high heat."
     			+ "\r\n"
@@ -102,6 +125,8 @@ public class RecipesController {
     			+ "mixture, 1/4 of the scrambled eggs, some diced tomato and 1/4 of the avocado."
     			+ "\r\n"
     			+ "Season, to taste, with hot sauce. Roll up burrito-style and serve.");
+    	
+    	// Creating container for button
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -109,22 +134,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	burritoRecipeContainer.getChildren().addAll(burritoNameContainer, burritoIngredients, burritoRecipeIngredients, 
     			burritoDirectionsLabel, burritoRecipe, doneButtonContainer);
     	
+    	// Creating and setting a new scene
     	Scene breakfastBurritoScene = new Scene(burritoRecipeContainer, 609, 856);
    	   	applicationStage.setScene(breakfastBurritoScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make apple pancakes.
+     * @param applePancakesRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showApplePancakesRecipe(ActionEvent event) {
+    void showApplePancakesRecipe(ActionEvent applePancakesRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     
     	// Source: https://www.foodnetwork.com/recipes/ellie-krieger/whole-wheat-apple-pancakes-recipe-2012287
+    	
+    	// Creating container and labels
     	VBox pancakesRecipeContainer = new VBox();
     	pancakesRecipeContainer.setStyle("-fx-background-color: white");
     	HBox pancakesNameContainer = new HBox();
@@ -135,6 +170,8 @@ public class RecipesController {
     	Label pancakesIngredients = new Label("Ingredients:");
     	pancakesIngredients.setFont(ingredientsFont);
     	Label pancakesRecipeIngredients = new Label();
+    	
+    	// Creating ingredients
     	pancakesRecipeIngredients.setText(
     			"1 cup low-fat buttermilk"
     			+ "\r\n"
@@ -158,9 +195,12 @@ public class RecipesController {
     			+ "1/4 teaspoon salt"
     			+ "\r\n"
     			);
+    	// Creating labels for instructions
     	Label pancakesDirectionsLabel = new Label("Directions:");
     	pancakesDirectionsLabel.setFont(directionsFont);
+    	
     	Label pancakesRecipe = new Label();
+    	// Writing recipe
     	pancakesRecipe.setText(
     			"Preheat the oven to 250. Put the apple in a microwave-safe bowl and tightly cover with plastic wrap;"
     			+ "\r\n"
@@ -185,6 +225,8 @@ public class RecipesController {
     			+ "Keep the pancakes warm on a baking sheet in the oven while making the rest."
     			+ "\r\n"
     			+ "Place 2 pancakes on each plate. Drizzle with the syrup.");
+    	
+    	// Creating a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -192,23 +234,33 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
     	doneButtonContainer.setAlignment(Pos.CENTER);
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	pancakesRecipeContainer.getChildren().addAll(pancakesNameLabel, pancakesIngredients, pancakesRecipeIngredients, 
     			pancakesDirectionsLabel, pancakesRecipe, doneButton);
     	
+    	// Craeting and setting a new scene
     	Scene applePancakesScene = new Scene(pancakesRecipeContainer, 609, 856);
    	   	applicationStage.setScene(applePancakesScene);
     
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make breakfast casserole.
+     * @param breakfastCasseroleRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showBreakfastCasseroleRecipe(ActionEvent event) {
+    void showBreakfastCasseroleRecipe(ActionEvent breakfastCasseroleRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/breakfast-casserole-3362652
+    	
+    	// Creating container and labels
     	VBox casseroleRecipeContainer = new VBox();
     	casseroleRecipeContainer.setStyle("-fx-background-color: white");
     	HBox casseroleNameContainer = new HBox();
@@ -219,6 +271,8 @@ public class RecipesController {
     	casseroleNameLabel.setFont(font);
     	Label casseroleIngredients = new Label("Ingredients:");
     	casseroleIngredients.setFont(ingredientsFont);
+    	
+    	// Writing ingredients
     	casseroleRecipeIngredients.setText(
     			"8 ounces spicy or sweet turkey sausage links, casings removed, meat crumbled"
     			+ "\r\n"
@@ -241,9 +295,12 @@ public class RecipesController {
     			+ "Cooking spray"
     			+ "\r\n");
     	
+    	// Creating labels for instructions
     	Label casseroleDirectionsLabel = new Label("Directions:");
     	casseroleDirectionsLabel.setFont(directionsFont);
+    	
     	Label casseroleRecipe = new Label();
+    	// Writing recipe
     	casseroleRecipe.setText(
     			"Heat a large nonstick skillet over medium heat."
     			+ "\r\n"
@@ -262,6 +319,8 @@ public class RecipesController {
     			+ "Preheat the oven to 350 degrees F. Bake the casserole, uncovered, until set and lightly browned on top,"
     			+ "\r\n"
     			+ "about 30 minutes.");
+    	
+    	// Creating a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -269,22 +328,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
     	doneButtonContainer.setAlignment(Pos.CENTER);
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	casseroleRecipeContainer.getChildren().addAll(casseroleNameLabel, casseroleIngredients, casseroleRecipeIngredients, 
     			casseroleDirectionsLabel, casseroleRecipe, doneButton);
     	
+    	// Creating and setting a new scene
     	Scene breakfastCasseroleScene = new Scene(casseroleRecipeContainer, 609, 856);
    	   	applicationStage.setScene(breakfastCasseroleScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make miso soup.
+     * @param misoSoupRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showMisoSoupRecipe(ActionEvent event) {
+    void showMisoSoupRecipe(ActionEvent misoSoupRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/miso-soup-recipe-2102742
+    	
+    	// Creating container and labels
     	VBox soupRecipeContainer = new VBox();
     	soupRecipeContainer.setStyle("-fx-background-color: white");
     	HBox soupNameContainer = new HBox();
@@ -295,6 +364,7 @@ public class RecipesController {
     	soupNameLabel.setFont(font);
     	Label soupIngredients = new Label("Ingredients:");
     	soupIngredients.setFont(ingredientsFont);
+    	// Writing ingredients
     	soupRecipeIngredients.setText(
     			"4 to 5 cups dashi, recipe follows"
     			+ "\r\n"
@@ -316,9 +386,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "One .88-ounce/25 grams package shaved dried bonito flakes"
     			+ "\r\n");
+    	
+    	// Creating labels for instructions
     	Label soupDirectionsLabel = new Label("Directions:");
     	soupDirectionsLabel.setFont(directionsFont);
+    	
     	Label soupRecipe = new Label();
+    	// Writing recipe
     	soupRecipe.setText(
     			"In a saucepan heat the dashi and whisk in the miso pastes."
     			+ "\r\n"
@@ -339,6 +413,8 @@ public class RecipesController {
     			+ "Strain through a fine mesh strainer into a medium bowl. Discard the bonito flakes."
     			+ "\r\n"
     			+ "Use immediately or store, covered, in the refrigerator for up to 3 days.");
+    	
+    	// Creating a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -346,22 +422,33 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added a button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	soupRecipeContainer.getChildren().addAll(soupNameContainer, soupIngredients, soupRecipeIngredients, 
     			soupDirectionsLabel, soupRecipe, doneButtonContainer);
     	
+    	// Creating and setting a new scene
     	Scene misoSoupScene = new Scene(soupRecipeContainer, 609, 856);
    	   	applicationStage.setScene(misoSoupScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make a 
+     * veggie club sandwich.
+     * @param sandwichRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showSandwichRecipe(ActionEvent event) {
+    void showSandwichRecipe(ActionEvent sandwichRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/veggie-lovers-club-sandwich-recipe-2120987
+    	
+    	// Creating a container and labels
     	VBox sandwichRecipeContainer = new VBox();
     	sandwichRecipeContainer.setStyle("-fx-background-color: white");
     	HBox sandwichNameContainer = new HBox();
@@ -372,6 +459,8 @@ public class RecipesController {
     	sandwichNameLabel.setFont(font);
     	Label sandwichIngredients = new Label("Ingredients:");
     	sandwichIngredients.setFont(ingredientsFont);
+    	
+    	// Writing the ingredients
     	sandwichRecipeIngredients.setText(
     			"1/2 Hass avocado, pitted"
     			+ "\r\n"
@@ -401,9 +490,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "1 large freshly roasted orange or red bell pepper, cut into 12 pieces, or 1/3 cup store-bought roasted peppers"
     			+ "\r\n");
+    	
+    	// Creating a label for instructions
     	Label soupDirectionsLabel = new Label("Directions:");
     	soupDirectionsLabel.setFont(directionsFont);
+    	
     	Label soupRecipe = new Label();
+    	// Writing a recipe
     	soupRecipe.setText(
     			"Squeeze or scoop the avocado from the skin into a small bowl."
     			+ "\r\n"
@@ -420,6 +513,8 @@ public class RecipesController {
     			+ "Place the remaining bread slices on top, avocado-side down."
     			+ "\r\n"
     			+ "Insert bamboo picks into each sandwich, cut in half on the diagonal with a bread knife and serve.");
+    	
+    	// Creating a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -427,22 +522,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added a button to the container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	sandwichRecipeContainer.getChildren().addAll(sandwichNameContainer, sandwichIngredients, sandwichRecipeIngredients, 
     			soupDirectionsLabel, soupRecipe, doneButtonContainer);
     	
+    	// Creating and setting a new scene
     	Scene sandwichScene = new Scene(sandwichRecipeContainer, 609, 856);
    	   	applicationStage.setScene(sandwichScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make tacos and salad.
+     * @param tacosAndSaladRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showTacosAndSaladRecipe(ActionEvent event) {
+    void showTacosAndSaladRecipe(ActionEvent tacosAndSaladRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/chicken-tacos-with-avocado-salad-3364227
+    	
+    	// Creating container and labels
     	VBox tacosRecipeContainer = new VBox();
     	tacosRecipeContainer.setStyle("-fx-background-color: white");
     	HBox tacosNameContainer = new HBox();
@@ -453,6 +558,8 @@ public class RecipesController {
     	tacosNameLabel.setFont(font);
     	Label tacosIngredients = new Label("Ingredients:");
     	tacosIngredients.setFont(ingredientsFont);
+    	
+    	// Writing ingredients
     	tacosRecipeIngredients.setText(
     			"1 1/4 pounds skinless, boneless chicken thighs (about 6)"
     			+ "\r\n"
@@ -478,9 +585,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "Shredded lettuce and/or diced red onion, for topping"
     			+ "\r\n");
+    	
+    	// Creating labels for the recipe
     	Label tacosDirectionsLabel = new Label("Directions:");
     	tacosDirectionsLabel.setFont(directionsFont);
+    	
     	Label tacosRecipe = new Label();
+    	// Writing recipe
     	tacosRecipe.setText(
     			"Toss the chicken with 1/2 cup salsa, the juice of 1 lime and 1 tablespoon vegetable oil in a large bowl;"
     			+ "\r\n"
@@ -501,6 +612,8 @@ public class RecipesController {
     			+ "Warm the tortillas as the label directs. Using 2 stacked tortillas per taco, fill with the chicken,"
     			+ "\r\n"
     			+ "salsa-sour cream mixture and lettuce and/or red onion. Serve with the avocado salad and lime wedges.");
+    	
+    	// Creating container for button
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -508,22 +621,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added a button into the container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	tacosRecipeContainer.getChildren().addAll(tacosNameContainer, tacosIngredients, tacosRecipeIngredients, 
     			tacosDirectionsLabel, tacosRecipe, doneButtonContainer);
     	
+    	// Creating and setting a new scene
     	Scene tacosScene = new Scene(tacosRecipeContainer, 609, 856);
    	   	applicationStage.setScene(tacosScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make roasted salmon.
+     * @param roastedSalmonRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showRoastedSalmonRecipe(ActionEvent event) {
+    void showRoastedSalmonRecipe(ActionEvent roastedSalmonRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/mustard-maple-roasted-salmon-recipe-2112041
+    	
+    	// Creating container and labels
     	VBox salmonRecipeContainer = new VBox();
     	salmonRecipeContainer.setStyle("-fx-background-color: white");
     	HBox salmonNameContainer = new HBox();
@@ -534,6 +657,8 @@ public class RecipesController {
     	salmonNameLabel.setFont(font);
     	Label salmonIngredients = new Label("Ingredients:");
     	salmonIngredients.setFont(ingredientsFont);
+    	
+    	// Writing ingredients
     	salmonRecipeIngredients.setText(
     			"2 tablespoons Dijon mustard"
     			+ "\r\n"
@@ -547,9 +672,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "Kosher salt and freshly ground black pepper"
     			+ "\r\n");
+    	
+    	// Creating label for instructions
     	Label salmonDirectionsLabel = new Label("Directions:");
     	salmonDirectionsLabel.setFont(directionsFont);
+    	
     	Label salmonRecipe = new Label();
+    	// Writing recipe
     	salmonRecipe.setText(
     			"Preheat the oven to 400 degrees F. Line a rimmed baking sheet with aluminum foil."
     			+ "\r\n"
@@ -562,6 +691,8 @@ public class RecipesController {
     			+ "Bake until just cooked through, 10 to 12 minute."
     			+ "\r\n"
     			+ "Sprinkle with the remaining 1 tablespoon cilantro and serve.");
+    	
+    	// Creating button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -569,22 +700,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	salmonRecipeContainer.getChildren().addAll(salmonNameContainer, salmonIngredients, salmonRecipeIngredients, 
     			salmonDirectionsLabel, salmonRecipe, doneButtonContainer);
     	
+    	// Creating and setting a new scene
     	Scene salmonScene = new Scene(salmonRecipeContainer, 609, 856);
    	   	applicationStage.setScene(salmonScene);
     }
 
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make beef stir fry.
+     * @param beefStirFryRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showBeefStirFryRecipe(ActionEvent event) {
+    void showBeefStirFryRecipe(ActionEvent beefStirFryRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/beef-stir-fry-3364942
+    	
+    	// Creating containers and labels
     	VBox stirFryRecipeContainer = new VBox();
     	stirFryRecipeContainer.setStyle("-fx-background-color: white");
     	HBox stirFryNameContainer = new HBox();
@@ -595,6 +736,8 @@ public class RecipesController {
     	stirFryNameLabel.setFont(font);
     	Label stirFryIngredients = new Label("Ingredients:");
     	stirFryIngredients.setFont(ingredientsFont);
+    	
+    	// Writing the ingredients
     	stirFryRecipeIngredients.setText(
     			"1 1/2 pounds skirt steak, cut into 4-inch-long pieces, then cut against the grain into 1/4-inch-thick slices"
     			+ "\r\n"
@@ -622,9 +765,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "1 red bell pepper, thinly sliced (optional)"
     			+ "\r\n");
+    	
+    	// Creating label for instructions
     	Label stirFryDirectionsLabel = new Label("Directions:");
     	stirFryDirectionsLabel.setFont(directionsFont);
+    	
     	Label stirFryRecipe = new Label();
+    	// Writing recipe
     	stirFryRecipe.setText(
     			"Season the steak with salt and pepper. In a medium bowl, whisk together the soy sauce, chile pepper,"
     			+ "\r\n"
@@ -643,6 +790,8 @@ public class RecipesController {
     			+ "Add the snow peas, baby corn and bell pepper and continue cooking until all the"
     			+ "\r\n"
     			+ "vegetables are crisp-tender, about 2 minutes. Return the beef to the skillet and toss to combine.");
+    	
+    	// Creating a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -650,22 +799,32 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Add button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	stirFryRecipeContainer.getChildren().addAll(stirFryNameContainer, stirFryIngredients, stirFryRecipeIngredients, 
     			stirFryDirectionsLabel, stirFryRecipe, doneButtonContainer);
     	
+    	//Creating and setting a new scene
     	Scene stirFryScene = new Scene(stirFryRecipeContainer, 609, 856);
    	   	applicationStage.setScene(stirFryScene);
     }
-
+    
+    /**
+     * This method will open a new scene with a list of ingredients and the instructions to how to make grilled chicken.
+     * @param grilledChickenRecipeEvent This ActionEvent will change the scene to show the user the recipe.
+     */
     @FXML
-    void showGrilledChickenRecipe(ActionEvent event) {
+    void showGrilledChickenRecipe(ActionEvent grilledChickenRecipeEvent) {
     	Scene mainScene = applicationStage.getScene();
     	
     	// Source: https://www.foodnetwork.com/recipes/food-network-kitchen/grilled-chicken-with-avocado-pesto-3796532
+    	
+    	// Create containers and labels
     	VBox chickenRecipeContainer = new VBox();
     	chickenRecipeContainer.setStyle("-fx-background-color: white");
     	HBox chickenNameContainer = new HBox();
@@ -676,6 +835,7 @@ public class RecipesController {
     	chickenNameLabel.setFont(font);
     	Label chickenIngredients = new Label("Ingredients:");
     	chickenIngredients.setFont(ingredientsFont);
+    	// Writing the ingredients
     	chickenRecipeIngredients.setText(
     			"4 tablespoons extra-virgin olive oil, plus more for brushing the grill grates"
     			+ "\r\n"
@@ -695,9 +855,13 @@ public class RecipesController {
     			+ "\r\n"
     			+ "1 large ripe avocado"
     			+ "\r\n");
+    	
+    	// Creating labels for recipe
     	Label chickenDirectionsLabel = new Label("Directions:");
     	chickenDirectionsLabel.setFont(directionsFont);
+    	
     	Label chickenRecipe = new Label();
+    	// Writing the recipe
     	chickenRecipe.setText(
     			"\r\n"
     			+ "Special equipment: Six 12-inch metal skewers or twelve 6-inch bamboo skewers"
@@ -724,6 +888,8 @@ public class RecipesController {
     			+ "Grill the chicken, turning often, until just cooked through, 5 to 7 minutes."
     			+ "\r\n"
     			+ "Serve the chicken dolloped with the pesto and any extra pesto on the side.");
+    	
+    	// Created a button container
     	HBox doneButtonContainer = new HBox();
     	Font buttonFont = Font.font("System", FontWeight.BOLD, 16);
     	Button doneButton = new Button("Done");
@@ -731,19 +897,29 @@ public class RecipesController {
     	doneButton.setStyle("-fx-background-color: orange");
     	doneButton.setTextFill(Color.WHITE);
     	
+    	// Added button to container
     	doneButtonContainer.getChildren().add(doneButton);
     	doneButtonContainer.setAlignment(Pos.CENTER);
     	doneButtonContainer.setPadding(new Insets(200,0,0,0));
+    	
+    	// Set action for button
     	doneButton.setOnAction(doneEvent -> applicationStage.setScene(mainScene));
     	chickenRecipeContainer.getChildren().addAll(chickenNameContainer, chickenIngredients, chickenRecipeIngredients, 
     			chickenDirectionsLabel, chickenRecipe, doneButtonContainer);
     	
+    	// Created and set a new scene
     	Scene chickenScene = new Scene(chickenRecipeContainer, 609, 856);
    	   	applicationStage.setScene(chickenScene);
     }
 
+    /**
+     * /**
+	 * This ActionEvent changes the scene back to the main page while passing the same User
+	 * object and setting various labels in the main window.
+     * @param returnToMainPagevent Changes the scene back to the main window.
+     */
     @FXML
-    void returnToMainPage(ActionEvent event) {
+    void returnToMainPage(ActionEvent returnToMainPagevent) {
     	try {
  		   FXMLLoader loader = new FXMLLoader();
  		   BorderPane root = loader.load(new FileInputStream("src/application/FitnessTrackerView.fxml"));
