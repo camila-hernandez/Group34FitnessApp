@@ -103,7 +103,7 @@ public class WaterIntakeController{
 		if (water != null) {
 			waterProgressLabel.setText("You have entered " + water + " cups of water.");
 		}
-		if (water == null) {
+		if (water == null || water == "") {
 			waterProgressLabel.setText("You have not entered your water intake.");
 		}
 	}
