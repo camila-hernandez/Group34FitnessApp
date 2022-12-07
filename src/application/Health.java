@@ -219,7 +219,7 @@ public class Health extends Goals {
 	 * @param waterProgressLabel This string gets converted from a double.
 	 */
 	public void setWaterProgressLabel(String waterProgressLabel) {
-		this.waterProgressLabel = waterProgressLabel;
+		this.waterProgressTotalLabel = waterProgressLabel;
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class Health extends Goals {
 	 * @return This getter method is returns the user's daily water in-take progress in a label.
 	 */
 	public String getWaterProgressLabel() {
-		return waterProgressLabel;
+		return waterProgressTotalLabel;
 	}
 
 	/**
