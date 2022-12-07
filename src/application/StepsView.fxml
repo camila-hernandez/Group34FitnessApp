@@ -17,64 +17,81 @@
    <top>
       <StackPane prefHeight="212.0" prefWidth="609.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#47a0c6" height="159.0" stroke="#52d4ff" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" width="481.0" />
-            <Label text="Steps" textFill="WHITE">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#3e9acf" height="95.0" stroke="#3e9acf" strokeType="INSIDE" width="390.0">
+               <effect>
+                  <DropShadow color="#00000080" />
+               </effect>
+            </Rectangle>
+            <ImageView fx:id="stepsIcon" fitHeight="85.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <StackPane.margin>
+                  <Insets right="250.0" />
+               </StackPane.margin>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="233.0" prefWidth="517.0" text="STEPS" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="58.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
+               <padding>
+                  <Insets top="40.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets bottom="40.0" />
+               </StackPane.margin>
             </Label>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="stepsIcon" fitHeight="150.0" fitWidth="150.0" layoutX="70.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </AnchorPane>
          </children>
       </StackPane>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="280.0" prefWidth="481.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="120.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="30.0" arcWidth="20.0" fill="#ff6459e8" height="66.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="481.0">
+                  <Rectangle arcHeight="30.0" arcWidth="20.0" fill="#3e9acfe8" height="66.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="380.0">
                      <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin></Rectangle>
-                  <Label prefHeight="46.0" prefWidth="390.0" text="LOG YOUR DAILY STEP COUNT" textAlignment="CENTER">
+                        <Insets top="-80.0" />
+                     </StackPane.margin>
+                     <effect>
+                        <DropShadow color="#00000080" />
+                     </effect></Rectangle>
+                  <Label prefHeight="46.0" prefWidth="390.0" text="LOG YOUR DAILY STEP COUNT" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="Yu Gothic UI Regular" size="24.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets left="50.0" />
+                        <Insets left="35.0" top="-80.0" />
                      </StackPane.margin>
                   </Label>
                </children>
             </StackPane>
             <HBox prefHeight="10.0" prefWidth="200.0">
                <children>
-                  <Label text="Day of the month:" textFill="#ff6459">
+                  <Label text="Day of the month:">
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label text="Steps taken:" textFill="#ff6459">
+                  <Label text="Steps taken:">
                      <HBox.margin>
-                        <Insets left="140.0" />
+                        <Insets left="133.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font size="15.0" />
                      </font>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets top="-50.0" />
+               </VBox.margin>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ChoiceBox fx:id="dayOfMonth" prefHeight="50.0" prefWidth="128.0">
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                      <items>
             		<FXCollections fx:factory="observableArrayList">
@@ -117,7 +134,7 @@
                         <Font size="36.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="45.0" />
+                        <Insets bottom="10.0" left="50.0" right="30.0" />
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="stepsTextField" alignment="CENTER" prefHeight="50.0" prefWidth="120.0">
@@ -127,12 +144,12 @@
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#updateStepsNumber" prefWidth="378.0" text="Update Daily Steps" textFill="#ff6459">
+            <Button mnemonicParsing="false" onAction="#updateStepsNumber" prefWidth="360.0" style="-fx-background-color: #3e9acf;" text="Update Daily Steps" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets bottom="40.0" left="50.0" />
+                  <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="30.0" />
@@ -140,12 +157,36 @@
                <effect>
                   <Blend />
                </effect></Button>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ProgressBar fx:id="stepsProgressBar" prefHeight="40.0" prefWidth="372.0" progress="0.0">
+                     <padding>
+                        <Insets left="5.0" right="3.0" top="-30.0" />
+                     </padding>
+                  </ProgressBar>
+                  <Label fx:id="percentageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="365.0" text="One day, or day 1?">
+                     <padding>
+                        <Insets bottom="60.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="progressLyrics" text="Your progress">
+                     <padding>
+                        <Insets bottom="25.0" />
+                     </padding>
+                     <font>
+                        <Font name="Consolas" size="14.5" />
+                     </font></Label>
+               </children>
+            </StackPane>
             <Label fx:id="stepsErrorLabel" prefHeight="21.0" prefWidth="395.0">
                <padding>
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0" text="Label">
+            <Label fx:id="dayOfMonthErrorLabel" prefHeight="21.0" prefWidth="395.0">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -164,25 +205,19 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="380.0">
                <children>
-                  <Label text="Your monthly progress:">
-                     <font>
-                        <Font name="Malgun Gothic" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="130.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ProgressBar fx:id="stepsProgressBar" prefHeight="100.0" prefWidth="354.0" progress="0.0">
-                     <VBox.margin>
-                        <Insets left="130.0" />
-                     </VBox.margin>
-                  </ProgressBar>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#returnToMainPage" prefHeight="36.0" prefWidth="160.0" text="RETURN TO MAIN">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#returnToMainPage" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Return to home" textFill="WHITE">
+                           <effect>
+                              <DropShadow color="#00000080" />
+                           </effect>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
                            <HBox.margin>
-                              <Insets left="100.0" right="20.0" top="40.0" />
-                           </HBox.margin></Button>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
                      </children>
                      <padding>
                         <Insets left="10.0" />

@@ -1,23 +1,28 @@
 package application;
 
+/**
+ * 
+ * @author CS219-user
+ *
+ */
 public class Health extends Goals {
 
 	User user;
 
-	private double sleepGoals;
-	private double waterIntakeGoals;
-	private double weightGoals;
-	private double startingWeight;
-	private double currentWeight;
-	private double height;
-	private double waterIntakeAmount;
-	private String waterProgressTotalLabel;
-	private double sleepDuration;
-	private String sleepProgressLabel;
+	private double sleepGoals = 0.0;
+	private double waterIntakeGoals = 0.0;
+	private double weightGoals = 0.0;
+	private double startingWeight = 0.0;
+	private double currentWeight = 0.0;
+	private double height = 0.0;
+	private double waterIntakeAmount = 0.0;
+	private String waterProgressTotalLabel = "";
+	private double sleepDuration = 0.0;
+	private String sleepProgressLabel = "";
 
-	private double carbs;
-	private double fat;
-	private double protein;
+	private double carbs = 0.0;
+	private double fat = 0.0;
+	private double protein = 0.0;
 
 	double value;
 
@@ -25,10 +30,6 @@ public class Health extends Goals {
 	boolean reachSleepGoal = false;
 	boolean reachWaterIntakeGoal = false;
 	boolean reachWeightGoal = false;
-
-	public Health() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * userSleepGoal is how long the user aims to sleep (in hours) without interruptions throughout the night.
@@ -318,14 +319,17 @@ public class Health extends Goals {
 	public void checkGoalsCompleted() {
 		// If the user has reached their goal, it calls a method in the Goals class
 		// and turns booleans true so that the user cannot reach the goal multiple time in one day
+		System.out.println("Sleep count: " + sleepDuration + "Sleep goal: " + sleepGoals);
 		if ((sleepDuration >= sleepGoals) && (!reachSleepGoal)) {
 			completeGoal();
 			reachSleepGoal = true;
 		}
+		System.out.println("water count: " + waterIntakeAmount + "water goal: " + waterIntakeGoals);
 		if (waterIntakeAmount >= waterIntakeGoals && (!reachWaterIntakeGoal)) {
 			completeGoal();
 			reachWaterIntakeGoal = true;
 		}
+		System.out.println("weight count: " + currentWeight + "Steps goal: " + weightGoals);
 		if((currentWeight >= weightGoals) && (!reachWeightGoal)) {
 			completeGoal();
 			reachWeightGoal = true;
