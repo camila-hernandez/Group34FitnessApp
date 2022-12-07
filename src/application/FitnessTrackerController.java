@@ -65,11 +65,6 @@ public class FitnessTrackerController implements Initializable {
 	private Label goalsCompletedLabel;
 	
 	User user;
-	
-	public void getLabel() {
-		System.out.println("Steps count: " + user.fitness.getStepsCount());
-		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
-	}
 
 	public void setUser(User user) {
     	this.user = user;
@@ -237,10 +232,10 @@ public class FitnessTrackerController implements Initializable {
 		}
 	}
 	
-	@FXML
-	void setDisplayLabel(ActionEvent event) {
+	public void setDisplayLabel() {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
+		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
 	}
    
    @FXML

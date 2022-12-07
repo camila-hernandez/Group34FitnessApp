@@ -84,7 +84,7 @@
                   <Insets left="20.0" />
                </padding>
                <font>
-                  <Font size="19.0" />
+                  <Font size="17.0" />
                </font></Label>
             <Label fx:id="servingRatioLabel" layoutX="325.0" layoutY="273.0" prefHeight="78.0" prefWidth="272.0" text="Serving Ratio:">
                <font>

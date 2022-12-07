@@ -227,6 +227,7 @@ public class UserProfileController {
 	  		controller.setGoalsCompletedLabel();
 	  		// Set name label in the main scene based on the User class
 	    	controller.setNameLabel();
+	    	controller.setDisplayLabel();
 	    	
 	    	controller.applicationStage = applicationStage;
 	    		   

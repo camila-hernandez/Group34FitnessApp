@@ -928,6 +928,7 @@ public class RecipesController {
  		   controller.setUser(user);
  		   controller.setGoalsCompletedLabel();
  		   controller.setNameLabel();
+ 		   controller.setDisplayLabel();
  		   controller.applicationStage = applicationStage;
  		   
  		   Scene scene = new Scene(root);
