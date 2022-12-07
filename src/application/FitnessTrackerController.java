@@ -70,7 +70,7 @@ public class FitnessTrackerController implements Initializable {
 		System.out.println("Steps count: " + user.fitness.getStepsCount());
 		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
 	}
-	
+
 	public void setUser(User user) {
     	this.user = user;
 	}
@@ -107,6 +107,7 @@ public class FitnessTrackerController implements Initializable {
 			BorderPane root = loader.load(new FileInputStream("src/application/StepsView.fxml"));
 			StepsController controller = (StepsController)loader.getController();
 			controller.setUser(user);
+			controller.updateProgressBar(event);
 			controller.applicationStage = applicationStage;
 			Scene scene = new Scene(root);
 			applicationStage.setScene(scene);
