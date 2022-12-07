@@ -3,8 +3,16 @@ package application;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The Fitness class will verify and store a set of characteristics that are related to the user's fitness goals
+ * that are unique to them based on the values entered.
+ * This class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class Fitness extends Goals {
-
 
 	private int stepsGoal = 0;
 	private ArrayList<Integer> stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
