@@ -139,7 +139,10 @@
                   <DropShadow color="#00000080" />
                </effect>
             </Button>
-            <Label fx:id="errorLabel" layoutX="171.0" layoutY="-17.0" textFill="RED" />
+            <Label fx:id="errorLabel" layoutX="18.0" layoutY="-29.0" prefHeight="39.0" prefWidth="304.0" textFill="RED">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
          </children>
       </Pane>
    </center>
