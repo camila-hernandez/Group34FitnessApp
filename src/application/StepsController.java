@@ -21,6 +21,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Enes Gisi (enes.gisi@ucalgary.ca)
+ * This controller class manages the Steps page.
+ *
+ */
 public class StepsController implements Initializable {
 	Stage applicationStage;
     
@@ -54,24 +60,27 @@ public class StepsController implements Initializable {
     @FXML
     private ProgressBar stepsProgressBar;
     
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    
     
     User user;
     
     /**
-	 * This method will allow for the same User object to be passed between different controllers.
+	 * This method will allow the same User object to be passed between different controllers.
 	 * The user can access the same properties in each scene.
-	 * @param user This is the User object.
+	 * @param user This is the User object passed from another controller.
 	 */
     public void setUser(User user) {
     	this.user = user;
     }
     
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-    
     /**
-     * This ActionEvent will display the user's overall steps taken count for the month in the main window.
-     * @param updateStepsEvent
-     * @throws InvalidUserInputException
+     * 
+     * @param event This method is invoked when steps update button is clicked
+     * @throws InvalidUserInputException if steps entered is not numeric, this exception is thrown
+     * 
+     * This method updates step count on the selected day and sets error labels
+     * if the values entered are not valid
      */
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
@@ -86,6 +95,13 @@ public class StepsController implements Initializable {
     	updateProgressBar(event);
     }
     
+    /**
+     * 
+     * @param event This method is invoked when the steps update button or the main Steps button is clicked
+     * 
+     * This method will divide steps in the month so far by the monthly goal and displays it
+     * both as percentage value and on a progress bar, along with Eye of the Tiger lyrics
+     */
     void updateProgressBar(ActionEvent event) {
     	if (user.fitness.getStepsGoals() != 0) {
     		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
@@ -116,14 +132,19 @@ public class StepsController implements Initializable {
     		  progressLyrics.setText("");
     	}
     }
-    
+    /**
+     * 
+     * @param labelMessage message to be displayed under the button
+     * 
+     * This method sets the label underneath the button
+     */
     public void setStepGoalLabel(String labelMessage) {
     	stepGoalLabel.setText(labelMessage);
     }
     
     /**
 	 * This ActionEvent changes the scene back to the main page while passing the same User
-	 * object and setting various labels in the main page.
+	 * object and setting the Steps label in the main page.
 	 * @param returnToMainPageEvent Changes the scene back to the main page.
 	 */
     @FXML
