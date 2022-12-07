@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Fitness extends Goals {
 	
 
-	private int stepsGoal;
+	private int stepsGoal = 111000;
 	private ArrayList<Integer> stepsArray;
 	private int stepsCount;
 	private double caloriesBurnedGoal;
@@ -32,6 +32,7 @@ public class Fitness extends Goals {
 	boolean reachCaloriesBurnedGoal = false;
 
 	double value;
+  stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
 	
 	User user;
 	
