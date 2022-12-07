@@ -81,7 +81,6 @@ public class UserProfileController {
 		ageLabel.setText(Integer.toString(user.getAge()));
 		genderLabel.setText(user.getGender());
 		heightLabel.setText(Double.toString(user.health.getHeight()));
-		System.out.println("Weight kg" + user.health.getStartingWeight());
 		weightLabel.setText(Double.toString(user.health.getStartingWeight()));
 	}
 	
@@ -192,6 +191,8 @@ public class UserProfileController {
 	    		// Check user input
 	    		user.checkName(nameTextfield.getText());
 				user.checkAge(ageTextfield.getText());
+				user.checkGender(genderChoiceBox.getValue()
+						);
 				user.health.checkInput(heightTextfield.getText());
 				user.health.checkInput(weightTextfield.getText());
 				// Set properties in User and Health classes
@@ -200,7 +201,7 @@ public class UserProfileController {
 				user.setGender(genderChoiceBox.getValue().toString());
 				user.health.setHeight(Double.parseDouble(heightTextfield.getText()));
 				user.health.setStartingWeight(Double.parseDouble(weightTextfield.getText()));
-				System.out.println("getw eight " + user.health.getStartingWeight());
+				
 				// Set labels with user information
 				setUserProfileLabels();
 				

@@ -78,12 +78,12 @@ public class User {
 	public void checkName(String nameString) throws InvalidUserInputException {
 		// Check if user input is empty
 		if (nameString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out all required TextFields.");
+			throw new InvalidUserInputException("Please fill out the required name TextField.");
 		}
 		// Check if the string is all alphabetical letters
 		else {
 			if (!nameString.matches("^[a-zA-Z]*$")) {
-				throw new InvalidUserInputException("Invalid Character");
+				throw new InvalidUserInputException("Please enter a valid name.");
 			}
 		}
 	}
@@ -96,15 +96,28 @@ public class User {
 	public void checkAge(String ageString) throws InvalidUserInputException {	
 		// Check if user input is empty
 		if (ageString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out all required TextFields.");
+			throw new InvalidUserInputException("Please fill out the required age TextField.");
 		}
 		else {
 			for (char c : ageString.toCharArray()) {
 				// Check if the character is a digit
 				if (!Character.isDigit(c)) {
-					throw new InvalidUserInputException("Make sure to enter a valid number.");
+					throw new InvalidUserInputException("Please enter a valid age.");
 				}
 			}
+		}
+	}
+	
+	/**
+	 * This method will check if the user has selected their gender in the ChoiceBox.
+	 * @param genderString This is the string that the user selected in the ChoiceBox.
+	 * @throws InvalidUserInputException InvalidUserInputException This is the custom exception that is 
+	 * thrown if the user's input is invalid.
+	 */
+	public void checkGender(String genderString) throws InvalidUserInputException {
+		// Check if user input is empty
+		if (genderString == null) {
+			throw new InvalidUserInputException("Please select a gender.");
 		}
 	}
 }

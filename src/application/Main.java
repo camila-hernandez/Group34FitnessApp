@@ -36,7 +36,6 @@ public class Main extends Application {
 			controller.setUser(user);
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
-			System.out.println("Setting user for fitness controller from main");
 		
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
