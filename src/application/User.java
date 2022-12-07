@@ -19,6 +19,22 @@ public class User {
 	private String gender = "";
 	
 	/**
+	 * 
+	 * @param str This parameter is the value of Age textfield
+	 * @return return true if age entered is numeric, false if not
+	 * 
+	 * This method checks if the value entered for age is numeric
+	 */
+	public boolean isNumeric(String str){ 
+		  try {  
+			Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
+	
+	/**
 	 * aName is the name of the user that can be inputed in the User Profile window.
 	 * Name is defaulted to an empty string.
 	 * @param aName This string must consist of only alphabetical letters.
@@ -74,11 +90,12 @@ public class User {
 	 * This method will check if the name that the user inputed into the TextField is valid.
 	 * @param s This is the string that the user enters into the TextField as their name.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user' input is invalid.
+	 * @throws EmptyInputException 
 	 */
-	public void checkName(String nameString) throws InvalidUserInputException {
+	public void checkName(String nameString) throws InvalidUserInputException, EmptyInputException {
 		// Check if user input is empty
 		if (nameString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out the required name TextField.");
+      throw new EmptyInputException("Please fill out all required TextFields.");
 		}
 		// Check if the string is all alphabetical letters
 		else {
@@ -92,11 +109,12 @@ public class User {
 	 * This method will check if the age that the user inputed into the TextField is a valid age.
 	 * @param valueEntered This is the value that the user entered into the TextField as a string.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
+	 * @throws EmptyInputException 
 	 */
-	public void checkAge(String ageString) throws InvalidUserInputException {	
+	public void checkAge(String ageString) throws InvalidUserInputException, EmptyInputException {	
 		// Check if user input is empty
 		if (ageString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out the required age TextField.");
+			throw new EmptyInputException("Please fill out all required TextFields.");
 		}
 		else {
 			for (char c : ageString.toCharArray()) {

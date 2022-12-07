@@ -346,11 +346,12 @@ public class Health extends Goals {
 	 * User Profile window are valid numbers.
 	 * @param valueEntered This is the value that the user entered into the TextField as a string.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
+	 * @throws EmptyInputException 
 	 */
-	public void checkInput(String valueEntered) throws InvalidUserInputException {	
+	public void checkInput(String valueEntered) throws InvalidUserInputException, EmptyInputException {	
 		boolean decimalEncountered = false;
 		if (valueEntered.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out all required TextFields.");
+			throw new EmptyInputException("Please fill out all required TextFields.");
 		}
 		else {
 			for (char c :valueEntered.toCharArray()) {
