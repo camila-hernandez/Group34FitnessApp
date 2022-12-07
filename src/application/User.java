@@ -14,9 +14,9 @@ public class User {
 	Health health = new Health();
 	Fitness fitness = new Fitness();
 	
-	private String name;
-	private int age;
-	private String gender;
+	private String name = "";
+	private int age = 0;
+	private String gender = "";
 	
 	/**
 	 * 

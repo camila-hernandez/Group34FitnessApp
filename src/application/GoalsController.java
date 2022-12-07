@@ -191,6 +191,7 @@ public class GoalsController {
   		   controller.setUser(user);
   		   controller.setNameLabel();
   		   controller.setGoalsCompletedLabel();
+  		   controller.setDisplayLabel();
 
   		   controller.applicationStage = applicationStage;
   		   

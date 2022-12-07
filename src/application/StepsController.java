@@ -70,7 +70,7 @@ public class StepsController implements Initializable {
     public void setUser(User user) {
     	this.user = user;
     }
-    
+   
     /**
      * 
      * @param event This method is invoked when steps update button is clicked
@@ -82,9 +82,10 @@ public class StepsController implements Initializable {
     @FXML
     void updateStepsNumber(ActionEvent event) throws InvalidUserInputException {
     	try {
+        	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
         	if(dayOfMonth.getValue()!=null)
             	dayOfMonthErrorLabel.setText("");
-    	user.fitness.updateMonthlySteps(dayOfMonth.getValue(), stepsTextField.getText());
+
     	stepsErrorLabel.setText("");
 
     	}catch(InvalidUserInputException e) {stepsErrorLabel.setText(e.getMessage());}
@@ -103,7 +104,7 @@ public class StepsController implements Initializable {
     	if (user.fitness.getStepsGoals() != 0) {
     		stepsProgressBar.setProgress((double)user.fitness.getStepsCount()/user.fitness.getStepsGoals());
     		double goalPercentage = (double)user.fitness.getStepsCount()/user.fitness.getStepsGoals();
-    		percentageLabel.setText(df.format(goalPercentage * 100) + "%");
+    		percentageLabel.setText((goalPercentage * 100) + "%");
 	    	//0-20%
 	    	if (goalPercentage < 0.2) {
 	    		progressLyrics.setText(String.valueOf("Rising up straight to the top"));
@@ -154,7 +155,8 @@ public class StepsController implements Initializable {
     		   controller.setUser(user);
     		   controller.setGoalsCompletedLabel();
     		   controller.setNameLabel();
-    		   controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
+    		   controller.setDisplayLabel();
+    		  // controller.stepsThisMonth.setText(String.valueOf(user.fitness.getStepsCount()));
     		   
     		   controller.applicationStage = applicationStage;
     		   

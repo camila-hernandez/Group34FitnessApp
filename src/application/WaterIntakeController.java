@@ -155,7 +155,7 @@ public class WaterIntakeController{
 
 			controller.setUser(user);
 			controller.applicationStage = applicationStage;
-			controller.setDisplayLabel(returnToMainPageEvent);
+			controller.setDisplayLabel();
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
 

@@ -71,5 +71,21 @@
       <Label fx:id="sleepGoalsLabel" contentDisplay="CENTER" layoutX="253.0" layoutY="267.0" prefHeight="35.0" prefWidth="260.0" />
       <Label fx:id="waterIntakeGoalsLabel" contentDisplay="CENTER" layoutX="364.0" layoutY="346.0" prefHeight="35.0" prefWidth="145.0" />
       <Label fx:id="weightGoalsLabel" contentDisplay="CENTER" layoutX="355.0" layoutY="451.0" prefHeight="35.0" prefWidth="145.0" />
+      <Label layoutX="-220.0" layoutY="274.0" text="Label" />
+      <Label layoutX="89.0" layoutY="225.0" prefHeight="27.0" prefWidth="267.0" text="What is your goal for the month?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="296.0" prefHeight="27.0" prefWidth="267.0" text="What is your sleep goal in hours?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="381.0" prefHeight="27.0" prefWidth="267.0" text="Please enter an amount in cups">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

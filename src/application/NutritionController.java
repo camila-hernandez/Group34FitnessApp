@@ -80,6 +80,7 @@ public class NutritionController {
 	 */
 	@FXML
 	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) throws InvalidUserInputException {
+
 		// Initially set error label to nothing
 		errorLabel.setText("");
 		
@@ -89,9 +90,9 @@ public class NutritionController {
 			
 			// Set the variable with the user input
 			double calorieAmount = Double.parseDouble(CalorieIntake.getText());
-			
+
 			// Shows average for the typical female
-			if (user.getGender().equalsIgnoreCase("Female")) {
+			if (user.getGender().trim().equals("Female")) {
 				if (calorieAmount < 2000) {
 					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' 
 				+ " is less than the average amount required daily for an adult female.");
@@ -109,7 +110,7 @@ public class NutritionController {
 			}
 			
 			// Shows averages for the typical males
-			if (user.getGender().equalsIgnoreCase("Male")) {
+			if (user.getGender().trim().equals("Male")) {
 				if (calorieAmount < 2500) {
 					CalorieIntakeDisplay.setText("Your calorie intake of " + calorieAmount + '\n' +
 							" is less than the average amount required daily for an adult male.");
@@ -296,6 +297,7 @@ public class NutritionController {
   		   controller.setUser(user);
 		   controller.setGoalsCompletedLabel();
   		   controller.setNameLabel();
+  		   controller.setDisplayLabel();
   		   controller.applicationStage = applicationStage;
   		   
   		   Scene scene = new Scene(root);

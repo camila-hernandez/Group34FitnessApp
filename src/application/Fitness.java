@@ -12,32 +12,28 @@ import java.util.Collections;
  */
 public class Fitness extends Goals {
 	
+	private int stepsGoal = 0;
+	private ArrayList<Integer> stepsArray = new ArrayList<Integer>(Collections.nCopies(30, 0));
+	private int stepsCount = 0;
+	private double caloriesBurnedGoal = 0.0;
+	private double exerciseGoal = 0.0;
+	private double progress = 0.0;
+	private double totalCaloriesBurned = 0.0;
+	private double mondayExerciseInfo = 0.0;
+	private double tuesdayExerciseInfo = 0.0;
+	private double wednesdayExerciseInfo = 0.0;
+	private double thursdayExerciseInfo = 0.0;
+	private double fridayExerciseInfo = 0.0;
+	private double saturdayExerciseInfo = 0.0;
+	private double sundayExerciseInfo = 0.0;
+	private double mondayCaloriesBurnedInfo = 0.0;
+	private double tuesdayCaloriesBurnedInfo = 0.0;
+	private double wednesdayCaloriesBurnedInfo = 0.0;
+	private double thursdayCaloriesBurnedInfo = 0.0;
+	private double fridayCaloriesBurnedInfo = 0.0;
+	private double saturdayCaloriesBurnedInfo = 0.0;
+	private double sundayCaloriesBurnedInfo = 0.0;
 
-	private int stepsGoal;
-	private ArrayList<Integer> stepsArray;
-	private int stepsCount;
-	private double caloriesBurnedGoal;
-	private double exerciseGoal;
-	private double progress;
-	private double totalCaloriesBurned;
-	private double mondayExerciseInfo;
-	private double tuesdayExerciseInfo;
-	private double wednesdayExerciseInfo;
-	private double thursdayExerciseInfo;
-	private double fridayExerciseInfo;
-	private double saturdayExerciseInfo;
-	private double sundayExerciseInfo;
-	private double mondayCaloriesBurnedInfo;
-	private double tuesdayCaloriesBurnedInfo;
-	private double wednesdayCaloriesBurnedInfo;
-	private double thursdayCaloriesBurnedInfo;
-	private double fridayCaloriesBurnedInfo;
-	private double saturdayCaloriesBurnedInfo;
-	private double sundayCaloriesBurnedInfo;
-	private String stepsGoalsLabel;
-	private String caloriesBurnedGoalsLabel;
-	private String exerciseGoalsLabel;
-	private String todaysExerciseMotivationalLabel;
 	
 	boolean reachStepsGoal = false;
 	boolean reachExerciseGoal = false;
@@ -76,15 +72,6 @@ public class Fitness extends Goals {
 	public void setStepsGoals(int steps) {
 		this.stepsGoal = steps;
     }
-	
-
-	/**
-	 * 
-	 * @return steps count
-	 */
-	public int getStepsCount() {
-		return stepsCount;
-	}
 	
 	/**
 	 * 
@@ -160,12 +147,24 @@ public class Fitness extends Goals {
 		return exerciseGoal;
 	}
 	
+	
 	/**
-	 * 
-	 * @param caloriesBurned
+	 * This method is used to compare the user's steps taken in a day to their goal.
+	 * @return This getter method returns the steps count of the user.
+	 */
+	public int getStepsCount() {
+		return stepsCount;
+	}
+
+	
+	/**
+	 * This method will store the suer's total calories burned from the calories burned TextFields in the Workouts
+	 * tab in the Activities window.
+	 * @param caloriesBurned This is the total calories the user burned through exercise.
 	 */
 	public void setTotalCaloriesBurned(double caloriesBurned) {
 		 this.totalCaloriesBurned = caloriesBurned;
+		 checkGoalsCompleted();
 	 }
 	 
 	 public double getTotalCaloriesBurned() {
@@ -174,6 +173,7 @@ public class Fitness extends Goals {
 	 
 	 public void setProgress(double time) {
 		 this.progress = time;
+		 checkGoalsCompleted();
 	 }
 	 
 	 public double getProgress() {
@@ -304,7 +304,25 @@ public class Fitness extends Goals {
 				completeGoal();
 				reachCaloriesBurnedGoal = true;
 			}
+		// If the user has reached their goal, it calls a method in the Goals class
+		// and turns booleans true so that the user cannot reach the goal multiple time in one day
+		System.out.println("Steps count: " + stepsCount + "Steps goal: " + stepsGoal);
+		 if ((stepsCount >= stepsGoal) && (!reachStepsGoal)) {
+			completeGoal();
+			reachStepsGoal = true;
 		}
+
+		 System.out.println("progress count: " + progress + "progress goal: " + exerciseGoal);
+		if ((progress >= exerciseGoal) && (!reachExerciseGoal)) {
+			completeGoal();
+			reachExerciseGoal = true;
+		}
+		System.out.println("calories count: " + totalCaloriesBurned + "calories goal: " + caloriesBurnedGoal);
+		if (totalCaloriesBurned >= caloriesBurnedGoal && !reachCaloriesBurnedGoal) {
+			completeGoal();
+			reachCaloriesBurnedGoal = true;
+		}
+	}
 		
 		public void checkInput(String valueEntered) throws InvalidUserInputException {	
 			boolean decimalEncountered = false;
