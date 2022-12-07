@@ -25,6 +25,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * The UserProfileController class will store and verify a set of characteristics that are unique to the user based
+ * on the values entered by the user.
+ * This class will also display personal information to the user in the User Profile window.
+ * The UserProfileController class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
+ * 
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class UserProfileController {
 	Stage applicationStage;
 	
