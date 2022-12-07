@@ -64,13 +64,8 @@ public class FitnessTrackerController implements Initializable {
 	@FXML
 	private Label goalsCompletedLabel;
 	
-	public static Label staticStepsLabel;
 	
 	User user;
-	
-	public void initialize() {
-		stepsThisMonth = staticStepsLabel;
-	}
 	
 	public void setUser(User user) {
     	this.user = user;
