@@ -77,9 +77,10 @@ public class NutritionController {
 	 * This ActionEvent stores and verifies the calories in-take amount inputed by the user in the Nutrition window.
 	 * @param setCalorieIntakeEvent This ActionEvent will allow the user to store their calorie in-take amount.
 	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 * @throws EmptyInputException 
 	 */
 	@FXML
-	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) throws InvalidUserInputException {
+	void setCalorieIntake(ActionEvent setCalorieIntakeEvent) throws InvalidUserInputException, EmptyInputException {
 
 		// Initially set error label to nothing
 		errorLabel.setText("");
@@ -130,6 +131,8 @@ public class NutritionController {
 		} catch (InvalidUserInputException e) {
 				errorLabel.setText(e.getMessage());
 		}
+		  catch (EmptyInputException e) {errorLabel.setText("Input can't be empty");
+		}
 	}
 	
 	/**
@@ -166,9 +169,10 @@ public class NutritionController {
 	 * This method will call the Health class to verify the user's input.
 	 * @param servingRatioEvent This ActionEvent sets the carbs, fat and protein variables in the Health class.
 	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 * @throws EmptyInputException 
 	 */
 	@FXML
-	void updateServingRatio(ActionEvent servingRatioEvent) throws InvalidUserInputException {
+	void updateServingRatio(ActionEvent servingRatioEvent) throws InvalidUserInputException, EmptyInputException {
 		// Initially set error label to nothing
 		errorLabel.setText("");
 				
@@ -184,7 +188,7 @@ public class NutritionController {
 			user.health.setProtein(Double.parseDouble(proteinTextField.getText()));	
 		} catch (InvalidUserInputException e){
 			errorLabel.setText(e.getMessage());
-		}
+		} catch (EmptyInputException e) {errorLabel.setText("Input cannot be empty");}
 	}
 	
 	/**
@@ -252,9 +256,10 @@ public class NutritionController {
 	 * The user can input this information in the Nutrition window.
 	 * @param setCurrentWeightEvent This ActionEvent stores the user's weight.
 	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 * @throws EmptyInputException 
 	 */
 	@FXML
-	void setCurrentWeight(ActionEvent setCurrentWeightEvent) throws InvalidUserInputException {
+	void setCurrentWeight(ActionEvent setCurrentWeightEvent) throws InvalidUserInputException, EmptyInputException {
 		// Initially set error label to nothing
 		errorLabel.setText("");
 		
@@ -280,7 +285,7 @@ public class NutritionController {
 			
 		} catch (InvalidUserInputException e) {
 			errorLabel.setText(e.getMessage());
-		}
+		} catch (EmptyInputException e) {errorLabel.setText("Input cannot be empty");}
 	}
 	
 	/**

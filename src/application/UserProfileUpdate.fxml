@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane prefHeight="856.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserUpdateController">
+   <children>
+      <Button fx:id="saveProfileButton" layoutX="220.0" layoutY="663.0" mnemonicParsing="false" onAction="#saveUserProfile" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="SAVE CHANGES" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6b4191" height="95.0" layoutX="110.0" layoutY="61.0" stroke="#6b4191" strokeType="INSIDE" width="390.0">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+      </Rectangle>
+      <Label layoutX="161.0" layoutY="91.0" text=" USER PROFILE UPDATE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="101.0" layoutY="192.0" prefHeight="100.0" prefWidth="408.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="-19.0" layoutY="-4.0" text="First name:">
+                     <font>
+                        <Font size="24.5" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameField" layoutX="124.0" layoutY="-1.0" />
+                  <Label fx:id="nameUpdateErrorLabel" layoutX="-3.0" layoutY="30.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="102.0" layoutY="286.0" prefHeight="100.0" prefWidth="408.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="26.0" layoutY="-4.0" text="Age:">
+                     <font>
+                        <Font size="24.5" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ageField" layoutX="126.0" layoutY="-1.0" />
+                  <Label fx:id="ageUpdateErrorLabel" layoutX="-3.0" layoutY="33.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="111.0" layoutY="378.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="-36.0" layoutY="-4.0" text="Gender:">
+                     <font>
+                        <Font size="24.5" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="genderField" layoutX="117.0" layoutY="-1.0" />
+                  <Label fx:id="genderUpdateErrorLabel" layoutX="-36.0" layoutY="23.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="110.0" layoutY="463.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" text="Height:">
+                     <font>
+                        <Font size="24.5" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="heightField" layoutX="134.0" layoutY="3.0" />
+                  <Label fx:id="heightUpdateErrorLabel" layoutX="14.0" layoutY="40.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="105.0" layoutY="546.0" prefHeight="100.0" prefWidth="390.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="-4.0" text="Weight:">
+                     <font>
+                        <Font size="24.5" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="weightField" layoutX="146.0" layoutY="-1.0" />
+                  <Label fx:id="weightUpdateErrorLabel" layoutX="25.0" layoutY="30.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Button fx:id="returnUser" layoutX="222.0" layoutY="724.0" mnemonicParsing="false" onAction="#returnToUser" style="-fx-background-color: #3e9acf; -fx-background-radius: 5;" text="Go Back" textFill="WHITE">
+         <effect>
+            <DropShadow color="#00000080" />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

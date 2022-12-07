@@ -90,11 +90,12 @@ public class User {
 	 * This method will check if the name that the user inputed into the TextField is valid.
 	 * @param s This is the string that the user enters into the TextField as their name.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user' input is invalid.
+	 * @throws EmptyInputException 
 	 */
-	public void checkName(String nameString) throws InvalidUserInputException {
+	public void checkName(String nameString) throws InvalidUserInputException, EmptyInputException {
 		// Check if user input is empty
 		if (nameString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out all required TextFields.");
+			throw new EmptyInputException("Please fill out all required TextFields.");
 		}
 		// Check if the string is all alphabetical letters
 		else {
@@ -108,11 +109,12 @@ public class User {
 	 * This method will check if the age that the user inputed into the TextField is a valid age.
 	 * @param valueEntered This is the value that the user entered into the TextField as a string.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
+	 * @throws EmptyInputException 
 	 */
-	public void checkAge(String ageString) throws InvalidUserInputException {	
+	public void checkAge(String ageString) throws InvalidUserInputException, EmptyInputException {	
 		// Check if user input is empty
 		if (ageString.isEmpty()) {
-			throw new InvalidUserInputException("Please fill out all required TextFields.");
+			throw new EmptyInputException("Please fill out all required TextFields.");
 		}
 		else {
 			for (char c : ageString.toCharArray()) {

@@ -366,7 +366,7 @@ public class GoalsController {
 		    		applicationStage.setScene(displayUserFitnessGoalsScene);
 		        	} catch (InvalidUserInputException e) {
 		        		goalsErrorLabel.setText(e.getMessage());
-		        	}
+		        	} catch (EmptyInputException e) {goalsErrorLabel.setText("Input cannot be empty");}
  	   	});
  	   
  	   // Adjusts button characteristics

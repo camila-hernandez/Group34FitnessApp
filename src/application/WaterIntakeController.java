@@ -59,9 +59,10 @@ public class WaterIntakeController{
 	 * This method will also display the user's progress in the window depending on their water in-take amount.
 	 * @param progressWaterEvent - This ActionEvent will display the user's progress in the window.
 	 * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
+	 * @throws EmptyInputException 
 	 */
 	@FXML
-	void calculateAmountWater(ActionEvent progressWaterEvent) throws InvalidUserInputException {
+	void calculateAmountWater(ActionEvent progressWaterEvent) throws InvalidUserInputException, EmptyInputException {
 		// Initialize label to empty
 		waterErrorLabel.setText("");
 		
@@ -92,7 +93,7 @@ public class WaterIntakeController{
 			}
 		} catch (InvalidUserInputException e) {
 			waterErrorLabel.setText(e.getMessage());
-		}
+		} catch (EmptyInputException e) {waterErrorLabel.setText("Input cannot be empty");}
 	}
 
 	/**
