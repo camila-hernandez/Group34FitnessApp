@@ -465,6 +465,12 @@ public class Fitness extends Goals {
 		}
 	}
 	
+	/**
+	  * This method will check if the user's steps count that they have entered in the TextFields in the
+	  * Steps window are valid numbers.
+	  * @param str This is the value that the user entered into the TextField as a string.
+	  * @throws InvalidUserInputException This is the custom exception that is thrown if the user's input is invalid.
+	  */
 	public void checkIntegers(String str) throws InvalidUserInputException {	
 		// Check if user input is empty
 		if (str.isEmpty()) {
