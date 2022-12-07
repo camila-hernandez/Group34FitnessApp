@@ -63,8 +63,9 @@ public class Main extends Application {
 			if (words[0].contentEquals("Height ")) {
 				user.health.setHeight(Double.parseDouble(words[1]));
 			}
-			if (words[0].contentEquals("Weight ")) {
+			if (words[0].contentEquals("Starting weight ")) {
 				user.health.setStartingWeight(Double.parseDouble(words[1]));
+				System.out.print("lll" + user.health.getStartingWeight());
 			}
 
 			// Sets goal values in Health and Fitness classes when the program starts

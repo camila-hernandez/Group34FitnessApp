@@ -1,6 +1,6 @@
-Name = Camila
+Name =  Camila
 Age = 20
-Gender = Female
+Gender =  Female
 Height = 156.0
 Starting weight = 46.0
 Steps goal = 1000
@@ -9,7 +9,7 @@ Water intake goal = 8.0
 Weight goal = 40.0
 Calories burned goal = 300.0
 Exercise goal = 45.0
-Daily progress = 55.0
+Daily progress = 0.0
 Monday exercise duration = 80.0
 Monday calories burned = 80.0
 Tuesday exercise duration = 0.0
