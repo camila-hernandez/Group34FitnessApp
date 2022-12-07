@@ -14,9 +14,18 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The Main class will run the application for user interaction. 
+ * This class will also read a file that saves the user's inputs.
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
+ *
+ */
 public class Main extends Application {
 	private static User user = new User();
 
+	/**
+	 * This method loads the application for the user to interact with.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -27,7 +36,6 @@ public class Main extends Application {
 			controller.setUser(user);
 			controller.setNameLabel();
 			controller.setGoalsCompletedLabel();
-			System.out.println("Setting user for fitness controller from main");
 		
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -39,6 +47,11 @@ public class Main extends Application {
 		}
 	}
 
+	/**
+	 * This method will read the contents of a file and import them into the application.
+	 * @throws IOException This is the exception that will be thrown if there were issues reading the file.
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 */
 	private static void readFile() throws IOException, InvalidUserInputException {
 		File f = new File("FitnessTrackerFile.txt");
 		// If the file doesn't exist, we will create the file
@@ -182,6 +195,12 @@ public class Main extends Application {
 		}
 	}
 
+	/**
+	 * This method will read the contents of the file and launch the application.
+	 * @param args This is the command line arguments.
+	 * @throws IOException This is the exception that will be thrown if there were issues reading the file.
+	 * @throws InvalidUserInputException This is the exception that will be thrown if the information is invalid.
+	 */
 	public static void main(String[] args) throws IOException, InvalidUserInputException {		
 		readFile();
 		launch(args);

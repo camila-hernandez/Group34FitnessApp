@@ -120,11 +120,11 @@ public class NutritionController {
 				if (calorieAmount >= 2500 && calorieAmount < 3000) {
 					CalorieIntakeDisplay.setText("You have consumed the average " + '\n'
 							+ "amount of calories needed for an adult male.");
-				}
-				
-				if (calorieAmount > 3000) {
-					CalorieIntakeDisplay.setText("Your calorie intake of " 
-				+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+              
+					if (calorieAmount > 3000) {
+						CalorieIntakeDisplay.setText("Your calorie intake of " 
+					+ calorieAmount + '\n' + " is greater than the average amount required daily for an adult.");
+					}
 				}
 			}
 			

@@ -1,9 +1,13 @@
 package application;
 
 /**
+ * The Health class will verify and store a set of characteristics that are related to the user's health goals
+ * that are unique to them based on the values entered.
+ * The Health class will also perform calculation based on the information entered by the user.
+ * This class will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
  * 
- * @author Mariam Masri, Enes Gisi, Camila Hernandez
- * This class manages healthy habits that support fitness, such as sleep and water intake
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
  *
  */
 public class Health extends Goals {

@@ -1,9 +1,6 @@
 package application;
-import java.io.BufferedWriter;
-import java.io.File;
+
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,19 +19,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
+ * The FitnessTrackerController will display health and fitness related characters in the main window 
+ * based on the values entered by the user.
+ * Also, the user will be able to access every aspect of this application from this window.
+ * This controller will check and display errors entered by the user, such as invalid characters
+ * or those out of acceptable range.
  * 
- * @author Enes Gisi, Camila Hernandez, Mariam Masri
+ * @author Camila Hernandez, Mariam Masri & Enes Gisi
  * 
- * This controller manages the main window of the application
- *
  */
 public class FitnessTrackerController implements Initializable {
   Stage applicationStage;
@@ -74,20 +70,36 @@ public class FitnessTrackerController implements Initializable {
 	
 	User user;
 
+	/**
+	 * This method will allow for the same User object to be passed between different controllers.
+	 * The user can access the same properties in each scene.
+	 * @param user This is the User object.
+	 */
 	public void setUser(User user) {
     	this.user = user;
 	}
 
+	/**
+	 * This method sets the user's name in the main window.
+	 */
 	public void setNameLabel() {
 		nameLabel.setText(user.getName());
 	}
 
+	/**
+	 * This method displays how many overall goals the user has completed today.
+	 */
 	public void setGoalsCompletedLabel() {
     	goalsCompletedLabel.setText("You have completed " + (user.fitness.getGoalsCompleted() + user.health.getGoalsCompleted()) + " goal(s)!");
     }
 	
+	/**
+	 * This ActionEvent will open a new scene where the user can view and modify their personal information,
+	 * as well as log out of the application.
+	 * @param userProfileEvent This ActionEvent will open a new scene to the user profile.
+	 */
     @FXML
-    void openUserProfile(ActionEvent event) {
+    void openUserProfile(ActionEvent userProfileEvent) {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			AnchorPane root = loader.load(new FileInputStream("src/application/UserProfile.fxml"));
@@ -103,11 +115,7 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
     }
-    /**
-     * 
-     * @param event Action when Steps is clicked
-     * This method will update a label and the progress bar on the Steps page and opens it
-     */
+
 	@FXML
 	void trackSteps(ActionEvent event) {
 		try {
@@ -128,8 +136,13 @@ public class FitnessTrackerController implements Initializable {
 		}
     }
 	
+	/**
+	 * This ActionEvent will open a new scene where the user can track their sleep and compare their sleep duration
+	 * to their goal.
+	 * @param trackSleepEvent This ActionEvent will open a new scene to the Sleep window.
+	 */
 	@FXML
-	void trackSleep(ActionEvent event) {
+	void trackSleep(ActionEvent trackSleepEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/SleepTracker.fxml"));
@@ -147,8 +160,14 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This ActionEvent will open a new scene where the user can track their nutrition and compare their weight goal
+	 * to their current goal.
+	 * @param trackNutritionEvent This ActionEvent will open a new scene to the Nutrition window.
+	 */
 	@FXML
-	void trackNutrition(ActionEvent event) {
+	void trackNutrition(ActionEvent trackNutritionEvent) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			BorderPane root = loader.load(new FileInputStream("src/application/NutritionTracker.fxml"));
@@ -164,6 +183,12 @@ public class FitnessTrackerController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This ActionEvent will open a new scene where the user can track their workouts and view their
+	 * weekly statistics.
+	 * @param trackActivitiesEvent This ActionEvent will open a new scene to the Activities window.
+	 */
 	@FXML
 	void trackActivities(ActionEvent event) {
 		try {
@@ -210,7 +235,12 @@ public class FitnessTrackerController implements Initializable {
 	   	   } catch(Exception e) {
 	   		   e.printStackTrace();
 	   	   }
-	    }
+	}
+	
+	/**
+	 * This ActionEvent will open a new scene where the user can view healthy recipes.
+	 * @param userProfileEvent This ActionEvent will open a new scene to the Recipes window.
+	 */
 	@FXML
 	void showHealthyRecipes(ActionEvent event) {
 		try {
@@ -228,6 +258,11 @@ public class FitnessTrackerController implements Initializable {
 	   	}
 	}
 	
+	/**
+	 * This ActionEvent will open a new scene where the user can track and compare their daily water in-take amount to
+	 * their goal set in the Goals window.
+	 * @param userProfileEvent This ActionEvent will open a new scene to the Water In-take window.
+	 */
 	@FXML
     void trackWaterIntake(ActionEvent event) {
 		try {
@@ -247,14 +282,21 @@ public class FitnessTrackerController implements Initializable {
 		}
 	}
 	
+	/**
+	 * This method will display progress labels with regards water in-take, sleep duration and monthly steps.
+	 */
 	public void setDisplayLabel() {
 		waterProgressIndicator.setProgress(user.health.getWaterIntakeAmount()/user.health.getWaterIntakeGoals());
 		sleepDisplayLabel.setText(user.health.getSleepDuration() + " h");
 		stepsThisMonth.setText(Integer.toString(user.fitness.getStepsCount()));
 	}
    
+	/**
+	 * This ActionEvent will open a new scene where the user can view and modify their health and fitness goals.
+	 * @param fitnessGoalsEvent This ActionEvent will open a new scene to the Health and Fitness Goals window.
+	 */
    @FXML
-   	void showUserFitnessGoals(ActionEvent event) {
+   	void showUserFitnessGoals(ActionEvent fitnessGoalsEvent) {
 	   try {		   
 		   FXMLLoader loader = new FXMLLoader();
 		   AnchorPane root = loader.load(new FileInputStream("src/application/FitnessTrackerGoalsView.fxml"));
@@ -272,6 +314,10 @@ public class FitnessTrackerController implements Initializable {
 		   e.printStackTrace();
 	   }  
    }
+   
+   /**
+    * This method sets imported images and the current date label in the main window.
+    */
    @Override
    public void initialize(URL location, ResourceBundle resources) {
 	   //<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
